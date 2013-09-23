@@ -1,0 +1,97 @@
+<ui:composition template="/WEB-INF/templates/template-admin.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<h:form prependId="false">
+
+    <p:dataTable id="dataTable" var="oper" value="#{operadorBean.operadores}"
+                 paginator="true" rows="10"
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 rowsPerPageTemplate="5,10,15">
+        <f:facet name="header">
+            Operadores Cadastrados
+        </f:facet>
+
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Login" />
+            </f:facet>
+            <h:outputText value="#{oper.login}" />
+        </p:column>
+
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Nome" />
+            </f:facet>
+            <h:outputText value="#{oper.nome}" />
+        </p:column>
+
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Telefone" />
+            </f:facet>
+            <h:outputText value="#{oper.telefone}" />
+        </p:column>
+
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Email" />
+            </f:facet>
+            <h:outputText value="#{oper.email}" />
+        </p:column>
+        
+    </p:dataTable>
+    
+
+</h:form>
+
+
+
+<h:form>
+<p:dataTable id="tbl" var="oper" value="#{operadorBean.operadores}" paginator="true" rows="10">
+	<p:column>
+		<f:facet name="header">
+			<h:outputText value="Nome" />
+		</f:facet>
+		<h:outputText value="#{oper.nome}" />
+	</p:column>
+
+	<p:column>
+		<f:facet name="header">
+			<h:outputText value="Telefone" />
+		</f:facet>
+		<h:outputText value="#{oper.telefone}"/>
+	</p:column>
+
+</p:dataTable>
+	
+<h:panelGrid columns="2">
+	<p:panel header="Export All Data">
+
+		<h:commandLink>
+		    <h:outputText value="pdf" />
+			<p:dataExporter type="pdf" target="tbl" fileName="operadores"/>
+		</h:commandLink>
+	
+	</p:panel>
+	
+	<p:panel header="Export Page Data">
+
+		<h:commandLink>
+			 <h:outputText value="pdf" />
+			<p:dataExporter type="pdf" target="tbl" fileName="operadores" pageOnly="true"/>
+		</h:commandLink>
+		
+	</p:panel>
+</h:panelGrid>
+
+</h:form>
+
+
+
+	</ui:define>
+</ui:composition>

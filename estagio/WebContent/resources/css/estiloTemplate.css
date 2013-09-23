@@ -1,0 +1,57 @@
+@CHARSET "ISO-8859-1";
+
+body{
+	background-color: white;
+}
+
+#conteudo{
+	
+	width:900px;
+	margin: 0 auto;
+	margin-top: 2px;
+	border: 1px solid #C0C0C0;
+	
+}
+
+#cabecalho{
+	background-color: #dddddd;
+	height: 110px;
+	margin-bottom: 1px;
+}
+
+#login{
+	width: 400px;
+	margin: 0 auto;
+	margin-bottom: 30px;
+}
+
+
+#corpo{
+	
+	min-height: 400px;
+	
+}
+
+
+
+
+#rodape{
+	
+}
+
+.msg-error{
+	margin-left:0;
+	list-style-type: none;
+	background-color: #FFCCCC;
+	padding: 8px;
+	border: 2px solid red;
+}
+
+.msg-sucesso{
+	margin-left:0;
+	list-style-type: none;
+	background-color: #99FF99;
+	padding: 8px;
+	border: 2px solid green;
+}
+

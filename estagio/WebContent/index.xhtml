@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Laboratório de Aracoiaba</title>
+	<h:outputStylesheet library="css" name="estiloTemplate.css"></h:outputStylesheet>
+</h:head>
+<h:body>
+    <div id="conteudo">
+    <div id="cabecalho">
+		<h2>Laboratório de Aracoiaba</h2>
+    </div>
+    <p:messages autoUpdate="true"/>
+	<h:form id="login">
+	    <p:panel header="Login">
+	    <h:outputLabel value="Usuário:" /><br />
+		<p:inputText value="#{loginBean.usuario.login}" required="true" />
+		<br /><br />
+		<h:outputLabel value="Senha:" /><br />
+		<p:password value="#{loginBean.usuario.senha}" label="password" required="true" />
+		<br /><br />
+		<h:outputLabel value="Tipo de usuário:" /><br />
+		<p:selectOneMenu value="#{loginBean.usuario.tipo}" required="true">
+			<f:selectItem itemLabel="selecione uma opcão" noSelectionOption="true" />
+			<f:selectItem itemValue="#{loginBean.tipoDeUsuario.administrador}" itemLabel="Administrador" />
+			<f:selectItem itemValue="#{loginBean.tipoDeUsuario.operador}" itemLabel="Operador" />
+		</p:selectOneMenu>
+		<br /><br />
+		<p:commandButton value="Entrar" action="#{loginBean.logar}" />
+		</p:panel>
+		<h:messages />
+	</h:form>
+	<h:panelGroup rendered="#{flash.msg.erro}">
+	        <div class="alert alert-error">
+		        <button type="button" class="close" data-dismiss="alert">x</button>
+		        <h:outputText value="#{flash.msg.msg}" />
+       		</div>
+    </h:panelGroup>
+    <h:panelGroup rendered="#{not empty facesContext.messageList}">
+	        <div class="alert alert-error">
+		        <button type="button" class="close" data-dismiss="alert">x</button>
+		        <h:messages styleClass="unstyled"  />
+       		</div>
+    </h:panelGroup>
+	</div>
+</h:body>
+</html>

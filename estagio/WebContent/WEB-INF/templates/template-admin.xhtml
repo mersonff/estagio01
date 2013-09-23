@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Laboratório de Aracoiaba</title>
+	<h:outputStylesheet library="css" name="estiloTemplate.css"></h:outputStylesheet>
+	
+</h:head>
+<h:body>
+	<f:view locale="pt_BR">
+		<div id="conteudo">
+			<div id="cabecalho">
+					<h2>Laboratório de Aracoiaba</h2>
+			</div>
+
+			<h:form>
+
+				<p:growl id="messages" />
+				
+				<p:menubar>
+					<p:submenu label="Operador">
+						<p:menuitem value="Cadastrar" url="/pages/admin/cadastro-operador.xhtml" />
+						<p:menuitem value="Exibir todos" url="/pages/admin/exibe-operador.xhtml" />
+						<p:menuitem value="Excluir" url="#" />
+					</p:submenu>
+
+					<p:submenu label="Editar">
+						<p:menuitem value="Undo" url="#"
+							icon="ui-icon-arrowreturnthick-1-w" />
+						<p:menuitem value="Redo" url="#"
+							icon="ui-icon-arrowreturnthick-1-e" />
+					</p:submenu>
+					
+					<p:submenu label="Excluir">
+						<p:menuitem value="Undo" url="#"
+							icon="ui-icon-arrowreturnthick-1-w" />
+						<p:menuitem value="Redo" url="#"
+							icon="ui-icon-arrowreturnthick-1-e" />
+					</p:submenu>
+
+					<p:submenu label="Help">
+						<p:menuitem value="Contents" url="#" />
+						<p:submenu label="Search" icon="ui-icon-search">
+							<p:submenu label="Text">
+								<p:menuitem value="Workspace" url="#" />
+							</p:submenu>
+							<p:menuitem value="File" url="#" />
+						</p:submenu>
+					</p:submenu>
+
+				</p:menubar>
+
+			</h:form>
+
+			<div id="corpo">
+				<ui:insert name="corpo">Corpo da página</ui:insert>
+			</div>
+
+			<div id="rodape"></div>
+		</div>
+	</f:view>
+</h:body>
+</html>
