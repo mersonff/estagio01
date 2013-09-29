@@ -5,10 +5,10 @@
 
 	<persistence-unit name="dev" transaction-type="RESOURCE_LOCAL">
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/estagio" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/estagio" />
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
 			<property name="javax.persistence.jdbc.user" value="postgres" />
-			<property name="javax.persistence.jdbc.password" value="rosy" />
+			<property name="javax.persistence.jdbc.password" value="postgre" />
 
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />

@@ -7,61 +7,62 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
+@MappedSuperclass
 public class Exame {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
+	private long cpfPaciente;
 	
 	@Temporal(TemporalType.DATE)
-	private Date data;
+	private Date dataNascimento;
 	
-	@OneToOne
-	private TipoDeExame tipo;
+	private String nomePaciente;
 	
-	@ManyToOne
+	/*@ManyToOne
 	private Paciente paciente;
 	
 	public Exame(){
-		this.tipo = new TipoDeExame();
 		this.paciente = new Paciente();
 	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+*/
+	
 
 	public Date getData() {
-		return data;
+		return dataNascimento;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public long getCpfPaciente() {
+		return cpfPaciente;
 	}
 
-	public TipoDeExame getTipo() {
-		return tipo;
+	public void setCpfPaciente(long cpfPaciente) {
+		this.cpfPaciente = cpfPaciente;
 	}
 
-	public void setTipo(TipoDeExame tipo) {
-		this.tipo = tipo;
+	public String getNomePaciente() {
+		return nomePaciente;
 	}
 
-	public Paciente getPaciente() {
+	public void setNomePaciente(String nomePaciente) {
+		this.nomePaciente = nomePaciente;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+/*	public Paciente getPaciente() {
 		return paciente;
 	}
 
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
 	}
-
+*/
 }

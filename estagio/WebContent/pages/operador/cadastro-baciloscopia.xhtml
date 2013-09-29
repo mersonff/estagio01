@@ -1,0 +1,80 @@
+<ui:composition template="/WEB-INF/templates/template-admin.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<h:form id="form">
+
+			<p:panel id="panel" header="Cadastro de Pedido/Resposta Baciloscopia"
+				style="margin-bottom:10px;">
+				<p:messages id="messages" />
+				<h:panelGrid columns="2">
+
+					<h:outputLabel for="cpfPaciente" value="CPF: *" />
+					<p:inputText id="cpf"
+						value="#{baciloscopiaBean.baciloscopia.cpfPaciente}"
+						required="true" label="CPF" />
+
+					<h:outputLabel for="Nome" value="Nome: *" />
+					<p:inputText id="firstname"
+						value="#{baciloscopiaBean.baciloscopia.nomePaciente}"
+						required="true" label="Nome">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+
+					<h:outputLabel for="prontuario" value="Prontuário:" />
+					<p:inputText id="email"
+						value="#{baciloscopiaBean.baciloscopia.prontuario}"
+						label="Prontuário" />
+
+					<h:outputLabel for="dataNascimento" value="Data de Nascimento: " />
+					<p:inputMask id="dataNascimento"
+						value="#{baciloscopiaBean.baciloscopia.dataNascimento}"
+						label="Data de Nascimento" mask="99/99/9999" />
+
+					<h:outputLabel for="sexo" value="Sexo:" />
+					<p:selectOneMenu value="#{baciloscopiaBean.baciloscopia.sexo}">
+						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
+					</p:selectOneMenu>
+
+					<h:outputLabel for="endereco" value="Endereço: " />
+					<p:inputText id="endereco"
+						value="#{baciloscopiaBean.baciloscopia.endereco}" label="Endereço" />
+
+					<h:outputLabel for="materialClinico" value="Material Clínico: " />
+					<p:inputText id="materialClinico"
+						value="#{baciloscopiaBean.baciloscopia.materialClinico}"
+						label="Material Clínico" />
+
+					<h:outputLabel for="outros" value="Outros: " />
+					<p:inputText id="outros"
+						value="#{baciloscopiaBean.baciloscopia.outros}" label="Outros" />
+
+					<h:outputLabel for="diagnostico" value="Diagnóstico: " />
+					<p:selectBooleanCheckbox
+						value="#{baciloscopiaBean.baciloscopia.diagnostico}" />
+					
+					<h:outputLabel for="controleDeTratamento" value="Controle de Tratamento: " />
+					<p:selectBooleanCheckbox
+						value="#{baciloscopiaBean.baciloscopia.controleDeTratamento}" />
+
+					<h:outputLabel for="numeroDaAmostra" value="Número da Amostra: " />
+					<p:selectOneRadio id="numeroDaAmostra"
+						value="#{baciloscopiaBean.baciloscopia.numeroDaAmostra}">
+						<f:selectItem itemLabel="1ª Amostra" itemValue="1" />
+						<f:selectItem itemLabel="2ª Amostra" itemValue="2" />
+					</p:selectOneRadio>
+
+					<p:commandButton value="Salvar" update="panel" id="ajax"
+						actionListener="#{baciloscopiaBean.cadastrar()}"
+						styleClass="ui-priority-primary" />
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
