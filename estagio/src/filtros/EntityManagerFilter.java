@@ -14,26 +14,29 @@ import util.JPAUtil;
 /**
  * Servlet Filter implementation class EntityManagerFilter
  */
-@WebFilter(servletNames="Faces Servlet")
+@WebFilter(servletNames = "Faces Servlet")
 public class EntityManagerFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response,
-	           FilterChain chain) throws IOException, ServletException {
-	    try {
-	    	JPAUtil.beginTransaction();
-	        chain.doFilter(request, response);
-	        JPAUtil.commit();
-	    } catch (Throwable e) {
-	        System.out.println(e.getMessage() + "\n" + e.getCause());
-	        e.printStackTrace();
-	        JPAUtil.rollback();
-	        throw new ServletException(e);
-	    } finally {
-	    	JPAUtil.closeEntityManager();
-	    }
-	  }
-	 
-	  public void destroy() {}
-	  public void init(FilterConfig arg0) throws ServletException {}
+			FilterChain chain) throws IOException, ServletException {
+		try {
+			JPAUtil.beginTransaction();
+			chain.doFilter(request, response);
+			JPAUtil.commit();
+		} catch (Throwable e) {
+			System.out.println(e.getMessage() + "\n" + e.getCause());
+			e.printStackTrace();
+			JPAUtil.rollback();
+			throw new ServletException(e);
+		} finally {
+			JPAUtil.closeEntityManager();
+		}
+	}
+
+	public void destroy() {
+	}
+
+	public void init(FilterConfig arg0) throws ServletException {
+	}
 
 }

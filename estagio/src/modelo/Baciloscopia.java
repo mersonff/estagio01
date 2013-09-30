@@ -1,7 +1,6 @@
 package modelo;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
@@ -10,7 +9,6 @@ import javax.persistence.TemporalType;
 @Entity
 public class Baciloscopia extends Exame {
 	private String unidadeDeSaude;
-	private String nomePaciente;
 	private String prontuario;
 
 	@Temporal(TemporalType.DATE)
@@ -24,7 +22,8 @@ public class Baciloscopia extends Exame {
 	private String municipio;
 	private String materialClinico;
 	private String outros;
-	private String diagnostico;
+	private boolean diagnostico;
+	private boolean controleDeTratamento;
 	private int numeroDaAmostra;
 	private int mesDaAmostra;
 	private String aspecto;
@@ -32,11 +31,9 @@ public class Baciloscopia extends Exame {
 	private String baar;
 	private String positividade;
 	private String observacoes;
-	
-	
 
 	public Baciloscopia() {
-		
+
 	}
 
 	public String getUnidadeDeSaude() {
@@ -45,14 +42,6 @@ public class Baciloscopia extends Exame {
 
 	public void setUnidadeDeSaude(String unidadeDeSaude) {
 		this.unidadeDeSaude = unidadeDeSaude;
-	}
-
-	public String getNomePaciente() {
-		return nomePaciente;
-	}
-
-	public void setNomePaciente(String nomePaciente) {
-		this.nomePaciente = nomePaciente;
 	}
 
 	public String getProntuario() {
@@ -119,11 +108,11 @@ public class Baciloscopia extends Exame {
 		this.outros = outros;
 	}
 
-	public String getDiagnostico() {
+	public boolean getDiagnostico() {
 		return diagnostico;
 	}
 
-	public void setDiagnostico(String diagnostico) {
+	public void setDiagnostico(boolean diagnostico) {
 		this.diagnostico = diagnostico;
 	}
 
@@ -181,6 +170,14 @@ public class Baciloscopia extends Exame {
 
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
+	}
+
+	public boolean isControleDeTratamento() {
+		return controleDeTratamento;
+	}
+
+	public void setControleDeTratamento(boolean controleDeTratamento) {
+		this.controleDeTratamento = controleDeTratamento;
 	}
 
 }

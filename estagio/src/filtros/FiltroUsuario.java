@@ -18,12 +18,12 @@ import javax.servlet.http.HttpSession;
 @WebFilter("*.xhtml")
 public class FiltroUsuario implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public FiltroUsuario() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public FiltroUsuario() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -35,18 +35,22 @@ public class FiltroUsuario implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
-		HttpSession session = ((HttpServletRequest)request).getSession(false);
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
+
+		HttpSession session = ((HttpServletRequest) request).getSession(false);
 		String path = ((HttpServletRequest) request).getRequestURI();
 
-		if (path.contains("index") || path.toLowerCase().contains("javax.faces.resource")) {
+		if (path.contains("index")
+				|| path.toLowerCase().contains("javax.faces.resource")) {
 			chain.doFilter(request, response);
-		} else if (session != null && session.getAttribute("login") != null){
+		} else if (session != null && session.getAttribute("login") != null) {
 			chain.doFilter(request, response);
 		} else {
-			String contextPath = ((HttpServletRequest) request).getContextPath();
-		    ((HttpServletResponse)response).sendRedirect(contextPath+"/index.xhtml");
+			String contextPath = ((HttpServletRequest) request)
+					.getContextPath();
+			((HttpServletResponse) response).sendRedirect(contextPath
+					+ "/index.xhtml");
 		}
 	}
 
