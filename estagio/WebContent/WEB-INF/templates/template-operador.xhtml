@@ -12,48 +12,61 @@
 <h:body>
 	<f:view locale="pt_BR">
 		<div id="conteudo">
-			<div id="cabecalho"> 
-			    <h2>Laboratório de Aracoiaba</h2>
+			<div id="cabecalho">
+				<h2>Laboratório de Aracoiaba</h2>
 			</div>
 
 			<h:form>
 
 				<p:growl id="messages" />
-				
+
 				<p:menubar>
+					<p:menuitem value="Início" icon="ui-icon-home"
+						url="/pages/operador/home-operador.xhtml"
+						action="/pages/operador/home-operador.xhtml" />
 					<p:submenu label="Cadastrar" icon="ui-icon-document">
-						<p:submenu label="New" icon="ui-icon-contact">
-							<p:menuitem value="Project" url="#" />
-							<p:menuitem value="Other" url="#" />
+						<p:submenu label="Exame">
+							<p:menuitem value="Baciloscopia"
+								url="/pages/operador/cadastro-baciloscopia.xhtml" />
+							<p:menuitem value="X" url="#" />
+							<p:menuitem value="X" url="#" />
+							<p:menuitem value="X" url="#" />
+							<p:menuitem value="X" url="#" />
+							<p:menuitem value="X" url="#" />
+							<p:menuitem value="X" url="#" />
 						</p:submenu>
-						<p:menuitem value="Open" url="#" />
 						<p:separator />
-						<p:menuitem value="Quit" url="#" />
+						<p:menuitem value="Resultado" url="#" />
+						<p:separator />
+						<p:menuitem value="Paciente" url="#" />
+					</p:submenu>
+
+					<p:submenu label="Buscar" icon="ui-icon-search">
+						<p:menuitem value="Exame" url="#" />
+						<p:separator />
+						<p:menuitem value="Resultado" url="#" />
+						<p:separator />
+						<p:menuitem value="Paciente" url="#" />
 					</p:submenu>
 
 					<p:submenu label="Editar" icon="ui-icon-pencil">
-						<p:menuitem value="Undo" url="#"
-							icon="ui-icon-arrowreturnthick-1-w" />
-						<p:menuitem value="Redo" url="#"
-							icon="ui-icon-arrowreturnthick-1-e" />
-					</p:submenu>
-					
-					<p:submenu label="Excluir" icon="ui-icon-pencil">
-						<p:menuitem value="Undo" url="#"
-							icon="ui-icon-arrowreturnthick-1-w" />
-						<p:menuitem value="Redo" url="#"
-							icon="ui-icon-arrowreturnthick-1-e" />
+						<p:menuitem value="Exame" url="#" />
+						<p:separator />
+						<p:menuitem value="Resultado" url="#" />
+						<p:separator />
+						<p:menuitem value="Paciente" url="#" />
 					</p:submenu>
 
-					<p:submenu label="Help" icon="ui-icon-help">
-						<p:menuitem value="Contents" url="#" />
-						<p:submenu label="Search" icon="ui-icon-search">
-							<p:submenu label="Text">
-								<p:menuitem value="Workspace" url="#" />
-							</p:submenu>
-							<p:menuitem value="File" url="#" />
-						</p:submenu>
+					<p:submenu label="Excluir" icon="ui-icon-close">
+						<p:menuitem value="Exame" url="#" />
+						<p:separator />
+						<p:menuitem value="Resultado" url="#" />
+						<p:separator />
+						<p:menuitem value="Paciente" url="#" />
 					</p:submenu>
+
+					<p:menuitem value="Sair" icon="ui-icon-arrowrefresh-1-w"
+						action="#{logoutBean.sair()}" />
 
 				</p:menubar>
 

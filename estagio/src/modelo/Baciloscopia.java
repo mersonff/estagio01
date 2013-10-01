@@ -1,21 +1,15 @@
 package modelo;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
+@PrimaryKeyJoinColumn(name = "cpfPaciente")
 public class Baciloscopia extends Exame {
 	private String unidadeDeSaude;
 	private String prontuario;
-
-	@Temporal(TemporalType.DATE)
-	private Date dataSolicitacao;
-
-	@Temporal(TemporalType.DATE)
-	private Date dataLiberacao;
+	private String dataSolicitacao;
+	private String dataLiberacao;
 
 	private String sexo;
 	private String endereco;
@@ -52,19 +46,19 @@ public class Baciloscopia extends Exame {
 		this.prontuario = prontuario;
 	}
 
-	public Date getDataSolicitacao() {
+	public String getDataSolicitacao() {
 		return dataSolicitacao;
 	}
 
-	public void setDataSolicitacao(Date dataSolicitacao) {
+	public void setDataSolicitacao(String dataSolicitacao) {
 		this.dataSolicitacao = dataSolicitacao;
 	}
 
-	public Date getDataLiberacao() {
+	public String getDataLiberacao() {
 		return dataLiberacao;
 	}
 
-	public void setDataLiberacao(Date dataLiberacao) {
+	public void setDataLiberacao(String dataLiberacao) {
 		this.dataLiberacao = dataLiberacao;
 	}
 

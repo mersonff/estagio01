@@ -1,4 +1,4 @@
-<ui:composition template="/WEB-INF/templates/template-admin.xhtml"
+<ui:composition template="/WEB-INF/templates/template-operador.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -57,8 +57,9 @@
 					<h:outputLabel for="diagnostico" value="Diagnóstico: " />
 					<p:selectBooleanCheckbox
 						value="#{baciloscopiaBean.baciloscopia.diagnostico}" />
-					
-					<h:outputLabel for="controleDeTratamento" value="Controle de Tratamento: " />
+
+					<h:outputLabel for="controleDeTratamento"
+						value="Controle de Tratamento: " />
 					<p:selectBooleanCheckbox
 						value="#{baciloscopiaBean.baciloscopia.controleDeTratamento}" />
 
@@ -69,9 +70,10 @@
 						<f:selectItem itemLabel="2ª Amostra" itemValue="2" />
 					</p:selectOneRadio>
 
-					<p:commandButton value="Salvar" update="panel" id="ajax"
+					<p:commandButton value="Cadastrar" update="panel" id="ajax"
 						actionListener="#{baciloscopiaBean.cadastrar()}"
 						styleClass="ui-priority-primary" />
+					<p:commandButton value="Limpar" type="reset" />
 				</h:panelGrid>
 			</p:panel>
 
