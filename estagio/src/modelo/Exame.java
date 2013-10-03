@@ -6,54 +6,54 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Exame {
 
 	@Id
-	private long cpfPaciente;
-	private String dataNascimento;
+	private long numeroSus;
+	private String dataPedido;
+	private String dataEntrega;
 
-	private String nomePaciente;
+	@ManyToOne
+	private Paciente paciente;
 
-	/*
-	 * @ManyToOne private Paciente paciente;
-	 * 
-	 * public Exame(){ this.paciente = new Paciente(); }
-	 */
-
-	public String getData() {
-		return dataNascimento;
+	public Exame() {
+		this.paciente = new Paciente();
 	}
 
-	public long getCpfPaciente() {
-		return cpfPaciente;
+	public Paciente getPaciente() {
+		return paciente;
 	}
 
-	public void setCpfPaciente(long cpfPaciente) {
-		this.cpfPaciente = cpfPaciente;
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
-	public String getNomePaciente() {
-		return nomePaciente;
+	public long getNumeroSus() {
+		return numeroSus;
 	}
 
-	public void setNomePaciente(String nomePaciente) {
-		this.nomePaciente = nomePaciente;
+	public void setNumeroSus(long numeroSus) {
+		this.numeroSus = numeroSus;
 	}
 
-	public void setDataNascimento(String dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public String getDataPedido() {
+		return dataPedido;
 	}
 
-	public String getDataNascimento() {
-		return dataNascimento;
+	public void setDataPedido(String dataPedido) {
+		this.dataPedido = dataPedido;
 	}
 
-	/*
-	 * public Paciente getPaciente() { return paciente; }
-	 * 
-	 * public void setPaciente(Paciente paciente) { this.paciente = paciente; }
-	 */
+	public String getDataEntrega() {
+		return dataEntrega;
+	}
+
+	public void setDataEntrega(String dataEntrega) {
+		this.dataEntrega = dataEntrega;
+	}
+
 }

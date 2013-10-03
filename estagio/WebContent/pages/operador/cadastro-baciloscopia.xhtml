@@ -13,37 +13,15 @@
 				<p:messages id="messages" />
 				<h:panelGrid columns="2">
 
-					<h:outputLabel for="cpfPaciente" value="CPF: *" />
+					<h:outputLabel for="numeroSUS" value="Número do SUS: *" />
 					<p:inputText id="cpf"
-						value="#{baciloscopiaBean.baciloscopia.cpfPaciente}"
-						required="true" label="CPF" />
-
-					<h:outputLabel for="Nome" value="Nome: *" />
-					<p:inputText id="firstname"
-						value="#{baciloscopiaBean.baciloscopia.nomePaciente}"
-						required="true" label="Nome">
-						<f:validateLength minimum="2" />
-					</p:inputText>
+						value="#{baciloscopiaBean.baciloscopia.numeroSus}"
+						required="true" label="numeroSUS" />
 
 					<h:outputLabel for="prontuario" value="Prontuário:" />
 					<p:inputText id="email"
 						value="#{baciloscopiaBean.baciloscopia.prontuario}"
 						label="Prontuário" />
-
-					<h:outputLabel for="dataNascimento" value="Data de Nascimento: " />
-					<p:inputMask id="dataNascimento"
-						value="#{baciloscopiaBean.baciloscopia.dataNascimento}"
-						label="Data de Nascimento" mask="99/99/9999" />
-
-					<h:outputLabel for="sexo" value="Sexo:" />
-					<p:selectOneMenu value="#{baciloscopiaBean.baciloscopia.sexo}">
-						<f:selectItem itemLabel="Masculino" itemValue="Masculino" />
-						<f:selectItem itemLabel="Feminino" itemValue="Feminino" />
-					</p:selectOneMenu>
-
-					<h:outputLabel for="endereco" value="Endereço: " />
-					<p:inputText id="endereco"
-						value="#{baciloscopiaBean.baciloscopia.endereco}" label="Endereço" />
 
 					<h:outputLabel for="materialClinico" value="Material Clínico: " />
 					<p:inputText id="materialClinico"

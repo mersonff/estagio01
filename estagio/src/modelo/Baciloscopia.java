@@ -4,16 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "cpfPaciente")
+@PrimaryKeyJoinColumn(name = "numeroSus")
 public class Baciloscopia extends Exame {
 	private String unidadeDeSaude;
 	private String prontuario;
-	private String dataSolicitacao;
-	private String dataLiberacao;
 
-	private String sexo;
-	private String endereco;
-	private String municipio;
 	private String materialClinico;
 	private String outros;
 	private boolean diagnostico;
@@ -44,46 +39,6 @@ public class Baciloscopia extends Exame {
 
 	public void setProntuario(String prontuario) {
 		this.prontuario = prontuario;
-	}
-
-	public String getDataSolicitacao() {
-		return dataSolicitacao;
-	}
-
-	public void setDataSolicitacao(String dataSolicitacao) {
-		this.dataSolicitacao = dataSolicitacao;
-	}
-
-	public String getDataLiberacao() {
-		return dataLiberacao;
-	}
-
-	public void setDataLiberacao(String dataLiberacao) {
-		this.dataLiberacao = dataLiberacao;
-	}
-
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-
-	public String getMunicipio() {
-		return municipio;
-	}
-
-	public void setMunicipio(String municipio) {
-		this.municipio = municipio;
 	}
 
 	public String getMaterialClinico() {
