@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -13,11 +14,12 @@ import javax.persistence.ManyToOne;
 public class Exame {
 
 	@Id
-	private long numeroSus;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long idExame;
 	private String dataPedido;
 	private String dataEntrega;
-
 	@ManyToOne
+	@JoinColumn(name = "numeroSus")
 	private Paciente paciente;
 
 	public Exame() {
@@ -30,14 +32,6 @@ public class Exame {
 
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
-	}
-
-	public long getNumeroSus() {
-		return numeroSus;
-	}
-
-	public void setNumeroSus(long numeroSus) {
-		this.numeroSus = numeroSus;
 	}
 
 	public String getDataPedido() {

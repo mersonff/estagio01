@@ -8,18 +8,22 @@
 	<ui:define name="corpo">
 		<h:form id="form">
 
-			<p:panel id="panel" header="Cadastro de Pedido/Resposta Baciloscopia"
+			<p:panel id="panel" header="Pedido de Exame: Baciloscopia"
 				style="margin-bottom:10px;">
 				<p:messages id="messages" />
 				<h:panelGrid columns="2">
 
-					<h:outputLabel for="numeroSUS" value="Número do SUS: *" />
-					<p:inputText id="cpf"
-						value="#{baciloscopiaBean.baciloscopia.numeroSus}"
-						required="true" label="numeroSUS" />
+					<h:outputLabel for="numeroSus" value="Número do SUS: *" />
+					<p:inputText id="numeroSus"
+						value="#{baciloscopiaBean.baciloscopia.paciente.numeroSus}" required="true"
+						label="numeroSus" />
+
+					<h:outputLabel for="dataPedido" value="Data de Solicitação: " />
+					<p:inputMask id="dataPedido" value="#{baciloscopiaBean.baciloscopia.dataPedido}"
+						label="dataPedido" />
 
 					<h:outputLabel for="prontuario" value="Prontuário:" />
-					<p:inputText id="email"
+					<p:inputText id="prontuario"
 						value="#{baciloscopiaBean.baciloscopia.prontuario}"
 						label="Prontuário" />
 
@@ -33,12 +37,12 @@
 						value="#{baciloscopiaBean.baciloscopia.outros}" label="Outros" />
 
 					<h:outputLabel for="diagnostico" value="Diagnóstico: " />
-					<p:selectBooleanCheckbox
+					<p:selectBooleanCheckbox id="diagnostico"
 						value="#{baciloscopiaBean.baciloscopia.diagnostico}" />
 
 					<h:outputLabel for="controleDeTratamento"
 						value="Controle de Tratamento: " />
-					<p:selectBooleanCheckbox
+					<p:selectBooleanCheckbox id="controleDeTratamento"
 						value="#{baciloscopiaBean.baciloscopia.controleDeTratamento}" />
 
 					<h:outputLabel for="numeroDaAmostra" value="Número da Amostra: " />

@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "numeroSus")
+@PrimaryKeyJoinColumn(name = "idExame")
 public class Baciloscopia extends Exame {
 	private String unidadeDeSaude;
 	private String prontuario;
@@ -15,11 +15,6 @@ public class Baciloscopia extends Exame {
 	private boolean controleDeTratamento;
 	private int numeroDaAmostra;
 	private int mesDaAmostra;
-	private String aspecto;
-	private String negativo;
-	private String baar;
-	private String positividade;
-	private String observacoes;
 
 	public Baciloscopia() {
 
@@ -79,46 +74,6 @@ public class Baciloscopia extends Exame {
 
 	public void setMesDaAmostra(int mesDaAmostra) {
 		this.mesDaAmostra = mesDaAmostra;
-	}
-
-	public String getAspecto() {
-		return aspecto;
-	}
-
-	public void setAspecto(String aspecto) {
-		this.aspecto = aspecto;
-	}
-
-	public String isNegativo() {
-		return negativo;
-	}
-
-	public void setNegativo(String negativo) {
-		this.negativo = negativo;
-	}
-
-	public String isBaar() {
-		return baar;
-	}
-
-	public void setBaar(String baar) {
-		this.baar = baar;
-	}
-
-	public String getPositividade() {
-		return positividade;
-	}
-
-	public void setPositividade(String positividade) {
-		this.positividade = positividade;
-	}
-
-	public String getObservacoes() {
-		return observacoes;
-	}
-
-	public void setObservacoes(String observacoes) {
-		this.observacoes = observacoes;
 	}
 
 	public boolean isControleDeTratamento() {
