@@ -26,5 +26,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/primefaces-3.5.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/slf4j-api-1.6.1.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/validation-api-1.0.0.GA.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/south-street-1.0.10.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
