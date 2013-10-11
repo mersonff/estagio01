@@ -1,7 +1,6 @@
 package modelo;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -13,7 +12,7 @@ public class Paciente {
 	@Id
 	private long numeroSus;
 	private String nome;
-	private Date dataNascimento;
+	private String dataNascimento;
 	private String endereco;
 	private String localidade;
 	private String sexo;
@@ -40,11 +39,11 @@ public class Paciente {
 		this.nome = nome;
 	}
 
-	public Date getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

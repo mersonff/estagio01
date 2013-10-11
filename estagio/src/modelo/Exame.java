@@ -18,9 +18,11 @@ public class Exame {
 	private long idExame;
 	private String dataPedido;
 	private String dataEntrega;
+	private String status;
 	@ManyToOne
 	@JoinColumn(name = "numeroSus")
 	private Paciente paciente;
+	private String nomeTipo;
 
 	public Exame() {
 		this.paciente = new Paciente();
@@ -48,6 +50,22 @@ public class Exame {
 
 	public void setDataEntrega(String dataEntrega) {
 		this.dataEntrega = dataEntrega;
+	}
+
+	public String getNomeTipo() {
+		return nomeTipo;
+	}
+
+	public void setNomeTipo(String nomeTipo) {
+		this.nomeTipo = nomeTipo;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

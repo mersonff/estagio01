@@ -14,7 +14,7 @@ public class Parasitologico extends Exame {
 	private String unidade;
 
 	public Parasitologico() {
-
+		setNomeTipo("Parasitológico");
 	}
 
 	public String getLeito() {

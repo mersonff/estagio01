@@ -11,7 +11,7 @@ public class Hemograma extends Exame{
 	private String leito;
 	
 	public Hemograma(){
-		
+		setNomeTipo("Hemograma");
 	}
 
 	public String getLeito() {

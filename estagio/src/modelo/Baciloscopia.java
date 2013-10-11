@@ -6,6 +6,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @Entity
 @PrimaryKeyJoinColumn(name = "idExame")
 public class Baciloscopia extends Exame {
+
 	private String unidadeDeSaude;
 	private String prontuario;
 
@@ -17,7 +18,8 @@ public class Baciloscopia extends Exame {
 	private int mesDaAmostra;
 
 	public Baciloscopia() {
-
+		setNomeTipo("Baciloscopia");
+		setStatus("Em aberto");
 	}
 
 	public String getUnidadeDeSaude() {

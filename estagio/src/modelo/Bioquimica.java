@@ -11,7 +11,7 @@ public class Bioquimica extends Exame{
 	private String leito;
 	
 	public Bioquimica(){
-		
+		setNomeTipo("Bioquímica");
 	}
 
 	public String getLeito() {

@@ -11,7 +11,7 @@ public class Plaqueta extends Exame{
 	private String leito;
 	
 	public Plaqueta(){
-		
+		setNomeTipo("Plaquetas");
 	}
 
 	public String getLeito() {
