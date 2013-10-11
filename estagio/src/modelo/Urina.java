@@ -3,13 +3,12 @@ package modelo;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
-
 @Entity
 @PrimaryKeyJoinColumn(name = "idExame")
-public class Urina extends Exame{
-	
+public class Urina extends Exame {
+
 	private String leito;
-	
+
 	private String volume;
 	private String cor;
 	private String aspecto;
@@ -19,7 +18,7 @@ public class Urina extends Exame{
 	private String proteina;
 	private String glicose;
 	private String acetona;
-	private String acetoacético;
+	private String acetoacetico;
 
 	private double cilindros;
 	private double hemacias;
@@ -27,8 +26,8 @@ public class Urina extends Exame{
 	private double celulas;
 
 	private String estudoDetalhado;
-	
-	public Urina(){
+
+	public Urina() {
 		setNomeTipo("Urina");
 	}
 
@@ -104,14 +103,6 @@ public class Urina extends Exame{
 		this.acetona = acetona;
 	}
 
-	public String getAcetoacético() {
-		return acetoacético;
-	}
-
-	public void setAcetoacético(String acetoacético) {
-		this.acetoacético = acetoacético;
-	}
-
 	public double getCilindros() {
 		return cilindros;
 	}
@@ -151,11 +142,13 @@ public class Urina extends Exame{
 	public void setEstudoDetalhado(String estudoDetalhado) {
 		this.estudoDetalhado = estudoDetalhado;
 	}
-	
-	
-	
-	
-	
-	
-}
 
+	public String getAcetoacetico() {
+		return acetoacetico;
+	}
+
+	public void setAcetoacetico(String acetoacetico) {
+		this.acetoacetico = acetoacetico;
+	}
+
+}
