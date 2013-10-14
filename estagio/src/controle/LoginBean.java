@@ -42,7 +42,7 @@ public class LoginBean extends AbstractBean {
 					throw new Exception();
 					/*
 					 * Mensagem msg = new
-					 * Mensagem("Usúario ou senha inválidos!", false, true);
+					 * Mensagem("UsuÃ¡rio ou senha invÃ¡lidos!", false, true);
 					 * ELFlash.getFlash().put("msg", msg);
 					 */
 				}
@@ -61,14 +61,14 @@ public class LoginBean extends AbstractBean {
 					throw new Exception();
 					/*
 					 * Mensagem msg = new
-					 * Mensagem("Usúario ou senha inválidos!", false, true);
+					 * Mensagem("Usï¿½ario ou senha invï¿½lidos!", false, true);
 					 * ELFlash.getFlash().put("msg", msg);
 					 */
 				}
 			}
 
 		} catch (Exception e) {
-			displayErrorMessageToUser("Usuário ou senha inválidos!");
+			displayErrorMessageToUser("UsuÃ¡rio ou senha invÃ¡lidos!");
 			return "/index.xhtml";
 		}
 

@@ -1,0 +1,139 @@
+package modelo;
+
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+@Entity
+@PrimaryKeyJoinColumn(name = "idResultado")
+public class UrinaResultado extends Resultado {
+	private String volume;
+	private String cor;
+	private String aspecto;
+	private String densidade;
+	private String ph;
+
+	private String proteina;
+	private String glicose;
+	private String acetona;
+	private String acetoacetico;
+
+	private double cilindros;
+	private double hemacias;
+	private double leucocitos;
+	private double celulas;
+
+	private String estudoDetalhado;
+
+	public String getVolume() {
+		return volume;
+	}
+
+	public void setVolume(String volume) {
+		this.volume = volume;
+	}
+
+	public String getCor() {
+		return cor;
+	}
+
+	public void setCor(String cor) {
+		this.cor = cor;
+	}
+
+	public String getAspecto() {
+		return aspecto;
+	}
+
+	public void setAspecto(String aspecto) {
+		this.aspecto = aspecto;
+	}
+
+	public String getDensidade() {
+		return densidade;
+	}
+
+	public void setDensidade(String densidade) {
+		this.densidade = densidade;
+	}
+
+	public String getPh() {
+		return ph;
+	}
+
+	public void setPh(String ph) {
+		this.ph = ph;
+	}
+
+	public String getProteina() {
+		return proteina;
+	}
+
+	public void setProteina(String proteina) {
+		this.proteina = proteina;
+	}
+
+	public String getGlicose() {
+		return glicose;
+	}
+
+	public void setGlicose(String glicose) {
+		this.glicose = glicose;
+	}
+
+	public String getAcetona() {
+		return acetona;
+	}
+
+	public void setAcetona(String acetona) {
+		this.acetona = acetona;
+	}
+
+	public String getAcetoacetico() {
+		return acetoacetico;
+	}
+
+	public void setAcetoacetico(String acetoacetico) {
+		this.acetoacetico = acetoacetico;
+	}
+
+	public double getCilindros() {
+		return cilindros;
+	}
+
+	public void setCilindros(double cilindros) {
+		this.cilindros = cilindros;
+	}
+
+	public double getHemacias() {
+		return hemacias;
+	}
+
+	public void setHemacias(double hemacias) {
+		this.hemacias = hemacias;
+	}
+
+	public double getLeucocitos() {
+		return leucocitos;
+	}
+
+	public void setLeucocitos(double leucocitos) {
+		this.leucocitos = leucocitos;
+	}
+
+	public double getCelulas() {
+		return celulas;
+	}
+
+	public void setCelulas(double celulas) {
+		this.celulas = celulas;
+	}
+
+	public String getEstudoDetalhado() {
+		return estudoDetalhado;
+	}
+
+	public void setEstudoDetalhado(String estudoDetalhado) {
+		this.estudoDetalhado = estudoDetalhado;
+	}
+
+}
