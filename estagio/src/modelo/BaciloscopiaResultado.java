@@ -10,7 +10,7 @@ public class BaciloscopiaResultado extends Resultado {
 	private boolean negativo;
 	private boolean baar;
 	private String positividade;
-	private String observações;
+	private String observacoes;
 
 	public String getAspectoDoEscarro() {
 		return aspectoDoEscarro;
@@ -45,11 +45,11 @@ public class BaciloscopiaResultado extends Resultado {
 	}
 
 	public String getObservações() {
-		return observações;
+		return observacoes;
 	}
 
 	public void setObservações(String observações) {
-		this.observações = observações;
+		this.observacoes = observações;
 	}
 
 }
