@@ -31,7 +31,7 @@ public class UrinaBean extends AbstractBean {
 			operDAO.save(this.urina);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 		} else {
-			displayInfoMessageToUser("Paciente n√£o cadastrado." + "");
+			displayInfoMessageToUser("Paciente n„o cadastrado." + "");
 		}
 	}
 

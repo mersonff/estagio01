@@ -33,21 +33,16 @@ public class BaciloscopiaBean extends AbstractBean {
 			operDAO.save(this.baciloscopia);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 		} else {
-			displayInfoMessageToUser("Paciente n√£o cadastrado.");
+			displayErrorMessageToUser("Paciente n„o cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
 	}
-	
+
 	public void cadastrarResultado() {
 		BaciloscopiaDAO operDAO = new BaciloscopiaJPADAO();
-		PacienteDAO pDAO = new PacienteJPADAO();
-		Paciente p = pDAO.find(this.baciloscopia.getPaciente().getNumeroSus());
-		if (p != null) {
-			this.baciloscopia.setStatus("Conclu√≠do");
-			operDAO.save(this.baciloscopia);
-			displayInfoMessageToUser("Cadastrado com sucesso!");
-		} else {
-			displayInfoMessageToUser("Paciente n√£o cadastrado.");
-		}
+		this.baciloscopia.setStatus("ConcluÌdo");
+		operDAO.save(this.baciloscopia);
+		displayInfoMessageToUser("Cadastrado com sucesso!");
+
 	}
 
 	public void pesquisarTodos() {
@@ -81,7 +76,8 @@ public class BaciloscopiaBean extends AbstractBean {
 		return filteredBaciloscopias;
 	}
 
-	public void setFilteredBaciloscopias(List<Baciloscopia> filteredBaciloscopias) {
+	public void setFilteredBaciloscopias(
+			List<Baciloscopia> filteredBaciloscopias) {
 		this.filteredBaciloscopias = filteredBaciloscopias;
 	}
 

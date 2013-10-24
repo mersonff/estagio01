@@ -31,7 +31,7 @@ public class SanguineoBean extends AbstractBean {
 			operDAO.save(this.sanguineo);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 		} else {
-			displayInfoMessageToUser("Paciente n√£o cadastrado." + "");
+			displayInfoMessageToUser("Paciente n„o cadastrado." + "");
 		}
 	}
 

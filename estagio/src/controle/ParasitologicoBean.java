@@ -31,7 +31,7 @@ public class ParasitologicoBean extends AbstractBean {
 			operDAO.save(this.parasitologico);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 		} else {
-			displayInfoMessageToUser("Paciente n√£o cadastrado." + "");
+			displayInfoMessageToUser("Paciente n„o cadastrado." + "");
 		}
 	}
 

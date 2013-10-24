@@ -15,6 +15,7 @@ public class Paciente {
 	@Id
 	private long numeroSus;
 	private String nome;
+	private String sobrenome;
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 	private String endereco;
@@ -81,6 +82,14 @@ public class Paciente {
 
 	public void setExames(List<Exame> exames) {
 		this.exames = exames;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
 	}
 
 }

@@ -31,7 +31,7 @@ public class PlaquetaBean extends AbstractBean {
 			operDAO.save(this.plaqueta);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 		} else {
-			displayInfoMessageToUser("Paciente n√£o cadastrado." + "");
+			displayInfoMessageToUser("Paciente n„o cadastrado." + "");
 		}
 	}
 

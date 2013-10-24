@@ -31,7 +31,7 @@ public class BioquimicaBean extends AbstractBean {
 			operDAO.save(this.bioquimica);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 		} else {
-			displayInfoMessageToUser("Paciente n√£o cadastrado." + "");
+			displayInfoMessageToUser("Paciente n„o cadastrado." + "");
 		}
 	}
 

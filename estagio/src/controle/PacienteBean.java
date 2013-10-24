@@ -17,8 +17,13 @@ public class PacienteBean extends AbstractBean{
 	
 	public void cadastrar(){
 		PacienteDAO pacienteDAO = new PacienteJPADAO();
+		Paciente p = pacienteDAO.find(this.paciente.getNumeroSus());
+		if(p==null){
 		pacienteDAO.save(this.paciente);
 		displayInfoMessageToUser("Cadastrado com sucesso!");
+		} else {
+			displayErrorMessageToUser("Número do SUS já cadastrado: Já existe um paciente com esse número de SUS cadastrado!");
+		}
 	}
 	
 	public void atualizar(){
