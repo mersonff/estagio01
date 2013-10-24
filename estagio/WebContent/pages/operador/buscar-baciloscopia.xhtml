@@ -56,7 +56,7 @@
 					<p:column style="width:4%">
 						<p:commandButton id="selectButton" update=":form:display"
 							oncomplete="resultadoDialog.show()" icon="ui-icon-search"
-							title="View">
+							title="Abrir">
 							<f:setPropertyActionListener value="#{baciloscopia}"
 								target="#{baciloscopiaBean.baciloscopia}" />
 						</p:commandButton>
@@ -68,7 +68,7 @@
 					widgetVar="resultadoDialog" resizable="false" id="resultDlg"
 					showEffect="fade" hideEffect="explode" modal="true">
 
-					<p:scrollPanel style="width:900px;height:500px" scrollMode="native">
+					<p:scrollPanel style="width:800px;height:600px" scrollMode="native">
 						<h:panelGrid id="display" cellpadding="4">
 						
 							<p:commandButton value="Imprimir" type="button"

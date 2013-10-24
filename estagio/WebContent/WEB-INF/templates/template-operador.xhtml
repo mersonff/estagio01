@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Laboratório de Aracoiaba</title>
-	<h:outputStylesheet library="css" name="estiloTemplate.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
 </h:head>
 <h:body>
 	<f:view locale="pt_BR">
@@ -20,119 +20,121 @@
 
 				<p:growl id="messages" />
 
-				<p:menubar>
-					<p:menuitem value="Início" icon="ui-icon-home"
-						url="/pages/operador/home-operador.xhtml"
-						action="/pages/operador/home-operador.xhtml" />
+				<div id="menubar">
+					<p:menubar>
+						<p:menuitem value="Início" icon="ui-icon-home"
+							url="/pages/operador/home-operador.xhtml"
+							action="/pages/operador/home-operador.xhtml" />
 
-					<p:submenu label="Cadastrar" icon="ui-icon-document">
-						<p:submenu label="Pedido de Exame">
-							<p:menuitem value="Baciloscopia"
-								url="/pages/operador/cadastro-baciloscopia.xhtml" />
-							<p:menuitem value="Bioquímica"
-								url="/pages/operador/cadastro-bioquimica.xhtml" />
-							<p:menuitem value="Classificação Sanguínea"
-								url="/pages/operador/cadastro-sanguineo.xhtml" />
-							<p:menuitem value="Hemograma"
-								url="/pages/operador/cadastro-hemograma.xhtml" />
-							<p:menuitem value="Hb / Ht com Plaquetas"
-								url="/pages/operador/cadastro-plaqueta.xhtml" />
-							<p:menuitem value="Parasitológico de Fezes"
-								url="/pages/operador/cadastro-parasitologico.xhtml" />
-							<p:menuitem value="Urina"
-								url="/pages/operador/cadastro-urina.xhtml" />
+						<p:submenu label="Cadastrar" icon="ui-icon-document">
+							<p:submenu label="Pedido de Exame">
+								<p:menuitem value="Baciloscopia"
+									url="/pages/operador/cadastro-baciloscopia.xhtml" />
+								<p:menuitem value="Bioquímica"
+									url="/pages/operador/cadastro-bioquimica.xhtml" />
+								<p:menuitem value="Classificação Sanguínea"
+									url="/pages/operador/cadastro-sanguineo.xhtml" />
+								<p:menuitem value="Hemograma"
+									url="/pages/operador/cadastro-hemograma.xhtml" />
+								<p:menuitem value="Hb / Ht com Plaquetas"
+									url="/pages/operador/cadastro-plaqueta.xhtml" />
+								<p:menuitem value="Parasitológico de Fezes"
+									url="/pages/operador/cadastro-parasitologico.xhtml" />
+								<p:menuitem value="Urina"
+									url="/pages/operador/cadastro-urina.xhtml" />
 
 
+							</p:submenu>
+							<p:separator />
+							<p:submenu label="Resultado de Exame">
+								<p:menuitem value="Baciloscopia"
+									url="/pages/operador/resultado-baciloscopia.xhtml" />
+								<p:menuitem value="Bioquímica"
+									url="/pages/operador/cadastro-bioquimica.xhtml" />
+								<p:menuitem value="Classificação Sanguínea"
+									url="/pages/operador/cadastro-sanguineo.xhtml" />
+								<p:menuitem value="Hemograma"
+									url="/pages/operador/cadastro-hemograma.xhtml" />
+								<p:menuitem value="Hb / Ht com Plaquetas"
+									url="/pages/operador/cadastro-plaqueta.xhtml" />
+								<p:menuitem value="Parasitológico de Fezes"
+									url="/pages/operador/cadastro-parasitologico.xhtml" />
+								<p:menuitem value="Urina"
+									url="/pages/operador/cadastro-urina.xhtml" />
+							</p:submenu>
+							<p:separator />
+							<p:menuitem value="Paciente"
+								url="/pages/operador/cadastro-paciente.xhtml" />
 						</p:submenu>
-						<p:separator />
-						<p:submenu label="Resultado de Exame">
-							<p:menuitem value="Baciloscopia"
-								url="/pages/operador/resultado-baciloscopia.xhtml" />
-							<p:menuitem value="Bioquímica"
-								url="/pages/operador/cadastro-bioquimica.xhtml" />
-							<p:menuitem value="Classificação Sanguínea"
-								url="/pages/operador/cadastro-sanguineo.xhtml" />
-							<p:menuitem value="Hemograma"
-								url="/pages/operador/cadastro-hemograma.xhtml" />
-							<p:menuitem value="Hb / Ht com Plaquetas"
-								url="/pages/operador/cadastro-plaqueta.xhtml" />
-							<p:menuitem value="Parasitológico de Fezes"
-								url="/pages/operador/cadastro-parasitologico.xhtml" />
-							<p:menuitem value="Urina"
-								url="/pages/operador/cadastro-urina.xhtml" />
+
+						<p:submenu label="Buscar" icon="ui-icon-search">
+							<p:submenu label="Exame">
+								<p:menuitem value="Baciloscopia"
+									url="/pages/operador/buscar-baciloscopia.xhtml" />
+								<p:menuitem value="Bioquímica"
+									url="/pages/operador/cadastro-bioquimica.xhtml" />
+								<p:menuitem value="Classificação Sanguínea"
+									url="/pages/operador/cadastro-sanguineo.xhtml" />
+								<p:menuitem value="Hemograma"
+									url="/pages/operador/cadastro-hemograma.xhtml" />
+								<p:menuitem value="Hb / Ht com Plaquetas"
+									url="/pages/operador/cadastro-plaqueta.xhtml" />
+								<p:menuitem value="Parasitológico de Fezes"
+									url="/pages/operador/cadastro-parasitologico.xhtml" />
+								<p:menuitem value="Urina"
+									url="/pages/operador/cadastro-urina.xhtml" />
+							</p:submenu>
+							<p:separator />
+							<p:menuitem value="Paciente" url="#" />
 						</p:submenu>
-						<p:separator />
-						<p:menuitem value="Paciente"
-							url="/pages/operador/cadastro-paciente.xhtml" />
-					</p:submenu>
 
-					<p:submenu label="Buscar" icon="ui-icon-search">
-						<p:submenu label="Exame">
-							<p:menuitem value="Baciloscopia"
-								url="/pages/operador/buscar-baciloscopia.xhtml" />
-							<p:menuitem value="Bioquímica"
-								url="/pages/operador/cadastro-bioquimica.xhtml" />
-							<p:menuitem value="Classificação Sanguínea"
-								url="/pages/operador/cadastro-sanguineo.xhtml" />
-							<p:menuitem value="Hemograma"
-								url="/pages/operador/cadastro-hemograma.xhtml" />
-							<p:menuitem value="Hb / Ht com Plaquetas"
-								url="/pages/operador/cadastro-plaqueta.xhtml" />
-							<p:menuitem value="Parasitológico de Fezes"
-								url="/pages/operador/cadastro-parasitologico.xhtml" />
-							<p:menuitem value="Urina"
-								url="/pages/operador/cadastro-urina.xhtml" />
+						<p:submenu label="Editar" icon="ui-icon-pencil">
+							<p:submenu label="Exame">
+								<p:menuitem value="Baciloscopia"
+									url="/pages/operador/editar-baciloscopia.xhtml" />
+								<p:menuitem value="Bioquímica"
+									url="/pages/operador/cadastro-bioquimica.xhtml" />
+								<p:menuitem value="Classificação Sanguínea"
+									url="/pages/operador/cadastro-sanguineo.xhtml" />
+								<p:menuitem value="Hemograma"
+									url="/pages/operador/cadastro-hemograma.xhtml" />
+								<p:menuitem value="Hb / Ht com Plaquetas"
+									url="/pages/operador/cadastro-plaqueta.xhtml" />
+								<p:menuitem value="Parasitológico de Fezes"
+									url="/pages/operador/cadastro-parasitologico.xhtml" />
+								<p:menuitem value="Urina"
+									url="/pages/operador/cadastro-urina.xhtml" />
+							</p:submenu>
+							<p:separator />
+							<p:menuitem value="Paciente" url="#" />
 						</p:submenu>
-						<p:separator />
-						<p:menuitem value="Paciente" url="#" />
-					</p:submenu>
 
-					<p:submenu label="Editar" icon="ui-icon-pencil">
-						<p:submenu label="Exame">
-							<p:menuitem value="Baciloscopia"
-								url="/pages/operador/editar-baciloscopia.xhtml" />
-							<p:menuitem value="Bioquímica"
-								url="/pages/operador/cadastro-bioquimica.xhtml" />
-							<p:menuitem value="Classificação Sanguínea"
-								url="/pages/operador/cadastro-sanguineo.xhtml" />
-							<p:menuitem value="Hemograma"
-								url="/pages/operador/cadastro-hemograma.xhtml" />
-							<p:menuitem value="Hb / Ht com Plaquetas"
-								url="/pages/operador/cadastro-plaqueta.xhtml" />
-							<p:menuitem value="Parasitológico de Fezes"
-								url="/pages/operador/cadastro-parasitologico.xhtml" />
-							<p:menuitem value="Urina"
-								url="/pages/operador/cadastro-urina.xhtml" />
+						<p:submenu label="Excluir" icon="ui-icon-close">
+							<p:submenu label="Exame">
+								<p:menuitem value="Baciloscopia"
+									url="/pages/operador/excluir-baciloscopia.xhtml" />
+								<p:menuitem value="Bioquímica"
+									url="/pages/operador/cadastro-bioquimica.xhtml" />
+								<p:menuitem value="Classificação Sanguínea"
+									url="/pages/operador/cadastro-sanguineo.xhtml" />
+								<p:menuitem value="Hemograma"
+									url="/pages/operador/cadastro-hemograma.xhtml" />
+								<p:menuitem value="Hb / Ht com Plaquetas"
+									url="/pages/operador/cadastro-plaqueta.xhtml" />
+								<p:menuitem value="Parasitológico de Fezes"
+									url="/pages/operador/cadastro-parasitologico.xhtml" />
+								<p:menuitem value="Urina"
+									url="/pages/operador/cadastro-urina.xhtml" />
+							</p:submenu>
+							<p:separator />
+							<p:menuitem value="Paciente" url="#" />
 						</p:submenu>
-						<p:separator />
-						<p:menuitem value="Paciente" url="#" />
-					</p:submenu>
 
-					<p:submenu label="Excluir" icon="ui-icon-close">
-						<p:submenu label="Exame">
-							<p:menuitem value="Baciloscopia"
-								url="/pages/operador/excluir-baciloscopia.xhtml" />
-							<p:menuitem value="Bioquímica"
-								url="/pages/operador/cadastro-bioquimica.xhtml" />
-							<p:menuitem value="Classificação Sanguínea"
-								url="/pages/operador/cadastro-sanguineo.xhtml" />
-							<p:menuitem value="Hemograma"
-								url="/pages/operador/cadastro-hemograma.xhtml" />
-							<p:menuitem value="Hb / Ht com Plaquetas"
-								url="/pages/operador/cadastro-plaqueta.xhtml" />
-							<p:menuitem value="Parasitológico de Fezes"
-								url="/pages/operador/cadastro-parasitologico.xhtml" />
-							<p:menuitem value="Urina"
-								url="/pages/operador/cadastro-urina.xhtml" />
-						</p:submenu>
-						<p:separator />
-						<p:menuitem value="Paciente" url="#" />
-					</p:submenu>
+						<p:menuitem value="Sair" icon="ui-icon-arrowrefresh-1-w"
+							action="#{logoutBean.sair()}" />
 
-					<p:menuitem value="Sair" icon="ui-icon-arrowrefresh-1-w"
-						action="#{logoutBean.sair()}" />
-
-				</p:menubar>
+					</p:menubar>
+				</div>
 
 			</h:form>
 

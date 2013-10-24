@@ -4,9 +4,14 @@ body{
 	background-color: white;
 }
 
+.ui-widget,.ui-widget .ui-widget {
+     font-size: 98% !important;
+}
+
 #conteudo{
 	
-	width:900px;
+	width:800px;
+	height:600px;
 	margin: 0 auto;
 	margin-top: 2px;
 	border: 1px solid #C0C0C0;
@@ -19,6 +24,10 @@ body{
 	margin-bottom: 1px;
 }
 
+#menubar{
+	margin: 10px;
+}
+
 #login{
 	width: 400px;
 	margin: 0 auto;
@@ -29,6 +38,7 @@ body{
 #corpo{
 	
 	min-height: 400px;
+	margin: 10px;
 	
 }
 

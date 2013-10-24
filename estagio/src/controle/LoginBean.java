@@ -59,11 +59,6 @@ public class LoginBean extends AbstractBean {
 					return "/pages/operador/home-operador.xhtml?faces-redirect=true";
 				} else {
 					throw new Exception();
-					/*
-					 * Mensagem msg = new
-					 * Mensagem("Us�ario ou senha inv�lidos!", false, true);
-					 * ELFlash.getFlash().put("msg", msg);
-					 */
 				}
 			}
 
