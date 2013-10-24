@@ -38,9 +38,12 @@
 						value="#{parasitologicoBean.parasitologico.enfermaria}"
 						label="endermaria" />
 
-					<h:outputLabel for="dataPedido" value="Data de Solicitação: " />
-					<p:inputMask id="dataPedido" value="#{parasitologicoBean.parasitologico.dataPedido}"
-						label="dataPedido" mask="99/99/9999" />
+					<h:outputLabel for="Data de Pedido" value="Data de Pedido: " />
+					<p:inputMask id="dataPedido"
+						value="#{parasitologicoBean.parasitologico.dataPedido}"
+						label="dataPedido" mask="99/99/9999">
+						<f:convertDateTime type="date" locale="pt_BR" dateStyle="medium" />
+					</p:inputMask>
 
 					<h:outputLabel for="leito" value="Leito: " />
 					<p:inputText id="leito" value="#{parasitologicoBean.parasitologico.leito}"

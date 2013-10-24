@@ -7,7 +7,7 @@
 
 	<ui:define name="corpo">
 		<h:form>
-			<p:panel id="panel" header="Pedido de Exame: Hemograma"
+			<p:panel id="panel" header="Cadastro de Paciente"
 				style="margin-bottom:10px;">
 				<p:messages id="messages" />
 				<h:panelGrid columns="2">
@@ -24,7 +24,9 @@
 					<h:outputLabel for="dataNascimento" value="Data de Nascimento: " />
 					<p:inputMask id="dataNascimento"
 						value="#{pacienteBean.paciente.dataNascimento}"
-						label="dataNascimento" mask="99/99/9999" />
+						label="dataNascimento" mask="99/99/9999">
+						<f:convertDateTime type="date" locale="pt_BR" dateStyle="medium" />
+					</p:inputMask>
 
 					<h:outputLabel for="endereco" value="Endereço: " />
 					<p:inputText id="endereco"

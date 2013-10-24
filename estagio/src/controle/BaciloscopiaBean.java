@@ -16,6 +16,8 @@ import dao.PacienteJPADAO;
 public class BaciloscopiaBean extends AbstractBean {
 	private Baciloscopia baciloscopia;
 	private List<Baciloscopia> baciloscopias;
+	private List<Baciloscopia> filteredBaciloscopias;
+	private Baciloscopia selectedBaciloscopia;
 
 	public BaciloscopiaBean() {
 		this.setBaciloscopia(new Baciloscopia());
@@ -28,6 +30,19 @@ public class BaciloscopiaBean extends AbstractBean {
 		PacienteDAO pDAO = new PacienteJPADAO();
 		Paciente p = pDAO.find(this.baciloscopia.getPaciente().getNumeroSus());
 		if (p != null) {
+			operDAO.save(this.baciloscopia);
+			displayInfoMessageToUser("Cadastrado com sucesso!");
+		} else {
+			displayInfoMessageToUser("Paciente não cadastrado.");
+		}
+	}
+	
+	public void cadastrarResultado() {
+		BaciloscopiaDAO operDAO = new BaciloscopiaJPADAO();
+		PacienteDAO pDAO = new PacienteJPADAO();
+		Paciente p = pDAO.find(this.baciloscopia.getPaciente().getNumeroSus());
+		if (p != null) {
+			this.baciloscopia.setStatus("Concluído");
 			operDAO.save(this.baciloscopia);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 		} else {
@@ -60,6 +75,22 @@ public class BaciloscopiaBean extends AbstractBean {
 
 	public void setBaciloscopias(List<Baciloscopia> baciloscopias) {
 		this.baciloscopias = baciloscopias;
+	}
+
+	public List<Baciloscopia> getFilteredBaciloscopias() {
+		return filteredBaciloscopias;
+	}
+
+	public void setFilteredBaciloscopias(List<Baciloscopia> filteredBaciloscopias) {
+		this.filteredBaciloscopias = filteredBaciloscopias;
+	}
+
+	public Baciloscopia getSelectedBaciloscopia() {
+		return selectedBaciloscopia;
+	}
+
+	public void setSelectedBaciloscopia(Baciloscopia selectedBaciloscopia) {
+		this.selectedBaciloscopia = selectedBaciloscopia;
 	}
 
 }

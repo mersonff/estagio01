@@ -18,10 +18,12 @@
 						value="#{sanguineoBean.sanguineo.paciente.numeroSus}" required="true"
 						label="numeroSus" />
 
-					<h:outputLabel for="dataPedido" value="Data de Solicitação: " />
+					<h:outputLabel for="Data de Pedido" value="Data de Pedido: " />
 					<p:inputMask id="dataPedido"
-						value="#{sanguineoBean.sanguineo.dataPedido}" label="dataPedido"
-						mask="99/99/9999" />
+						value="#{sanguineoBean.sanguineo.dataPedido}"
+						label="dataPedido" mask="99/99/9999">
+						<f:convertDateTime type="date" locale="pt_BR" dateStyle="medium" />
+					</p:inputMask>
 
 					<h:outputLabel for="leito" value="Leito: " />
 					<p:inputText id="leito" value="#{sanguineoBean.sanguineo.leito}"

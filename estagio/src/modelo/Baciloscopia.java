@@ -1,21 +1,31 @@
 package modelo;
 
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "idExame")
 public class Baciloscopia extends Exame {
-
+	// Dados da Solicitação
 	private String unidadeDeSaude;
 	private String prontuario;
-
 	private String materialClinico;
 	private String outros;
 	private boolean diagnostico;
 	private boolean controleDeTratamento;
 	private int numeroDaAmostra;
 	private int mesDaAmostra;
+
+	// Dados do Resultado
+	@ElementCollection
+	private List<String> aspectoDoEscarro;
+	private boolean negativo;
+	private boolean baar;
+	private String positividade;
+	private String observacoes;
 
 	public Baciloscopia() {
 		setNomeTipo("Baciloscopia");
@@ -54,12 +64,20 @@ public class Baciloscopia extends Exame {
 		this.outros = outros;
 	}
 
-	public boolean getDiagnostico() {
+	public boolean isDiagnostico() {
 		return diagnostico;
 	}
 
 	public void setDiagnostico(boolean diagnostico) {
 		this.diagnostico = diagnostico;
+	}
+
+	public boolean isControleDeTratamento() {
+		return controleDeTratamento;
+	}
+
+	public void setControleDeTratamento(boolean controleDeTratamento) {
+		this.controleDeTratamento = controleDeTratamento;
 	}
 
 	public int getNumeroDaAmostra() {
@@ -78,12 +96,44 @@ public class Baciloscopia extends Exame {
 		this.mesDaAmostra = mesDaAmostra;
 	}
 
-	public boolean isControleDeTratamento() {
-		return controleDeTratamento;
+	public boolean isNegativo() {
+		return negativo;
 	}
 
-	public void setControleDeTratamento(boolean controleDeTratamento) {
-		this.controleDeTratamento = controleDeTratamento;
+	public void setNegativo(boolean negativo) {
+		this.negativo = negativo;
+	}
+
+	public boolean isBaar() {
+		return baar;
+	}
+
+	public void setBaar(boolean baar) {
+		this.baar = baar;
+	}
+
+	public String getPositividade() {
+		return positividade;
+	}
+
+	public void setPositividade(String positividade) {
+		this.positividade = positividade;
+	}
+
+	public String getObservacoes() {
+		return observacoes;
+	}
+
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
+	}
+
+	public List<String> getAspectoDoEscarro() {
+		return aspectoDoEscarro;
+	}
+
+	public void setAspectoDoEscarro(List<String> aspectoDoEscarro) {
+		this.aspectoDoEscarro = aspectoDoEscarro;
 	}
 
 }

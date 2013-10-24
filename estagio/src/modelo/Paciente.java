@@ -1,18 +1,22 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Paciente {
 	@Id
 	private long numeroSus;
 	private String nome;
-	private String dataNascimento;
+	@Temporal(TemporalType.DATE)
+	private Date dataNascimento;
 	private String endereco;
 	private String localidade;
 	private String sexo;
@@ -39,11 +43,11 @@ public class Paciente {
 		this.nome = nome;
 	}
 
-	public String getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(String dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

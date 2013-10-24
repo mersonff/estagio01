@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,24 +10,25 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Exame {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idExame;
-	private String dataPedido;
+	@Temporal(TemporalType.DATE)
+	private Date dataPedido;
+	@Temporal(TemporalType.DATE)
+	private Date dataEntrega;
 	private String status;
 	@ManyToOne
 	@JoinColumn(name = "numeroSus")
 	private Paciente paciente;
 	private String nomeTipo;
-	@OneToOne
-	@JoinColumn(name = "idExame")
-	private Resultado resultado;
 
 	public Exame() {
 		this.paciente = new Paciente();
@@ -37,14 +40,6 @@ public class Exame {
 
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
-	}
-
-	public String getDataPedido() {
-		return dataPedido;
-	}
-
-	public void setDataPedido(String dataPedido) {
-		this.dataPedido = dataPedido;
 	}
 
 	public String getNomeTipo() {
@@ -71,12 +66,23 @@ public class Exame {
 		this.idExame = idExame;
 	}
 
-	public Resultado getResultado() {
-		return resultado;
+	public Date getDataPedido() {
+		return dataPedido;
 	}
 
-	public void setResultado(Resultado resultado) {
-		this.resultado = resultado;
+	public void setDataPedido(Date dataPedido) {
+		this.dataPedido = dataPedido;
 	}
+
+	public Date getDataEntrega() {
+		return dataEntrega;
+	}
+
+	public void setDataEntrega(Date dataEntrega) {
+		this.dataEntrega = dataEntrega;
+	}
+	
+	
+	
 
 }
