@@ -62,14 +62,29 @@
 							<f:setPropertyActionListener value="#{baciloscopia}"
 								target="#{baciloscopiaBean.baciloscopia}" />
 						</p:commandButton>
-						<p:commandButton icon="ui-icon-trash"
-							update=":formExcluir:excluir" oncomplete="confirmacao.show()">
+						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
+							oncomplete="confirmacao.show()">
 							<f:setPropertyActionListener
 								target="#{baciloscopiaBean.baciloscopia}"
 								value="#{baciloscopia}" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
+
+				<p:confirmDialog header="Excluir Exame" message="Tem certeza?"
+					widgetVar="confirmacao" id="excluir">
+
+					<h:inputHidden id="idExame"
+						value="#{baciloscopiaBean.baciloscopia.idExame}" />
+					<h:inputHidden id="numeroSus"
+						value="#{baciloscopiaBean.baciloscopia.paciente.numeroSus}" />
+
+					<p:commandButton value="Sim" update="panel" id="ajax"
+						oncomplete="confirmacao.hide()" 
+						actionListener="#{baciloscopiaBean.excluir()}" />
+					<p:button value="Não" onclick="confirmacao.hide();" />
+
+				</p:confirmDialog>
 
 				<p:dialog
 					header="Pedido / Resultado de #{baciloscopiaBean.baciloscopia.nomeTipo}"
@@ -99,10 +114,12 @@
 											value="#{baciloscopiaBean.baciloscopia.unidadeDeSaude}"
 											style="font-weight:bold" disabled="true" size="15" />
 
-										<h:outputText value="Solicitado em:" />
 										<p:inputText
 											value="#{baciloscopiaBean.baciloscopia.dataPedido}"
-											style="font-weight:bold" disabled="true" size="7" />
+											style="font-weight:bold" disabled="true" size="7">
+											<f:convertDateTime type="date" locale="pt_BR"
+												timeZone="America/Fortaleza" />
+										</p:inputText>
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4" columns="6">
@@ -256,61 +273,7 @@
 		<h:form id="formExcluir">
 			<p:growl id="msgs2" showDetail="true" />
 
-			<p:confirmDialog header="Excluir Exame" message="Tem certeza?"
-				widgetVar="confirmacao" id="excluir">
 
-				<h:inputHidden id="idExame"
-					value="#{baciloscopiaBean.baciloscopia.idExame}" />
-				<h:inputHidden id="numeroSus"
-					value="#{baciloscopiaBean.baciloscopia.paciente.numeroSus}" />
-				<h:inputHidden id="unidadeDeSaude"
-					value="#{baciloscopiaBean.baciloscopia.unidadeDeSaude}" />
-				<h:inputHidden id="dataPedido"
-					value="#{baciloscopiaBean.baciloscopia.dataPedido}" />
-				<h:inputHidden id="nome"
-					value="#{baciloscopiaBean.baciloscopia.paciente.nome}" />
-				<h:inputHidden id="sobrenome"
-					value="#{baciloscopiaBean.baciloscopia.paciente.sobrenome}" />
-				<h:inputHidden id="sexo"
-					value="#{baciloscopiaBean.baciloscopia.paciente.sexo}" />
-				<h:inputHidden id="dataNascimento"
-					value="#{baciloscopiaBean.baciloscopia.paciente.dataNascimento}" />
-				<h:inputHidden id="prontuario"
-					value="#{baciloscopiaBean.baciloscopia.prontuario}" />
-				<h:inputHidden id="endereco"
-					value="#{baciloscopiaBean.baciloscopia.paciente.endereco}" />
-				<h:inputHidden id="localidade"
-					value="#{baciloscopiaBean.baciloscopia.paciente.localidade}" />
-				<h:inputHidden id="materialClinico"
-					value="#{baciloscopiaBean.baciloscopia.materialClinico}" />
-				<h:inputHidden id="outros"
-					value="#{baciloscopiaBean.baciloscopia.outros}" />
-				<h:inputHidden id="diagnostico"
-					value="#{baciloscopiaBean.baciloscopia.diagnostico}" />
-				<h:inputHidden id="numeroDaAmostra"
-					value="#{baciloscopiaBean.baciloscopia.numeroDaAmostra}" />
-				<h:inputHidden id="controleDeTratamento"
-					value="#{baciloscopiaBean.baciloscopia.controleDeTratamento}" />
-				<h:inputHidden id="mesDaAmostra"
-					value="#{baciloscopiaBean.baciloscopia.mesDaAmostra}" />
-				<h:inputHidden id="dataEntrega"
-					value="#{baciloscopiaBean.baciloscopia.dataEntrega}" />
-				<h:inputHidden id="aspectoDoEscarro"
-					value="#{baciloscopiaBean.baciloscopia.aspectoDoEscarro}" />
-				<h:inputHidden id="negativo"
-					value="#{baciloscopiaBean.baciloscopia.negativo}" />
-				<h:inputHidden id="baar"
-					value="#{baciloscopiaBean.baciloscopia.baar}" />
-				<h:inputHidden id="positividade"
-					value="#{baciloscopiaBean.baciloscopia.positividade}" />
-				<h:inputHidden id="observacoes"
-					value="#{baciloscopiaBean.baciloscopia.observacoes}" />
-				<p:commandButton value="Sim" update=":form:dataTable"
-					oncomplete="confirmacao.hide()"
-					actionListener="#{baciloscopiaBean.excluir()}" />
-				<p:button value="Não" onclick="confirmacao.hide();" />
-
-			</p:confirmDialog>
 		</h:form>
 	</ui:define>
 </ui:composition>

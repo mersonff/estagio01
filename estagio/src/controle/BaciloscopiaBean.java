@@ -6,12 +6,9 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 
 import modelo.Baciloscopia;
-import modelo.Exame;
 import modelo.Paciente;
 import dao.BaciloscopiaDAO;
 import dao.BaciloscopiaJPADAO;
-import dao.ExameDAO;
-import dao.ExameJPADAO;
 import dao.PacienteDAO;
 import dao.PacienteJPADAO;
 
@@ -38,6 +35,7 @@ public class BaciloscopiaBean extends AbstractBean {
 		} else {
 			displayErrorMessageToUser("Paciente não cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
+		
 	}
 
 	public void cadastrarResultado() {
@@ -57,6 +55,7 @@ public class BaciloscopiaBean extends AbstractBean {
 		BaciloscopiaDAO operDAO = new BaciloscopiaJPADAO();
 		operDAO.delete(this.baciloscopia);
 		displayInfoMessageToUser("Excluido com sucesso!");
+		this.baciloscopias = operDAO.find();
 
 	}
 

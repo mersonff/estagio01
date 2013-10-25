@@ -17,30 +17,29 @@
 		<p:messages autoUpdate="true" />
 		<h:form id="login">
 			<p:panel header="Login">
-				<h:outputLabel value="Usuário:" />
-				<br />
-				<p:inputText value="#{loginBean.usuario.login}" required="true" />
-				<br />
-				<br />
-				<h:outputLabel value="Senha:" />
-				<br />
-				<p:password value="#{loginBean.usuario.senha}" label="password"
-					required="true" />
-				<br />
-				<br />
-				<h:outputLabel value="Tipo de usuário:" />
-				<br />
-				<p:selectOneMenu value="#{loginBean.usuario.tipo}" required="true">
-					<f:selectItem itemLabel="selecione uma opcão"
-						noSelectionOption="true" />
-					<f:selectItem itemValue="#{loginBean.tipoDeUsuario.administrador}"
-						itemLabel="Administrador" />
-					<f:selectItem itemValue="#{loginBean.tipoDeUsuario.operador}"
-						itemLabel="Operador" />
-				</p:selectOneMenu>
-				<br />
-				<br />
-				<p:commandButton value="Entrar" action="#{loginBean.logar}" />
+				<h:panelGrid style="margin: 0 auto" cellpadding="4">
+					<h:outputLabel value="Usuário:" />
+
+					<p:inputText value="#{loginBean.usuario.login}" required="true" />
+
+					<h:outputLabel value="Senha:" />
+
+					<p:password value="#{loginBean.usuario.senha}" label="password"
+						required="true" />
+
+					<h:outputLabel value="Tipo de usuário:" />
+
+					<p:selectOneMenu value="#{loginBean.usuario.tipo}" required="true">
+						<f:selectItem itemLabel="selecione uma opcão"
+							noSelectionOption="true" />
+						<f:selectItem itemValue="#{loginBean.tipoDeUsuario.administrador}"
+							itemLabel="Administrador" />
+						<f:selectItem itemValue="#{loginBean.tipoDeUsuario.operador}"
+							itemLabel="Operador" />
+					</p:selectOneMenu>
+
+					<p:commandButton value="Entrar" action="#{loginBean.logar}" />
+				</h:panelGrid>
 			</p:panel>
 			<h:messages />
 		</h:form>
