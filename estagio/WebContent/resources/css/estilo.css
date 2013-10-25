@@ -1,67 +1,58 @@
 @CHARSET "ISO-8859-1";
 
-body{
+body {
 	background-color: white;
 }
 
 .ui-widget,.ui-widget .ui-widget {
-     font-size: 98% !important;
+	font-size: 98% !important;
 }
 
-#conteudo{
-	
-	width:800px;
-	height:600px;
+#conteudo {
+	width: 800px;
+	height: 600px;
 	margin: 0 auto;
 	margin-top: 2px;
 	border: 1px solid #C0C0C0;
-	
 }
 
-#cabecalho{
+#cabecalho {
 	background-color: #dddddd;
 	height: 110px;
 	margin-bottom: 1px;
 }
 
-#menubar{
+#menubar {
 	margin: 10px;
 }
 
-#login{
+#login {
 	width: 400px;
 	margin: 10px auto;
 	margin-bottom: 30px;
 }
 
-
-#corpo{
-	
+#corpo {
 	min-height: 400px;
 	margin: 10px;
+}
+
+#rodape {
 	
 }
 
-
-
-
-#rodape{
-	
-}
-
-.msg-error{
-	margin-left:0;
+.msg-error {
+	margin-left: 0;
 	list-style-type: none;
 	background-color: #FFCCCC;
 	padding: 8px;
 	border: 2px solid red;
 }
 
-.msg-sucesso{
-	margin-left:0;
+.msg-sucesso {
+	margin-left: 0;
 	list-style-type: none;
 	background-color: #99FF99;
 	padding: 8px;
 	border: 2px solid green;
 }
-

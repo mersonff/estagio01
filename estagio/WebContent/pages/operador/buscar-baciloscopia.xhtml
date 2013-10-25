@@ -14,7 +14,9 @@
 
 				<p:dataTable id="dataTable" var="baciloscopia"
 					value="#{baciloscopiaBean.baciloscopias}"
-					widgetVar="baciloscopiasTable"
+					widgetVar="baciloscopiasTable" paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
 					emptyMessage="Nenhum exame encontrado com esses critérios."
 					filteredValue="#{baciloscopiaBean.filteredBaciloscopias}">
 
@@ -65,19 +67,19 @@
 
 				<p:dialog
 					header="Pedido / Resultado de #{baciloscopiaBean.baciloscopia.nomeTipo}"
-					widgetVar="resultadoDialog" resizable="false" id="resultDlg"
+					widgetVar="resultadoDialog" resizable="false" id="dialogo"
 					showEffect="fade" hideEffect="explode" modal="true">
 
-					<p:scrollPanel style="width:800px;height:600px" scrollMode="native">
+					<p:scrollPanel style="width:800px;height:500px" scrollMode="native">
 						<h:panelGrid id="display" cellpadding="4">
-						
+
 							<p:commandButton value="Imprimir" type="button"
 								icon="ui-icon-print">
 								<p:printer target="printArea" />
 							</p:commandButton>
-							
+
 							<h:form id="printArea">
-							
+
 								<p:panel header="Dados do Pedido">
 
 									<h:panelGrid cellpadding="4" columns="6">
@@ -89,12 +91,15 @@
 										<h:outputText value="Unidade de Saúde: " />
 										<p:inputText
 											value="#{baciloscopiaBean.baciloscopia.unidadeDeSaude}"
-											style="font-weight:bold" disabled="true" size="15"/>
+											style="font-weight:bold" disabled="true" size="15" />
 
 										<h:outputText value="Solicitado em:" />
 										<p:inputText
 											value="#{baciloscopiaBean.baciloscopia.dataPedido}"
-											style="font-weight:bold" disabled="true" size="7" />
+											style="font-weight:bold" disabled="true" size="7">
+											<f:convertDateTime type="date" locale="pt_BR"
+												timeZone="America/Fortaleza" />
+										</p:inputText>
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4" columns="6">
@@ -121,7 +126,7 @@
 											value="#{baciloscopiaBean.baciloscopia.paciente.dataNascimento}"
 											style="font-weight:bold" disabled="true" size="7">
 											<f:convertDateTime type="date" locale="pt_BR"
-												dateStyle="medium" />
+												timeZone="America/Fortaleza" />
 										</p:inputText>
 
 										<h:outputText value="Prontuário:" />
@@ -138,7 +143,7 @@
 											style="font-weight:bold" disabled="true" />
 
 										<h:outputText value="Localidade:" />
-										<p:inputText id="municipio"
+										<p:inputText id="localidade"
 											value="#{baciloscopiaBean.baciloscopia.paciente.localidade}"
 											style="font-weight:bold" disabled="true" size="10" />
 									</h:panelGrid>

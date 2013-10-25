@@ -6,9 +6,12 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 
 import modelo.Baciloscopia;
+import modelo.Exame;
 import modelo.Paciente;
 import dao.BaciloscopiaDAO;
 import dao.BaciloscopiaJPADAO;
+import dao.ExameDAO;
+import dao.ExameJPADAO;
 import dao.PacienteDAO;
 import dao.PacienteJPADAO;
 
@@ -50,10 +53,11 @@ public class BaciloscopiaBean extends AbstractBean {
 		this.baciloscopias = operDAO.find();
 	}
 
-	public void excluir(Baciloscopia bacil) {
+	public void excluir() {
 		BaciloscopiaDAO operDAO = new BaciloscopiaJPADAO();
-		operDAO.delete(bacil);
+		operDAO.delete(this.baciloscopia);
 		displayInfoMessageToUser("Excluido com sucesso!");
+
 	}
 
 	public Baciloscopia getBaciloscopia() {

@@ -15,21 +15,22 @@
 					<h:outputLabel for="numeroSus" value="Número do SUS: *" />
 					<p:inputText id="numeroSus"
 						value="#{pacienteBean.paciente.numeroSus}" required="true"
-						label="numeroSus" size="5"/>
+						label="numeroSus" size="5" />
 
 					<h:outputLabel for="nome" value="Nome: " />
 					<p:inputText id="nome" value="#{pacienteBean.paciente.nome}"
-						label="nome" size="5"/>
-					
+						label="nome" size="10" />
+
 					<h:outputLabel for="sobrenome" value="Sobrenome: " />
-					<p:inputText id="sobrenome" value="#{pacienteBean.paciente.sobrenome}"
-						label="sobrenome" />
+					<p:inputText id="sobrenome"
+						value="#{pacienteBean.paciente.sobrenome}" label="sobrenome" />
 
 					<h:outputLabel for="dataNascimento" value="Data de Nascimento: " />
 					<p:inputMask id="dataNascimento"
 						value="#{pacienteBean.paciente.dataNascimento}"
 						label="dataNascimento" mask="99/99/9999" size="5">
-						<f:convertDateTime type="date" locale="pt_BR" dateStyle="medium" />
+						<f:convertDateTime type="date" locale="pt_BR"
+							timeZone="America/Fortaleza" />
 					</p:inputMask>
 
 					<h:outputLabel for="endereco" value="Endereço: " />
@@ -38,7 +39,8 @@
 
 					<h:outputLabel for="localidade" value="Localidade: " />
 					<p:inputText id="localidade"
-						value="#{pacienteBean.paciente.localidade}" label="localidade" size="10"/>
+						value="#{pacienteBean.paciente.localidade}" label="localidade"
+						size="10" />
 
 					<h:outputLabel for="sexo" value="Sexo: " />
 					<p:selectOneMenu id="sexo" value="#{pacienteBean.paciente.sexo}">

@@ -19,14 +19,15 @@
 						required="true" label="numeroSus" size="6"/>
 
 					<h:outputText value="Unidade de Saúde: " />
-					<p:inputText
+					<p:inputText id="unidadeDeSaude"
 						value="#{baciloscopiaBean.baciloscopia.unidadeDeSaude}" />
 
-					<h:outputLabel for="Data de Pedido" value="Data de Pedido: " />
+					<h:outputLabel for="dataPedido" value="Data de Pedido: " />
 					<p:inputMask id="dataPedido" size="7"
 						value="#{baciloscopiaBean.baciloscopia.dataPedido}"
 						label="dataPedido" mask="99/99/9999">
-						<f:convertDateTime type="date" locale="pt_BR" dateStyle="medium"/>
+						<f:convertDateTime type="date" locale="pt_BR"
+							timeZone="America/Fortaleza" />
 					</p:inputMask>
 
 					<h:outputLabel for="prontuario" value="Prontuário:" />

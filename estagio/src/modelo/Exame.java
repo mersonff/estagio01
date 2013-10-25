@@ -81,8 +81,5 @@ public class Exame {
 	public void setDataEntrega(Date dataEntrega) {
 		this.dataEntrega = dataEntrega;
 	}
-	
-	
-	
 
 }
