@@ -20,9 +20,9 @@ public class Bioquimica extends Exame {
 	private double tgo;
 	private double tgp;
 	private double fosfatase;
-	private double biliburrinaTotal;
-	private double biliburrinaDireta;
-	private double biliburrinaIndireta;
+	private double bilirrubinaTotal;
+	private double bilirrubinaDireta;
+	private double bilirrubinaIndireta;
 	private double proteinasTotais;
 	private double albumina;
 	private double amilase;
@@ -36,6 +36,7 @@ public class Bioquimica extends Exame {
 
 	public Bioquimica() {
 		setNomeTipo("Bioquímica");
+		setStatus("Em aberto");
 	}
 
 	public String getLeito() {
@@ -118,28 +119,28 @@ public class Bioquimica extends Exame {
 		this.fosfatase = fosfatase;
 	}
 
-	public double getBiliburrinaTotal() {
-		return biliburrinaTotal;
+	public double getBilirrubinaTotal() {
+		return bilirrubinaTotal;
 	}
 
-	public void setBiliburrinaTotal(double biliburrinaTotal) {
-		this.biliburrinaTotal = biliburrinaTotal;
+	public void setBilirrubinaTotal(double bilirrubinaTotal) {
+		this.bilirrubinaTotal = bilirrubinaTotal;
 	}
 
-	public double getBiliburrinaDireta() {
-		return biliburrinaDireta;
+	public double getBilirrubinaDireta() {
+		return bilirrubinaDireta;
 	}
 
-	public void setBiliburrinaDireta(double biliburrinaDireta) {
-		this.biliburrinaDireta = biliburrinaDireta;
+	public void setBilirrubinaDireta(double bilirrubinaDireta) {
+		this.bilirrubinaDireta = bilirrubinaDireta;
 	}
 
-	public double getBiliburrinaIndireta() {
-		return biliburrinaIndireta;
+	public double getBilirrubinaIndireta() {
+		return bilirrubinaIndireta;
 	}
 
-	public void setBiliburrinaIndireta(double biliburrinaIndireta) {
-		this.biliburrinaIndireta = biliburrinaIndireta;
+	public void setBilirrubinaIndireta(double bilirrubinaIndireta) {
+		this.bilirrubinaIndireta = bilirrubinaIndireta;
 	}
 
 	public double getProteinasTotais() {

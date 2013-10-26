@@ -17,7 +17,6 @@ public class BaciloscopiaBean extends AbstractBean {
 	private Baciloscopia baciloscopia;
 	private List<Baciloscopia> baciloscopias;
 	private List<Baciloscopia> filteredBaciloscopias;
-	private Baciloscopia selectedBaciloscopia;
 
 	public BaciloscopiaBean() {
 		this.setBaciloscopia(new Baciloscopia());
@@ -82,14 +81,6 @@ public class BaciloscopiaBean extends AbstractBean {
 	public void setFilteredBaciloscopias(
 			List<Baciloscopia> filteredBaciloscopias) {
 		this.filteredBaciloscopias = filteredBaciloscopias;
-	}
-
-	public Baciloscopia getSelectedBaciloscopia() {
-		return selectedBaciloscopia;
-	}
-
-	public void setSelectedBaciloscopia(Baciloscopia selectedBaciloscopia) {
-		this.selectedBaciloscopia = selectedBaciloscopia;
 	}
 
 }

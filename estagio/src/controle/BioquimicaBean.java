@@ -5,19 +5,18 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
-import modelo.Paciente;
 import modelo.Bioquimica;
-import dao.PacienteDAO;
-import dao.PacienteJPADAO;
+import modelo.Paciente;
 import dao.BioquimicaDAO;
 import dao.BioquimicaJPADAO;
+import dao.PacienteDAO;
+import dao.PacienteJPADAO;
 
 @ManagedBean
 public class BioquimicaBean extends AbstractBean {
 	private Bioquimica bioquimica;
 	private List<Bioquimica> bioquimicas;
 	private List<Bioquimica> filteredBioquimicas;
-
 
 	public BioquimicaBean() {
 		this.setBioquimica(new Bioquimica());
@@ -33,8 +32,17 @@ public class BioquimicaBean extends AbstractBean {
 			operDAO.save(this.bioquimica);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 		} else {
-			displayInfoMessageToUser("Paciente não cadastrado." + "");
+			displayErrorMessageToUser("Paciente não cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
+		
+	}
+
+	public void cadastrarResultado() {
+		BioquimicaDAO operDAO = new BioquimicaJPADAO();
+		this.bioquimica.setStatus("Concluído");
+		operDAO.save(this.bioquimica);
+		displayInfoMessageToUser("Cadastrado com sucesso!");
+
 	}
 
 	public void pesquisarTodos() {
@@ -42,10 +50,12 @@ public class BioquimicaBean extends AbstractBean {
 		this.bioquimicas = operDAO.find();
 	}
 
-	public void excluir(Bioquimica bioquimica) {
+	public void excluir() {
 		BioquimicaDAO operDAO = new BioquimicaJPADAO();
-		operDAO.delete(bioquimica);
+		operDAO.delete(this.bioquimica);
 		displayInfoMessageToUser("Excluido com sucesso!");
+		this.bioquimicas = operDAO.find();
+
 	}
 
 	public Bioquimica getBioquimica() {
@@ -68,7 +78,8 @@ public class BioquimicaBean extends AbstractBean {
 		return filteredBioquimicas;
 	}
 
-	public void setFilteredBioquimicas(List<Bioquimica> filteredBioquimicas) {
+	public void setFilteredBioquimicas(
+			List<Bioquimica> filteredBioquimicas) {
 		this.filteredBioquimicas = filteredBioquimicas;
 	}
 

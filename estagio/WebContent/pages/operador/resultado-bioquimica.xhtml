@@ -74,6 +74,11 @@
 						<h:panelGrid id="display" cellpadding="4">
 							<p:panel header="Dados do Pedido">
 
+								<h:inputHidden id="idExame" value="#{bioquimicaBean.bioquimica.idExame}"/>
+								<h:inputHidden id="numeroSus" value="#{bioquimicaBean.bioquimica.paciente.numeroSus}"/>
+								<h:inputHidden id="dataPedido" value="#{bioquimicaBean.bioquimica.dataPedido}"/>
+								<h:inputHidden id="leito" value="#{bioquimicaBean.bioquimica.leito}"/>
+
 								<h:panelGrid cellpadding="4" columns="4">
 									<h:outputText value="Nome: " />
 									<p:inputText id="nome"
@@ -241,7 +246,7 @@
 									</p:panel>
 
 									<p:panel header="Valores de Referência">
-
+										
 										<h:panelGrid cellpadding="7" columns="2">
 											<h:outputText value="Glicose: " />
 											<h:outputText value="70 - 110 mg/dl" />
@@ -278,31 +283,31 @@
 
 											<h:outputText value="Bilirrubina Total: " />
 											<h:outputText value="Até 1,2 mg/dl" />
-
+											
 											<h:outputText value="Bilirrubina Direta: " />
 											<h:outputText value="Até 0,4 mg/dl" />
-
+											
 											<h:outputText value="Bilirrubina Indireta: " />
 											<h:outputText value="Até 1,0 mg/dl" />
-
+											
 											<h:outputText value="Proteínas Totais: " />
 											<h:outputText value="6,0 - 8,0 g/dl" />
-
+											
 											<h:outputText value="Albumina: " />
 											<h:outputText value="3,55 -5,5 g/dl" />
-
+											
 											<h:outputText value="Amilase: " />
 											<h:outputText value="60 - 160 u/dl" />
-
+											
 											<h:outputText value="ASO:" />
 											<h:outputText value="Menor que 200 ul/ml" />
-
+											
 											<h:outputText value="PCR " />
 											<h:outputText value="Menor que 6,0 mg/l" />
-
+											
 											<h:outputText value="Látex: " />
 											<h:outputText value="Menor que 8 ul/ml" />
-
+											
 											<h:outputText value="VDRL: " />
 											<h:outputText value="Não reagente" />
 										</h:panelGrid>

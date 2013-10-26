@@ -16,12 +16,16 @@
 					<h:outputLabel for="numeroSus" value="Número do SUS: *" />
 					<p:inputText id="numeroSus"
 						value="#{bioquimicaBean.bioquimica.paciente.numeroSus}"
-						required="true" label="numeroSus" size="6" />
+						required="true" label="numeroSus" size="6"
+						requiredMessage="Número do SUS: Campo obrigatório."
+						converterMessage="Número do SUS: Deve ser um número." />
 
-					<h:outputLabel for="Data de Pedido" value="Data de Pedido: " />
-					<p:inputMask id="dataPedido"
-						value="#{bioquimicaBean.bioquimica.dataPedido}" label="dataPedido"
-						mask="99/99/9999" size="7">
+					<h:outputLabel for="dataPedido" value="Data de Pedido: " />
+					<p:inputMask id="dataPedido" size="7"
+						value="#{bioquimicaBean.bioquimica.dataPedido}"
+						label="dataPedido" mask="99/99/9999"
+						requiredMessage="Data de Pedido: Campo obrigatório."
+						converterMessage="Data Pedido: A data inserida não é uma data válida">
 						<f:convertDateTime type="date" locale="pt_BR"
 							timeZone="America/Fortaleza" />
 					</p:inputMask>
