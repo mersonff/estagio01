@@ -1,0 +1,211 @@
+<ui:composition template="/WEB-INF/templates/template-operador.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+
+		<h:form id="form">
+			<p:panel id="panel" style="margin-bottom:10px;">
+
+				<p:growl id="msgs" showDetail="true" />
+
+				<p:dataTable id="dataTable" var="bioquimica"
+					value="#{bioquimicaBean.bioquimicas}" widgetVar="bioquimicasTable"
+					paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					emptyMessage="Nenhum exame encontrado com esses critérios."
+					filteredValue="#{bioquimicaBean.filteredBioquimicas}">
+
+					<f:facet name="header">
+						<p:outputPanel>
+							<h:outputText value="Procurar em todos os campos:" />
+							<p:inputText id="globalFilter"
+								onkeyup="bioquimicasTable.filter()" style="width:150px" />
+						</p:outputPanel>
+					</f:facet>
+
+					<p:column id="numeroSusColumn"
+						sortBy="#{bioquimica.paciente.numeroSus}"
+						filterBy="#{bioquimica.paciente.numeroSus}" headerText="SUS"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{bioquimica.paciente.numeroSus}" />
+					</p:column>
+
+					<p:column id="nomeColumn" filterBy="#{bioquimica.paciente.nome}"
+						headerText="Nome" sortBy="#{bioquimica.paciente.nome}"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{bioquimica.paciente.nome}" />
+					</p:column>
+
+					<p:column id="dataPedidoColumn" sortBy="#{bioquimica.dataPedido}"
+						filterBy="#{bioquimica.dataPedido}" headerText="Data de Pedido"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{bioquimica.dataPedido}">
+							<f:convertDateTime type="date" locale="pt_BR" dateStyle="medium" />
+						</h:outputText>
+					</p:column>
+
+					<p:column id="statusColumn" filterBy="#{bioquimica.status}"
+						headerText="Status" filterOptions="#{exameBean.statusOptions}"
+						filterMatchMode="exact">
+						<h:outputText value="#{bioquimica.status}" />
+					</p:column>
+
+					<p:column style="width:4%">
+						<p:commandButton id="selectButton" update=":form:display"
+							oncomplete="resultadoDialog.show()" icon="ui-icon-search"
+							title="Abrir">
+							<f:setPropertyActionListener value="#{bioquimica}"
+								target="#{bioquimicaBean.bioquimica}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:dialog
+					header="Pedido / Resultado de #{bioquimicaBean.bioquimica.nomeTipo}"
+					widgetVar="resultadoDialog" resizable="false" id="dialogo"
+					showEffect="fade" hideEffect="explode" modal="true">
+
+					<p:scrollPanel style="width:800px;height:500px" scrollMode="native">
+						<h:panelGrid id="display" cellpadding="4">
+
+							<p:commandButton value="Imprimir" type="button"
+								icon="ui-icon-print">
+								<p:printer target="printArea" />
+							</p:commandButton>
+
+							<h:form id="printArea">
+
+								<p:panel header="Dados do Pedido">
+
+									<h:panelGrid cellpadding="4" columns="6">
+										<h:outputText value="SUS:" />
+										<p:inputText
+											value="#{bioquimicaBean.bioquimica.paciente.numeroSus}"
+											style="font-weight:bold" disabled="true" size="6" />
+
+										<h:outputText value="Solicitado em:" />
+										<p:inputText value="#{bioquimicaBean.bioquimica.dataPedido}"
+											style="font-weight:bold" disabled="true" size="7">
+											<f:convertDateTime type="date" locale="pt_BR"
+												timeZone="America/Fortaleza" />
+										</p:inputText>
+									</h:panelGrid>
+
+									<h:panelGrid cellpadding="4" columns="6">
+										<h:outputText value="Nome: " />
+										<p:inputText
+											value="#{bioquimicaBean.bioquimica.paciente.nome}"
+											style="font-weight:bold" disabled="true" size="10" />
+
+										<h:outputText value="Sobrenome: " />
+										<p:inputText
+											value="#{bioquimicaBean.bioquimica.paciente.sobrenome}"
+											style="font-weight:bold" disabled="true" />
+
+										<h:outputText value="Sexo:" />
+										<p:inputText id="sexo"
+											value="#{bioquimicaBean.bioquimica.paciente.sexo}"
+											style="font-weight:bold" disabled="true" size="1" />
+									</h:panelGrid>
+
+									<h:panelGrid cellpadding="4" columns="4">
+
+										<h:outputText value="Data de Nascimento:" />
+										<p:inputText id="dataNascimento"
+											value="#{bioquimicaBean.bioquimica.paciente.dataNascimento}"
+											style="font-weight:bold" disabled="true" size="7">
+											<f:convertDateTime type="date" locale="pt_BR"
+												timeZone="America/Fortaleza" />
+										</p:inputText>
+
+										<h:outputText value="Leito:" />
+										<p:inputText id="leito"
+											value="#{bioquimicaBean.bioquimica.leito}"
+											style="font-weight:bold" disabled="true" />
+									</h:panelGrid>
+
+									<h:panelGrid cellpadding="4" columns="4">
+
+										<h:outputText value="Endereço:" />
+										<p:inputText id="endereco"
+											value="#{bioquimicaBean.bioquimica.paciente.endereco}"
+											style="font-weight:bold" disabled="true" />
+
+										<h:outputText value="Localidade:" />
+										<p:inputText id="localidade"
+											value="#{bioquimicaBean.bioquimica.paciente.localidade}"
+											style="font-weight:bold" disabled="true" size="10" />
+									</h:panelGrid>
+
+								</p:panel>
+
+								<p:panel header="Dados do Resultado">
+
+									<h:panelGrid cellpadding="4" columns="2">
+
+										<h:outputLabel for="dataEntrega" value="Data de Entrega: " />
+										<p:inputMask id="dataEntrega"
+											value="#{bioquimicaBean.bioquimica.dataEntrega}"
+											label="dataEntrega" mask="99/99/9999" size="7"
+											disabled="true">
+											<f:convertDateTime type="date" locale="pt_BR"
+												timeZone="America/Fortaleza" />
+										</p:inputMask>
+									</h:panelGrid>
+
+									<h:panelGrid cellpadding="4" columns="2">
+
+										<h:outputText for="aspectoDoEscarro"
+											value="Aspecto do Escarro: " />
+										<p:inputTextarea id="aspectoDoEscarro"
+											value="#{bioquimicaBean.bioquimica.aspectoDoEscarro}"
+											disabled="true" />
+									</h:panelGrid>
+
+									<h:panelGrid cellpadding="4" columns="4">
+
+										<h:outputLabel for="negativo" value="Negativo: " />
+										<p:selectBooleanCheckbox id="negativo"
+											value="#{bioquimicaBean.bioquimica.negativo}"
+											label="Negativo" disabled="true" />
+
+										<h:outputLabel for="baar" value="1 a 9 BAAR: " />
+										<p:selectBooleanCheckbox id="baar"
+											value="#{bioquimicaBean.bioquimica.baar}" label="Baar"
+											disabled="true" />
+									</h:panelGrid>
+
+									<h:panelGrid cellpadding="4" columns="2">
+
+										<h:outputLabel for="positividade" value="" />
+										<p:selectOneRadio id="positividade"
+											value="#{bioquimicaBean.bioquimica.positividade}"
+											disabled="true">
+											<f:selectItem itemLabel=" Positivo+ " itemValue="Positivo++" />
+											<f:selectItem itemLabel=" Positivo++ " itemValue="Positivo++" />
+											<f:selectItem itemLabel=" Positivo+++ "
+												itemValue="Positivo+++" />
+										</p:selectOneRadio>
+									</h:panelGrid>
+
+									<h:panelGrid cellpadding="4" columns="2">
+
+										<h:outputLabel for="observacoes" value="Observações: " />
+										<p:inputTextarea id="observacoes"
+											value="#{bioquimicaBean.bioquimica.observacoes}"
+											label="Observacoes" rows="4" cols="50" disabled="true" />
+									</h:panelGrid>
+								</p:panel>
+							</h:form>
+						</h:panelGrid>
+					</p:scrollPanel>
+				</p:dialog>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

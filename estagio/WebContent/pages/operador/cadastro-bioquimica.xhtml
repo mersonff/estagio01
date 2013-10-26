@@ -11,18 +11,19 @@
 			<p:panel id="panel" header="Pedido de Exame: Bioquímica"
 				style="margin-bottom:10px;">
 				<p:messages id="messages" />
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="2" cellpadding="4">
 
 					<h:outputLabel for="numeroSus" value="Número do SUS: *" />
 					<p:inputText id="numeroSus"
 						value="#{bioquimicaBean.bioquimica.paciente.numeroSus}"
-						required="true" label="numeroSus" />
+						required="true" label="numeroSus" size="6" />
 
 					<h:outputLabel for="Data de Pedido" value="Data de Pedido: " />
 					<p:inputMask id="dataPedido"
-						value="#{bioquimicaBean.bioquimica.dataPedido}"
-						label="dataPedido" mask="99/99/9999">
-						<f:convertDateTime type="date" locale="pt_BR" dateStyle="medium" />
+						value="#{bioquimicaBean.bioquimica.dataPedido}" label="dataPedido"
+						mask="99/99/9999" size="7">
+						<f:convertDateTime type="date" locale="pt_BR"
+							timeZone="America/Fortaleza" />
 					</p:inputMask>
 
 					<h:outputLabel for="leito" value="Leito: " />

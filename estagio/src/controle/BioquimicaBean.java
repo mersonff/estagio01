@@ -16,6 +16,8 @@ import dao.BioquimicaJPADAO;
 public class BioquimicaBean extends AbstractBean {
 	private Bioquimica bioquimica;
 	private List<Bioquimica> bioquimicas;
+	private List<Bioquimica> filteredBioquimicas;
+
 
 	public BioquimicaBean() {
 		this.setBioquimica(new Bioquimica());
@@ -60,6 +62,14 @@ public class BioquimicaBean extends AbstractBean {
 
 	public void setBioquimicas(List<Bioquimica> bioquimicas) {
 		this.bioquimicas = bioquimicas;
+	}
+
+	public List<Bioquimica> getFilteredBioquimicas() {
+		return filteredBioquimicas;
+	}
+
+	public void setFilteredBioquimicas(List<Bioquimica> filteredBioquimicas) {
+		this.filteredBioquimicas = filteredBioquimicas;
 	}
 
 }
