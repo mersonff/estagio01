@@ -70,253 +70,309 @@
 					widgetVar="resultadoDialog" resizable="false" id="dialogo"
 					showEffect="fade" hideEffect="explode" modal="true">
 
-					<p:scrollPanel style="width:800px;height:500px" scrollMode="native">
-						<h:panelGrid id="display" cellpadding="4">
-							<p:panel header="Dados do Pedido">
+					<p:scrollPanel style="width:1000px;height:500px" scrollMode="native">
+						<h:panelGrid id="display">
 
-								<h:panelGrid cellpadding="4" columns="4">
-									<h:outputText value="Nome: " />
-									<p:inputText id="nome"
-										value="#{bioquimicaBean.bioquimica.paciente.nome}"
-										style="font-weight:bold" disabled="true" size="10" />
+							<p:commandButton value="Imprimir" type="button"
+								icon="ui-icon-print">
+								<p:printer target="printArea" />
+							</p:commandButton>
 
-									<h:outputText value="Sobrenome: " />
-									<p:inputText id="sobrenome"
-										value="#{bioquimicaBean.bioquimica.paciente.sobrenome}"
-										style="font-weight:bold" disabled="true" />
-								</h:panelGrid>
+							<h:form id="printArea">
+								<p:panel header="Dados do Pedido">
 
-								<h:panelGrid cellpadding="4" columns="2">
-
-									<h:outputText value="Leito: " />
-									<p:inputText value="#{bioquimicaBean.bioquimica.leito}"
-										style="font-weight:bold" disabled="true" />
-								</h:panelGrid>
-
-								<h:panelGrid cellpadding="4" columns="2">
-
-									<h:outputText value="Solicitado em:" />
-									<p:inputText value="#{bioquimicaBean.bioquimica.dataPedido}"
-										style="font-weight:bold" disabled="true" size="7">
+									<h:inputHidden id="idExame"
+										value="#{bioquimicaBean.bioquimica.idExame}" />
+									<h:inputHidden id="numeroSus"
+										value="#{bioquimicaBean.bioquimica.paciente.numeroSus}" />
+									<h:inputHidden id="dataPedido"
+										value="#{bioquimicaBean.bioquimica.dataPedido}">
 										<f:convertDateTime type="date" locale="pt_BR"
 											timeZone="America/Fortaleza" />
-									</p:inputText>
-								</h:panelGrid>
-							</p:panel>
+									</h:inputHidden>
+									<h:inputHidden id="leito"
+										value="#{bioquimicaBean.bioquimica.leito}" />
 
-							<p:panel header="Dados do Resultado">
+									<h:panelGrid cellpadding="4" columns="4">
+										<h:outputText value="Nome: " />
+										<p:inputText id="nome"
+											value="#{bioquimicaBean.bioquimica.paciente.nome}"
+											style="font-weight:bold" disabled="true" size="10" />
 
-								<h:panelGrid cellpadding="4" columns="2">
+										<h:outputText value="Sobrenome: " />
+										<p:inputText id="sobrenome"
+											value="#{bioquimicaBean.bioquimica.paciente.sobrenome}"
+											style="font-weight:bold" disabled="true" />
+									</h:panelGrid>
 
-									<h:outputLabel for="dataEntrega" value="Data de Entrega: " />
-									<p:inputMask id="dataEntrega"
-										value="#{bioquimicaBean.bioquimica.dataEntrega}"
-										label="dataEntrega" mask="99/99/9999" required="true" size="7"
-										requiredMessage="Data de Entrega: Campo obrigatório."
-										converterMessage="Data de Entrega: A data inserida não é uma data válida">
-										<f:convertDateTime type="date" locale="pt_BR"
-											timeZone="America/Fortaleza" />
-									</p:inputMask>
-								</h:panelGrid>
+									<h:panelGrid cellpadding="4" columns="2">
 
-								<h:panelGrid cellpadding="4" columns="2">
+										<h:outputText value="Leito: " />
+										<p:inputText value="#{bioquimicaBean.bioquimica.leito}"
+											style="font-weight:bold" disabled="true" />
+									</h:panelGrid>
 
-									<p:panel header="Resultados">
-										<h:panelGrid columns="2">
-											<h:outputLabel for="glicose" value="Glicose: " />
-											<p:inputText id="glicose"
-												value="#{bioquimicaBean.bioquimica.glicose}" label="glicose"
-												size="3" />
+									<h:panelGrid cellpadding="4" columns="2">
 
-											<h:outputLabel for="colesterol" value="Colesterol: " />
-											<p:inputText id="colesterol"
-												value="#{bioquimicaBean.bioquimica.colesterol}"
-												label="colesterol" size="3" />
+										<h:outputText value="Solicitado em:" />
+										<p:inputText value="#{bioquimicaBean.bioquimica.dataPedido}"
+											style="font-weight:bold" disabled="true" size="7">
+											<f:convertDateTime type="date" locale="pt_BR"
+												timeZone="America/Fortaleza" />
+										</p:inputText>
+									</h:panelGrid>
+								</p:panel>
 
-											<h:outputLabel for="triglicerides" value="Triglicérides: " />
-											<p:inputText id="triglicerides"
-												value="#{bioquimicaBean.bioquimica.triglicerides}"
-												label="triglicerides" size="3" />
+								<p:panel header="Dados do Resultado">
 
-											<h:outputLabel for="ureia" value="Ureia: " />
-											<p:inputText id="ureia"
-												value="#{bioquimicaBean.bioquimica.ureia}" label="ureia"
-												size="3" />
+									<h:panelGrid cellpadding="4" columns="2">
 
-											<h:outputLabel for="creatina" value="Creatina: " />
-											<p:inputText id="creatina"
-												value="#{bioquimicaBean.bioquimica.creatina}"
-												label="creatina" size="3" />
+										<h:outputLabel for="dataEntrega" value="Data de Entrega: " />
+										<p:inputMask id="dataEntrega"
+											value="#{bioquimicaBean.bioquimica.dataEntrega}"
+											label="dataEntrega" mask="99/99/9999" size="7"
+											disabled="true">
+											<f:convertDateTime type="date" locale="pt_BR"
+												timeZone="America/Fortaleza" />
+										</p:inputMask>
+									</h:panelGrid>
 
-											<h:outputLabel for="acidoUrico" value="Ácido Úrico: " />
-											<p:inputText id="acidoUrico"
-												value="#{bioquimicaBean.bioquimica.acidoUrico}"
-												label="acidoUrico" size="3" />
+									<h:panelGrid cellpadding="4" columns="2">
 
-											<h:outputLabel for="tgo" value="TGO: " />
-											<p:inputText id="tgo"
-												value="#{bioquimicaBean.bioquimica.tgo}" label="tgo"
-												size="3" />
+										<p:panel header="Resultados">
+											<h:panelGrid columns="4">
+												<h:outputLabel for="glicose" value="Glicose: " />
+												<p:inputText id="glicose"
+													value="#{bioquimicaBean.bioquimica.glicose}"
+													label="glicose" size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputLabel for="tgp" value="TGP: " />
-											<p:inputText id="tgp"
-												value="#{bioquimicaBean.bioquimica.tgp}" label="tgp"
-												size="3" />
+												<h:outputLabel for="colesterol" value="Colesterol: " />
+												<p:inputText id="colesterol"
+													value="#{bioquimicaBean.bioquimica.colesterol}"
+													label="colesterol" size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputLabel for="fosfatase" value="Fosfatase Alcalina: " />
-											<p:inputText id="fosfatase"
-												value="#{bioquimicaBean.bioquimica.fosfatase}"
-												label="fosfatase" size="3" />
+												<h:outputLabel for="triglicerides" value="Triglicérides: " />
+												<p:inputText id="triglicerides"
+													value="#{bioquimicaBean.bioquimica.triglicerides}"
+													label="triglicerides" size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputLabel for="bilirrubinaTotal"
-												value="Bilirrubine Total: " />
-											<p:inputText id="bilirrubinaTotal"
-												value="#{bioquimicaBean.bioquimica.bilirrubinaTotal}"
-												label="bilirrubinaTotal" size="3" />
+												<h:outputLabel for="ureia" value="Ureia: " />
+												<p:inputText id="ureia"
+													value="#{bioquimicaBean.bioquimica.ureia}" label="ureia"
+													size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputLabel for="bilirrubinaDireta"
-												value="Bilirrubina Direta: " />
-											<p:inputText id="bilirrubinaDireta"
-												value="#{bioquimicaBean.bioquimica.bilirrubinaDireta}"
-												label="bilirrubinaDireta" size="3" />
+												<h:outputLabel for="creatina" value="Creatina: " />
+												<p:inputText id="creatina"
+													value="#{bioquimicaBean.bioquimica.creatina}"
+													label="creatina" size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputLabel for="bilirrubinaIndireta"
-												value="Bilirrubina Indireta: " />
-											<p:inputText id="bilirrubinaIndireta"
-												value="#{bioquimicaBean.bioquimica.bilirrubinaIndireta}"
-												label="bilirrubinaIndireta" size="3" />
+												<h:outputLabel for="acidoUrico" value="Ácido Úrico: " />
+												<p:inputText id="acidoUrico"
+													value="#{bioquimicaBean.bioquimica.acidoUrico}"
+													label="acidoUrico" size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputLabel for="proteinasTotais"
-												value="Proteínas Totais: " />
-											<p:inputText id="proteinasTotais"
-												value="#{bioquimicaBean.bioquimica.proteinasTotais}"
-												label="proteinasTotais" size="3" />
+												<h:outputLabel for="tgo" value="TGO: " />
+												<p:inputText id="tgo"
+													value="#{bioquimicaBean.bioquimica.tgo}" label="tgo"
+													size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputLabel for="albumina" value="Albumina: " />
-											<p:inputText id="albumina"
-												value="#{bioquimicaBean.bioquimica.albumina}"
-												label="albumina" size="3" />
+												<h:outputLabel for="tgp" value="TGP: " />
+												<p:inputText id="tgp"
+													value="#{bioquimicaBean.bioquimica.tgp}" label="tgp"
+													size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputLabel for="amilase" value="Amilase: " />
-											<p:inputText id="amilase"
-												value="#{bioquimicaBean.bioquimica.amilase}" label="amilase"
-												size="3" />
+												<h:outputLabel for="fosfatase" value="Fosfatase Alcalina: " />
+												<p:inputText id="fosfatase"
+													value="#{bioquimicaBean.bioquimica.fosfatase}"
+													label="fosfatase" size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputLabel for="aso" value="ASO: " />
-											<p:inputText id="aso"
-												value="#{bioquimicaBean.bioquimica.aso}" label="aso"
-												size="3" />
+												<h:outputLabel for="bilirrubinaTotal"
+													value="Bilirrubine Total: " />
+												<p:inputText id="bilirrubinaTotal"
+													value="#{bioquimicaBean.bioquimica.bilirrubinaTotal}"
+													label="bilirrubinaTotal" size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputLabel for="pcr" value="PCR: " />
-											<p:inputText id="pcr"
-												value="#{bioquimicaBean.bioquimica.pcr}" label="pcr"
-												size="3" />
+												<h:outputLabel for="bilirrubinaDireta"
+													value="Bilirrubina Direta: " />
+												<p:inputText id="bilirrubinaDireta"
+													value="#{bioquimicaBean.bioquimica.bilirrubinaDireta}"
+													label="bilirrubinaDireta" size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputLabel for="latex" value="Látex " />
-											<p:inputText id="latex"
-												value="#{bioquimicaBean.bioquimica.latex}" label="latex"
-												size="3" />
+												<h:outputLabel for="bilirrubinaIndireta"
+													value="Bilirrubina Indireta: " />
+												<p:inputText id="bilirrubinaIndireta"
+													value="#{bioquimicaBean.bioquimica.bilirrubinaIndireta}"
+													label="bilirrubinaIndireta" size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputLabel for="vdrl" value="VDRL (Soro): " />
-											<p:inputText id="vdrl"
-												value="#{bioquimicaBean.bioquimica.vdrl}" label="vdrl"
-												size="3" />
+												<h:outputLabel for="proteinasTotais"
+													value="Proteínas Totais: " />
+												<p:inputText id="proteinasTotais"
+													value="#{bioquimicaBean.bioquimica.proteinasTotais}"
+													label="proteinasTotais" size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputLabel for="vhs" value="VHS: " />
-											<p:inputText id="vhs"
-												value="#{bioquimicaBean.bioquimica.vhs}" label="vhs"
-												size="3" />
+												<h:outputLabel for="albumina" value="Albumina: " />
+												<p:inputText id="albumina"
+													value="#{bioquimicaBean.bioquimica.albumina}"
+													label="albumina" size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputLabel for="bhcg" value="B-HCG: " />
-											<p:inputText id="bhcg"
-												value="#{bioquimicaBean.bioquimica.bhcg}" label="bhcg"
-												size="3" />
+												<h:outputLabel for="amilase" value="Amilase: " />
+												<p:inputText id="amilase"
+													value="#{bioquimicaBean.bioquimica.amilase}"
+													label="amilase" size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputLabel for="ttgo" value="TTGO: " />
-											<p:inputText id="ttgo"
-												value="#{bioquimicaBean.bioquimica.ttgo}" label="ttgo"
-												size="3" />
+												<h:outputLabel for="aso" value="ASO: " />
+												<p:inputText id="aso"
+													value="#{bioquimicaBean.bioquimica.aso}" label="aso"
+													size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-										</h:panelGrid>
-									</p:panel>
+												<h:outputLabel for="pcr" value="PCR: " />
+												<p:inputText id="pcr"
+													value="#{bioquimicaBean.bioquimica.pcr}" label="pcr"
+													size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-									<p:panel header="Valores de Referência">
+												<h:outputLabel for="latex" value="Látex " />
+												<p:inputText id="latex"
+													value="#{bioquimicaBean.bioquimica.latex}" label="latex"
+													size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-										<h:panelGrid cellpadding="7" columns="2">
-											<h:outputText value="Glicose: " />
-											<h:outputText value="70 - 110 mg/dl" />
+												<h:outputLabel for="vdrl" value="VDRL (Soro): " />
+												<p:inputText id="vdrl"
+													value="#{bioquimicaBean.bioquimica.vdrl}" label="vdrl"
+													size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputText value="Colesterol: " />
-											<h:outputText value="Menor que 200mg/dl" />
+												<h:outputLabel for="vhs" value="VHS: " />
+												<p:inputText id="vhs"
+													value="#{bioquimicaBean.bioquimica.vhs}" label="vhs"
+													size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputText value="Triglicérides: " />
-											<h:outputText value="Até 160mg/dl" />
+												<h:outputLabel for="bhcg" value="B-HCG: " />
+												<p:inputText id="bhcg"
+													value="#{bioquimicaBean.bioquimica.bhcg}" label="bhcg"
+													size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
 
-											<h:outputText value="Ureia: " />
-											<h:outputText value="10 -50 mg/dl" />
+												<h:outputLabel for="ttgo" value="TTGO: " />
+												<p:inputText id="ttgo"
+													value="#{bioquimicaBean.bioquimica.ttgo}" label="ttgo"
+													size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText> 
 
-											<h:outputText value="Creatina: " />
-											<h:outputText value="0,4 - 1,4 mg/dl" />
-
-											<h:outputText value="Ácido Úrico: " />
-											<h:panelGrid>
-												<h:outputText value="H - 2,5 - 7,0 mg/dl" />
-												<h:outputText value="M - 1,5 - 6,0 mg/dl" />
 											</h:panelGrid>
+										</p:panel>
 
-											<h:outputText value="TGO: " />
-											<h:outputText value="12 - 45 mg/dl" />
+										<p:panel header="Valores de Referência">
 
-											<h:outputText value="TGP: " />
-											<h:outputText value="3 - 50 mg/dl" />
+											<h:panelGrid columns="2" cellpadding="2" border="1" style="font-size: 10px">
+												<h:outputText value="Glicose: " />
+												<h:outputText value="70 - 110 mg/dl" />
 
-											<h:outputText value="Fosfatase Alcalina: " />
-											<h:panelGrid>
-												<h:outputText value="ADULTO - 13 - 45 u/ul" />
-												<h:outputText value="CRIANÇA - 56 - 156 u/l" />
+												<h:outputText value="Colesterol: " />
+												<h:outputText value="Menor que 200mg/dl" />
+
+												<h:outputText value="Triglicérides: " />
+												<h:outputText value="Até 160mg/dl" />
+
+												<h:outputText value="Ureia: " />
+												<h:outputText value="10 -50 mg/dl" />
+
+												<h:outputText value="Creatina: " />
+												<h:outputText value="0,4 - 1,4 mg/dl" />
+
+												<h:outputText value="Ácido Úrico: " />
+												<h:panelGrid style="font-size: 10px">
+													<h:outputText value="H - 2,5 - 7,0 mg/dl" />
+													<h:outputText value="M - 1,5 - 6,0 mg/dl" />
+												</h:panelGrid>
+
+												<h:outputText value="TGO: " />
+												<h:outputText value="12 - 45 mg/dl" />
+
+												<h:outputText value="TGP: " />
+												<h:outputText value="3 - 50 mg/dl" />
+
+												<h:outputText value="Fosfatase Alcalina: " />
+												<h:panelGrid style="font-size: 10px">
+													<h:outputText value="ADULTO - 13 - 45 u/ul" />
+													<h:outputText value="CRIANÇA - 56 - 156 u/l" />
+												</h:panelGrid>
+
+												<h:outputText value="Bilirrubina Total: " />
+												<h:outputText value="Até 1,2 mg/dl" />
+
+												<h:outputText value="Bilirrubina Direta: " />
+												<h:outputText value="Até 0,4 mg/dl" />
+
+												<h:outputText value="Bilirrubina Indireta: " />
+												<h:outputText value="Até 1,0 mg/dl" />
+
+												<h:outputText value="Proteínas Totais: " />
+												<h:outputText value="6,0 - 8,0 g/dl" />
+
+												<h:outputText value="Albumina: " />
+												<h:outputText value="3,55 -5,5 g/dl" />
+
+												<h:outputText value="Amilase: " />
+												<h:outputText value="60 - 160 u/dl" />
+
+												<h:outputText value="ASO:" />
+												<h:outputText value="Menor que 200 ul/ml" />
+
+												<h:outputText value="PCR " />
+												<h:outputText value="Menor que 6,0 mg/l" />
+
+												<h:outputText value="Látex: " />
+												<h:outputText value="Menor que 8 ul/ml" />
+
+												<h:outputText value="VDRL: " />
+												<h:outputText value="Não reagente" />
 											</h:panelGrid>
+										</p:panel>
 
-											<h:outputText value="Bilirrubina Total: " />
-											<h:outputText value="Até 1,2 mg/dl" />
-
-											<h:outputText value="Bilirrubina Direta: " />
-											<h:outputText value="Até 0,4 mg/dl" />
-
-											<h:outputText value="Bilirrubina Indireta: " />
-											<h:outputText value="Até 1,0 mg/dl" />
-
-											<h:outputText value="Proteínas Totais: " />
-											<h:outputText value="6,0 - 8,0 g/dl" />
-
-											<h:outputText value="Albumina: " />
-											<h:outputText value="3,55 -5,5 g/dl" />
-
-											<h:outputText value="Amilase: " />
-											<h:outputText value="60 - 160 u/dl" />
-
-											<h:outputText value="ASO:" />
-											<h:outputText value="Menor que 200 ul/ml" />
-
-											<h:outputText value="PCR " />
-											<h:outputText value="Menor que 6,0 mg/l" />
-
-											<h:outputText value="Látex: " />
-											<h:outputText value="Menor que 8 ul/ml" />
-
-											<h:outputText value="VDRL: " />
-											<h:outputText value="Não reagente" />
-										</h:panelGrid>
-									</p:panel>
-
-								</h:panelGrid>
-
-
-							</p:panel>
-
-							<p:commandButton value="Cadastrar" update="panel" id="ajax"
-								actionListener="#{bioquimicaBean.cadastrarResultado()}"
-								styleClass="ui-priority-primary"
-								oncomplete="resultadoDialog.hide();" />
+									</h:panelGrid>
+								</p:panel>
+							</h:form>
 						</h:panelGrid>
 					</p:scrollPanel>
 				</p:dialog>
