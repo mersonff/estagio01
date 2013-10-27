@@ -29,6 +29,7 @@
 
 					<p:column id="numeroSusColumn"
 						sortBy="#{baciloscopia.paciente.numeroSus}"
+						style="text-align: center"
 						filterBy="#{baciloscopia.paciente.numeroSus}" headerText="SUS"
 						filterMatchMode="startsWith">
 						<h:outputText value="#{baciloscopia.paciente.numeroSus}" />
@@ -36,21 +37,21 @@
 
 					<p:column id="nomeColumn" filterBy="#{baciloscopia.paciente.nome}"
 						headerText="Nome" sortBy="#{baciloscopia.paciente.nome}"
-						filterMatchMode="startsWith">
+						style="text-align: center" filterMatchMode="startsWith">
 						<h:outputText value="#{baciloscopia.paciente.nome}" />
 					</p:column>
 
 					<p:column id="dataPedidoColumn" sortBy="#{baciloscopia.dataPedido}"
-						filterBy="#{baciloscopia.dataPedido}" headerText="Data de Pedido"
-						filterMatchMode="startsWith">
+						filterBy="#{baciloscopia.dataPedido}" headerText="Pedido em"
+						style="text-align: center" filterMatchMode="startsWith">
 						<h:outputText value="#{baciloscopia.dataPedido}">
 							<f:convertDateTime type="date" locale="pt_BR" dateStyle="medium" />
 						</h:outputText>
 					</p:column>
 
 					<p:column id="statusColumn" filterBy="#{baciloscopia.status}"
-						headerText="Status" filterOptions="#{exameBean.statusOptions}"
-						filterMatchMode="exact">
+						style="text-align: center" headerText="Status"
+						filterOptions="#{exameBean.statusOptions}" filterMatchMode="exact">
 						<h:outputText value="#{baciloscopia.status}" />
 					</p:column>
 

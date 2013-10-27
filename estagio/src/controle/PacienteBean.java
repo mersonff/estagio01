@@ -1,18 +1,23 @@
 package controle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 
+import modelo.Paciente;
 import dao.PacienteDAO;
 import dao.PacienteJPADAO;
-
-import modelo.Paciente;
 @ManagedBean
 public class PacienteBean extends AbstractBean{
 	
 	private Paciente paciente;
+	private List<Paciente> pacientes;
+	private List<Paciente> pacientesFiltrados;
 	
 	public PacienteBean(){
 		this.setPaciente(new Paciente());
+		this.setPacientes(new ArrayList<Paciente>());
 	}
 	
 	public void cadastrar(){
@@ -38,6 +43,22 @@ public class PacienteBean extends AbstractBean{
 
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
+	}
+
+	public List<Paciente> getPacientes() {
+		return pacientes;
+	}
+
+	public void setPacientes(List<Paciente> pacientes) {
+		this.pacientes = pacientes;
+	}
+
+	public List<Paciente> getPacientesFiltrados() {
+		return pacientesFiltrados;
+	}
+
+	public void setPacientesFiltrados(List<Paciente> pacientesFiltrados) {
+		this.pacientesFiltrados = pacientesFiltrados;
 	}
 
 }

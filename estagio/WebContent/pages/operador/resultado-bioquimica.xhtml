@@ -29,20 +29,21 @@
 
 					<p:column id="numeroSusColumn"
 						sortBy="#{bioquimica.paciente.numeroSus}"
+						style="text-align: center"
 						filterBy="#{bioquimica.paciente.numeroSus}" headerText="SUS"
 						filterMatchMode="startsWith">
 						<h:outputText value="#{bioquimica.paciente.numeroSus}" />
 					</p:column>
 
 					<p:column id="nomeColumn" filterBy="#{bioquimica.paciente.nome}"
-						headerText="Nome" sortBy="#{bioquimica.paciente.nome}"
-						filterMatchMode="startsWith">
+						style="text-align: center" headerText="Nome"
+						sortBy="#{bioquimica.paciente.nome}" filterMatchMode="startsWith">
 						<h:outputText value="#{bioquimica.paciente.nome}" />
 					</p:column>
 
 					<p:column id="dataPedidoColumn" sortBy="#{bioquimica.dataPedido}"
-						filterBy="#{bioquimica.dataPedido}" headerText="Data de Pedido"
-						filterMatchMode="startsWith">
+						style="text-align: center" filterBy="#{bioquimica.dataPedido}"
+						headerText="Pedido em" filterMatchMode="startsWith">
 						<h:outputText value="#{bioquimica.dataPedido}">
 							<f:convertDateTime type="date" locale="pt_BR"
 								timeZone="America/Fortaleza" />
@@ -50,8 +51,8 @@
 					</p:column>
 
 					<p:column id="statusColumn" filterBy="#{bioquimica.status}"
-						headerText="Status" filterOptions="#{exameBean.statusOptions}"
-						filterMatchMode="exact">
+						style="text-align: center" headerText="Status"
+						filterOptions="#{exameBean.statusOptions}" filterMatchMode="exact">
 						<h:outputText value="#{bioquimica.status}" />
 					</p:column>
 
