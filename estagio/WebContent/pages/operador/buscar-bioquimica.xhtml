@@ -66,7 +66,7 @@
 				</p:dataTable>
 
 				<p:dialog
-					header="Cadastrar Resultado de #{bioquimicaBean.bioquimica.nomeTipo}"
+					header="Pedido / Resultado de #{bioquimicaBean.bioquimica.nomeTipo}"
 					widgetVar="resultadoDialog" resizable="false" id="dialogo"
 					showEffect="fade" hideEffect="explode" modal="true">
 
@@ -80,18 +80,6 @@
 
 							<h:form id="printArea">
 								<p:panel header="Dados do Pedido">
-
-									<h:inputHidden id="idExame"
-										value="#{bioquimicaBean.bioquimica.idExame}" />
-									<h:inputHidden id="numeroSus"
-										value="#{bioquimicaBean.bioquimica.paciente.numeroSus}" />
-									<h:inputHidden id="dataPedido"
-										value="#{bioquimicaBean.bioquimica.dataPedido}">
-										<f:convertDateTime type="date" locale="pt_BR"
-											timeZone="America/Fortaleza" />
-									</h:inputHidden>
-									<h:inputHidden id="leito"
-										value="#{bioquimicaBean.bioquimica.leito}" />
 
 									<h:panelGrid cellpadding="4" columns="4">
 										<h:outputText value="Nome: " />

@@ -27,9 +27,9 @@
 					<h:outputLabel for="dataPedido" value="Data de Pedido: " />
 					<p:inputMask id="dataPedido" size="7"
 						value="#{baciloscopiaBean.baciloscopia.dataPedido}"
-						label="dataPedido" mask="99/99/9999"
+						label="dataPedido" mask="99/99/9999" required="true"
 						requiredMessage="Data de Pedido: Campo obrigatório."
-						converterMessage="Data Pedido: A data inserida não é uma data válida">
+						converterMessage="Data de Pedido: A data inserida não é uma data válida">
 						<f:convertDateTime type="date" locale="pt_BR"
 							timeZone="America/Fortaleza" />
 					</p:inputMask>

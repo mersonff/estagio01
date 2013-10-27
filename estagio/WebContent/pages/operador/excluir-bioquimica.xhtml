@@ -62,29 +62,40 @@
 							<f:setPropertyActionListener value="#{bioquimica}"
 								target="#{bioquimicaBean.bioquimica}" />
 						</p:commandButton>
+						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
+							oncomplete="confirmacao.show()">
+							<f:setPropertyActionListener
+								target="#{bioquimicaBean.bioquimica}"
+								value="#{bioquimica}" />
+						</p:commandButton>
 					</p:column>
 				</p:dataTable>
 
+				<p:confirmDialog header="Excluir Exame" message="Tem certeza?"
+					widgetVar="confirmacao" id="excluir">
+
+					<h:inputHidden id="idExame"
+						value="#{bioquimicaBean.bioquimica.idExame}" />
+					<h:inputHidden id="numeroSus"
+						value="#{bioquimicaBean.bioquimica.paciente.numeroSus}" />
+
+					<p:commandButton value="Sim" update="panel" id="ajax"
+						oncomplete="confirmacao.hide()"
+						actionListener="#{bioquimicaBean.excluir()}" />
+					<p:button value="Não" onclick="confirmacao.hide();" />
+
+				</p:confirmDialog>
+
 				<p:dialog
-					header="Cadastrar Resultado de #{bioquimicaBean.bioquimica.nomeTipo}"
+					header="Pedido / Resultado de #{bioquimicaBean.bioquimica.nomeTipo}"
 					widgetVar="resultadoDialog" resizable="false" id="dialogo"
 					showEffect="fade" hideEffect="explode" modal="true">
 
-					<p:scrollPanel style="width:800px;height:500px" scrollMode="native">
-						<h:panelGrid id="display" cellpadding="4">
-							<p:panel header="Dados do Pedido">
+					<p:scrollPanel style="width:1000px;height:500px"
+						scrollMode="native">
+						<h:panelGrid id="display">
 
-								<h:inputHidden id="idExame"
-									value="#{bioquimicaBean.bioquimica.idExame}" />
-								<h:inputHidden id="numeroSus"
-									value="#{bioquimicaBean.bioquimica.paciente.numeroSus}" />
-								<h:inputHidden id="dataPedido"
-									value="#{bioquimicaBean.bioquimica.dataPedido}">
-									<f:convertDateTime type="date" locale="pt_BR"
-										timeZone="America/Fortaleza" />
-								</h:inputHidden>
-								<h:inputHidden id="leito"
-									value="#{bioquimicaBean.bioquimica.leito}" />
+							<p:panel header="Dados do Pedido">
 
 								<h:panelGrid cellpadding="4" columns="4">
 									<h:outputText value="Nome: " />
@@ -121,11 +132,9 @@
 								<h:panelGrid cellpadding="4" columns="2">
 
 									<h:outputLabel for="dataEntrega" value="Data de Entrega: " />
-									<p:inputMask id="dataEntrega" size="7"
+									<p:inputMask id="dataEntrega"
 										value="#{bioquimicaBean.bioquimica.dataEntrega}"
-										label="dataEntrega" mask="99/99/9999" required="true"
-										requiredMessage="Data de Entrega: Campo obrigatório."
-										converterMessage="Data de Entrega: A data inserida não é uma data válida">
+										label="dataEntrega" mask="99/99/9999" size="7" disabled="true">
 										<f:convertDateTime type="date" locale="pt_BR"
 											timeZone="America/Fortaleza" />
 									</p:inputMask>
@@ -134,67 +143,67 @@
 								<h:panelGrid cellpadding="4" columns="2">
 
 									<p:panel header="Resultados">
-										<h:panelGrid columns="2">
+										<h:panelGrid columns="4">
 											<h:outputLabel for="glicose" value="Glicose: " />
 											<p:inputText id="glicose"
 												value="#{bioquimicaBean.bioquimica.glicose}" label="glicose"
-												size="3">
+												size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="colesterol" value="Colesterol: " />
 											<p:inputText id="colesterol"
 												value="#{bioquimicaBean.bioquimica.colesterol}"
-												label="colesterol" size="3">
+												label="colesterol" size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="triglicerides" value="Triglicérides: " />
 											<p:inputText id="triglicerides"
 												value="#{bioquimicaBean.bioquimica.triglicerides}"
-												label="triglicerides" size="3">
+												label="triglicerides" size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="ureia" value="Ureia: " />
 											<p:inputText id="ureia"
 												value="#{bioquimicaBean.bioquimica.ureia}" label="ureia"
-												size="3">
+												size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="creatina" value="Creatina: " />
 											<p:inputText id="creatina"
 												value="#{bioquimicaBean.bioquimica.creatina}"
-												label="creatina" size="3">
+												label="creatina" size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="acidoUrico" value="Ácido Úrico: " />
 											<p:inputText id="acidoUrico"
 												value="#{bioquimicaBean.bioquimica.acidoUrico}"
-												label="acidoUrico" size="3">
+												label="acidoUrico" size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="tgo" value="TGO: " />
 											<p:inputText id="tgo"
 												value="#{bioquimicaBean.bioquimica.tgo}" label="tgo"
-												size="3">
+												size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="tgp" value="TGP: " />
 											<p:inputText id="tgp"
 												value="#{bioquimicaBean.bioquimica.tgp}" label="tgp"
-												size="3">
+												size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="fosfatase" value="Fosfatase Alcalina: " />
 											<p:inputText id="fosfatase"
 												value="#{bioquimicaBean.bioquimica.fosfatase}"
-												label="fosfatase" size="3">
+												label="fosfatase" size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
@@ -202,7 +211,7 @@
 												value="Bilirrubine Total: " />
 											<p:inputText id="bilirrubinaTotal"
 												value="#{bioquimicaBean.bioquimica.bilirrubinaTotal}"
-												label="bilirrubinaTotal" size="3">
+												label="bilirrubinaTotal" size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
@@ -210,7 +219,7 @@
 												value="Bilirrubina Direta: " />
 											<p:inputText id="bilirrubinaDireta"
 												value="#{bioquimicaBean.bioquimica.bilirrubinaDireta}"
-												label="bilirrubinaDireta" size="3">
+												label="bilirrubinaDireta" size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
@@ -218,7 +227,7 @@
 												value="Bilirrubina Indireta: " />
 											<p:inputText id="bilirrubinaIndireta"
 												value="#{bioquimicaBean.bioquimica.bilirrubinaIndireta}"
-												label="bilirrubinaIndireta" size="3">
+												label="bilirrubinaIndireta" size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
@@ -226,70 +235,70 @@
 												value="Proteínas Totais: " />
 											<p:inputText id="proteinasTotais"
 												value="#{bioquimicaBean.bioquimica.proteinasTotais}"
-												label="proteinasTotais" size="3">
+												label="proteinasTotais" size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="albumina" value="Albumina: " />
 											<p:inputText id="albumina"
 												value="#{bioquimicaBean.bioquimica.albumina}"
-												label="albumina" size="3">
+												label="albumina" size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="amilase" value="Amilase: " />
 											<p:inputText id="amilase"
 												value="#{bioquimicaBean.bioquimica.amilase}" label="amilase"
-												size="3">
+												size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="aso" value="ASO: " />
 											<p:inputText id="aso"
 												value="#{bioquimicaBean.bioquimica.aso}" label="aso"
-												size="3">
+												size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="pcr" value="PCR: " />
 											<p:inputText id="pcr"
 												value="#{bioquimicaBean.bioquimica.pcr}" label="pcr"
-												size="3">
+												size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="latex" value="Látex " />
 											<p:inputText id="latex"
 												value="#{bioquimicaBean.bioquimica.latex}" label="latex"
-												size="3">
+												size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="vdrl" value="VDRL (Soro): " />
 											<p:inputText id="vdrl"
 												value="#{bioquimicaBean.bioquimica.vdrl}" label="vdrl"
-												size="3">
+												size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="vhs" value="VHS: " />
 											<p:inputText id="vhs"
 												value="#{bioquimicaBean.bioquimica.vhs}" label="vhs"
-												size="3">
+												size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="bhcg" value="B-HCG: " />
 											<p:inputText id="bhcg"
 												value="#{bioquimicaBean.bioquimica.bhcg}" label="bhcg"
-												size="3">
+												size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="ttgo" value="TTGO: " />
 											<p:inputText id="ttgo"
 												value="#{bioquimicaBean.bioquimica.ttgo}" label="ttgo"
-												size="3">
+												size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
@@ -298,7 +307,8 @@
 
 									<p:panel header="Valores de Referência">
 
-										<h:panelGrid cellpadding="7" columns="2" border="1">
+										<h:panelGrid columns="2" cellpadding="2" border="1"
+											style="font-size: 10px">
 											<h:outputText value="Glicose: " />
 											<h:outputText value="70 - 110 mg/dl" />
 
@@ -315,7 +325,7 @@
 											<h:outputText value="0,4 - 1,4 mg/dl" />
 
 											<h:outputText value="Ácido Úrico: " />
-											<h:panelGrid>
+											<h:panelGrid style="font-size: 10px">
 												<h:outputText value="H - 2,5 - 7,0 mg/dl" />
 												<h:outputText value="M - 1,5 - 6,0 mg/dl" />
 											</h:panelGrid>
@@ -327,7 +337,7 @@
 											<h:outputText value="3 - 50 mg/dl" />
 
 											<h:outputText value="Fosfatase Alcalina: " />
-											<h:panelGrid>
+											<h:panelGrid style="font-size: 10px">
 												<h:outputText value="ADULTO - 13 - 45 u/ul" />
 												<h:outputText value="CRIANÇA - 56 - 156 u/l" />
 											</h:panelGrid>
@@ -365,14 +375,7 @@
 									</p:panel>
 
 								</h:panelGrid>
-
-
 							</p:panel>
-
-							<p:commandButton value="Cadastrar" update="panel" id="ajax"
-								actionListener="#{bioquimicaBean.cadastrarResultado()}"
-								styleClass="ui-priority-primary"
-								oncomplete="resultadoDialog.hide();" />
 						</h:panelGrid>
 					</p:scrollPanel>
 				</p:dialog>

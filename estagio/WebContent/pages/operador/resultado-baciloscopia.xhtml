@@ -9,7 +9,7 @@
 
 		<h:form id="form">
 			<p:panel id="panel" style="margin-bottom:10px;">
-				<p:growl id="msgs" showDetail="true" />
+				<p:growl id="msgs" />
 
 				<p:dataTable id="dataTable" var="baciloscopia"
 					value="#{baciloscopiaBean.baciloscopias}"
@@ -206,11 +206,13 @@
 							<p:panel header="Dados do Resultado">
 
 								<h:panelGrid cellpadding="4" columns="2">
-
-									<h:outputLabel for="dataEntrega" value="Data de Entrega: " />
-									<p:inputMask id="dataEntrega"
+								
+									<h:outputLabel for="dataEntrega" value="Data de Pedido: " />
+									<p:inputMask id="dataEntrega" size="7"
 										value="#{baciloscopiaBean.baciloscopia.dataEntrega}"
-										label="dataEntrega" mask="99/99/9999" size="7">
+										label="dataEntrega" mask="99/99/9999" required="true"
+										requiredMessage="Data de Entrega: Campo obrigatório."
+										converterMessage="Data de Entrega: A data inserida não é uma data válida">
 										<f:convertDateTime type="date" locale="pt_BR"
 											timeZone="America/Fortaleza" />
 									</p:inputMask>
