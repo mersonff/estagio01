@@ -86,26 +86,26 @@
 										<h:outputText value="Nome: " />
 										<p:inputText id="nome"
 											value="#{bioquimicaBean.bioquimica.paciente.nome}"
-											style="font-weight:bold" disabled="true" size="10" />
+											 disabled="true" size="10" />
 
 										<h:outputText value="Sobrenome: " />
 										<p:inputText id="sobrenome"
 											value="#{bioquimicaBean.bioquimica.paciente.sobrenome}"
-											style="font-weight:bold" disabled="true" />
+											 disabled="true" />
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4" columns="2">
 
 										<h:outputText value="Leito: " />
 										<p:inputText value="#{bioquimicaBean.bioquimica.leito}"
-											style="font-weight:bold" disabled="true" />
+											 disabled="true" />
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4" columns="2">
 
 										<h:outputText value="Solicitado em:" />
 										<p:inputText value="#{bioquimicaBean.bioquimica.dataPedido}"
-											style="font-weight:bold" disabled="true" size="7">
+											 disabled="true" size="7">
 											<f:convertDateTime type="date" locale="pt_BR"
 												timeZone="America/Fortaleza" />
 										</p:inputText>

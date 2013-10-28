@@ -1,6 +1,7 @@
 package controle;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -29,6 +30,7 @@ public class BioquimicaBean extends AbstractBean {
 		PacienteDAO pDAO = new PacienteJPADAO();
 		Paciente p = pDAO.find(this.bioquimica.getPaciente().getNumeroSus());
 		if (p != null) {
+			this.bioquimica.setDataPedido(new Date());
 			operDAO.save(this.bioquimica);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 		} else {
@@ -39,6 +41,7 @@ public class BioquimicaBean extends AbstractBean {
 
 	public void cadastrarResultado() {
 		BioquimicaDAO operDAO = new BioquimicaJPADAO();
+		this.bioquimica.setDataEntrega(new Date());
 		this.bioquimica.setStatus("Concluído");
 		operDAO.save(this.bioquimica);
 		displayInfoMessageToUser("Cadastrado com sucesso!");

@@ -20,16 +20,6 @@
 						requiredMessage="Número do SUS: Campo obrigatório."
 						converterMessage="Número do SUS: Deve ser um número." />
 
-					<h:outputLabel for="dataPedido" value="Data de Pedido: " />
-					<p:inputMask id="dataPedido" size="7"
-						value="#{bioquimicaBean.bioquimica.dataPedido}"
-						label="dataPedido" mask="99/99/9999" required="true"
-						requiredMessage="Data de Pedido: Campo obrigatório."
-						converterMessage="Data de Pedido: A data inserida não é uma data válida">
-						<f:convertDateTime type="date" locale="pt_BR"
-							timeZone="America/Fortaleza" />
-					</p:inputMask>
-
 					<h:outputLabel for="leito" value="Leito: " />
 					<p:inputText id="leito" value="#{bioquimicaBean.bioquimica.leito}"
 						label="leito" />

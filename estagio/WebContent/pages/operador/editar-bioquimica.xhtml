@@ -91,19 +91,19 @@
 									<h:outputText value="Nome: " />
 									<p:inputText id="nome"
 										value="#{bioquimicaBean.bioquimica.paciente.nome}"
-										style="font-weight:bold" disabled="true" size="10" />
+										 disabled="true" size="10" />
 
 									<h:outputText value="Sobrenome: " />
 									<p:inputText id="sobrenome"
 										value="#{bioquimicaBean.bioquimica.paciente.sobrenome}"
-										style="font-weight:bold" disabled="true" />
+										 disabled="true" />
 								</h:panelGrid>
 
 								<h:panelGrid cellpadding="4" columns="2">
 
 									<h:outputText value="Leito: " />
 									<p:inputText value="#{bioquimicaBean.bioquimica.leito}"
-										style="font-weight:bold" required="true" />
+										 />
 								</h:panelGrid>
 
 								<h:panelGrid cellpadding="4" columns="2">
@@ -111,7 +111,7 @@
 									<h:outputLabel for="dataPedido" value="Data de Pedido: " />
 									<p:inputMask size="7"
 										value="#{bioquimicaBean.bioquimica.dataPedido}"
-										label="dataPedido" mask="99/99/9999" required="true"
+										label="dataPedido" mask="99/99/9999"
 										requiredMessage="Data de Pedido: Campo obrigatório."
 										converterMessage="Data de Pedido: A data inserida não é uma data válida">
 										<f:convertDateTime type="date" locale="pt_BR"
@@ -121,19 +121,6 @@
 							</p:panel>
 
 							<p:panel header="Dados do Resultado">
-
-								<h:panelGrid cellpadding="4" columns="2">
-
-									<h:outputLabel for="dataEntrega" value="Data de Pedido: " />
-									<p:inputMask id="dataEntrega" size="7"
-										value="#{bioquimicaBean.bioquimica.dataEntrega}"
-										label="dataPedido" mask="99/99/9999" required="true"
-										requiredMessage="Data de Entrega: Campo obrigatório."
-										converterMessage="Data de Entrega: A data inserida não é uma data válida">
-										<f:convertDateTime type="date" locale="pt_BR"
-											timeZone="America/Fortaleza" />
-									</p:inputMask>
-								</h:panelGrid>
 
 								<h:panelGrid cellpadding="4" columns="2">
 

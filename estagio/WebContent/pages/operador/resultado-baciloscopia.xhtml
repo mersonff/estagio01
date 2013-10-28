@@ -46,7 +46,8 @@
 						style="text-align: center" filterBy="#{baciloscopia.dataPedido}"
 						headerText="Pedido em" filterMatchMode="startsWith">
 						<h:outputText value="#{baciloscopia.dataPedido}">
-							<f:convertDateTime type="date" locale="pt_BR" dateStyle="medium" />
+							<f:convertDateTime type="date" locale="pt_BR"
+								timeZone="America/Fortaleza" />
 						</h:outputText>
 					</p:column>
 
@@ -105,17 +106,17 @@
 									<h:outputText value="SUS:" />
 									<p:inputText
 										value="#{baciloscopiaBean.baciloscopia.paciente.numeroSus}"
-										style="font-weight:bold" disabled="true" size="6" />
+										 disabled="true" size="6" />
 
 									<h:outputText value="Unidade de Saúde: " />
 									<p:inputText
 										value="#{baciloscopiaBean.baciloscopia.unidadeDeSaude}"
-										style="font-weight:bold" disabled="true" />
+										 disabled="true" />
 
 									<h:outputText value="Solicitado em:" />
 									<p:inputText
 										value="#{baciloscopiaBean.baciloscopia.dataPedido}"
-										style="font-weight:bold" disabled="true" size="7">
+										 disabled="true" size="7">
 										<f:convertDateTime type="date" locale="pt_BR"
 											timeZone="America/Fortaleza" />
 									</p:inputText>
@@ -125,17 +126,17 @@
 									<h:outputText value="Nome: " />
 									<p:inputText id="nome"
 										value="#{baciloscopiaBean.baciloscopia.paciente.nome}"
-										style="font-weight:bold" disabled="true" size="10" />
+										 disabled="true" size="10" />
 
 									<h:outputText value="Sobrenome: " />
 									<p:inputText id="sobrenome"
 										value="#{baciloscopiaBean.baciloscopia.paciente.sobrenome}"
-										style="font-weight:bold" disabled="true" />
+										 disabled="true" />
 
 									<h:outputText value="Sexo:" />
 									<p:inputText id="sexo"
 										value="#{baciloscopiaBean.baciloscopia.paciente.sexo}"
-										style="font-weight:bold" disabled="true" size="1" />
+										 disabled="true" size="1" />
 								</h:panelGrid>
 
 								<h:panelGrid cellpadding="4" columns="4">
@@ -143,7 +144,7 @@
 									<h:outputText value="Data de Nascimento:" />
 									<p:inputText id="dataNascimento"
 										value="#{baciloscopiaBean.baciloscopia.paciente.dataNascimento}"
-										style="font-weight:bold" disabled="true" size="7">
+										 disabled="true" size="7">
 										<f:convertDateTime type="date" locale="pt_BR"
 											timeZone="America/Fortaleza" />
 									</p:inputText>
@@ -151,7 +152,7 @@
 									<h:outputText value="Prontuário:" />
 									<p:inputText
 										value="#{baciloscopiaBean.baciloscopia.prontuario}"
-										style="font-weight:bold" disabled="true" />
+										 disabled="true" />
 								</h:panelGrid>
 
 								<h:panelGrid cellpadding="4" columns="4">
@@ -159,12 +160,12 @@
 									<h:outputText value="Endereço:" />
 									<p:inputText id="endereco"
 										value="#{baciloscopiaBean.baciloscopia.paciente.endereco}"
-										style="font-weight:bold" disabled="true" />
+										 disabled="true" />
 
 									<h:outputText value="Localidade:" />
 									<p:inputText id="localidade"
 										value="#{baciloscopiaBean.baciloscopia.paciente.localidade}"
-										style="font-weight:bold" disabled="true" size="10" />
+										 disabled="true" size="10" />
 								</h:panelGrid>
 
 								<h:panelGrid cellpadding="4" columns="4">
@@ -172,12 +173,12 @@
 									<h:outputText value="Material Clínico:" />
 									<p:inputTextarea
 										value="#{baciloscopiaBean.baciloscopia.materialClinico}"
-										style="font-weight:bold" disabled="true" />
+										 disabled="true" />
 
 									<h:outputText value="Outros:" />
 									<p:inputTextarea
 										value="#{baciloscopiaBean.baciloscopia.outros}"
-										style="font-weight:bold" disabled="true" />
+										 disabled="true" />
 								</h:panelGrid>
 
 								<h:panelGrid cellpadding="4" columns="8">
@@ -190,7 +191,7 @@
 									<h:outputText value="Amostra:" />
 									<p:inputText
 										value="#{baciloscopiaBean.baciloscopia.numeroDaAmostra}"
-										style="font-weight:bold" disabled="true" size="1" />
+										 disabled="true" size="1" />
 
 									<h:outputLabel for="controleDeTratamento"
 										value="Controle de Tratamento: " />
@@ -201,24 +202,11 @@
 									<h:outputText value="Mês da Amostra:" />
 									<p:inputText
 										value="#{baciloscopiaBean.baciloscopia.mesDaAmostra}"
-										style="font-weight:bold" disabled="true" size="1" />
+										 disabled="true" size="1" />
 								</h:panelGrid>
 							</p:panel>
 
 							<p:panel header="Dados do Resultado">
-
-								<h:panelGrid cellpadding="4" columns="2">
-
-									<h:outputLabel for="dataEntrega" value="Data de Pedido: " />
-									<p:inputMask id="dataEntrega" size="7"
-										value="#{baciloscopiaBean.baciloscopia.dataEntrega}"
-										label="dataEntrega" mask="99/99/9999" required="true"
-										requiredMessage="Data de Entrega: Campo obrigatório."
-										converterMessage="Data de Entrega: A data inserida não é uma data válida">
-										<f:convertDateTime type="date" locale="pt_BR"
-											timeZone="America/Fortaleza" />
-									</p:inputMask>
-								</h:panelGrid>
 
 								<h:panelGrid cellpadding="4" columns="2">
 

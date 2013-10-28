@@ -1,6 +1,7 @@
 package controle;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -29,6 +30,7 @@ public class BaciloscopiaBean extends AbstractBean {
 		PacienteDAO pDAO = new PacienteJPADAO();
 		Paciente p = pDAO.find(this.baciloscopia.getPaciente().getNumeroSus());
 		if (p != null) {
+			this.baciloscopia.setDataPedido(new Date());
 			operDAO.save(this.baciloscopia);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 		} else {
@@ -40,6 +42,7 @@ public class BaciloscopiaBean extends AbstractBean {
 	public void cadastrarResultado() {
 		BaciloscopiaDAO operDAO = new BaciloscopiaJPADAO();
 		this.baciloscopia.setStatus("Concluído");
+		this.baciloscopia.setDataEntrega(new Date());
 		operDAO.save(this.baciloscopia);
 		displayInfoMessageToUser("Cadastrado com sucesso!");
 
