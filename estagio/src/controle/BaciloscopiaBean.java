@@ -60,6 +60,16 @@ public class BaciloscopiaBean extends AbstractBean {
 		this.baciloscopias = operDAO.find();
 
 	}
+	
+	public void find(){
+		PacienteDAO pDAO = new PacienteJPADAO();
+		Paciente p = pDAO.find(this.baciloscopia.getPaciente().getNumeroSus());
+		if (p != null) {
+			displayInfoMessageToUser("Paciente encontrado.");
+		} else {
+			displayErrorMessageToUser("Paciente não encontrado. Por favor, realize o cadastro do paciente.");
+		}
+	}
 
 	public Baciloscopia getBaciloscopia() {
 		return baciloscopia;

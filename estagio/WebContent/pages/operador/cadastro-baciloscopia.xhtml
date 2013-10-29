@@ -11,7 +11,7 @@
 			<p:panel id="panel" header="Pedido de Exame: Baciloscopia"
 				style="margin-bottom:10px;">
 				<p:messages id="messages" />
-				<h:panelGrid columns="2" cellpadding="4">
+				<h:panelGrid columns="3" cellpadding="4">
 
 					<h:outputLabel for="numeroSus" value="Número do SUS: *" />
 					<p:inputText id="numeroSus"
@@ -19,6 +19,14 @@
 						required="true" label="numeroSus" size="6"
 						requiredMessage="Número do SUS: Campo obrigatório."
 						converterMessage="Número do SUS: Deve ser um número." />
+					<p:commandButton value="Verificar" update="panel"
+						actionListener="#{baciloscopiaBean.find()}"
+						styleClass="ui-priority-primary" />
+					<p:message for="numeroSus" display="icon" />
+
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="4">
 
 					<h:outputText value="Unidade de Saúde: " />
 					<p:inputText id="unidadeDeSaude"
@@ -63,6 +71,7 @@
 						actionListener="#{baciloscopiaBean.cadastrar()}"
 						styleClass="ui-priority-primary" />
 					<p:commandButton value="Limpar" type="reset" />
+
 				</h:panelGrid>
 			</p:panel>
 

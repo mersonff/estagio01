@@ -36,7 +36,7 @@ public class PacienteBean extends AbstractBean{
 		pacienteDAO.save(this.paciente);
 		displayInfoMessageToUser("Atualizado com sucesso!");
 	}
-
+	
 	public Paciente getPaciente() {
 		return paciente;
 	}
