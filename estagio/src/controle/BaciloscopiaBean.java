@@ -17,8 +17,8 @@ import dao.PacienteJPADAO;
 public class BaciloscopiaBean extends AbstractBean {
 	private Baciloscopia baciloscopia;
 	private List<Baciloscopia> baciloscopias;
+	private long idFiltro;
 	private List<Baciloscopia> filteredBaciloscopias;
-	private String filtro;
 
 	public BaciloscopiaBean() {
 		this.setBaciloscopia(new Baciloscopia());
@@ -47,7 +47,6 @@ public class BaciloscopiaBean extends AbstractBean {
 		this.baciloscopia.setStatus("Em aberto");
 		operDAO.save(this.baciloscopia);
 		displayInfoMessageToUser("Cadastrado com sucesso!");
-		this.baciloscopia = new Baciloscopia();
 	}
 
 	public void atualizar() {
@@ -82,6 +81,16 @@ public class BaciloscopiaBean extends AbstractBean {
 		}
 	}
 
+	public List<Baciloscopia> filtrar() {
+		List<Baciloscopia> tempList = new ArrayList<Baciloscopia>();
+		for (Baciloscopia b : baciloscopias) {
+			if (b.getPaciente().getNumeroSus() == this.idFiltro)
+				tempList.add(b);
+		}
+		baciloscopias = tempList;
+		return baciloscopias;
+	}
+
 	public Baciloscopia getBaciloscopia() {
 		return baciloscopia;
 	}
@@ -107,12 +116,12 @@ public class BaciloscopiaBean extends AbstractBean {
 		this.filteredBaciloscopias = filteredBaciloscopias;
 	}
 
-	public String getFiltro() {
-		return filtro;
+	public long getIdFiltro() {
+		return idFiltro;
 	}
 
-	public void setFiltro(String filtro) {
-		this.filtro = filtro;
+	public void setIdFiltro(long idFiltro) {
+		this.idFiltro = idFiltro;
 	}
 
 }

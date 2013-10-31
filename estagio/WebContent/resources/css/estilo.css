@@ -22,6 +22,10 @@ body {
 	margin-bottom: 1px;
 }
 
+#filtro{
+	text-align: right;
+}
+
 #clock{
 	margin-top: 60px;
 	margin-left: 610px;

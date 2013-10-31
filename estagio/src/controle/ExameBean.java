@@ -21,9 +21,10 @@ public class ExameBean extends AbstractBean {
 
 	private final static String[] status;
 	static {
-		status = new String[2];
-		status[0] = "Em aberto";
-		status[1] = "Concluído";
+		status = new String[3];
+		status[0] = "Em espera";
+		status[1] = "Em aberto";
+		status[2] = "Concluído";
 	}
 
 	private SelectItem[] statusOptions;
@@ -33,6 +34,7 @@ public class ExameBean extends AbstractBean {
 		this.setExames(new ArrayList<Exame>());
 		pesquisarTodos();
 		statusOptions = createFilterOptions(status);
+		
 	}
 
 	public void cadastrar() {
