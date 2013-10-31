@@ -18,6 +18,7 @@ public class BaciloscopiaBean extends AbstractBean {
 	private Baciloscopia baciloscopia;
 	private List<Baciloscopia> baciloscopias;
 	private List<Baciloscopia> filteredBaciloscopias;
+	private String filtro;
 
 	public BaciloscopiaBean() {
 		this.setBaciloscopia(new Baciloscopia());
@@ -25,21 +26,31 @@ public class BaciloscopiaBean extends AbstractBean {
 		pesquisarTodos();
 	}
 
-	public void cadastrar() {
+	public void agendar() {
 		BaciloscopiaDAO operDAO = new BaciloscopiaJPADAO();
 		PacienteDAO pDAO = new PacienteJPADAO();
 		Paciente p = pDAO.find(this.baciloscopia.getPaciente().getNumeroSus());
 		if (p != null) {
-			this.baciloscopia.setDataPedido(new Date());
+			this.baciloscopia.setStatus("Em espera");
 			operDAO.save(this.baciloscopia);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
+			this.baciloscopia = new Baciloscopia();
 		} else {
 			displayErrorMessageToUser("Paciente não cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
-		
+
 	}
 
-	public void cadastrarResultado() {
+	public void cadastrar() {
+		BaciloscopiaDAO operDAO = new BaciloscopiaJPADAO();
+		this.baciloscopia.setDataPedido(new Date());
+		this.baciloscopia.setStatus("Em aberto");
+		operDAO.save(this.baciloscopia);
+		displayInfoMessageToUser("Cadastrado com sucesso!");
+		this.baciloscopia = new Baciloscopia();
+	}
+
+	public void atualizar() {
 		BaciloscopiaDAO operDAO = new BaciloscopiaJPADAO();
 		this.baciloscopia.setStatus("Concluído");
 		this.baciloscopia.setDataEntrega(new Date());
@@ -60,8 +71,8 @@ public class BaciloscopiaBean extends AbstractBean {
 		this.baciloscopias = operDAO.find();
 
 	}
-	
-	public void find(){
+
+	public void find() {
 		PacienteDAO pDAO = new PacienteJPADAO();
 		Paciente p = pDAO.find(this.baciloscopia.getPaciente().getNumeroSus());
 		if (p != null) {
@@ -94,6 +105,14 @@ public class BaciloscopiaBean extends AbstractBean {
 	public void setFilteredBaciloscopias(
 			List<Baciloscopia> filteredBaciloscopias) {
 		this.filteredBaciloscopias = filteredBaciloscopias;
+	}
+
+	public String getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(String filtro) {
+		this.filtro = filtro;
 	}
 
 }

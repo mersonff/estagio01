@@ -24,6 +24,8 @@ public class Exame {
 	private Date dataPedido;
 	@Temporal(TemporalType.DATE)
 	private Date dataEntrega;
+	@Temporal(TemporalType.DATE)
+	private Date dataAgendamento;
 	private String status;
 	@ManyToOne
 	@JoinColumn(name = "numeroSus")
@@ -81,5 +83,15 @@ public class Exame {
 	public void setDataEntrega(Date dataEntrega) {
 		this.dataEntrega = dataEntrega;
 	}
+
+	public Date getDataAgendamento() {
+		return dataAgendamento;
+	}
+
+	public void setDataAgendamento(Date dataAgendamento) {
+		this.dataAgendamento = dataAgendamento;
+	}
+	
+	
 
 }

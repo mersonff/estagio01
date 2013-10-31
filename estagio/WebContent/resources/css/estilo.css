@@ -37,6 +37,12 @@ body {
 	margin-bottom: 30px;
 }
 
+#agendamento {
+	width: 400px;
+	margin: 10px auto;
+	margin-bottom: 30px;
+}
+
 #corpo {
 	min-height: 400px;
 	margin: 10px;
