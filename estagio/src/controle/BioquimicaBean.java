@@ -17,6 +17,8 @@ import dao.PacienteJPADAO;
 public class BioquimicaBean extends AbstractBean {
 	private Bioquimica bioquimica;
 	private List<Bioquimica> bioquimicas;
+	private List<Bioquimica> bioquimicaEmEspera;
+	private List<Bioquimica> bioquimicaEmAberto;
 	private List<Bioquimica> filteredBioquimicas;
 
 	public BioquimicaBean() {
@@ -25,24 +27,40 @@ public class BioquimicaBean extends AbstractBean {
 		pesquisarTodos();
 	}
 
-	public void cadastrar() {
+	public void agendar() {
 		BioquimicaDAO operDAO = new BioquimicaJPADAO();
 		PacienteDAO pDAO = new PacienteJPADAO();
 		Paciente p = pDAO.find(this.bioquimica.getPaciente().getNumeroSus());
 		if (p != null) {
-			this.bioquimica.setDataPedido(new Date());
+			this.bioquimica.setStatus("Em espera");
 			operDAO.save(this.bioquimica);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
+			this.bioquimica = new Bioquimica();
 		} else {
 			displayErrorMessageToUser("Paciente não cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
-		
+
 	}
 
-	public void cadastrarResultado() {
+	public void remarcar() {
 		BioquimicaDAO operDAO = new BioquimicaJPADAO();
-		this.bioquimica.setDataEntrega(new Date());
+		this.bioquimica.setStatus("Em espera");
+		operDAO.save(this.bioquimica);
+		displayInfoMessageToUser("Cadastrado com sucesso!");
+	}
+
+	public void cadastrar() {
+		BioquimicaDAO operDAO = new BioquimicaJPADAO();
+		this.bioquimica.setDataPedido(new Date());
+		this.bioquimica.setStatus("Em aberto");
+		operDAO.save(this.bioquimica);
+		displayInfoMessageToUser("Cadastrado com sucesso!");
+	}
+
+	public void atualizar() {
+		BioquimicaDAO operDAO = new BioquimicaJPADAO();
 		this.bioquimica.setStatus("Concluído");
+		this.bioquimica.setDataEntrega(new Date());
 		operDAO.save(this.bioquimica);
 		displayInfoMessageToUser("Cadastrado com sucesso!");
 
@@ -59,6 +77,16 @@ public class BioquimicaBean extends AbstractBean {
 		displayInfoMessageToUser("Excluido com sucesso!");
 		this.bioquimicas = operDAO.find();
 
+	}
+
+	public void find() {
+		PacienteDAO pDAO = new PacienteJPADAO();
+		Paciente p = pDAO.find(this.bioquimica.getPaciente().getNumeroSus());
+		if (p != null) {
+			displayInfoMessageToUser("Paciente encontrado.");
+		} else {
+			displayErrorMessageToUser("Paciente não encontrado. Por favor, realize o cadastro do paciente.");
+		}
 	}
 
 	public Bioquimica getBioquimica() {
@@ -84,6 +112,34 @@ public class BioquimicaBean extends AbstractBean {
 	public void setFilteredBioquimicas(
 			List<Bioquimica> filteredBioquimicas) {
 		this.filteredBioquimicas = filteredBioquimicas;
+	}
+
+	public List<Bioquimica> getBioquimicaEmEspera() {
+		List<Bioquimica> temp = new ArrayList<Bioquimica>();
+		for (Bioquimica b : bioquimicas) {
+			if (b.getStatus().equals("Em espera"))
+				temp.add(b);
+		}
+		bioquimicaEmEspera = temp;
+		return bioquimicaEmEspera;
+	}
+
+	public void setBioquimicaEmEspera(List<Bioquimica> bioquimicaEmEspera) {
+		this.bioquimicaEmEspera = bioquimicaEmEspera;
+	}
+
+	public List<Bioquimica> getBioquimicaEmAberto() {
+		List<Bioquimica> temp = new ArrayList<Bioquimica>();
+		for (Bioquimica b : bioquimicas) {
+			if (b.getStatus().equals("Em aberto"))
+				temp.add(b);
+		}
+		bioquimicaEmAberto = temp;
+		return bioquimicaEmAberto;
+	}
+
+	public void setBioquimicaEmAberto(List<Bioquimica> bioquimicaEmAberto) {
+		this.bioquimicaEmAberto = bioquimicaEmAberto;
 	}
 
 }

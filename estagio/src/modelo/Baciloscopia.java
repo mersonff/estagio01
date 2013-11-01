@@ -29,7 +29,6 @@ public class Baciloscopia extends Exame {
 
 	public Baciloscopia() {
 		setNomeTipo("Baciloscopia");
-		setStatus("Em aberto");
 	}
 
 	public String getUnidadeDeSaude() {

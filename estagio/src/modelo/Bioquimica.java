@@ -36,7 +36,6 @@ public class Bioquimica extends Exame {
 
 	public Bioquimica() {
 		setNomeTipo("Bioquímica");
-		setStatus("Em aberto");
 	}
 
 	public String getLeito() {

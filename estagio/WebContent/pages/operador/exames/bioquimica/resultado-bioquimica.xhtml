@@ -11,19 +11,26 @@
 			<p:panel id="panel" style="margin-bottom:10px;">
 				<p:growl id="msgs" />
 
+				<div id="tableName">
+					<h:outputText value="Exames Aguardando Resultado" />
+				</div>
+
 				<p:dataTable id="dataTable" var="bioquimica"
-					value="#{bioquimicaBean.bioquimicas}" widgetVar="bioquimicasTable"
-					paginator="true" rows="10"
+					value="#{bioquimicaBean.bioquimicaEmAberto}"
+					widgetVar="bioquimicasTable" paginator="true" rows="10"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15"
 					emptyMessage="Nenhum exame encontrado com esses critérios."
-					filteredValue="#{bioquimicaBean.filteredBioquimicas}">
+					filteredValue="#{bioquimicaBean.filteredBioquimicas}"
+					paginatorAlwaysVisible="false">
 
 					<f:facet name="header">
 						<p:outputPanel>
-							<h:outputText value="Procurar em todos os campos:" />
-							<p:inputText id="globalFilter"
-								onkeyup="bioquimicasTable.filter()" style="width:150px" />
+							<div id="filtro">
+								<h:outputText value="Procurar em todos os campos " />
+								<p:inputText id="globalFilter"
+									onkeyup="bioquimicasTable.filter()" style="width:150px" />
+							</div>
 						</p:outputPanel>
 					</f:facet>
 
@@ -37,7 +44,8 @@
 
 					<p:column id="nomeColumn" filterBy="#{bioquimica.paciente.nome}"
 						style="text-align: center" headerText="Nome"
-						sortBy="#{bioquimica.paciente.nome}" filterMatchMode="startsWith">
+						sortBy="#{bioquimica.paciente.nome}"
+						filterMatchMode="startsWith">
 						<h:outputText value="#{bioquimica.paciente.nome}" />
 					</p:column>
 
@@ -50,14 +58,19 @@
 						</h:outputText>
 					</p:column>
 
-					<p:column id="statusColumn" filterBy="#{bioquimica.status}"
-						style="text-align: center" headerText="Status"
-						filterOptions="#{exameBean.statusOptions}" filterMatchMode="exact">
+					<p:column id="statusColumn" style="text-align: center"
+						headerText="Status">
 						<h:outputText value="#{bioquimica.status}" />
 					</p:column>
 
 					<p:column style="width:4%">
-						<p:commandButton id="selectButton" update=":form:display"
+						<p:commandButton id="selectButton" update=":form:pedido"
+							oncomplete="pedidoDialog.show()" icon="ui-icon-search"
+							title="Dados do Pedido">
+							<f:setPropertyActionListener value="#{bioquimica}"
+								target="#{bioquimicaBean.bioquimica}" />
+						</p:commandButton>
+						<p:commandButton id="selectButton2" update=":form:resultado"
 							oncomplete="resultadoDialog.show()" icon="ui-icon-document"
 							title="Cadastrar Resultado">
 							<f:setPropertyActionListener value="#{bioquimica}"
@@ -67,55 +80,101 @@
 				</p:dataTable>
 
 				<p:dialog
-					header="Cadastrar Resultado de #{bioquimicaBean.bioquimica.nomeTipo}"
-					widgetVar="resultadoDialog" resizable="false" id="dialogo"
+					header="Pedido de #{bioquimicaBean.bioquimica.nomeTipo}"
+					widgetVar="pedidoDialog" resizable="false" id="pedido"
 					showEffect="fade" hideEffect="explode" modal="true">
+
+					<h:panelGrid cellpadding="4">
+						<p:fieldset legend="Dados do Paciente">
+
+							<h:panelGrid cellpadding="4" columns="4">
+								<h:outputText value="Número do SUS: " />
+								<p:inputText
+									value="#{bioquimicaBean.bioquimica.paciente.numeroSus}"
+									size="14" disabled="true" />
+
+								<h:outputText value="Nascido em: " />
+								<p:inputMask
+									value="#{bioquimicaBean.bioquimica.paciente.dataNascimento}"
+									disabled="true" mask="99/99/9999" size="7">
+									<f:convertDateTime type="date" locale="pt_BR"
+										timeZone="America/Fortaleza" />
+								</p:inputMask>
+							</h:panelGrid>
+
+							<h:panelGrid cellpadding="4" columns="6">
+								<h:outputText value="Nome: " />
+								<p:inputText
+									value="#{bioquimicaBean.bioquimica.paciente.nome}"
+									disabled="true" size="10" />
+
+								<h:outputText value="Sobrenome: " />
+								<p:inputText
+									value="#{bioquimicaBean.bioquimica.paciente.sobrenome}"
+									disabled="true" />
+
+								<h:outputText value="Sexo: " />
+								<p:inputText
+									value="#{bioquimicaBean.bioquimica.paciente.sexo}"
+									disabled="true" size="1" />
+							</h:panelGrid>
+
+							<h:panelGrid cellpadding="4" columns="4">
+								<h:outputText value="Endereço: " />
+								<p:inputText
+									value="#{bioquimicaBean.bioquimica.paciente.endereco}"
+									disabled="true" />
+
+								<h:outputText value="Localidade: " />
+								<p:inputText
+									value="#{bioquimicaBean.bioquimica.paciente.localidade}"
+									disabled="true" size="10" />
+							</h:panelGrid>
+						</p:fieldset>
+					</h:panelGrid>
+
+					<h:panelGrid cellpadding="4">
+						<p:fieldset legend="Dados de Pedido">
+
+							<h:panelGrid columns="2" cellpadding="4">
+								<h:outputText value="Data de Pedido: " />
+								<p:inputText value="#{bioquimicaBean.bioquimica.dataPedido}"
+									disabled="true" size="7">
+									<f:convertDateTime type="date" locale="pt_BR"
+										timeZone="America/Fortaleza" />
+								</p:inputText>
+							</h:panelGrid>
+
+						</p:fieldset>
+					</h:panelGrid>
+				</p:dialog>
+
+				<p:dialog
+					header="Resultado de #{bioquimicaBean.bioquimica.nomeTipo}"
+					widgetVar="resultadoDialog" resizable="false" id="resultado"
+					showEffect="fade" hideEffect="explode" modal="true">
+
+					<h:panelGrid cellpading="4">
+						<p:commandButton value="Cadastrar" update="panel" id="ajax"
+							actionListener="#{bioquimicaBean.atualizar()}"
+							styleClass="ui-priority-primary"
+							oncomplete="resultadoDialog.hide();" />
+					</h:panelGrid>
+
+					<h:inputHidden id="idExame"
+						value="#{bioquimicaBean.bioquimica.idExame}" />
+					<h:inputHidden id="numeroSus"
+						value="#{bioquimicaBean.bioquimica.paciente.numeroSus}" />
+					<h:inputHidden id="dataPedido"
+						value="#{bioquimicaBean.bioquimica.dataPedido}">
+						<f:convertDateTime type="date" locale="pt_BR"
+							timeZone="America/Fortaleza" />
+					</h:inputHidden>
+					<h:inputHidden id="leito"
+						value="#{bioquimicaBean.bioquimica.leito}" />
 
 					<p:scrollPanel style="width:800px;height:500px" scrollMode="native">
 						<h:panelGrid id="display" cellpadding="4">
-							<p:panel header="Dados do Pedido">
-
-								<h:inputHidden id="idExame"
-									value="#{bioquimicaBean.bioquimica.idExame}" />
-								<h:inputHidden id="numeroSus"
-									value="#{bioquimicaBean.bioquimica.paciente.numeroSus}" />
-								<h:inputHidden id="dataPedido"
-									value="#{bioquimicaBean.bioquimica.dataPedido}">
-									<f:convertDateTime type="date" locale="pt_BR"
-										timeZone="America/Fortaleza" />
-								</h:inputHidden>
-								<h:inputHidden id="leito"
-									value="#{bioquimicaBean.bioquimica.leito}" />
-
-								<h:panelGrid cellpadding="4" columns="4">
-									<h:outputText value="Nome: " />
-									<p:inputText id="nome"
-										value="#{bioquimicaBean.bioquimica.paciente.nome}"
-										 disabled="true" size="10" />
-
-									<h:outputText value="Sobrenome: " />
-									<p:inputText id="sobrenome"
-										value="#{bioquimicaBean.bioquimica.paciente.sobrenome}"
-										 disabled="true" />
-								</h:panelGrid>
-
-								<h:panelGrid cellpadding="4" columns="2">
-
-									<h:outputText value="Leito: " />
-									<p:inputText value="#{bioquimicaBean.bioquimica.leito}"
-										 disabled="true" />
-								</h:panelGrid>
-
-								<h:panelGrid cellpadding="4" columns="2">
-
-									<h:outputText value="Solicitado em:" />
-									<p:inputText value="#{bioquimicaBean.bioquimica.dataPedido}"
-										 disabled="true" size="7">
-										<f:convertDateTime type="date" locale="pt_BR"
-											timeZone="America/Fortaleza" />
-									</p:inputText>
-								</h:panelGrid>
-							</p:panel>
 
 							<p:panel header="Dados do Resultado">
 
@@ -351,16 +410,8 @@
 											<h:outputText value="Não reagente" />
 										</h:panelGrid>
 									</p:panel>
-
 								</h:panelGrid>
-
-
 							</p:panel>
-
-							<p:commandButton value="Cadastrar" update="panel" id="ajax"
-								actionListener="#{bioquimicaBean.cadastrarResultado()}"
-								styleClass="ui-priority-primary"
-								oncomplete="resultadoDialog.hide();" />
 						</h:panelGrid>
 					</p:scrollPanel>
 				</p:dialog>

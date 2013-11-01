@@ -9,7 +9,12 @@
 
 		<h:form id="form">
 			<p:panel id="panel" style="margin-bottom:10px;">
+
 				<p:growl id="msgs" />
+
+				<div id="tableName">
+					<h:outputText value="Todos os Exames" />
+				</div>
 
 				<p:dataTable id="dataTable" var="bioquimica"
 					value="#{bioquimicaBean.bioquimicas}" widgetVar="bioquimicasTable"
@@ -17,32 +22,35 @@
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15"
 					emptyMessage="Nenhum exame encontrado com esses critérios."
-					filteredValue="#{bioquimicaBean.filteredBioquimicas}">
+					filteredValue="#{bioquimicaBean.filteredBioquimicas}"
+					paginatorAlwaysVisible="false">
 
 					<f:facet name="header">
-						<p:outputPanel>
-							<h:outputText value="Procurar em todos os campos:" />
-							<p:inputText id="globalFilter"
-								onkeyup="bioquimicasTable.filter()" style="width:150px" />
-						</p:outputPanel>
+						<div id="filtro">
+							<p:outputPanel>
+								<h:outputText value="Procurar em todos os campos:" />
+								<p:inputText id="globalFilter"
+									onkeyup="bioquimicasTable.filter()" style="width:150px" />
+							</p:outputPanel>
+						</div>
 					</f:facet>
 
-					<p:column id="numeroSusColumn" style="text-align: center"
+					<p:column id="numeroSusColumn"
 						sortBy="#{bioquimica.paciente.numeroSus}"
 						filterBy="#{bioquimica.paciente.numeroSus}" headerText="SUS"
-						filterMatchMode="startsWith">
+						filterMatchMode="startsWith" style="text-align: center">
 						<h:outputText value="#{bioquimica.paciente.numeroSus}" />
 					</p:column>
 
 					<p:column id="nomeColumn" filterBy="#{bioquimica.paciente.nome}"
-						style="text-align: center" headerText="Nome"
-						sortBy="#{bioquimica.paciente.nome}" filterMatchMode="startsWith">
+						headerText="Nome" sortBy="#{bioquimica.paciente.nome}"
+						style="text-align: center" filterMatchMode="startsWith">
 						<h:outputText value="#{bioquimica.paciente.nome}" />
 					</p:column>
 
 					<p:column id="dataPedidoColumn" sortBy="#{bioquimica.dataPedido}"
-						style="text-align: center" filterBy="#{bioquimica.dataPedido}"
-						headerText="Pedido em" filterMatchMode="startsWith">
+						filterBy="#{bioquimica.dataPedido}" headerText="Pedido em"
+						style="text-align: center" filterMatchMode="startsWith">
 						<h:outputText value="#{bioquimica.dataPedido}">
 							<f:convertDateTime type="date" locale="pt_BR"
 								timeZone="America/Fortaleza" />
@@ -57,62 +65,84 @@
 
 					<p:column style="width:4%">
 						<p:commandButton id="selectButton" update=":form:display"
-							oncomplete="resultadoDialog.show()" icon="ui-icon-document"
-							title="Cadastrar Resultado">
+							oncomplete="exameDialog.show()" icon="ui-icon-search"
+							title="Vizualizar Exame">
 							<f:setPropertyActionListener value="#{bioquimica}"
 								target="#{bioquimicaBean.bioquimica}" />
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
+							oncomplete="confirmacao.show()" title="Excluir Exame">
+							<f:setPropertyActionListener
+								target="#{bioquimicaBean.bioquimica}" value="#{bioquimica}" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
 
+				<p:confirmDialog header="Excluir Exame" message="Tem certeza?"
+					widgetVar="confirmacao" id="excluir">
+
+					<h:inputHidden id="idExame"
+						value="#{bioquimicaBean.bioquimica.idExame}" />
+					<h:inputHidden id="numeroSus"
+						value="#{bioquimicaBean.bioquimica.paciente.numeroSus}" />
+
+					<p:commandButton value="Sim" update="panel" id="ajax"
+						oncomplete="confirmacao.hide()"
+						actionListener="#{bioquimicaBean.excluir()}" />
+					<p:button value="Não" onclick="confirmacao.hide();" />
+
+				</p:confirmDialog>
+
 				<p:dialog
 					header="Pedido / Resultado de #{bioquimicaBean.bioquimica.nomeTipo}"
-					widgetVar="resultadoDialog" resizable="false" id="dialogo"
+					widgetVar="exameDialog" resizable="false" id="exame"
 					showEffect="fade" hideEffect="explode" modal="true">
 
-					<p:scrollPanel style="width:1000px;height:500px"
-						scrollMode="native">
-						<h:panelGrid id="display">
+					<h:panelGrid cellpadding="4">
+						<p:commandButton value="Imprimir" type="button"
+							icon="ui-icon-print">
+							<p:printer target="printArea" />
+						</p:commandButton>
+					</h:panelGrid>
 
-							<p:commandButton value="Imprimir" type="button"
-								icon="ui-icon-print">
-								<p:printer target="printArea" />
-							</p:commandButton>
+					<p:scrollPanel style="width:800px;height:500px" scrollMode="native">
+						<h:panelGrid id="display" cellpadding="4">
+
 
 							<h:form id="printArea">
-								<p:panel header="Dados do Pedido">
+								<p:fieldset legend="Dados do Pedido">
 
 									<h:panelGrid cellpadding="4" columns="4">
 										<h:outputText value="Nome: " />
 										<p:inputText id="nome"
 											value="#{bioquimicaBean.bioquimica.paciente.nome}"
-											 disabled="true" size="10" />
+											disabled="true" size="10" />
 
 										<h:outputText value="Sobrenome: " />
 										<p:inputText id="sobrenome"
 											value="#{bioquimicaBean.bioquimica.paciente.sobrenome}"
-											 disabled="true" />
+											disabled="true" />
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4" columns="2">
 
 										<h:outputText value="Leito: " />
 										<p:inputText value="#{bioquimicaBean.bioquimica.leito}"
-											 disabled="true" />
+											disabled="true" />
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4" columns="2">
 
 										<h:outputText value="Solicitado em:" />
 										<p:inputText value="#{bioquimicaBean.bioquimica.dataPedido}"
-											 disabled="true" size="7">
+											disabled="true" size="7">
 											<f:convertDateTime type="date" locale="pt_BR"
 												timeZone="America/Fortaleza" />
 										</p:inputText>
 									</h:panelGrid>
-								</p:panel>
+								</p:fieldset>
 
-								<p:panel header="Dados do Resultado">
+								<p:fieldset legend="Dados do Resultado">
 
 									<h:panelGrid cellpadding="4" columns="2">
 
@@ -128,7 +158,7 @@
 
 									<h:panelGrid cellpadding="4" columns="2">
 
-										<p:panel header="Resultados">
+										<p:fieldset legend="Resultados">
 											<h:panelGrid columns="4">
 												<h:outputLabel for="glicose" value="Glicose: " />
 												<p:inputText id="glicose"
@@ -289,9 +319,9 @@
 												</p:inputText>
 
 											</h:panelGrid>
-										</p:panel>
+										</p:fieldset>
 
-										<p:panel header="Valores de Referência">
+										<p:fieldset legend="Valores de Referência">
 
 											<h:panelGrid columns="2" cellpadding="2" border="1"
 												style="font-size: 10px">
@@ -358,10 +388,9 @@
 												<h:outputText value="VDRL: " />
 												<h:outputText value="Não reagente" />
 											</h:panelGrid>
-										</p:panel>
-
+										</p:fieldset>
 									</h:panelGrid>
-								</p:panel>
+								</p:fieldset>
 							</h:form>
 						</h:panelGrid>
 					</p:scrollPanel>
