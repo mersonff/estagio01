@@ -11,7 +11,7 @@
 			<p:panel id="panel" header="Agendamento: Baciloscopia"
 				style="margin-bottom:10px;">
 				<p:growl id="msgs"/>
-				<h:panelGrid columns="3" cellpadding="4" style="margin: 0 auto">
+				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto">
 
 					<h:outputLabel for="numeroSus" value="Número do SUS: *" />
 					<p:inputText id="numeroSus"
@@ -19,9 +19,6 @@
 						required="true" label="numeroSus" size="14"
 						requiredMessage="Número do SUS: Campo obrigatório."
 						converterMessage="Número do SUS: Deve ser um número." />
-					<p:commandButton update="panel" icon="ui-icon-search"
-						actionListener="#{baciloscopiaBean.find()}"
-						styleClass="ui-priority-primary" />
 
 					<h:outputText value="Agendar para:" />
 					<p:inputMask id="dataAgendamento" size="7" required="true"

@@ -26,6 +26,7 @@ public class PacienteBean extends AbstractBean{
 		if(p==null){
 		pacienteDAO.save(this.paciente);
 		displayInfoMessageToUser("Cadastrado com sucesso!");
+		this.paciente = new Paciente();
 		} else {
 			displayErrorMessageToUser("Número do SUS já cadastrado: Já existe um paciente com esse número de SUS cadastrado!");
 		}

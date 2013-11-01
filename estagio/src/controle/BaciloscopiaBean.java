@@ -42,6 +42,13 @@ public class BaciloscopiaBean extends AbstractBean {
 
 	}
 
+	public void remarcar() {
+		BaciloscopiaDAO operDAO = new BaciloscopiaJPADAO();
+		this.baciloscopia.setStatus("Em espera");
+		operDAO.save(this.baciloscopia);
+		displayInfoMessageToUser("Cadastrado com sucesso!");
+	}
+
 	public void cadastrar() {
 		BaciloscopiaDAO operDAO = new BaciloscopiaJPADAO();
 		this.baciloscopia.setDataPedido(new Date());
@@ -109,8 +116,8 @@ public class BaciloscopiaBean extends AbstractBean {
 
 	public List<Baciloscopia> getBaciloscopiaEmEspera() {
 		List<Baciloscopia> temp = new ArrayList<Baciloscopia>();
-		for(Baciloscopia b : baciloscopias){
-			if(b.getStatus().equals("Em espera"))
+		for (Baciloscopia b : baciloscopias) {
+			if (b.getStatus().equals("Em espera"))
 				temp.add(b);
 		}
 		baciloscopiaEmEspera = temp;
@@ -123,8 +130,8 @@ public class BaciloscopiaBean extends AbstractBean {
 
 	public List<Baciloscopia> getBaciloscopiaEmAberto() {
 		List<Baciloscopia> temp = new ArrayList<Baciloscopia>();
-		for(Baciloscopia b : baciloscopias){
-			if(b.getStatus().equals("Em aberto"))
+		for (Baciloscopia b : baciloscopias) {
+			if (b.getStatus().equals("Em aberto"))
 				temp.add(b);
 		}
 		baciloscopiaEmAberto = temp;

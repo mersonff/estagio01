@@ -9,9 +9,13 @@
 		<h:form id="form">
 			<p:panel id="panel" style="margin-bottom:10px;">
 
-				<p:growl id="msgs" showDetail="true" />
-
-				<p:dataTable id="dataTable" var="baciloscopia"
+				<p:growl id="msgs" />
+				
+				<div id="tableName">
+				<h:outputText value="Exames Agendados"/>
+				</div>
+				
+				<p:dataTable id="dataTable" var="baciloscopia" 
 					value="#{baciloscopiaBean.baciloscopiaEmEspera}"
 					widgetVar="baciloscopiasTable" paginator="true" rows="10"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -23,7 +27,7 @@
 					<f:facet name="header">
 						<p:outputPanel>
 							<div id="filtro">
-								<h:outputText value="Procurar em todos os campos " />
+								<h:outputText value="Procurar em todos os campos "/>
 								<p:inputText id="globalFilter"
 									onkeyup="baciloscopiasTable.filter()" style="width:150px" />
 							</div>
@@ -54,10 +58,8 @@
 						</h:outputText>
 					</p:column>
 
-					<p:column id="statusColumn" filterBy="#{baciloscopia.status}"
-						filterOptions="#{exameBean.statusOptions}"
-						style="text-align: center" headerText="Status"
-						filterMatchMode="exact">
+					<p:column id="statusColumn" style="text-align: center"
+						headerText="Status">
 						<h:outputText value="#{baciloscopia.status}" />
 					</p:column>
 
@@ -68,7 +70,13 @@
 							<f:setPropertyActionListener value="#{baciloscopia}"
 								target="#{baciloscopiaBean.baciloscopia}" />
 						</p:commandButton>
-
+						<p:commandButton id="selectButton3"
+							update=":remarcarForm:remarcar"
+							oncomplete="remarcarDialog.show()" icon="ui-icon-pencil"
+							title="Remarcar Exame">
+							<f:setPropertyActionListener value="#{baciloscopia}"
+								target="#{baciloscopiaBean.baciloscopia}" />
+						</p:commandButton>
 						<p:commandButton id="selectButton" update=":form:pedido"
 							oncomplete="pedidoDialog.show()" icon="ui-icon-plus"
 							title="Cadastrar Pedido">
@@ -128,7 +136,6 @@
 								disabled="true" size="10" />
 						</h:panelGrid>
 					</p:fieldset>
-
 				</p:dialog>
 
 				<p:dialog
@@ -205,6 +212,41 @@
 					</h:panelGrid>
 				</p:dialog>
 			</p:panel>
+		</h:form>
+		<h:form id="remarcarForm">
+			<p:dialog header="Remarcar #{baciloscopiaBean.baciloscopia.nomeTipo}"
+				widgetVar="remarcarDialog" resizable="false" id="remarcar"
+				showEffect="fade" hideEffect="explode" modal="true">
+
+				<h:panelGrid id="display" style="margin: 0 auto">
+
+					<h:inputHidden id="numeroSus"
+						value="#{baciloscopiaBean.baciloscopia.paciente.numeroSus}" />
+					<h:inputHidden id="idExame"
+						value="#{baciloscopiaBean.baciloscopia.idExame}" />
+
+					<p:fieldset legend="Nova Data">
+						<h:panelGrid cellpadding="4" style="margin: 0 auto">
+							<p:inputMask id="dataAgendamento" size="7" required="true"
+								mask="99/99/9999"
+								requiredMessage="Agendar para: Campo obrigatório."
+								converterMessage="Agendar para: Data digitada é inválida."
+								value="#{baciloscopiaBean.baciloscopia.dataAgendamento}">
+								<f:convertDateTime type="date" locale="pt_BR"
+									timeZone="America/Fortaleza" />
+							</p:inputMask>
+						</h:panelGrid>
+					</p:fieldset>
+				</h:panelGrid>
+
+				<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto">
+					<p:commandButton value="Atualizar" update=":form:panel" id="ajax"
+						actionListener="#{baciloscopiaBean.remarcar()}"
+						styleClass="ui-priority-primary" onsuccess="remarcarDialog.hide()" />
+					<p:commandButton value="Cancelar" type="reset"
+						onclick="remarcarDialog.hide()" />
+				</h:panelGrid>
+			</p:dialog>
 		</h:form>
 	</ui:define>
 </ui:composition>

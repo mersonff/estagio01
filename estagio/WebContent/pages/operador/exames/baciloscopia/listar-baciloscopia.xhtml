@@ -10,7 +10,11 @@
 		<h:form id="form">
 			<p:panel id="panel" style="margin-bottom:10px;">
 
-				<p:growl id="msgs" showDetail="true" />
+				<p:growl id="msgs" />
+
+				<div id="tableName">
+					<h:outputText value="Todos os Exames" />
+				</div>
 
 				<p:dataTable id="dataTable" var="baciloscopia"
 					value="#{baciloscopiaBean.baciloscopias}"
@@ -18,34 +22,35 @@
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15"
 					emptyMessage="Nenhum exame encontrado com esses critérios."
-					filteredValue="#{baciloscopiaBean.filteredBaciloscopias}">
+					filteredValue="#{baciloscopiaBean.filteredBaciloscopias}"
+					paginatorAlwaysVisible="false">
 
 					<f:facet name="header">
-						<p:outputPanel>
-							<h:outputText value="Procurar em todos os campos:" />
-							<h:inputHidden id="globalFilter"
-								onkeyup="baciloscopiasTable.filter()" style="width:150px" />
-						</p:outputPanel>
+						<div id="filtro">
+							<p:outputPanel>
+								<h:outputText value="Procurar em todos os campos:" />
+								<p:inputText id="globalFilter"
+									onkeyup="baciloscopiasTable.filter()" style="width:150px" />
+							</p:outputPanel>
+						</div>
 					</f:facet>
 
 					<p:column id="numeroSusColumn"
 						sortBy="#{baciloscopia.paciente.numeroSus}"
-						style="text-align: center"
 						filterBy="#{baciloscopia.paciente.numeroSus}" headerText="SUS"
-						filterMatchMode="startsWith">
+						filterMatchMode="startsWith" style="text-align: center">
 						<h:outputText value="#{baciloscopia.paciente.numeroSus}" />
 					</p:column>
 
 					<p:column id="nomeColumn" filterBy="#{baciloscopia.paciente.nome}"
-						style="text-align: center" headerText="Nome"
-						sortBy="#{baciloscopia.paciente.nome}"
-						filterMatchMode="startsWith">
+						headerText="Nome" sortBy="#{baciloscopia.paciente.nome}"
+						style="text-align: center" filterMatchMode="startsWith">
 						<h:outputText value="#{baciloscopia.paciente.nome}" />
 					</p:column>
 
 					<p:column id="dataPedidoColumn" sortBy="#{baciloscopia.dataPedido}"
-						style="text-align: center" filterBy="#{baciloscopia.dataPedido}"
-						headerText="Pedido em" filterMatchMode="startsWith">
+						filterBy="#{baciloscopia.dataPedido}" headerText="Pedido em"
+						style="text-align: center" filterMatchMode="startsWith">
 						<h:outputText value="#{baciloscopia.dataPedido}">
 							<f:convertDateTime type="date" locale="pt_BR"
 								timeZone="America/Fortaleza" />
@@ -60,13 +65,13 @@
 
 					<p:column style="width:4%">
 						<p:commandButton id="selectButton" update=":form:display"
-							oncomplete="resultadoDialog.show()" icon="ui-icon-search"
-							title="Abrir">
+							oncomplete="exameDialog.show()" icon="ui-icon-search"
+							title="Vizualizar Exame">
 							<f:setPropertyActionListener value="#{baciloscopia}"
 								target="#{baciloscopiaBean.baciloscopia}" />
 						</p:commandButton>
 						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
-							oncomplete="confirmacao.show()">
+							oncomplete="confirmacao.show()" title="Excluir Exame">
 							<f:setPropertyActionListener
 								target="#{baciloscopiaBean.baciloscopia}"
 								value="#{baciloscopia}" />
@@ -89,34 +94,38 @@
 
 				</p:confirmDialog>
 
+
 				<p:dialog
-					header="Pedido / Resultado de #{baciloscopiaBean.baciloscopia.nomeTipo}"
-					widgetVar="resultadoDialog" resizable="false" id="dialogo"
+					header="Exame de #{baciloscopiaBean.baciloscopia.nomeTipo}"
+					widgetVar="exameDialog" resizable="false" id="exame"
 					showEffect="fade" hideEffect="explode" modal="true">
+
+					<h:panelGrid cellpadding="4">
+						<p:commandButton value="Imprimir" type="button"
+							icon="ui-icon-print">
+							<p:printer target="printArea" />
+						</p:commandButton>
+					</h:panelGrid>
 
 					<p:scrollPanel style="width:800px;height:500px" scrollMode="native">
 						<h:panelGrid id="display" cellpadding="4">
 
-							<p:commandButton value="Imprimir" type="button"
-								icon="ui-icon-print">
-								<p:printer target="printArea" />
-							</p:commandButton>
-
 							<h:form id="printArea">
 
-								<p:panel header="Dados do Pedido">
+								<p:fieldset legend="Dados do Pedido">
 
 									<h:panelGrid cellpadding="4" columns="6">
 										<h:outputText value="SUS:" />
 										<p:inputText
 											value="#{baciloscopiaBean.baciloscopia.paciente.numeroSus}"
-											disabled="true" size="6" />
+											disabled="true" size="14" />
 
 										<h:outputText value="Unidade de Saúde: " />
 										<p:inputText
 											value="#{baciloscopiaBean.baciloscopia.unidadeDeSaude}"
 											disabled="true" size="15" />
 
+										<h:outputText value="Solicitado em:" />
 										<p:inputText
 											value="#{baciloscopiaBean.baciloscopia.dataPedido}"
 											disabled="true" size="7">
@@ -149,7 +158,7 @@
 											value="#{baciloscopiaBean.baciloscopia.paciente.dataNascimento}"
 											disabled="true" size="7">
 											<f:convertDateTime type="date" locale="pt_BR"
-												dateStyle="medium" />
+												timeZone="America/Fortaleza" />
 										</p:inputText>
 
 										<h:outputText value="Prontuário:" />
@@ -207,19 +216,21 @@
 											value="#{baciloscopiaBean.baciloscopia.mesDaAmostra}"
 											disabled="true" size="1" />
 									</h:panelGrid>
-								</p:panel>
+								</p:fieldset>
 
-								<p:panel header="Dados do Resultado">
+								<br />
+
+								<p:fieldset legend="Dados do Resultado">
 
 									<h:panelGrid cellpadding="4" columns="2">
 
 										<h:outputLabel for="dataEntrega" value="Data de Entrega: " />
 										<p:inputMask id="dataEntrega"
 											value="#{baciloscopiaBean.baciloscopia.dataEntrega}"
-											label="dataEntrega" mask="99/99/9999" size="5"
+											label="dataEntrega" mask="99/99/9999" size="7"
 											disabled="true">
 											<f:convertDateTime type="date" locale="pt_BR"
-												dateStyle="medium" />
+												timeZone="America/Fortaleza" />
 										</p:inputMask>
 									</h:panelGrid>
 
@@ -265,18 +276,12 @@
 											value="#{baciloscopiaBean.baciloscopia.observacoes}"
 											label="Observacoes" rows="4" cols="50" disabled="true" />
 									</h:panelGrid>
-								</p:panel>
+								</p:fieldset>
 							</h:form>
 						</h:panelGrid>
 					</p:scrollPanel>
 				</p:dialog>
 			</p:panel>
-		</h:form>
-
-		<h:form id="formExcluir">
-			<p:growl id="msgs2" showDetail="true" />
-
-
 		</h:form>
 	</ui:define>
 </ui:composition>

@@ -11,6 +11,10 @@
 			<p:panel id="panel" style="margin-bottom:10px;">
 				<p:growl id="msgs" />
 
+				<div id="tableName">
+					<h:outputText value="Exames Aguardando Resultado" />
+				</div>
+
 				<p:dataTable id="dataTable" var="baciloscopia"
 					value="#{baciloscopiaBean.baciloscopiaEmAberto}"
 					widgetVar="baciloscopiasTable" paginator="true" rows="10"
@@ -54,9 +58,8 @@
 						</h:outputText>
 					</p:column>
 
-					<p:column id="statusColumn" filterBy="#{baciloscopia.status}"
-						style="text-align: center" headerText="Status"
-						filterOptions="#{exameBean.statusOptions}" filterMatchMode="exact">
+					<p:column id="statusColumn" style="text-align: center"
+						headerText="Status">
 						<h:outputText value="#{baciloscopia.status}" />
 					</p:column>
 
@@ -242,7 +245,7 @@
 							</p:selectManyCheckbox>
 						</h:panelGrid>
 
-						<h:panelGrid cellpadding="4" columns="4">
+						<h:panelGrid cellpadding="4" columns="2">
 
 							<h:outputLabel for="negativo" value="Negativo: " />
 							<p:selectBooleanCheckbox id="negativo"
