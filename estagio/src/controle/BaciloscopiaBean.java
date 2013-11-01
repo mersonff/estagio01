@@ -17,7 +17,8 @@ import dao.PacienteJPADAO;
 public class BaciloscopiaBean extends AbstractBean {
 	private Baciloscopia baciloscopia;
 	private List<Baciloscopia> baciloscopias;
-	private long idFiltro;
+	private List<Baciloscopia> baciloscopiaEmEspera;
+	private List<Baciloscopia> baciloscopiaEmAberto;
 	private List<Baciloscopia> filteredBaciloscopias;
 
 	public BaciloscopiaBean() {
@@ -81,16 +82,6 @@ public class BaciloscopiaBean extends AbstractBean {
 		}
 	}
 
-	public List<Baciloscopia> filtrar() {
-		List<Baciloscopia> tempList = new ArrayList<Baciloscopia>();
-		for (Baciloscopia b : baciloscopias) {
-			if (b.getPaciente().getNumeroSus() == this.idFiltro)
-				tempList.add(b);
-		}
-		baciloscopias = tempList;
-		return baciloscopias;
-	}
-
 	public Baciloscopia getBaciloscopia() {
 		return baciloscopia;
 	}
@@ -116,12 +107,32 @@ public class BaciloscopiaBean extends AbstractBean {
 		this.filteredBaciloscopias = filteredBaciloscopias;
 	}
 
-	public long getIdFiltro() {
-		return idFiltro;
+	public List<Baciloscopia> getBaciloscopiaEmEspera() {
+		List<Baciloscopia> temp = new ArrayList<Baciloscopia>();
+		for(Baciloscopia b : baciloscopias){
+			if(b.getStatus().equals("Em espera"))
+				temp.add(b);
+		}
+		baciloscopiaEmEspera = temp;
+		return baciloscopiaEmEspera;
 	}
 
-	public void setIdFiltro(long idFiltro) {
-		this.idFiltro = idFiltro;
+	public void setBaciloscopiaEmEspera(List<Baciloscopia> baciloscopiaEmEspera) {
+		this.baciloscopiaEmEspera = baciloscopiaEmEspera;
+	}
+
+	public List<Baciloscopia> getBaciloscopiaEmAberto() {
+		List<Baciloscopia> temp = new ArrayList<Baciloscopia>();
+		for(Baciloscopia b : baciloscopias){
+			if(b.getStatus().equals("Em aberto"))
+				temp.add(b);
+		}
+		baciloscopiaEmAberto = temp;
+		return baciloscopiaEmAberto;
+	}
+
+	public void setBaciloscopiaEmAberto(List<Baciloscopia> baciloscopiaEmAberto) {
+		this.baciloscopiaEmAberto = baciloscopiaEmAberto;
 	}
 
 }
