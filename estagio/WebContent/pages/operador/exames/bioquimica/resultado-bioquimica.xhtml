@@ -44,8 +44,7 @@
 
 					<p:column id="nomeColumn" filterBy="#{bioquimica.paciente.nome}"
 						style="text-align: center" headerText="Nome"
-						sortBy="#{bioquimica.paciente.nome}"
-						filterMatchMode="startsWith">
+						sortBy="#{bioquimica.paciente.nome}" filterMatchMode="startsWith">
 						<h:outputText value="#{bioquimica.paciente.nome}" />
 					</p:column>
 
@@ -79,8 +78,7 @@
 					</p:column>
 				</p:dataTable>
 
-				<p:dialog
-					header="Pedido de #{bioquimicaBean.bioquimica.nomeTipo}"
+				<p:dialog header="Pedido de #{bioquimicaBean.bioquimica.nomeTipo}"
 					widgetVar="pedidoDialog" resizable="false" id="pedido"
 					showEffect="fade" hideEffect="explode" modal="true">
 
@@ -104,8 +102,7 @@
 
 							<h:panelGrid cellpadding="4" columns="6">
 								<h:outputText value="Nome: " />
-								<p:inputText
-									value="#{bioquimicaBean.bioquimica.paciente.nome}"
+								<p:inputText value="#{bioquimicaBean.bioquimica.paciente.nome}"
 									disabled="true" size="10" />
 
 								<h:outputText value="Sobrenome: " />
@@ -114,8 +111,7 @@
 									disabled="true" />
 
 								<h:outputText value="Sexo: " />
-								<p:inputText
-									value="#{bioquimicaBean.bioquimica.paciente.sexo}"
+								<p:inputText value="#{bioquimicaBean.bioquimica.paciente.sexo}"
 									disabled="true" size="1" />
 							</h:panelGrid>
 
@@ -143,6 +139,11 @@
 									<f:convertDateTime type="date" locale="pt_BR"
 										timeZone="America/Fortaleza" />
 								</p:inputText>
+
+								<h:outputText value="Leito: " />
+								<p:inputText value="#{bioquimicaBean.bioquimica.leito}"
+									disabled="true" />
+
 							</h:panelGrid>
 
 						</p:fieldset>
@@ -159,6 +160,9 @@
 							actionListener="#{bioquimicaBean.atualizar()}"
 							styleClass="ui-priority-primary"
 							oncomplete="resultadoDialog.hide();" />
+
+						<p:commandButton value="Cancelar" type="reset"
+							onclick="remarcarDialog.hide()" />
 					</h:panelGrid>
 
 					<h:inputHidden id="idExame"
@@ -176,11 +180,11 @@
 					<p:scrollPanel style="width:800px;height:500px" scrollMode="native">
 						<h:panelGrid id="display" cellpadding="4">
 
-							<p:panel header="Dados do Resultado">
+							<p:fieldset legend="Dados do Resultado">
 
 								<h:panelGrid cellpadding="4" columns="2">
 
-									<p:panel header="Resultados">
+									<p:fieldset legend="Resultados">
 										<h:panelGrid columns="2">
 											<h:outputLabel for="glicose" value="Glicose: " />
 											<p:inputText id="glicose"
@@ -341,9 +345,9 @@
 											</p:inputText>
 
 										</h:panelGrid>
-									</p:panel>
+									</p:fieldset>
 
-									<p:panel header="Valores de Referência">
+									<p:fieldset legend="Valores de Referência">
 
 										<h:panelGrid cellpadding="7" columns="2" border="1">
 											<h:outputText value="Glicose: " />
@@ -409,9 +413,9 @@
 											<h:outputText value="VDRL: " />
 											<h:outputText value="Não reagente" />
 										</h:panelGrid>
-									</p:panel>
+									</p:fieldset>
 								</h:panelGrid>
-							</p:panel>
+							</p:fieldset>
 						</h:panelGrid>
 					</p:scrollPanel>
 				</p:dialog>

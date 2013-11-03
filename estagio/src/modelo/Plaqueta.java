@@ -12,11 +12,11 @@ public class Plaqueta extends Exame{
 	
 	//Dados do Resultado;
 	private double hemoglobina;
-	private double hematocitos;
+	private double hematocrito;
 	private double plaquetas;
 	
 	public Plaqueta(){
-		setNomeTipo("Plaquetas");
+		setNomeTipo("Hb / Ht com Plaquetas");
 	}
 
 	public String getLeito() {
@@ -35,12 +35,12 @@ public class Plaqueta extends Exame{
 		this.hemoglobina = hemoglobina;
 	}
 
-	public double getHematocitos() {
-		return hematocitos;
+	public double getHematocrito() {
+		return hematocrito;
 	}
 
-	public void setHematocitos(double hematocitos) {
-		this.hematocitos = hematocitos;
+	public void setHematocrito(double hematocrito) {
+		this.hematocrito = hematocrito;
 	}
 
 	public double getPlaquetas() {

@@ -11,10 +11,10 @@ public class Sanguineo extends Exame {
 
 	// Dados do Resultado
 	private String abo;
-	private String fotarRH;
+	private String fatorRH;
 
 	public Sanguineo() {
-		setNomeTipo("Sanguíneo");
+		setNomeTipo("Classificação Sanguínea");
 	}
 
 	public String getLeito() {
@@ -33,12 +33,12 @@ public class Sanguineo extends Exame {
 		this.abo = abo;
 	}
 
-	public String getFotarRH() {
-		return fotarRH;
+	public String getFatorRH() {
+		return fatorRH;
 	}
 
-	public void setFotarRH(String fotarRH) {
-		this.fotarRH = fotarRH;
+	public void setFatorRH(String fatorRH) {
+		this.fatorRH = fatorRH;
 	}
 
 }

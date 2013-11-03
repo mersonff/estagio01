@@ -1,0 +1,199 @@
+<ui:composition template="/WEB-INF/templates/template-operador.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+
+		<h:form id="form">
+			<p:panel id="panel" style="margin-bottom:10px;">
+				<p:growl id="msgs" />
+
+				<div id="tableName">
+					<h:outputText value="Exames Aguardando Resultado" />
+				</div>
+
+				<p:dataTable id="dataTable" var="sanguineo"
+					value="#{sanguineoBean.sanguineoEmAberto}"
+					widgetVar="sanguineosTable" paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					emptyMessage="Nenhum exame encontrado com esses critérios."
+					filteredValue="#{sanguineoBean.filteredSanguineos}"
+					paginatorAlwaysVisible="false">
+
+					<f:facet name="header">
+						<p:outputPanel>
+							<div id="filtro">
+								<h:outputText value="Procurar em todos os campos " />
+								<p:inputText id="globalFilter"
+									onkeyup="sanguineosTable.filter()" style="width:150px" />
+							</div>
+						</p:outputPanel>
+					</f:facet>
+
+					<p:column id="numeroSusColumn"
+						sortBy="#{sanguineo.paciente.numeroSus}"
+						style="text-align: center"
+						filterBy="#{sanguineo.paciente.numeroSus}" headerText="SUS"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{sanguineo.paciente.numeroSus}" />
+					</p:column>
+
+					<p:column id="nomeColumn" filterBy="#{sanguineo.paciente.nome}"
+						style="text-align: center" headerText="Nome"
+						sortBy="#{sanguineo.paciente.nome}" filterMatchMode="startsWith">
+						<h:outputText value="#{sanguineo.paciente.nome}" />
+					</p:column>
+
+					<p:column id="dataPedidoColumn" sortBy="#{sanguineo.dataPedido}"
+						style="text-align: center" filterBy="#{sanguineo.dataPedido}"
+						headerText="Pedido em" filterMatchMode="startsWith">
+						<h:outputText value="#{sanguineo.dataPedido}">
+							<f:convertDateTime type="date" locale="pt_BR"
+								timeZone="America/Fortaleza" />
+						</h:outputText>
+					</p:column>
+
+					<p:column id="statusColumn" style="text-align: center"
+						headerText="Status">
+						<h:outputText value="#{sanguineo.status}" />
+					</p:column>
+
+					<p:column style="width:4%">
+						<p:commandButton id="selectButton" update=":form:pedido"
+							oncomplete="pedidoDialog.show()" icon="ui-icon-search"
+							title="Dados do Pedido">
+							<f:setPropertyActionListener value="#{sanguineo}"
+								target="#{sanguineoBean.sanguineo}" />
+						</p:commandButton>
+						<p:commandButton id="selectButton2" update=":form:resultado"
+							oncomplete="resultadoDialog.show()" icon="ui-icon-document"
+							title="Cadastrar Resultado">
+							<f:setPropertyActionListener value="#{sanguineo}"
+								target="#{sanguineoBean.sanguineo}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:dialog header="Pedido de #{sanguineoBean.sanguineo.nomeTipo}"
+					widgetVar="pedidoDialog" resizable="false" id="pedido"
+					showEffect="fade" hideEffect="explode" modal="true">
+
+					<h:panelGrid cellpadding="4">
+						<p:fieldset legend="Dados do Paciente">
+
+							<h:panelGrid cellpadding="4" columns="4">
+								<h:outputText value="Número do SUS: " />
+								<p:inputText
+									value="#{sanguineoBean.sanguineo.paciente.numeroSus}" size="14"
+									disabled="true" />
+
+								<h:outputText value="Nascido em: " />
+								<p:inputMask
+									value="#{sanguineoBean.sanguineo.paciente.dataNascimento}"
+									disabled="true" mask="99/99/9999" size="7">
+									<f:convertDateTime type="date" locale="pt_BR"
+										timeZone="America/Fortaleza" />
+								</p:inputMask>
+							</h:panelGrid>
+
+							<h:panelGrid cellpadding="4" columns="6">
+								<h:outputText value="Nome: " />
+								<p:inputText value="#{sanguineoBean.sanguineo.paciente.nome}"
+									disabled="true" size="10" />
+
+								<h:outputText value="Sobrenome: " />
+								<p:inputText
+									value="#{sanguineoBean.sanguineo.paciente.sobrenome}"
+									disabled="true" />
+
+								<h:outputText value="Sexo: " />
+								<p:inputText value="#{sanguineoBean.sanguineo.paciente.sexo}"
+									disabled="true" size="1" />
+							</h:panelGrid>
+
+							<h:panelGrid cellpadding="4" columns="4">
+								<h:outputText value="Endereço: " />
+								<p:inputText
+									value="#{sanguineoBean.sanguineo.paciente.endereco}"
+									disabled="true" />
+
+								<h:outputText value="Localidade: " />
+								<p:inputText
+									value="#{sanguineoBean.sanguineo.paciente.localidade}"
+									disabled="true" size="10" />
+							</h:panelGrid>
+						</p:fieldset>
+					</h:panelGrid>
+
+					<h:panelGrid cellpadding="4">
+						<p:fieldset legend="Dados de Pedido">
+
+							<h:panelGrid columns="2" cellpadding="4">
+								<h:outputText value="Data de Pedido: " />
+								<p:inputText value="#{sanguineoBean.sanguineo.dataPedido}"
+									disabled="true" size="7">
+									<f:convertDateTime type="date" locale="pt_BR"
+										timeZone="America/Fortaleza" />
+								</p:inputText>
+
+								<h:outputText value="Leito: " />
+								<p:inputText value="#{sanguineoBean.sanguineo.leito}"
+									disabled="true" />
+							</h:panelGrid>
+
+						</p:fieldset>
+					</h:panelGrid>
+				</p:dialog>
+
+				<p:dialog header="Resultado de #{sanguineoBean.sanguineo.nomeTipo}"
+					widgetVar="resultadoDialog" resizable="false" id="resultado"
+					showEffect="fade" hideEffect="explode" modal="true">
+
+					<h:inputHidden id="idExame"
+						value="#{sanguineoBean.sanguineo.idExame}" />
+					<h:inputHidden id="numeroSus"
+						value="#{sanguineoBean.sanguineo.paciente.numeroSus}" />
+					<h:inputHidden id="dataPedido"
+						value="#{sanguineoBean.sanguineo.dataPedido}">
+						<f:convertDateTime type="date" locale="pt_BR"
+							timeZone="America/Fortaleza" />
+					</h:inputHidden>
+					<h:inputHidden id="leito" value="#{sanguineoBean.sanguineo.leito}" />
+
+					<h:panelGrid id="display" cellpadding="4">
+
+						<p:fieldset legend="Dados do Resultado">
+
+							<h:panelGrid cellpadding="4" columns="2">
+
+								<h:panelGrid columns="2">
+									<h:outputLabel for="abo" value="ABO: " />
+									<p:inputText id="hemoglobina"
+										value="#{sanguineoBean.sanguineo.abo}" label="hemoglobina"
+										size="3" />
+
+									<h:outputLabel for="fatorRH" value="Fator RH: " />
+									<p:inputText id="hematocrito"
+										value="#{sanguineoBean.sanguineo.fatorRH}" label="colesterol" />
+								</h:panelGrid>
+							</h:panelGrid>
+						</p:fieldset>
+
+						<h:panelGrid cellpading="4" columns="2">
+							<p:commandButton value="Cadastrar" update="panel" id="ajax"
+								actionListener="#{sanguineoBean.atualizar()}"
+								styleClass="ui-priority-primary"
+								oncomplete="resultadoDialog.hide();" />
+							<p:commandButton value="Cancelar" type="reset"
+								onclick="remarcarDialog.hide()" />
+						</h:panelGrid>
+					</h:panelGrid>
+				</p:dialog>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

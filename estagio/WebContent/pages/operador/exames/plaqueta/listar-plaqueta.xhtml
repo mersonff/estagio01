@@ -1,0 +1,217 @@
+<ui:composition template="/WEB-INF/templates/template-operador.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+
+		<h:form id="form">
+			<p:panel id="panel" style="margin-bottom:10px;">
+
+				<p:growl id="msgs" />
+
+				<div id="tableName">
+					<h:outputText value="Todos os Exames" />
+				</div>
+
+				<p:dataTable id="dataTable" var="plaqueta"
+					value="#{plaquetaBean.plaquetas}" widgetVar="plaquetasTable"
+					paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					emptyMessage="Nenhum exame encontrado com esses critérios."
+					filteredValue="#{plaquetaBean.filteredPlaquetas}"
+					paginatorAlwaysVisible="false">
+
+					<f:facet name="header">
+						<div id="filtro">
+							<p:outputPanel>
+								<h:outputText value="Procurar em todos os campos:" />
+								<p:inputText id="globalFilter" onkeyup="plaquetasTable.filter()"
+									style="width:150px" />
+							</p:outputPanel>
+						</div>
+					</f:facet>
+
+					<p:column id="numeroSusColumn"
+						sortBy="#{plaqueta.paciente.numeroSus}"
+						filterBy="#{plaqueta.paciente.numeroSus}" headerText="SUS"
+						filterMatchMode="startsWith" style="text-align: center">
+						<h:outputText value="#{plaqueta.paciente.numeroSus}" />
+					</p:column>
+
+					<p:column id="nomeColumn" filterBy="#{plaqueta.paciente.nome}"
+						headerText="Nome" sortBy="#{plaqueta.paciente.nome}"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{plaqueta.paciente.nome}" />
+					</p:column>
+
+					<p:column id="dataPedidoColumn" sortBy="#{plaqueta.dataPedido}"
+						filterBy="#{plaqueta.dataPedido}" headerText="Pedido em"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{plaqueta.dataPedido}">
+							<f:convertDateTime type="date" locale="pt_BR"
+								timeZone="America/Fortaleza" />
+						</h:outputText>
+					</p:column>
+
+					<p:column id="statusColumn" filterBy="#{plaqueta.status}"
+						style="text-align: center" headerText="Status"
+						filterOptions="#{exameBean.statusOptions}" filterMatchMode="exact">
+						<h:outputText value="#{plaqueta.status}" />
+					</p:column>
+
+					<p:column style="width:4%">
+						<p:commandButton id="selectButton" update=":form:display"
+							oncomplete="exameDialog.show()" icon="ui-icon-search"
+							title="Vizualizar Exame">
+							<f:setPropertyActionListener value="#{plaqueta}"
+								target="#{plaquetaBean.plaqueta}" />
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
+							oncomplete="confirmacao.show()" title="Excluir Exame">
+							<f:setPropertyActionListener target="#{plaquetaBean.plaqueta}"
+								value="#{plaqueta}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog header="Excluir Exame" message="Tem certeza?"
+					widgetVar="confirmacao" id="excluir">
+
+					<h:inputHidden id="idExame"
+						value="#{plaquetaBean.plaqueta.idExame}" />
+					<h:inputHidden id="numeroSus"
+						value="#{plaquetaBean.plaqueta.paciente.numeroSus}" />
+
+					<p:commandButton value="Sim" update="panel" id="ajax"
+						oncomplete="confirmacao.hide()"
+						actionListener="#{plaquetaBean.excluir()}" />
+					<p:button value="Não" onclick="confirmacao.hide();" />
+
+				</p:confirmDialog>
+
+				<p:dialog
+					header="Pedido / Resultado de #{plaquetaBean.plaqueta.nomeTipo}"
+					widgetVar="exameDialog" resizable="false" id="exame"
+					showEffect="fade" hideEffect="explode" modal="true">
+
+					<h:panelGrid cellpadding="4">
+						<p:commandButton value="Imprimir" type="button"
+							icon="ui-icon-print">
+							<p:printer target="printArea" />
+						</p:commandButton>
+					</h:panelGrid>
+
+					<p:scrollPanel style="width:800px;height:500px" scrollMode="native">
+						<h:panelGrid id="display" cellpadding="4">
+
+
+							<h:form id="printArea">
+								<p:fieldset legend="Dados do Pedido">
+
+									<h:panelGrid cellpadding="4" columns="4">
+										<h:outputText value="Nome: " />
+										<p:inputText id="nome"
+											value="#{plaquetaBean.plaqueta.paciente.nome}"
+											disabled="true" size="10" />
+
+										<h:outputText value="Sobrenome: " />
+										<p:inputText id="sobrenome"
+											value="#{plaquetaBean.plaqueta.paciente.sobrenome}"
+											disabled="true" />
+									</h:panelGrid>
+
+									<h:panelGrid cellpadding="4" columns="2">
+
+										<h:outputText value="Leito: " />
+										<p:inputText value="#{plaquetaBean.plaqueta.leito}"
+											disabled="true" />
+									</h:panelGrid>
+
+									<h:panelGrid cellpadding="4" columns="2">
+
+										<h:outputText value="Solicitado em:" />
+										<p:inputText value="#{plaquetaBean.plaqueta.dataPedido}"
+											disabled="true" size="7">
+											<f:convertDateTime type="date" locale="pt_BR"
+												timeZone="America/Fortaleza" />
+										</p:inputText>
+									</h:panelGrid>
+								</p:fieldset>
+
+								<br />
+
+								<p:fieldset legend="Dados do Resultado">
+
+									<h:panelGrid cellpadding="4" columns="2">
+
+										<h:outputLabel for="dataEntrega" value="Data de Entrega: " />
+										<p:inputMask id="dataEntrega"
+											value="#{plaquetaBean.plaqueta.dataEntrega}"
+											label="dataEntrega" mask="99/99/9999" size="7"
+											disabled="true">
+											<f:convertDateTime type="date" locale="pt_BR"
+												timeZone="America/Fortaleza" />
+										</p:inputMask>
+									</h:panelGrid>
+
+									<h:panelGrid cellpadding="4" columns="2">
+
+										<p:fieldset legend="Resultados">
+											<h:panelGrid columns="4">
+												<h:outputLabel for="hemoglobina" value="Hemoglobina: " />
+												<p:inputText id="hemoglobina"
+													value="#{plaquetaBean.plaqueta.hemoglobina}"
+													label="glicose" size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
+
+												<h:outputLabel for="hematocrito" value="Hematócrito: " />
+												<p:inputText id="hemotocrito"
+													value="#{plaquetaBean.plaqueta.hematocrito}"
+													label="colesterol" size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
+
+												<h:outputLabel for="plaquetas" value="Plaquetas: " />
+												<p:inputText id="plaquetas"
+													value="#{plaquetaBean.plaqueta.plaquetas}"
+													label="triglicerides" size="3" disabled="true">
+													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+												</p:inputText>
+
+											</h:panelGrid>
+										</p:fieldset>
+
+										<p:fieldset legend="Valores de Referência">
+
+											<h:panelGrid cellpadding="7" columns="2" border="1">
+												<h:outputText value="Hemoglobina: " />
+												<h:panelGrid>
+													<h:outputText value="H - 13,0 - 16,0" />
+													<h:outputText value="M - 11,5 - 15,0" />
+												</h:panelGrid>
+
+												<h:outputText value="Hematócrito " />
+												<h:panelGrid>
+													<h:outputText value="H - 40 - 50" />
+													<h:outputText value="M - 39 - 45" />
+												</h:panelGrid>
+
+												<h:outputText value="Plaquetas: " />
+												<h:outputText value="130.000 - 400.000 mm³" />
+											</h:panelGrid>
+										</p:fieldset>
+									</h:panelGrid>
+								</p:fieldset>
+							</h:form>
+						</h:panelGrid>
+					</p:scrollPanel>
+				</p:dialog>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,6 +1,7 @@
 package controle;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -16,6 +17,9 @@ import dao.SanguineoJPADAO;
 public class SanguineoBean extends AbstractBean {
 	private Sanguineo sanguineo;
 	private List<Sanguineo> sanguineos;
+	private List<Sanguineo> sanguineoEmEspera;
+	private List<Sanguineo> sanguineoEmAberto;
+	private List<Sanguineo> filteredSanguineos;
 
 	public SanguineoBean() {
 		this.setSanguineo(new Sanguineo());
@@ -23,16 +27,43 @@ public class SanguineoBean extends AbstractBean {
 		pesquisarTodos();
 	}
 
-	public void cadastrar() {
+	public void agendar() {
 		SanguineoDAO operDAO = new SanguineoJPADAO();
 		PacienteDAO pDAO = new PacienteJPADAO();
 		Paciente p = pDAO.find(this.sanguineo.getPaciente().getNumeroSus());
 		if (p != null) {
+			this.sanguineo.setStatus("Em espera");
 			operDAO.save(this.sanguineo);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
+			this.sanguineo = new Sanguineo();
 		} else {
-			displayInfoMessageToUser("Paciente não cadastrado." + "");
+			displayErrorMessageToUser("Paciente não cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
+
+	}
+
+	public void remarcar() {
+		SanguineoDAO operDAO = new SanguineoJPADAO();
+		this.sanguineo.setStatus("Em espera");
+		operDAO.save(this.sanguineo);
+		displayInfoMessageToUser("Cadastrado com sucesso!");
+	}
+
+	public void cadastrar() {
+		SanguineoDAO operDAO = new SanguineoJPADAO();
+		this.sanguineo.setDataPedido(new Date());
+		this.sanguineo.setStatus("Em aberto");
+		operDAO.save(this.sanguineo);
+		displayInfoMessageToUser("Cadastrado com sucesso!");
+	}
+
+	public void atualizar() {
+		SanguineoDAO operDAO = new SanguineoJPADAO();
+		this.sanguineo.setStatus("Concluído");
+		this.sanguineo.setDataEntrega(new Date());
+		operDAO.save(this.sanguineo);
+		displayInfoMessageToUser("Cadastrado com sucesso!");
+
 	}
 
 	public void pesquisarTodos() {
@@ -40,10 +71,22 @@ public class SanguineoBean extends AbstractBean {
 		this.sanguineos = operDAO.find();
 	}
 
-	public void excluir(Sanguineo sanguineo) {
+	public void excluir() {
 		SanguineoDAO operDAO = new SanguineoJPADAO();
-		operDAO.delete(sanguineo);
+		operDAO.delete(this.sanguineo);
 		displayInfoMessageToUser("Excluido com sucesso!");
+		this.sanguineos = operDAO.find();
+
+	}
+
+	public void find() {
+		PacienteDAO pDAO = new PacienteJPADAO();
+		Paciente p = pDAO.find(this.sanguineo.getPaciente().getNumeroSus());
+		if (p != null) {
+			displayInfoMessageToUser("Paciente encontrado.");
+		} else {
+			displayErrorMessageToUser("Paciente não encontrado. Por favor, realize o cadastro do paciente.");
+		}
 	}
 
 	public Sanguineo getSanguineo() {
@@ -60,6 +103,43 @@ public class SanguineoBean extends AbstractBean {
 
 	public void setSanguineos(List<Sanguineo> sanguineos) {
 		this.sanguineos = sanguineos;
+	}
+
+	public List<Sanguineo> getFilteredSanguineos() {
+		return filteredSanguineos;
+	}
+
+	public void setFilteredSanguineos(
+			List<Sanguineo> filteredSanguineos) {
+		this.filteredSanguineos = filteredSanguineos;
+	}
+
+	public List<Sanguineo> getSanguineoEmEspera() {
+		List<Sanguineo> temp = new ArrayList<Sanguineo>();
+		for (Sanguineo b : sanguineos) {
+			if (b.getStatus().equals("Em espera"))
+				temp.add(b);
+		}
+		sanguineoEmEspera = temp;
+		return sanguineoEmEspera;
+	}
+
+	public void setSanguineoEmEspera(List<Sanguineo> sanguineoEmEspera) {
+		this.sanguineoEmEspera = sanguineoEmEspera;
+	}
+
+	public List<Sanguineo> getSanguineoEmAberto() {
+		List<Sanguineo> temp = new ArrayList<Sanguineo>();
+		for (Sanguineo b : sanguineos) {
+			if (b.getStatus().equals("Em aberto"))
+				temp.add(b);
+		}
+		sanguineoEmAberto = temp;
+		return sanguineoEmAberto;
+	}
+
+	public void setSanguineoEmAberto(List<Sanguineo> sanguineoEmAberto) {
+		this.sanguineoEmAberto = sanguineoEmAberto;
 	}
 
 }
