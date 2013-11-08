@@ -18,6 +18,7 @@ public class Hemograma extends Exame {
 	private double chcm;
 
 	private double leucocitos;
+	private double mieiocitos;
 	private double metamiei;
 	private double bastoes;
 	private double segmentacao;
@@ -31,6 +32,9 @@ public class Hemograma extends Exame {
 	private String tipoLinfocitos;
 	private String tipoGranulacoes;
 	private String tipoEritroblastos;
+	
+	private double vhs;
+	private double plaquetas;
 
 	public Hemograma() {
 		setNomeTipo("Hemograma");
@@ -194,6 +198,30 @@ public class Hemograma extends Exame {
 
 	public void setTipoEritroblastos(String tipoEritroblastos) {
 		this.tipoEritroblastos = tipoEritroblastos;
+	}
+
+	public double getMieiocitos() {
+		return mieiocitos;
+	}
+
+	public void setMieiocitos(double mieiocitos) {
+		this.mieiocitos = mieiocitos;
+	}
+
+	public double getVhs() {
+		return vhs;
+	}
+
+	public void setVhs(double vhs) {
+		this.vhs = vhs;
+	}
+
+	public double getPlaquetas() {
+		return plaquetas;
+	}
+
+	public void setPlaquetas(double plaquetas) {
+		this.plaquetas = plaquetas;
 	}
 	
 	
