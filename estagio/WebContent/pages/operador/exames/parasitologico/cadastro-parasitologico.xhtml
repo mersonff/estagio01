@@ -10,52 +10,217 @@
 
 			<p:panel id="panel" header="Pedido de Exame: Parasitológico de Fezes"
 				style="margin-bottom:10px;">
-				<p:messages id="messages" />
-				<h:panelGrid columns="2">
+				<p:growl id="msgs" />
 
-					<h:outputLabel for="numeroSus" value="Número do SUS: *" />
-					<p:inputText id="numeroSus"
-						value="#{parasitologicoBean.parasitologico.paciente.numeroSus}"
-						required="true" label="numeroSus" />
+				<div id="tableName">
+					<h:outputText value="Exames Agendados" />
+				</div>
 
-					<h:outputLabel for="unidade" value="Unidade: " />
-					<p:inputText id="unidade"
-						value="#{parasitologicoBean.parasitologico.unidade}"
-						label="unidade" />
+				<p:dataTable id="dataTable" var="parasitologico"
+					value="#{parasitologicoBean.parasitologicoEmEspera}"
+					widgetVar="parasitologicosTable" paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					emptyMessage="Nenhum exame encontrado com esses critérios."
+					filteredValue="#{parasitologicoBean.filteredParasitologicos}"
+					paginatorAlwaysVisible="false">
 
-					<h:outputLabel for="medicoSolicitante" value="Médico Solicitante: " />
-					<p:inputText id="medicoSolicitante"
-						value="#{parasitologicoBean.parasitologico.medicoSolicitante}"
-						label="medicoSolicitante" />
+					<f:facet name="header">
+						<p:outputPanel>
+							<div id="filtro">
+								<h:outputText value="Procurar em todos os campos " />
+								<p:inputText id="globalFilter"
+									onkeyup="parasitologicosTable.filter()" style="width:150px" />
+							</div>
+						</p:outputPanel>
+					</f:facet>
 
-					<h:outputLabel for="prontuario" value="Prontuário: " />
-					<p:inputText id="pronturario"
-						value="#{parasitologicoBean.parasitologico.prontuario}"
-						label="prontuario" />
+					<p:column id="numeroSusColumn"
+						sortBy="#{parasitologico.paciente.numeroSus}"
+						filterBy="#{parasitologico.paciente.numeroSus}" headerText="SUS"
+						filterMatchMode="startsWith" style="text-align: center">
+						<h:outputText value="#{parasitologico.paciente.numeroSus}" />
+					</p:column>
 
-					<h:outputLabel for="enfermaria" value="Enfermaria: " />
-					<p:inputText id="enfermaria"
-						value="#{parasitologicoBean.parasitologico.enfermaria}"
-						label="endermaria" />
+					<p:column id="nomeColumn"
+						filterBy="#{parasitologico.paciente.nome}" headerText="Nome"
+						sortBy="#{parasitologico.paciente.nome}"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{parasitologico.paciente.nome}" />
+					</p:column>
 
-					<h:outputLabel for="Data de Pedido" value="Data de Pedido: " />
-					<p:inputMask id="dataPedido"
-						value="#{parasitologicoBean.parasitologico.dataPedido}"
-						label="dataPedido" mask="99/99/9999">
-						<f:convertDateTime type="date" locale="pt_BR" dateStyle="medium" />
-					</p:inputMask>
+					<p:column id="dataAgendamentoColumn"
+						sortBy="#{parasitologico.dataAgendamento}"
+						filterBy="#{parasitologico.dataAgendamento}"
+						headerText="Agendado em" style="text-align: center"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{parasitologico.dataAgendamento}">
+							<f:convertDateTime type="date" locale="pt_BR"
+								timeZone="America/Fortaleza" />
+						</h:outputText>
+					</p:column>
 
-					<h:outputLabel for="leito" value="Leito: " />
-					<p:inputText id="leito" value="#{parasitologicoBean.parasitologico.leito}"
-						label="leito" />
+					<p:column id="statusColumn" style="text-align: center"
+						headerText="Status">
+						<h:outputText value="#{parasitologico.status}" />
+					</p:column>
 
-					<p:commandButton value="Cadastrar" update="panel" id="ajax"
-						actionListener="#{parasitologicoBean.cadastrar()}"
-						styleClass="ui-priority-primary" />
-					<p:commandButton value="Limpar" type="reset" />
-				</h:panelGrid>
+					<p:column style="width:4%">
+						<p:commandButton id="selectButton2" update=":form:paciente"
+							oncomplete="pacienteDialog.show()" icon="ui-icon-contact"
+							title="Dados do Paciente">
+							<f:setPropertyActionListener value="#{parasitologico}"
+								target="#{parasitologicoBean.parasitologico}" />
+						</p:commandButton>
+						<p:commandButton id="selectButton3"
+							update=":remarcarForm:remarcar"
+							oncomplete="remarcarDialog.show()" icon="ui-icon-pencil"
+							title="Remarcar Exame">
+							<f:setPropertyActionListener value="#{parasitologico}"
+								target="#{parasitologicoBean.parasitologico}" />
+						</p:commandButton>
+						<p:commandButton id="selectButton" update=":form:pedido"
+							oncomplete="pedidoDialog.show()" icon="ui-icon-plus"
+							title="Cadastrar Pedido">
+							<f:setPropertyActionListener value="#{parasitologico}"
+								target="#{parasitologicoBean.parasitologico}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:dialog header="Dados do Paciente" widgetVar="pacienteDialog"
+					resizable="false" id="paciente" showEffect="fade"
+					hideEffect="explode" modal="true">
+
+					<p:fieldset legend="Dados do Paciente">
+
+						<h:panelGrid cellpadding="4" columns="4">
+							<h:outputText value="Número do SUS: " />
+							<p:inputText
+								value="#{parasitologicoBean.parasitologico.paciente.numeroSus}"
+								size="14" disabled="true" />
+
+							<h:outputText value="Nascido em: " />
+							<p:inputMask
+								value="#{parasitologicoBean.parasitologico.paciente.dataNascimento}"
+								disabled="true" mask="99/99/9999" size="7">
+								<f:convertDateTime type="date" locale="pt_BR"
+									timeZone="America/Fortaleza" />
+							</p:inputMask>
+						</h:panelGrid>
+
+						<h:panelGrid cellpadding="4" columns="6">
+							<h:outputText value="Nome: " />
+							<p:inputText
+								value="#{parasitologicoBean.parasitologico.paciente.nome}"
+								disabled="true" size="10" />
+
+							<h:outputText value="Sobrenome: " />
+							<p:inputText
+								value="#{parasitologicoBean.parasitologico.paciente.sobrenome}"
+								disabled="true" />
+
+							<h:outputText value="Sexo: " />
+							<p:inputText
+								value="#{parasitologicoBean.parasitologico.paciente.sexo}"
+								disabled="true" size="1" />
+						</h:panelGrid>
+
+						<h:panelGrid cellpadding="4" columns="4">
+							<h:outputText value="Endereço: " />
+							<p:inputText
+								value="#{parasitologicoBean.parasitologico.paciente.endereco}"
+								disabled="true" />
+
+							<h:outputText value="Localidade: " />
+							<p:inputText
+								value="#{parasitologicoBean.parasitologico.paciente.localidade}"
+								disabled="true" size="10" />
+						</h:panelGrid>
+					</p:fieldset>
+				</p:dialog>
+
+				<p:dialog
+					header="Pedido de #{parasitologicoBean.parasitologico.nomeTipo}"
+					widgetVar="pedidoDialog" resizable="false" id="pedido"
+					showEffect="fade" hideEffect="explode" modal="true">
+
+					<h:panelGrid id="display" columns="2" cellpadding="4">
+
+						<h:inputHidden id="numeroSus"
+							value="#{parasitologicoBean.parasitologico.paciente.numeroSus}" />
+						<h:inputHidden id="idExame"
+							value="#{parasitologicoBean.parasitologico.idExame}" />
+
+						<h:outputLabel for="unidade" value="Unidade: " />
+						<p:inputText id="unidade"
+							value="#{parasitologicoBean.parasitologico.unidade}"
+							label="Unidade" />
+
+						<h:outputLabel for="medicoSolicitante"
+							value="Médico Solicitante: " />
+						<p:inputText id="medicoSolicitante"
+							value="#{parasitologicoBean.parasitologico.medicoSolicitante}"
+							label="Médico Solicitante" />
+
+						<h:outputLabel for="prontuario" value="Prontuário: " />
+						<p:inputText id="prontuario"
+							value="#{parasitologicoBean.parasitologico.prontuario}"
+							label="Prontuário" />
+
+						<h:outputLabel for="enfermaria" value="Enfermaria: " />
+						<p:inputText id="enfermaria"
+							value="#{parasitologicoBean.parasitologico.enfermaria}"
+							label="Enfermaria" />
+
+						<h:outputLabel for="leito" value="Leito: " />
+						<p:inputText id="leito"
+							value="#{parasitologicoBean.parasitologico.leito}" label="leito" />
+
+						<p:commandButton value="Cadastrar" update="panel" id="ajax"
+							actionListener="#{parasitologicoBean.cadastrar()}"
+							styleClass="ui-priority-primary" />
+						<p:commandButton value="Limpar" type="reset" />
+					</h:panelGrid>
+				</p:dialog>
 			</p:panel>
+		</h:form>
 
+		<h:form id="remarcarForm">
+			<p:dialog
+				header="Remarcar #{parasitologicoBean.parasitologico.nomeTipo}"
+				widgetVar="remarcarDialog" resizable="false" id="remarcar"
+				showEffect="fade" hideEffect="explode" modal="true">
+
+				<h:panelGrid id="display" style="margin: 0 auto">
+
+					<h:inputHidden id="numeroSus"
+						value="#{parasitologicoBean.parasitologico.paciente.numeroSus}" />
+					<h:inputHidden id="idExame"
+						value="#{parasitologicoBean.parasitologico.idExame}" />
+
+					<p:fieldset legend="Nova Data">
+						<h:panelGrid cellpadding="4" style="margin: 0 auto">
+							<p:inputMask id="dataAgendamento" size="7" required="true"
+								mask="99/99/9999"
+								requiredMessage="Agendar para: Campo obrigatório."
+								converterMessage="Agendar para: Data digitada é inválida."
+								value="#{parasitologicoBean.parasitologico.dataAgendamento}">
+								<f:convertDateTime type="date" locale="pt_BR"
+									timeZone="America/Fortaleza" />
+							</p:inputMask>
+						</h:panelGrid>
+					</p:fieldset>
+				</h:panelGrid>
+
+				<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto">
+					<p:commandButton value="Atualizar" update=":form:panel" id="ajax"
+						actionListener="#{parasitologicoBean.remarcar()}"
+						styleClass="ui-priority-primary" onsuccess="remarcarDialog.hide()" />
+					<p:commandButton value="Cancelar" type="reset"
+						onclick="remarcarDialog.hide()" />
+				</h:panelGrid>
+			</p:dialog>
 		</h:form>
 	</ui:define>
 </ui:composition>

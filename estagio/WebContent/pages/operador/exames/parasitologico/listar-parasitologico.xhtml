@@ -1,0 +1,208 @@
+<ui:composition template="/WEB-INF/templates/template-operador.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+
+		<h:form id="form">
+			<p:panel id="panel" style="margin-bottom:10px;">
+
+				<p:growl id="msgs" />
+
+				<div id="tableName">
+					<h:outputText value="Todos os Exames" />
+				</div>
+
+				<p:dataTable id="dataTable" var="parasitologico"
+					value="#{parasitologicoBean.parasitologicos}"
+					widgetVar="parasitologicosTable" paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					emptyMessage="Nenhum exame encontrado com esses critérios."
+					filteredValue="#{parasitologicoBean.filteredParasitologicos}"
+					paginatorAlwaysVisible="false">
+
+					<f:facet name="header">
+						<div id="filtro">
+							<p:outputPanel>
+								<h:outputText value="Procurar em todos os campos:" />
+								<p:inputText id="globalFilter"
+									onkeyup="parasitologicosTable.filter()" style="width:150px" />
+							</p:outputPanel>
+						</div>
+					</f:facet>
+
+					<p:column id="numeroSusColumn"
+						sortBy="#{parasitologico.paciente.numeroSus}"
+						filterBy="#{parasitologico.paciente.numeroSus}" headerText="SUS"
+						filterMatchMode="startsWith" style="text-align: center">
+						<h:outputText value="#{parasitologico.paciente.numeroSus}" />
+					</p:column>
+
+					<p:column id="nomeColumn"
+						filterBy="#{parasitologico.paciente.nome}" headerText="Nome"
+						sortBy="#{parasitologico.paciente.nome}"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{parasitologico.paciente.nome}" />
+					</p:column>
+
+					<p:column id="dataPedidoColumn"
+						sortBy="#{parasitologico.dataPedido}"
+						filterBy="#{parasitologico.dataPedido}" headerText="Pedido em"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{parasitologico.dataPedido}">
+							<f:convertDateTime type="date" locale="pt_BR"
+								timeZone="America/Fortaleza" />
+						</h:outputText>
+					</p:column>
+
+					<p:column id="statusColumn" filterBy="#{parasitologico.status}"
+						style="text-align: center" headerText="Status"
+						filterOptions="#{exameBean.statusOptions}" filterMatchMode="exact">
+						<h:outputText value="#{parasitologico.status}" />
+					</p:column>
+
+					<p:column style="width:4%">
+						<p:commandButton id="selectButton" update=":form:display"
+							oncomplete="exameDialog.show()" icon="ui-icon-search"
+							title="Vizualizar Exame">
+							<f:setPropertyActionListener value="#{parasitologico}"
+								target="#{parasitologicoBean.parasitologico}" />
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
+							oncomplete="confirmacao.show()" title="Excluir Exame">
+							<f:setPropertyActionListener
+								target="#{parasitologicoBean.parasitologico}"
+								value="#{parasitologico}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog header="Excluir Exame" message="Tem certeza?"
+					widgetVar="confirmacao" id="excluir">
+
+					<h:inputHidden id="idExame"
+						value="#{parasitologicoBean.parasitologico.idExame}" />
+					<h:inputHidden id="numeroSus"
+						value="#{parasitologicoBean.parasitologico.paciente.numeroSus}" />
+
+					<p:commandButton value="Sim" update="panel" id="ajax"
+						oncomplete="confirmacao.hide()"
+						actionListener="#{parasitologicoBean.excluir()}" />
+					<p:button value="Não" onclick="confirmacao.hide();" />
+
+				</p:confirmDialog>
+
+				<p:dialog
+					header="Pedido / Resultado de #{parasitologicoBean.parasitologico.nomeTipo}"
+					widgetVar="exameDialog" resizable="false" id="exame"
+					showEffect="fade" hideEffect="explode" modal="true">
+
+					<h:panelGrid cellpadding="4">
+						<p:commandButton value="Imprimir" type="button"
+							icon="ui-icon-print">
+							<p:printer target="printArea" />
+						</p:commandButton>
+					</h:panelGrid>
+
+					<p:scrollPanel style="width:600px;height:500px" scrollMode="native">
+						<h:panelGrid id="display" cellpadding="4">
+
+
+							<h:form id="printArea">
+								<p:fieldset legend="Dados de Pedido">
+
+									<h:panelGrid columns="4" cellpadding="4">
+										<h:outputText value="Data de Pedido: " />
+										<p:inputText
+											value="#{parasitologicoBean.parasitologico.dataPedido}"
+											disabled="true" size="7">
+											<f:convertDateTime type="date" locale="pt_BR"
+												timeZone="America/Fortaleza" />
+										</p:inputText>
+
+										<h:outputLabel for="unidade" value="Unidade: " />
+										<p:inputText
+											value="#{parasitologicoBean.parasitologico.unidade}"
+											label="Unidade" disabled="true" />
+
+										<h:outputLabel for="nome" value="Nome: " />
+										<p:inputText
+											value="#{parasitologicoBean.parasitologico.paciente.nome}"
+											label="Nome" disabled="true" />
+
+										<h:outputLabel for="sobrenome" value="Sobrenome: " />
+										<p:inputText
+											value="#{parasitologicoBean.parasitologico.paciente.sobrenome}"
+											label="Sobrenome" disabled="true" />
+
+										<h:outputLabel for="medicoSolicitante"
+											value="Médico Solicitante: " />
+										<p:inputText
+											value="#{parasitologicoBean.parasitologico.medicoSolicitante}"
+											label="Médico Solicitante" disabled="true" />
+
+										<h:outputLabel for="prontuario" value="Prontuário: " />
+										<p:inputText
+											value="#{parasitologicoBean.parasitologico.prontuario}"
+											label="Prontuário" disabled="true" />
+
+										<h:outputLabel for="enfermaria" value="Enfermaria: " />
+										<p:inputText
+											value="#{parasitologicoBean.parasitologico.enfermaria}"
+											label="Enfermaria" disabled="true" />
+
+										<h:outputLabel for="leito" value="Leito: " />
+										<p:inputText
+											value="#{parasitologicoBean.parasitologico.leito}"
+											label="leito" disabled="true" />
+
+									</h:panelGrid>
+
+								</p:fieldset>
+
+								<br />
+
+								<p:fieldset legend="Dados do Resultado">
+
+									<h:panelGrid cellpadding="4" columns="4">
+										<h:outputLabel for="dataEntrega" value="Data de Entrega: " />
+										<p:inputMask id="dataEntrega"
+											value="#{parasitologicoBean.parasitologico.dataEntrega}"
+											label="dataEntrega" mask="99/99/9999" size="7"
+											disabled="true">
+											<f:convertDateTime type="date" locale="pt_BR"
+												timeZone="America/Fortaleza" />
+										</p:inputMask>
+
+										<h:outputLabel for="metodo" value="Método: " />
+										<p:inputText disabled="true"
+											value="#{parasitologicoBean.parasitologico.metodo}"/>
+									</h:panelGrid>
+
+									<h:panelGrid cellpadding="4">
+										<p:fieldset legend="Ovos de Helmintos">
+											<p:inputTextarea disabled="true"
+												value="#{parasitologicoBean.parasitologico.ovosDeHelmintos}"
+												cols="70" />
+										</p:fieldset>
+
+										<p:fieldset legend="Protozoários">
+											<p:inputTextarea disabled="true"
+												value="#{parasitologicoBean.parasitologico.protozoarios}"
+												cols="70" />
+										</p:fieldset>
+									</h:panelGrid>
+
+								</p:fieldset>
+							</h:form>
+						</h:panelGrid>
+					</p:scrollPanel>
+				</p:dialog>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
