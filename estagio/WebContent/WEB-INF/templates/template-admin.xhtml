@@ -14,7 +14,10 @@
 	<f:view locale="pt_BR">
 		<div id="conteudo">
 			<div id="cabecalho">
-					<h2>Laboratório de Aracoiaba</h2>
+				<h2>LOGO</h2>
+				<h:form id="clock">
+					<p:clock pattern="HH:mm dd/MM/yyyy" />
+				</h:form>
 			</div>
 
 			<h:form>
@@ -22,35 +25,26 @@
 				<p:growl id="messages" />
 				
 				<p:menubar>
-					<p:submenu label="Operador">
-						<p:menuitem value="Cadastrar" url="/pages/admin/cadastro-operador.xhtml" />
-						<p:menuitem value="Exibir todos" url="/pages/admin/exibe-operador.xhtml" />
-						<p:menuitem value="Excluir" url="#" />
+				
+				    <p:menuitem value="Início" icon="ui-icon-home"
+							url="/pages/admin/home-admin.xhtml"
+							action="/pages/admin/home-admin.xhtml" />
+				    
+					<p:submenu label="Cadastrar" icon="ui-icon-document">
+						<p:menuitem value="Operador" url="/pages/admin/cadastro-operador.xhtml" />
 					</p:submenu>
 
-					<p:submenu label="Editar">
-						<p:menuitem value="Undo" url="#"
-							icon="ui-icon-arrowreturnthick-1-w" />
-						<p:menuitem value="Redo" url="#"
-							icon="ui-icon-arrowreturnthick-1-e" />
+					<p:submenu label="Pesquisar" icon="ui-icon-search">
+						<p:menuitem value="Operador" url="/pages/admin/exibe-operador.xhtml" />
 					</p:submenu>
 					
-					<p:submenu label="Excluir">
-						<p:menuitem value="Undo" url="#"
-							icon="ui-icon-arrowreturnthick-1-w" />
-						<p:menuitem value="Redo" url="#"
-							icon="ui-icon-arrowreturnthick-1-e" />
+					<p:submenu label="Editar">
+					    <p:menuitem value="Perfil" url="#" />
+						<p:menuitem value="Operador" url="#" />
 					</p:submenu>
-
-					<p:submenu label="Help">
-						<p:menuitem value="Contents" url="#" />
-						<p:submenu label="Search" icon="ui-icon-search">
-							<p:submenu label="Text">
-								<p:menuitem value="Workspace" url="#" />
-							</p:submenu>
-							<p:menuitem value="File" url="#" />
-						</p:submenu>
-					</p:submenu>
+					
+					<p:menuitem value="Sair" icon="ui-icon-extlink"
+							action="#{logoutBean.sair()}" />
 
 				</p:menubar>
 

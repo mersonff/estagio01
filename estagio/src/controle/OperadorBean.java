@@ -15,6 +15,7 @@ public class OperadorBean extends AbstractBean{
 	
 	private Operador operador;
 	private List<Operador> operadores;
+	private List<Operador> filteredOperadores;
 	
 	public OperadorBean(){
 		this.setOperadores(new ArrayList<Operador>());
@@ -33,10 +34,11 @@ public class OperadorBean extends AbstractBean{
 		this.operadores = operDAO.find();
 	}
 	
-	public void excluir(Operador oper){
+	public void excluir(){
 		OperadorDAO operDAO = new OperadorJPADAO();
-		operDAO.delete(oper);
+		operDAO.delete(this.operador);
 		displayInfoMessageToUser("Excluido com sucesso!");
+		this.operadores = operDAO.find();
 	}
 
 	public Operador getOperador() {
@@ -53,6 +55,14 @@ public class OperadorBean extends AbstractBean{
 
 	public void setOperadores(List<Operador> operadores) {
 		this.operadores = operadores;
+	}
+
+	public List<Operador> getFilteredOperadores() {
+		return filteredOperadores;
+	}
+
+	public void setFilteredOperadores(List<Operador> filteredOperadores) {
+		this.filteredOperadores = filteredOperadores;
 	}
 	
 
