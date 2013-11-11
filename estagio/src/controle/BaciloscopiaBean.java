@@ -76,7 +76,6 @@ public class BaciloscopiaBean extends AbstractBean {
 		operDAO.delete(this.baciloscopia);
 		displayInfoMessageToUser("Excluido com sucesso!");
 		this.baciloscopias = operDAO.find();
-
 	}
 
 	public void find() {

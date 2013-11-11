@@ -8,7 +8,6 @@
 <h:head>
 	<title>Laboratório de Aracoiaba</title>
 	<h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
-	
 </h:head>
 <h:body>
 	<f:view locale="pt_BR">
@@ -23,30 +22,35 @@
 			<h:form>
 
 				<p:growl id="messages" />
-				
-				<p:menubar>
-				
-				    <p:menuitem value="Início" icon="ui-icon-home"
+
+				<div id="menubar">
+
+					<p:menubar>
+
+						<p:menuitem value="Início" icon="ui-icon-home"
 							url="/pages/admin/home-admin.xhtml"
 							action="/pages/admin/home-admin.xhtml" />
-				    
-					<p:submenu label="Cadastrar" icon="ui-icon-document">
-						<p:menuitem value="Operador" url="/pages/admin/cadastro-operador.xhtml" />
-					</p:submenu>
 
-					<p:submenu label="Pesquisar" icon="ui-icon-search">
-						<p:menuitem value="Operador" url="/pages/admin/exibe-operador.xhtml" />
-					</p:submenu>
-					
-					<p:submenu label="Editar">
-					    <p:menuitem value="Perfil" url="#" />
-						<p:menuitem value="Operador" url="#" />
-					</p:submenu>
-					
-					<p:menuitem value="Sair" icon="ui-icon-extlink"
+						<p:submenu label="Cadastrar" icon="ui-icon-document">
+							<p:menuitem value="Operador"
+								url="/pages/admin/cadastro-operador.xhtml" />
+						</p:submenu>
+
+						<p:submenu label="Pesquisar" icon="ui-icon-search">
+							<p:menuitem value="Operador"
+								url="/pages/admin/exibe-operador.xhtml" />
+						</p:submenu>
+
+						<p:submenu label="Editar">
+							<p:menuitem value="Perfil" url="#" />
+							<p:menuitem value="Operador" url="#" />
+						</p:submenu>
+
+						<p:menuitem value="Sair" icon="ui-icon-extlink"
 							action="#{logoutBean.sair()}" />
 
-				</p:menubar>
+					</p:menubar>
+				</div>
 
 			</h:form>
 
