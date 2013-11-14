@@ -151,7 +151,7 @@
 											disabled="true" size="1" />
 									</h:panelGrid>
 
-									<h:panelGrid cellpadding="4" columns="4">
+									<h:panelGrid cellpadding="4" columns="6">
 
 										<h:outputText value="Data de Nascimento:" />
 										<p:inputText id="dataNascimento"
@@ -160,6 +160,10 @@
 											<f:convertDateTime type="date" locale="pt_BR"
 												timeZone="America/Fortaleza" />
 										</p:inputText>
+
+										<h:outputText value="Idade: " />
+										<p:inputText value="#{baciloscopiaBean.baciloscopia.paciente.idade}" disabled="true"
+											size="1" />
 
 										<h:outputText value="Prontuário:" />
 										<p:inputText id="prontuario"

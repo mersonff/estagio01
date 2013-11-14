@@ -139,6 +139,11 @@
 											value="#{parasitologicoBean.parasitologico.paciente.sobrenome}"
 											label="Sobrenome" disabled="true" />
 
+										<h:outputText value="Idade: " />
+										<p:inputText
+											value="#{parasitologicoBean.parasitologico.paciente.idade}"
+											disabled="true" size="1" />
+
 										<h:outputLabel for="medicoSolicitante"
 											value="Médico Solicitante: " />
 										<p:inputText
@@ -180,7 +185,7 @@
 
 										<h:outputLabel for="metodo" value="Método: " />
 										<p:inputText disabled="true"
-											value="#{parasitologicoBean.parasitologico.metodo}"/>
+											value="#{parasitologicoBean.parasitologico.metodo}" />
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4">

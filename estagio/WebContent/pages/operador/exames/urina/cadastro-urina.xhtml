@@ -17,8 +17,8 @@
 				</div>
 
 				<p:dataTable id="dataTable" var="urina"
-					value="#{urinaBean.urinaEmEspera}"
-					widgetVar="urinasTable" paginator="true" rows="10"
+					value="#{urinaBean.urinaEmEspera}" widgetVar="urinasTable"
+					paginator="true" rows="10"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15"
 					emptyMessage="Nenhum exame encontrado com esses critérios."
@@ -29,14 +29,13 @@
 						<p:outputPanel>
 							<div id="filtro">
 								<h:outputText value="Procurar em todos os campos " />
-								<p:inputText id="globalFilter"
-									onkeyup="urinasTable.filter()" style="width:150px" />
+								<p:inputText id="globalFilter" onkeyup="urinasTable.filter()"
+									style="width:150px" />
 							</div>
 						</p:outputPanel>
 					</f:facet>
 
-					<p:column id="numeroSusColumn"
-						sortBy="#{urina.paciente.numeroSus}"
+					<p:column id="numeroSusColumn" sortBy="#{urina.paciente.numeroSus}"
 						filterBy="#{urina.paciente.numeroSus}" headerText="SUS"
 						filterMatchMode="startsWith" style="text-align: center">
 						<h:outputText value="#{urina.paciente.numeroSus}" />
@@ -92,19 +91,21 @@
 
 					<p:fieldset legend="Dados do Paciente">
 
-						<h:panelGrid cellpadding="4" columns="4">
+						<h:panelGrid cellpadding="4" columns="6">
 							<h:outputText value="Número do SUS: " />
-							<p:inputText
-								value="#{urinaBean.urina.paciente.numeroSus}"
+							<p:inputText value="#{urinaBean.urina.paciente.numeroSus}"
 								size="14" disabled="true" />
 
 							<h:outputText value="Nascido em: " />
-							<p:inputMask
-								value="#{urinaBean.urina.paciente.dataNascimento}"
+							<p:inputMask value="#{urinaBean.urina.paciente.dataNascimento}"
 								disabled="true" mask="99/99/9999" size="7">
 								<f:convertDateTime type="date" locale="pt_BR"
 									timeZone="America/Fortaleza" />
 							</p:inputMask>
+
+							<h:outputText value="Idade: " />
+							<p:inputText value="#{urinaBean.urina.paciente.idade}"
+								disabled="true" size="1" />
 						</h:panelGrid>
 
 						<h:panelGrid cellpadding="4" columns="6">
@@ -113,8 +114,7 @@
 								disabled="true" size="10" />
 
 							<h:outputText value="Sobrenome: " />
-							<p:inputText
-								value="#{urinaBean.urina.paciente.sobrenome}"
+							<p:inputText value="#{urinaBean.urina.paciente.sobrenome}"
 								disabled="true" />
 
 							<h:outputText value="Sexo: " />
@@ -124,13 +124,11 @@
 
 						<h:panelGrid cellpadding="4" columns="4">
 							<h:outputText value="Endereço: " />
-							<p:inputText
-								value="#{urinaBean.urina.paciente.endereco}"
+							<p:inputText value="#{urinaBean.urina.paciente.endereco}"
 								disabled="true" />
 
 							<h:outputText value="Localidade: " />
-							<p:inputText
-								value="#{urinaBean.urina.paciente.localidade}"
+							<p:inputText value="#{urinaBean.urina.paciente.localidade}"
 								disabled="true" size="10" />
 						</h:panelGrid>
 					</p:fieldset>
@@ -144,8 +142,7 @@
 
 						<h:inputHidden id="numeroSus"
 							value="#{urinaBean.urina.paciente.numeroSus}" />
-						<h:inputHidden id="idExame"
-							value="#{urinaBean.urina.idExame}" />
+						<h:inputHidden id="idExame" value="#{urinaBean.urina.idExame}" />
 
 						<h:outputLabel for="leito" value="Leito: " />
 						<p:inputText id="leito" value="#{urinaBean.urina.leito}"
@@ -169,8 +166,7 @@
 
 					<h:inputHidden id="numeroSus"
 						value="#{urinaBean.urina.paciente.numeroSus}" />
-					<h:inputHidden id="idExame"
-						value="#{urinaBean.urina.idExame}" />
+					<h:inputHidden id="idExame" value="#{urinaBean.urina.idExame}" />
 
 					<p:fieldset legend="Nova Data">
 						<h:panelGrid cellpadding="4" style="margin: 0 auto">

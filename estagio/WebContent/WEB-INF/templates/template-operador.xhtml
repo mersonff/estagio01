@@ -6,14 +6,14 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Laboratório de Aracoiaba</title>
+	<title>iLab</title>
 	<h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
 </h:head>
 <h:body>
 	<f:view locale="pt_BR">
 		<div id="conteudo">
 			<div id="cabecalho">
-				<h2>LOGO</h2>
+				<h2>iLab</h2>
 				<h:form id="clock">
 					<p:clock pattern="HH:mm dd/MM/yyyy" />
 				</h:form>
@@ -108,7 +108,8 @@
 									url="/pages/operador/exames/urina/listar-urina.xhtml" />
 							</p:submenu>
 							<p:separator />
-							<p:menuitem value="Paciente" url="/pages/operador/paciente/listar-paciente.xhtml" />
+							<p:menuitem value="Paciente"
+								url="/pages/operador/paciente/listar-paciente.xhtml" />
 						</p:submenu>
 
 						<p:submenu label="Gerenciar" icon="ui-icon-gear">

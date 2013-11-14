@@ -97,7 +97,7 @@
 
 					<p:fieldset legend="Dados do Paciente">
 
-						<h:panelGrid cellpadding="4" columns="4">
+						<h:panelGrid cellpadding="4" columns="6">
 							<h:outputText value="Número do SUS: " />
 							<p:inputText value="#{pacienteBean.paciente.numeroSus}" size="14"
 								disabled="true" />
@@ -108,6 +108,10 @@
 								<f:convertDateTime type="date" locale="pt_BR"
 									timeZone="America/Fortaleza" />
 							</p:inputMask>
+							
+							<h:outputText value="Idade: " />
+							<p:inputText value="#{pacienteBean.paciente.idade}"
+								disabled="true" size="1" />
 						</h:panelGrid>
 
 						<h:panelGrid cellpadding="4" columns="6">

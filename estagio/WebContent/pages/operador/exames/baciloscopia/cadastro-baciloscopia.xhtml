@@ -10,12 +10,12 @@
 			<p:panel id="panel" style="margin-bottom:10px;">
 
 				<p:growl id="msgs" />
-				
+
 				<div id="tableName">
-				<h:outputText value="Exames Agendados"/>
+					<h:outputText value="Exames Agendados" />
 				</div>
-				
-				<p:dataTable id="dataTable" var="baciloscopia" 
+
+				<p:dataTable id="dataTable" var="baciloscopia"
 					value="#{baciloscopiaBean.baciloscopiaEmEspera}"
 					widgetVar="baciloscopiasTable" paginator="true" rows="10"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -27,7 +27,7 @@
 					<f:facet name="header">
 						<p:outputPanel>
 							<div id="filtro">
-								<h:outputText value="Procurar em todos os campos "/>
+								<h:outputText value="Procurar em todos os campos " />
 								<p:inputText id="globalFilter"
 									onkeyup="baciloscopiasTable.filter()" style="width:150px" />
 							</div>
@@ -92,7 +92,7 @@
 
 					<p:fieldset legend="Dados do Paciente">
 
-						<h:panelGrid cellpadding="4" columns="4">
+						<h:panelGrid cellpadding="4" columns="6">
 							<h:outputText value="Número do SUS: " />
 							<p:inputText
 								value="#{baciloscopiaBean.baciloscopia.paciente.numeroSus}"
@@ -105,6 +105,11 @@
 								<f:convertDateTime type="date" locale="pt_BR"
 									timeZone="America/Fortaleza" />
 							</p:inputMask>
+
+							<h:outputText value="Idade: " />
+							<p:inputText
+								value="#{baciloscopiaBean.baciloscopia.paciente.idade}"
+								disabled="true" size="1" />
 						</h:panelGrid>
 
 						<h:panelGrid cellpadding="4" columns="6">

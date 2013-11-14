@@ -111,7 +111,7 @@
 							<h:form id="printArea">
 								<p:fieldset legend="Dados do Pedido">
 
-									<h:panelGrid cellpadding="4" columns="4">
+									<h:panelGrid cellpadding="4" columns="6">
 										<h:outputText value="Nome: " />
 										<p:inputText id="nome"
 											value="#{sanguineoBean.sanguineo.paciente.nome}"
@@ -121,6 +121,10 @@
 										<p:inputText id="sobrenome"
 											value="#{sanguineoBean.sanguineo.paciente.sobrenome}"
 											disabled="true" />
+
+										<h:outputText value="Idade: " />
+										<p:inputText value="#{sanguineoBean.sanguineo.paciente.idade}"
+											disabled="true" size="1" />
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4" columns="2">

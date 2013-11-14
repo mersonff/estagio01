@@ -17,8 +17,8 @@
 				</div>
 
 				<p:dataTable id="dataTable" var="plaqueta"
-					value="#{plaquetaBean.plaquetaEmEspera}"
-					widgetVar="plaquetasTable" paginator="true" rows="10"
+					value="#{plaquetaBean.plaquetaEmEspera}" widgetVar="plaquetasTable"
+					paginator="true" rows="10"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15"
 					emptyMessage="Nenhum exame encontrado com esses critérios."
@@ -29,8 +29,8 @@
 						<p:outputPanel>
 							<div id="filtro">
 								<h:outputText value="Procurar em todos os campos " />
-								<p:inputText id="globalFilter"
-									onkeyup="plaquetasTable.filter()" style="width:150px" />
+								<p:inputText id="globalFilter" onkeyup="plaquetasTable.filter()"
+									style="width:150px" />
 							</div>
 						</p:outputPanel>
 					</f:facet>
@@ -92,10 +92,9 @@
 
 					<p:fieldset legend="Dados do Paciente">
 
-						<h:panelGrid cellpadding="4" columns="4">
+						<h:panelGrid cellpadding="4" columns="6">
 							<h:outputText value="Número do SUS: " />
-							<p:inputText
-								value="#{plaquetaBean.plaqueta.paciente.numeroSus}"
+							<p:inputText value="#{plaquetaBean.plaqueta.paciente.numeroSus}"
 								size="14" disabled="true" />
 
 							<h:outputText value="Nascido em: " />
@@ -105,6 +104,10 @@
 								<f:convertDateTime type="date" locale="pt_BR"
 									timeZone="America/Fortaleza" />
 							</p:inputMask>
+
+							<h:outputText value="Idade: " />
+							<p:inputText value="#{plaquetaBean.plaqueta.paciente.idade}"
+								disabled="true" size="1" />
 						</h:panelGrid>
 
 						<h:panelGrid cellpadding="4" columns="6">
@@ -113,8 +116,7 @@
 								disabled="true" size="10" />
 
 							<h:outputText value="Sobrenome: " />
-							<p:inputText
-								value="#{plaquetaBean.plaqueta.paciente.sobrenome}"
+							<p:inputText value="#{plaquetaBean.plaqueta.paciente.sobrenome}"
 								disabled="true" />
 
 							<h:outputText value="Sexo: " />
@@ -124,13 +126,11 @@
 
 						<h:panelGrid cellpadding="4" columns="4">
 							<h:outputText value="Endereço: " />
-							<p:inputText
-								value="#{plaquetaBean.plaqueta.paciente.endereco}"
+							<p:inputText value="#{plaquetaBean.plaqueta.paciente.endereco}"
 								disabled="true" />
 
 							<h:outputText value="Localidade: " />
-							<p:inputText
-								value="#{plaquetaBean.plaqueta.paciente.localidade}"
+							<p:inputText value="#{plaquetaBean.plaqueta.paciente.localidade}"
 								disabled="true" size="10" />
 						</h:panelGrid>
 					</p:fieldset>

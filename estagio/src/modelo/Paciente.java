@@ -1,7 +1,9 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -21,6 +23,7 @@ public class Paciente {
 	private String endereco;
 	private String localidade;
 	private String sexo;
+	private int idade;
 	@OneToMany(mappedBy = "paciente")
 	private List<Exame> exames;
 
@@ -90,6 +93,26 @@ public class Paciente {
 
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
+	}
+
+	public int getIdade() {
+		if (dataNascimento != null) {
+			Calendar dataNasc = new GregorianCalendar();
+			dataNasc.setTime(dataNascimento);
+			Calendar hoje = Calendar.getInstance();
+			idade = hoje.get(Calendar.YEAR) - dataNasc.get(Calendar.YEAR);
+			dataNasc.add(Calendar.YEAR, idade);
+			if (hoje.before(dataNasc)) {
+				idade--;
+			}
+			return idade;
+		} else {
+			return 0;
+		}
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
 	}
 
 }
