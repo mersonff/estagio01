@@ -49,6 +49,12 @@ body {
 	margin-bottom: 30px;
 }
 
+#perfil {
+	width: 400px;
+	margin: 10px auto;
+	margin-bottom: 30px;
+}
+
 #agendamento {
 	width: 400px;
 	margin: 10px auto;
@@ -56,6 +62,12 @@ body {
 }
 
 #cad_paciente{
+	width: 400px;
+	margin: 10px auto;
+	margin-bottom: 30px;
+}
+
+#cad_operador{
 	width: 400px;
 	margin: 10px auto;
 	margin-bottom: 30px;

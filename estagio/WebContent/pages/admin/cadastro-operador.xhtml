@@ -6,11 +6,11 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-    <h:form id="form">
+    <h:form id="cad_operador">
 
             <p:panel id="panel" header="Cadastro de operador" style="margin-bottom:10px;">
                 <p:messages id="messages" />
-                <h:panelGrid columns="2">
+                <h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto">
                     
                     <h:outputLabel for="login" value="Login: *" />
                     <p:inputText id="login" 
@@ -27,15 +27,15 @@
                         <f:validateLength minimum="2" />
                     </p:inputText>
                     
-                    <h:outputLabel for="email" value="Email:" />
+                    <h:outputLabel for="email" value="E-mail:" />
                     <p:inputText id="email" 
-                        value="#{operadorBean.operador.email}" required="true" label="Email">
+                        value="#{operadorBean.operador.email}" label="E-mail">
                        
                     </p:inputText>
                     
                     <h:outputLabel for="telefone" value="Telefone:" />
                     <p:inputMask id="telefone" 
-                        value="#{operadorBean.operador.telefone}" mask="(99)99-999999" required="true" label="Telefone">
+                        value="#{operadorBean.operador.telefone}" mask="(99)9999-9999" label="Telefone">
                        
                     </p:inputMask>
                     

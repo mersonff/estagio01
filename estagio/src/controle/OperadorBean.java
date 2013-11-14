@@ -4,36 +4,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import modelo.Operador;
 import dao.OperadorDAO;
 import dao.OperadorJPADAO;
 
 @ManagedBean
-public class OperadorBean extends AbstractBean{
-	
+public class OperadorBean extends AbstractBean {
+
 	private Operador operador;
+	private Operador ativo;
 	private List<Operador> operadores;
 	private List<Operador> filteredOperadores;
-	
-	public OperadorBean(){
+	private String novaSenha;
+
+	public OperadorBean() {
 		this.setOperadores(new ArrayList<Operador>());
 		this.setOperador(new Operador());
 		pesquisarTodos();
 	}
-	
-	public void cadastrar(){
+
+	public void cadastrar() {
 		OperadorDAO operDAO = new OperadorJPADAO();
 		operDAO.save(this.operador);
 		displayInfoMessageToUser("Cadastrado com sucesso!");
 	}
 	
-	public void pesquisarTodos(){
+	public void atualizar() {
+		OperadorDAO operDAO = new OperadorJPADAO();
+		operDAO.save(this.ativo);
+		displayInfoMessageToUser("Atualizado com Sucesso!");
+	}
+	
+	public void alterarSenha() {
+		OperadorDAO operDAO = new OperadorJPADAO();
+		this.ativo.setSenha(novaSenha);
+		operDAO.save(this.ativo);
+		displayInfoMessageToUser("Atualizado com Sucesso!");
+	}
+
+	public void pesquisarTodos() {
 		OperadorDAO operDAO = new OperadorJPADAO();
 		this.operadores = operDAO.find();
 	}
-	
-	public void excluir(){
+
+	public void excluir() {
 		OperadorDAO operDAO = new OperadorJPADAO();
 		operDAO.delete(this.operador);
 		displayInfoMessageToUser("Excluido com sucesso!");
@@ -62,6 +79,27 @@ public class OperadorBean extends AbstractBean{
 
 	public void setFilteredOperadores(List<Operador> filteredOperadores) {
 		this.filteredOperadores = filteredOperadores;
-	}	
+	}
+
+	public Operador getAtivo() {
+		HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		Operador temp = new Operador();
+		OperadorDAO pDAO = new OperadorJPADAO();
+		temp = pDAO.find(sessao.getAttribute("login"));
+		ativo = temp;
+		return ativo;
+	}
+
+	public void setAtivo(Operador ativo) {
+		this.ativo = ativo;
+	}
+
+	public String getNovaSenha() {
+		return novaSenha;
+	}
+
+	public void setNovaSenha(String novaSenha) {
+		this.novaSenha = novaSenha;
+	}
 
 }

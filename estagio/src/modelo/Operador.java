@@ -7,7 +7,7 @@ import javax.persistence.Id;
 public class Operador {
 	
 	@Id
-	private long login;
+	private String login;
 	private String senha;
 	private String nome;
 	private String telefone;
@@ -41,11 +41,11 @@ public class Operador {
 		this.email = email;
 	}
 
-	public long getLogin() {
+	public String getLogin() {
 		return login;
 	}
 
-	public void setLogin(long login) {
+	public void setLogin(String login) {
 		this.login = login;
 	}
 

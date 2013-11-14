@@ -14,24 +14,25 @@
 		<div id="cabecalho">
 			<h2>Laboratório de Aracoiaba</h2>
 		</div>
-		<p:messages autoUpdate="true" />
+		<p:messages autoUpdate="true" closable="true" />
+
 		<h:form id="login">
 			<p:panel header="Login">
+
 				<h:panelGrid style="margin: 0 auto" cellpadding="4">
 					<h:outputLabel value="Usuário:" />
-
-					<p:inputText value="#{loginBean.usuario.login}" required="true" />
+					<p:inputText value="#{loginBean.usuario.login}" required="true"
+						label="Login" />
 
 					<h:outputLabel value="Senha:" />
-
-					<p:password value="#{loginBean.usuario.senha}" label="password"
+					<p:password value="#{loginBean.usuario.senha}" label="Senha"
 						required="true" />
 
 					<h:outputLabel value="Tipo de usuário:" />
 
-					<p:selectOneMenu value="#{loginBean.usuario.tipo}" required="true">
-						<f:selectItem itemLabel="Selecione"
-							noSelectionOption="true" />
+					<p:selectOneMenu value="#{loginBean.usuario.tipo}" required="true"
+						label="Tipo de Usuário">
+						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 						<f:selectItem itemValue="#{loginBean.tipoDeUsuario.administrador}"
 							itemLabel="Administrador" />
 						<f:selectItem itemValue="#{loginBean.tipoDeUsuario.operador}"

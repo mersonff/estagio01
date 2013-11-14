@@ -2,7 +2,7 @@ package util;
 
 public class Usuario {
 	
-	private long login;
+	private String login;
 	private String senha;
 	private String tipo;
 	
@@ -23,11 +23,11 @@ public class Usuario {
 		this.tipo = tipo;
 	}
 
-	public long getLogin() {
+	public String getLogin() {
 		return login;
 	}
 
-	public void setLogin(long login) {
+	public void setLogin(String login) {
 		this.login = login;
 	}
 	

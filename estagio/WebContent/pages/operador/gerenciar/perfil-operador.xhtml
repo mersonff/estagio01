@@ -6,44 +6,97 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-    <h:form id="form">
+		<h:form id="perfil">
 
-            <p:panel id="panel" header="Cadastro de operador" style="margin-bottom:10px;">
-                <p:messages id="messages" />
-                <h:panelGrid columns="2">
-                    
-                    <h:outputLabel for="login" value="Login: *" />
-                    <p:inputText id="login" 
-                        value="#{operadorBean.operador.login}" required="true" label="Login">
-                       
-                    </p:inputText>
+			<p:panel id="panel" header="Dados do Operador"
+				style="margin-bottom:10px;">
+				<p:growl id="messages" />
 
-                    <h:outputLabel for="senha" value="Senha: *" />
-                    <p:password id="senha" value="#{operadorBean.operador.senha}" feedback="true" required="true" label="Senha"/>
-                
-                    <h:outputLabel for="Nome" value="Nome: *" />
-                    <p:inputText id="nome" 
-                        value="#{operadorBean.operador.nome}" required="true" label="Nome">
-                        <f:validateLength minimum="2" />
-                    </p:inputText>
-                    
-                    <h:outputLabel for="email" value="Email:" />
-                    <p:inputText id="email" 
-                        value="#{operadorBean.operador.email}" required="true" label="Email">
-                       
-                    </p:inputText>
-                    
-                    <h:outputLabel for="telefone" value="Telefone:" />
-                    <p:inputMask id="telefone" 
-                        value="#{operadorBean.operador.telefone}" mask="(99)99-999999" required="true" label="Telefone">
-                       
-                    </p:inputMask>
-                    
-                    <p:commandButton value="Salvar" update="panel" id="ajax"
-                     actionListener="#{operadorBean.cadastrar()}" styleClass="ui-priority-primary"/>
-                </h:panelGrid>
-            </p:panel>
+				<h:panelGrid cellpadding="4">
 
-        </h:form>
+					<p:fieldset legend="Dados Pessoais">
+
+						<h:inputHidden id="senha" value="#{operadorBean.ativo.senha}" />
+
+						<h:panelGrid columns="2" cellpadding="4">
+							<h:outputLabel for="login" value="Login: *" />
+							<p:inputText id="login" value="#{operadorBean.ativo.login}"
+								required="true" label="Login">
+
+							</p:inputText>
+
+							<h:outputLabel for="nome" value="Nome: *" />
+							<p:inputText id="nome" value="#{operadorBean.ativo.nome}"
+								required="true" label="Nome">
+								<f:validateLength minimum="2" />
+							</p:inputText>
+
+							<h:outputLabel for="email" value="Email:" />
+							<p:inputText id="email" value="#{operadorBean.ativo.email}"
+								required="true" label="Email">
+
+							</p:inputText>
+
+							<h:outputLabel for="telefone" value="Telefone:" />
+							<p:inputMask id="telefone" value="#{operadorBean.ativo.telefone}"
+								mask="(99)9999-9999" required="true" label="Telefone">
+							</p:inputMask>
+
+							<p:commandButton value="Atualizar" update=":perfil:panel"
+								id="ajax" actionListener="#{operadorBean.atualizar()}"
+								styleClass="ui-priority-primary" />
+
+							<p:commandButton value="Cancelar"
+								action="/pages/operador/home-operador.xhtml" />
+						</h:panelGrid>
+
+					</p:fieldset>
+
+					<p:commandButton id="selectButton" update=":dialog:password"
+						value="Alterar Senha" oncomplete="passwordDialog.show()"
+						title="Alterar Senha" />
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+		<h:form id="dialog">
+			<p:dialog header="Alterar Senha" widgetVar="passwordDialog"
+				resizable="false" id="password" showEffect="fade"
+				hideEffect="explode" modal="true">
+
+				<h:inputHidden id="login" value="#{operadorBean.ativo.login}"
+					required="true" label="Login" />
+				<h:inputHidden id="nome" value="#{operadorBean.ativo.nome}"
+					required="true" label="Nome" />
+				<h:inputHidden id="email" value="#{operadorBean.ativo.email}"
+					required="true" label="Email" />
+				<h:inputHidden id="telefone" value="#{operadorBean.ativo.telefone}"
+					required="true" label="Telefone" />
+				<h:inputHidden id="senha" value="#{operadorBean.ativo.senha}"
+					required="true" label="Senha" />
+
+				<h:panelGrid columns="2" cellpadding="4">
+					<h:outputLabel value="Senha Atual: " />
+					<p:password value="#{operadorBean.ativo.senha}" redisplay="true"
+						label="Senha" disabled="true" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="4">
+					<h:outputLabel value="Nova Senha: *" />
+					<p:password id="novaSenha" value="#{operadorBean.novaSenha}"
+						redisplay="true" label="Senha" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="4">
+					<p:commandButton value="Salvar" update=":perfil:panel" id="ajax"
+						actionListener="#{operadorBean.alterarSenha()}"
+						styleClass="
+						ui-priority-primary"
+						oncomplete="passwordDialog.hide()" />
+					<p:commandButton value="Cancelar"
+						action="/pages/operador/home-operador.xhtml" />
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
 	</ui:define>
 </ui:composition>

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class Administrador {
 	
 	@Id
-	private long login;
+	private String login;
 	private String senha;
 	private String nome;
 	
@@ -25,11 +25,11 @@ public class Administrador {
 		this.nome = nome;
 	}
 
-	public long getLogin() {
+	public String getLogin() {
 		return login;
 	}
 
-	public void setLogin(long login) {
+	public void setLogin(String login) {
 		this.login = login;
 	}
 
