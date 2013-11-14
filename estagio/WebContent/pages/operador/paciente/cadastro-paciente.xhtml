@@ -6,11 +6,11 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-		<h:form>
+		<h:form id="cad_paciente">
 			<p:panel id="panel" header="Cadastro de Paciente"
 				style="margin-bottom:10px;">
 				<p:messages id="messages" />
-				<h:panelGrid columns="2" cellpadding="4">
+				<h:panelGrid columns="2" cellpadding="4"  style="margin: 0 auto">
 
 					<h:outputLabel for="numeroSus" value="Número do SUS: *" />
 					<p:inputText id="numeroSus"

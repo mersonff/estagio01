@@ -5,10 +5,9 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
+import modelo.Operador;
 import dao.OperadorDAO;
 import dao.OperadorJPADAO;
-
-import modelo.Operador;
 
 @ManagedBean
 public class OperadorBean extends AbstractBean{
@@ -63,7 +62,6 @@ public class OperadorBean extends AbstractBean{
 
 	public void setFilteredOperadores(List<Operador> filteredOperadores) {
 		this.filteredOperadores = filteredOperadores;
-	}
-	
+	}	
 
 }

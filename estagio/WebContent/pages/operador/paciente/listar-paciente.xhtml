@@ -1,0 +1,141 @@
+<ui:composition template="/WEB-INF/templates/template-operador.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+
+		<h:form id="form">
+			<p:panel id="panel" style="margin-bottom:10px;">
+
+				<p:growl id="msgs" />
+
+				<div id="tableName">
+					<h:outputText value="Pacientes Cadastrados" />
+				</div>
+
+				<p:dataTable id="dataTable" var="paciente"
+					value="#{pacienteBean.pacientes}" widgetVar="pacientesTable"
+					paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					emptyMessage="Nenhum paciente encontrado com esses critérios."
+					filteredValue="#{pacienteBean.filteredPacientes}"
+					paginatorAlwaysVisible="false">
+
+					<f:facet name="header">
+						<div id="filtro">
+							<p:outputPanel>
+								<h:outputText value="Procurar em todos os campos:" />
+								<p:inputText id="globalFilter" onkeyup="pacientesTable.filter()"
+									style="width:150px" />
+							</p:outputPanel>
+						</div>
+					</f:facet>
+
+					<p:column id="numeroSusColumn" sortBy="#{paciente.numeroSus}"
+						filterBy="#{paciente.numeroSus}" headerText="SUS"
+						filterMatchMode="startsWith" style="text-align: center">
+						<h:outputText value="#{paciente.numeroSus}" />
+					</p:column>
+
+					<p:column id="nomeColumn" filterBy="#{paciente.nome}"
+						headerText="Nome" sortBy="#{paciente.nome}"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{paciente.nome}" />
+					</p:column>
+
+					<p:column id="dataNascimentoColumn"
+						sortBy="#{paciente.dataNascimento}"
+						filterBy="#{paciente.dataNascimento}" headerText="Nascido em"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{paciente.dataNascimento}">
+							<f:convertDateTime type="date" locale="pt_BR"
+								timeZone="America/Fortaleza" />
+						</h:outputText>
+					</p:column>
+
+					<p:column id="sexoColumn" filterBy="#{paciente.sexo}"
+						style="text-align: center" headerText="Sexo"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{paciente.sexo}" />
+					</p:column>
+
+					<p:column style="width:4%">
+						<p:commandButton id="selectButton" update=":form:paciente"
+							oncomplete="pacienteDialog.show()" icon="ui-icon-search"
+							title="Vizualizar Exame">
+							<f:setPropertyActionListener value="#{paciente}"
+								target="#{pacienteBean.paciente}" />
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
+							oncomplete="confirmacao.show()" title="Excluir Exame">
+							<f:setPropertyActionListener target="#{pacienteBean.paciente}"
+								value="#{paciente}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog header="Excluir Paciente" message="Tem certeza?"
+					widgetVar="confirmacao" id="excluir">
+
+					<h:inputHidden id="numeroSus"
+						value="#{pacienteBean.paciente.numeroSus}" />
+
+					<p:commandButton value="Sim" update="panel" id="ajax"
+						oncomplete="confirmacao.hide()"
+						actionListener="#{pacienteBean.excluir()}" />
+					<p:button value="Não" onclick="confirmacao.hide();" />
+
+				</p:confirmDialog>
+
+				<p:dialog header="Dados do Paciente" widgetVar="pacienteDialog"
+					resizable="false" id="paciente" showEffect="fade"
+					hideEffect="explode" modal="true">
+
+					<p:fieldset legend="Dados do Paciente">
+
+						<h:panelGrid cellpadding="4" columns="4">
+							<h:outputText value="Número do SUS: " />
+							<p:inputText value="#{pacienteBean.paciente.numeroSus}" size="14"
+								disabled="true" />
+
+							<h:outputText value="Nascido em: " />
+							<p:inputMask value="#{pacienteBean.paciente.dataNascimento}"
+								disabled="true" mask="99/99/9999" size="7">
+								<f:convertDateTime type="date" locale="pt_BR"
+									timeZone="America/Fortaleza" />
+							</p:inputMask>
+						</h:panelGrid>
+
+						<h:panelGrid cellpadding="4" columns="6">
+							<h:outputText value="Nome: " />
+							<p:inputText value="#{pacienteBean.paciente.nome}"
+								disabled="true" size="10" />
+
+							<h:outputText value="Sobrenome: " />
+							<p:inputText value="#{pacienteBean.paciente.sobrenome}"
+								disabled="true" />
+
+							<h:outputText value="Sexo: " />
+							<p:inputText value="#{pacienteBean.paciente.sexo}"
+								disabled="true" size="1" />
+						</h:panelGrid>
+
+						<h:panelGrid cellpadding="4" columns="4">
+							<h:outputText value="Endereço: " />
+							<p:inputText value="#{pacienteBean.paciente.endereco}"
+								disabled="true" />
+
+							<h:outputText value="Localidade: " />
+							<p:inputText value="#{pacienteBean.paciente.localidade}"
+								disabled="true" size="10" />
+						</h:panelGrid>
+					</p:fieldset>
+				</p:dialog>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

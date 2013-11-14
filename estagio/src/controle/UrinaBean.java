@@ -1,6 +1,7 @@
 package controle;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -16,6 +17,12 @@ import dao.UrinaJPADAO;
 public class UrinaBean extends AbstractBean {
 	private Urina urina;
 	private List<Urina> urinas;
+	private List<Urina> urinaEmEspera;
+	private List<Urina> urinaEmAberto;
+	private List<Urina> filteredUrinas;
+	private String[] elementosAnormais = { "Proteína", "Glicose", "Acetona",
+			"Acetoacético", "Sais Biliares", "Pig Biliares", "Urobilinogênio",
+			"Hemoglobina" };
 
 	public UrinaBean() {
 		this.setUrina(new Urina());
@@ -23,16 +30,43 @@ public class UrinaBean extends AbstractBean {
 		pesquisarTodos();
 	}
 
-	public void cadastrar() {
+	public void agendar() {
 		UrinaDAO operDAO = new UrinaJPADAO();
 		PacienteDAO pDAO = new PacienteJPADAO();
 		Paciente p = pDAO.find(this.urina.getPaciente().getNumeroSus());
 		if (p != null) {
+			this.urina.setStatus("Em espera");
 			operDAO.save(this.urina);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
+			this.urina = new Urina();
 		} else {
-			displayInfoMessageToUser("Paciente não cadastrado." + "");
+			displayErrorMessageToUser("Paciente não cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
+
+	}
+
+	public void remarcar() {
+		UrinaDAO operDAO = new UrinaJPADAO();
+		this.urina.setStatus("Em espera");
+		operDAO.save(this.urina);
+		displayInfoMessageToUser("Cadastrado com sucesso!");
+	}
+
+	public void cadastrar() {
+		UrinaDAO operDAO = new UrinaJPADAO();
+		this.urina.setDataPedido(new Date());
+		this.urina.setStatus("Em aberto");
+		operDAO.save(this.urina);
+		displayInfoMessageToUser("Cadastrado com sucesso!");
+	}
+
+	public void atualizar() {
+		UrinaDAO operDAO = new UrinaJPADAO();
+		this.urina.setStatus("Concluído");
+		this.urina.setDataEntrega(new Date());
+		operDAO.save(this.urina);
+		displayInfoMessageToUser("Cadastrado com sucesso!");
+
 	}
 
 	public void pesquisarTodos() {
@@ -40,10 +74,22 @@ public class UrinaBean extends AbstractBean {
 		this.urinas = operDAO.find();
 	}
 
-	public void excluir(Urina urina) {
+	public void excluir() {
 		UrinaDAO operDAO = new UrinaJPADAO();
-		operDAO.delete(urina);
+		operDAO.delete(this.urina);
 		displayInfoMessageToUser("Excluido com sucesso!");
+		this.urinas = operDAO.find();
+
+	}
+
+	public void find() {
+		PacienteDAO pDAO = new PacienteJPADAO();
+		Paciente p = pDAO.find(this.urina.getPaciente().getNumeroSus());
+		if (p != null) {
+			displayInfoMessageToUser("Paciente encontrado.");
+		} else {
+			displayErrorMessageToUser("Paciente não encontrado. Por favor, realize o cadastro do paciente.");
+		}
 	}
 
 	public Urina getUrina() {
@@ -60,6 +106,50 @@ public class UrinaBean extends AbstractBean {
 
 	public void setUrinas(List<Urina> urinas) {
 		this.urinas = urinas;
+	}
+
+	public List<Urina> getFilteredUrinas() {
+		return filteredUrinas;
+	}
+
+	public void setFilteredUrinas(List<Urina> filteredUrinas) {
+		this.filteredUrinas = filteredUrinas;
+	}
+
+	public List<Urina> getUrinaEmEspera() {
+		List<Urina> temp = new ArrayList<Urina>();
+		for (Urina b : urinas) {
+			if (b.getStatus().equals("Em espera"))
+				temp.add(b);
+		}
+		urinaEmEspera = temp;
+		return urinaEmEspera;
+	}
+
+	public void setUrinaEmEspera(List<Urina> urinaEmEspera) {
+		this.urinaEmEspera = urinaEmEspera;
+	}
+
+	public List<Urina> getUrinaEmAberto() {
+		List<Urina> temp = new ArrayList<Urina>();
+		for (Urina b : urinas) {
+			if (b.getStatus().equals("Em aberto"))
+				temp.add(b);
+		}
+		urinaEmAberto = temp;
+		return urinaEmAberto;
+	}
+
+	public void setUrinaEmAberto(List<Urina> urinaEmAberto) {
+		this.urinaEmAberto = urinaEmAberto;
+	}
+
+	public String[] getElementosAnormais() {
+		return elementosAnormais;
+	}
+
+	public void setElementosAnormais(String[] elementosAnormais) {
+		this.elementosAnormais = elementosAnormais;
 	}
 
 }

@@ -1,0 +1,275 @@
+<ui:composition template="/WEB-INF/templates/template-operador.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+
+		<h:form id="form">
+			<p:panel id="panel" style="margin-bottom:10px;">
+
+				<p:growl id="msgs" />
+
+				<div id="tableName">
+					<h:outputText value="Todos os Exames" />
+				</div>
+
+				<p:dataTable id="dataTable" var="urina" value="#{urinaBean.urinas}"
+					widgetVar="urinasTable" paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					emptyMessage="Nenhum exame encontrado com esses critérios."
+					filteredValue="#{urinaBean.filteredUrinas}"
+					paginatorAlwaysVisible="false">
+
+					<f:facet name="header">
+						<div id="filtro">
+							<p:outputPanel>
+								<h:outputText value="Procurar em todos os campos:" />
+								<p:inputText id="globalFilter" onkeyup="urinasTable.filter()"
+									style="width:150px" />
+							</p:outputPanel>
+						</div>
+					</f:facet>
+
+					<p:column id="numeroSusColumn" sortBy="#{urina.paciente.numeroSus}"
+						filterBy="#{urina.paciente.numeroSus}" headerText="SUS"
+						filterMatchMode="startsWith" style="text-align: center">
+						<h:outputText value="#{urina.paciente.numeroSus}" />
+					</p:column>
+
+					<p:column id="nomeColumn" filterBy="#{urina.paciente.nome}"
+						headerText="Nome" sortBy="#{urina.paciente.nome}"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{urina.paciente.nome}" />
+					</p:column>
+
+					<p:column id="dataPedidoColumn" sortBy="#{urina.dataPedido}"
+						filterBy="#{urina.dataPedido}" headerText="Pedido em"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{urina.dataPedido}">
+							<f:convertDateTime type="date" locale="pt_BR"
+								timeZone="America/Fortaleza" />
+						</h:outputText>
+					</p:column>
+
+					<p:column id="statusColumn" filterBy="#{urina.status}"
+						style="text-align: center" headerText="Status"
+						filterOptions="#{exameBean.statusOptions}" filterMatchMode="exact">
+						<h:outputText value="#{urina.status}" />
+					</p:column>
+
+					<p:column style="width:4%">
+						<p:commandButton id="selectButton" update=":form:display"
+							oncomplete="exameDialog.show()" icon="ui-icon-search"
+							title="Vizualizar Exame">
+							<f:setPropertyActionListener value="#{urina}"
+								target="#{urinaBean.urina}" />
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
+							oncomplete="confirmacao.show()" title="Excluir Exame">
+							<f:setPropertyActionListener target="#{urinaBean.urina}"
+								value="#{urina}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog header="Excluir Exame" message="Tem certeza?"
+					widgetVar="confirmacao" id="excluir">
+
+					<h:inputHidden id="idExame" value="#{urinaBean.urina.idExame}" />
+					<h:inputHidden id="numeroSus"
+						value="#{urinaBean.urina.paciente.numeroSus}" />
+
+					<p:commandButton value="Sim" update="panel" id="ajax"
+						oncomplete="confirmacao.hide()"
+						actionListener="#{urinaBean.excluir()}" />
+					<p:button value="Não" onclick="confirmacao.hide();" />
+
+				</p:confirmDialog>
+
+				<p:dialog header="Pedido / Resultado de #{urinaBean.urina.nomeTipo}"
+					widgetVar="exameDialog" resizable="false" id="exame"
+					showEffect="fade" hideEffect="explode" modal="true">
+
+					<h:panelGrid cellpadding="4">
+						<p:commandButton value="Imprimir" type="button"
+							icon="ui-icon-print">
+							<p:printer target="printArea" />
+						</p:commandButton>
+					</h:panelGrid>
+
+					<p:scrollPanel style="width:800px;height:500px" scrollMode="native">
+						<h:panelGrid id="display" cellpadding="4">
+
+
+							<h:form id="printArea">
+								<p:fieldset legend="Dados do Pedido">
+
+									<h:panelGrid cellpadding="4" columns="4">
+										<h:outputText value="Nome: " />
+										<p:inputText id="nome"
+											value="#{urinaBean.urina.paciente.nome}" disabled="true"
+											size="10" />
+
+										<h:outputText value="Sobrenome: " />
+										<p:inputText id="sobrenome"
+											value="#{urinaBean.urina.paciente.sobrenome}" disabled="true" />
+									</h:panelGrid>
+
+									<h:panelGrid cellpadding="4" columns="2">
+
+										<h:outputText value="Leito: " />
+										<p:inputText value="#{urinaBean.urina.leito}" disabled="true" />
+									</h:panelGrid>
+
+									<h:panelGrid cellpadding="4" columns="2">
+
+										<h:outputText value="Solicitado em:" />
+										<p:inputText value="#{urinaBean.urina.dataPedido}"
+											disabled="true" size="7">
+											<f:convertDateTime type="date" locale="pt_BR"
+												timeZone="America/Fortaleza" />
+										</p:inputText>
+									</h:panelGrid>
+								</p:fieldset>
+
+								<br />
+
+								<p:fieldset legend="Dados do Resultado">
+
+									<h:panelGrid cellpadding="4" columns="2">
+
+										<h:outputLabel for="dataEntrega" value="Data de Entrega: " />
+										<p:inputMask id="dataEntrega"
+											value="#{urinaBean.urina.dataEntrega}" label="dataEntrega"
+											mask="99/99/9999" size="7" disabled="true">
+											<f:convertDateTime type="date" locale="pt_BR"
+												timeZone="America/Fortaleza" />
+										</p:inputMask>
+									</h:panelGrid>
+
+									<h:panelGrid cellpadding="4" columns="2">
+
+										<p:fieldset legend="Características Gerais">
+
+											<h:panelGrid cellpadding="4" columns="2">
+
+												<p:fieldset legend="Urina Examinada">
+													<h:panelGrid columns="2">
+														<h:outputLabel for="volume" value="Volume: " />
+														<p:inputText id="volume" value="#{urinaBean.urina.volume}"
+															label="Volume" disabled="true" />
+
+														<h:outputLabel for="cor" value="Cor: " />
+														<p:inputText id="cor" value="#{urinaBean.urina.cor}"
+															label="Cor" disabled="true" />
+
+														<h:outputLabel for="aspecto" value="Aspecto: " />
+														<p:inputText id="aspecto" disabled="true"
+															value="#{urinaBean.urina.aspecto}" label="Aspecto" />
+
+														<h:outputLabel for="densidade" value="Densidade: " />
+														<p:inputText id="densidade"
+															value="#{urinaBean.urina.densidade}" label="Densidade"
+															size="4" disabled="true">
+															<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+														</p:inputText>
+
+														<h:outputLabel for="ph" value="PH: " />
+														<p:inputText id="ph" value="#{urinaBean.urina.ph}"
+															label="PH" size="3" disabled="true">
+															<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+														</p:inputText>
+
+													</h:panelGrid>
+												</p:fieldset>
+
+												<p:fieldset legend="Urina Normal">
+
+													<h:panelGrid cellpadding="6">
+														<h:outputText value="Variável" />
+														<h:outputText value="Ambar" />
+														<h:outputText value="Límpida" />
+														<h:outputText value="1010 - 1025" />
+														<h:outputText value="5,0" />
+													</h:panelGrid>
+												</p:fieldset>
+											</h:panelGrid>
+										</p:fieldset>
+
+										<p:fieldset legend="Elementos Anormais">
+											<p:selectManyCheckbox id="elementosAnormais"
+												value="#{urinaBean.urina.elementosAnormais}"
+												layout="pageDirection" disabled="true">
+												<f:selectItems value="#{urinaBean.elementosAnormais}" />
+											</p:selectManyCheckbox>
+										</p:fieldset>
+
+										<p:fieldset
+											legend="Sedimentoscopia com Aumento 400x Valores em Unidades por Campo">
+
+											<h:panelGrid cellpadding="4" columns="2">
+
+												<p:fieldset legend="Urina Examinada">
+													<h:panelGrid columns="2">
+														<h:outputLabel for="cilindros" value="Cilindros: " />
+														<p:inputText id="cilindros" disabled="true"
+															value="#{urinaBean.urina.cilindros}" label="Cilindros"
+															size="3">
+															<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+														</p:inputText>
+
+														<h:outputLabel for="hemacias" value="Hemácias: " />
+														<p:inputText id="hemacias" disabled="true"
+															value="#{urinaBean.urina.hemacias}" label="Hemácias"
+															size="3">
+															<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+														</p:inputText>
+
+														<h:outputLabel for="leucocitos" value="Leucócitos: " />
+														<p:inputText id="leucocitos" disabled="true"
+															value="#{urinaBean.urina.leucocitos}" label="Leucócitos"
+															size="3">
+															<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+														</p:inputText>
+
+														<h:outputLabel for="celulas" value="Cél. Epiteliais: " />
+														<p:inputText id="celulas" disabled="true"
+															value="#{urinaBean.urina.celulas}"
+															label="Cél. Epiteliais" size="3">
+															<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+														</p:inputText>
+
+													</h:panelGrid>
+												</p:fieldset>
+
+												<p:fieldset legend="Urina Normal">
+
+													<h:panelGrid cellpadding="6">
+														<h:outputText value="0" />
+														<h:outputText value="0" />
+														<h:outputText value="0 - 5" />
+														<h:outputText value="0 - 5" />
+													</h:panelGrid>
+												</p:fieldset>
+											</h:panelGrid>
+										</p:fieldset>
+									</h:panelGrid>
+									<h:panelGrid cellpadding="4">
+										<p:fieldset legend="Estudo Detalhado por Segmento">
+											<p:inputTextarea value="#{urinaBean.urina.estudoDetalhado}"
+												cols="75" rows="6" disabled="true" />
+										</p:fieldset>
+									</h:panelGrid>
+								</p:fieldset>
+							</h:form>
+						</h:panelGrid>
+					</p:scrollPanel>
+				</p:dialog>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
