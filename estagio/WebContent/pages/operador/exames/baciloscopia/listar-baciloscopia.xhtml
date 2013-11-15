@@ -95,24 +95,32 @@
 				</p:confirmDialog>
 
 
-				<p:dialog
-					header="Exame de #{baciloscopiaBean.baciloscopia.nomeTipo}"
-					widgetVar="exameDialog" resizable="false" id="exame"
+				<p:dialog widgetVar="exameDialog" resizable="false" id="exame"
 					showEffect="fade" hideEffect="explode" modal="true">
 
-					<h:panelGrid cellpadding="4">
+					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
 						<p:commandButton value="Imprimir" type="button"
 							icon="ui-icon-print">
 							<p:printer target="printArea" />
 						</p:commandButton>
+						<p:commandButton value="Fechar" type="reset"
+							onclick="exameDialog.hide()" />
 					</h:panelGrid>
 
-					<p:scrollPanel style="width:800px;height:500px" scrollMode="native">
+					<p:scrollPanel style="height:500px" scrollMode="native">
 						<h:panelGrid id="display" cellpadding="4">
 
 							<h:form id="printArea">
 
-								<p:fieldset legend="Dados do Pedido">
+								<div id="cabecalho">
+									<h:panelGrid width="100%" style="text-align: center;margin-bottom: 10px;">
+										<p:graphicImage value="/resources/images/logo.png"
+											width="200px" />
+											<h:outputText value="Exame de Baciloscopia" styleClass="nomeExame"/>
+									</h:panelGrid>
+								</div>
+
+								<p:fieldset legend="Dados do Pedido" style="text-align: center;">
 
 									<h:panelGrid cellpadding="4" columns="6">
 										<h:outputText value="SUS:" />
@@ -162,8 +170,9 @@
 										</p:inputText>
 
 										<h:outputText value="Idade: " />
-										<p:inputText value="#{baciloscopiaBean.baciloscopia.paciente.idade}" disabled="true"
-											size="1" />
+										<p:inputText
+											value="#{baciloscopiaBean.baciloscopia.paciente.idade}"
+											disabled="true" size="1" />
 
 										<h:outputText value="Prontuário:" />
 										<p:inputText id="prontuario"
@@ -224,10 +233,10 @@
 
 								<br />
 
-								<p:fieldset legend="Dados do Resultado">
+								<p:fieldset legend="Dados do Resultado"
+									style="text-align: center;">
 
-									<h:panelGrid cellpadding="4" columns="2">
-
+									<h:panelGrid cellpadding="4" columns="4">
 										<h:outputLabel for="dataEntrega" value="Data de Entrega: " />
 										<p:inputMask id="dataEntrega"
 											value="#{baciloscopiaBean.baciloscopia.dataEntrega}"
@@ -236,9 +245,6 @@
 											<f:convertDateTime type="date" locale="pt_BR"
 												timeZone="America/Fortaleza" />
 										</p:inputMask>
-									</h:panelGrid>
-
-									<h:panelGrid cellpadding="4" columns="2">
 
 										<h:outputText for="aspectoDoEscarro"
 											value="Aspecto do Escarro: " />
@@ -247,7 +253,7 @@
 											disabled="true" />
 									</h:panelGrid>
 
-									<h:panelGrid cellpadding="4" columns="4">
+									<h:panelGrid cellpadding="4" columns="6">
 
 										<h:outputLabel for="negativo" value="Negativo: " />
 										<p:selectBooleanCheckbox id="negativo"
@@ -258,9 +264,6 @@
 										<p:selectBooleanCheckbox id="baar"
 											value="#{baciloscopiaBean.baciloscopia.baar}" label="Baar"
 											disabled="true" />
-									</h:panelGrid>
-
-									<h:panelGrid cellpadding="4" columns="2">
 
 										<h:outputLabel for="positividade" value="" />
 										<p:selectOneRadio id="positividade"

@@ -10,14 +10,14 @@
 			<p:panel id="panel" style="margin-bottom:10px;">
 
 				<p:growl id="msgs" />
-
+				
 				<div id="tableName">
-					<h:outputText value="Exames Agendados" />
+					<h:outputText value="Baciloscopias Agendadas" />
 				</div>
 
 				<p:dataTable id="dataTable" var="baciloscopia"
 					value="#{baciloscopiaBean.baciloscopiaEmEspera}"
-					widgetVar="baciloscopiasTable" paginator="true" rows="10"
+					widgetVar="baciloscopiasTable" paginator="true" rows="9"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15"
 					emptyMessage="Nenhum exame encontrado com esses critérios."
@@ -86,11 +86,10 @@
 					</p:column>
 				</p:dataTable>
 
-				<p:dialog header="Dados do Paciente" widgetVar="pacienteDialog"
-					resizable="false" id="paciente" showEffect="fade"
-					hideEffect="explode" modal="true">
+				<p:dialog widgetVar="pacienteDialog" resizable="false" id="paciente"
+					showEffect="fade" hideEffect="explode" modal="true">
 
-					<p:fieldset legend="Dados do Paciente">
+					<p:fieldset legend="Dados do Paciente" style="text-align: center;">
 
 						<h:panelGrid cellpadding="4" columns="6">
 							<h:outputText value="Número do SUS: " />
@@ -143,9 +142,7 @@
 					</p:fieldset>
 				</p:dialog>
 
-				<p:dialog
-					header="Pedido de #{baciloscopiaBean.baciloscopia.nomeTipo}"
-					widgetVar="pedidoDialog" resizable="false" id="pedido"
+				<p:dialog widgetVar="pedidoDialog" resizable="false" id="pedido"
 					showEffect="fade" hideEffect="explode" modal="true">
 
 					<h:panelGrid id="display" style="margin: 0 auto">
@@ -155,7 +152,7 @@
 						<h:inputHidden id="idExame"
 							value="#{baciloscopiaBean.baciloscopia.idExame}" />
 
-						<p:fieldset legend="Dados de Pedido">
+						<p:fieldset legend="Dados de Pedido: Baciloscopia">
 							<h:panelGrid columns="4" cellpadding="4">
 
 								<h:outputText value="Unidade de Saúde: " />
@@ -219,8 +216,7 @@
 			</p:panel>
 		</h:form>
 		<h:form id="remarcarForm">
-			<p:dialog header="Remarcar #{baciloscopiaBean.baciloscopia.nomeTipo}"
-				widgetVar="remarcarDialog" resizable="false" id="remarcar"
+			<p:dialog widgetVar="remarcarDialog" resizable="false" id="remarcar"
 				showEffect="fade" hideEffect="explode" modal="true">
 
 				<h:panelGrid id="display" style="margin: 0 auto">
@@ -230,8 +226,10 @@
 					<h:inputHidden id="idExame"
 						value="#{baciloscopiaBean.baciloscopia.idExame}" />
 
-					<p:fieldset legend="Nova Data">
-						<h:panelGrid cellpadding="4" style="margin: 0 auto">
+					<p:fieldset legend="Remarcar Baciloscopia"
+						style="text-align:center;">
+						<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto">
+							<p:outputLabel value="Nova Data: " />
 							<p:inputMask id="dataAgendamento" size="7" required="true"
 								mask="99/99/9999"
 								requiredMessage="Agendar para: Campo obrigatório."

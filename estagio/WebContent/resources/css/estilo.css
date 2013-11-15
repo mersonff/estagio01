@@ -1,85 +1,96 @@
 @CHARSET "ISO-8859-1";
 
 body {
-	background-color: white;
+	background-color: #69b549;
+}
+
+a {
+	text-decoration: none;
 }
 
 .ui-widget,.ui-widget .ui-widget {
-	font-size: 98%!important;
+	font-size: 96% !important;
+	font-family: Calibri;
 }
 
 #conteudo {
-	width: 800px;
-	height: 600px;
-	margin: 0 auto;
 	margin-top: 2px;
-	border: 1px solid #C0C0C0;
+	width: 800px;
+	background-color: #eaeac6;
+	-webkit-border-radius: 5px;
+	margin: 0 auto;
 }
 
-#tableName{
+#tableName {
 	text-align: center;
 	margin-bottom: 10px;
 	font-weight: bolder;
-	font-size: 18px;
-	
+	font-size: 15px;
+}
+
+.nomeExame {
+	font-weight: bolder;
 }
 
 #cabecalho {
-	background-color: #dddddd;
-	height: 110px;
 	margin-bottom: 1px;
 }
 
-#filtro{
+#filtro {
 	text-align: right;
 }
 
-#clock{
+#clock {
 	margin-top: 60px;
 	margin-left: 610px;
 }
 
-#menubar {
+#menu {
+	margin-top: 10px;
 	margin: 10px;
 }
 
 #login {
 	width: 400px;
-	margin: 10px auto;
-	margin-bottom: 30px;
+	margin: 0 auto;
+	margin-bottom: 10px;
 }
 
 #perfil {
 	width: 400px;
 	margin: 10px auto;
-	margin-bottom: 30px;
 }
 
 #agendamento {
 	width: 400px;
 	margin: 10px auto;
-	margin-bottom: 30px;
 }
 
-#cad_paciente{
+#cad_paciente {
 	width: 400px;
 	margin: 10px auto;
-	margin-bottom: 30px;
 }
 
-#cad_operador{
+#cad_operador {
 	width: 400px;
 	margin: 10px auto;
 	margin-bottom: 30px;
 }
 
 #corpo {
-	min-height: 400px;
+	min-height: 650px;
+	margin: 10px;
+}
+
+#corpoLogin {
+	min-height: 350px;
 	margin: 10px;
 }
 
 #rodape {
-	
+	width: 900px;
+	margin-top: 10px;
+	margin: 0 auto;
 }
 
 .msg-error {

@@ -12,38 +12,45 @@
 <h:body>
 	<div id="conteudo">
 		<div id="cabecalho">
-			<h2>Laboratório de Aracoiaba</h2>
+			<h:panelGrid width="100%" style="text-align: center">
+				<p:graphicImage value="/resources/images/logo.png" width="300px" />
+			</h:panelGrid>
 		</div>
 		<p:messages autoUpdate="true" closable="true" />
 
-		<h:form id="login">
-			<p:panel header="Login">
+		<div id="corpoLogin">
 
-				<h:panelGrid style="margin: 0 auto" cellpadding="4">
-					<h:outputLabel value="Usuário:" />
-					<p:inputText value="#{loginBean.usuario.login}" required="true"
-						label="Login" />
+			<h:form id="login">
+				<p:panel header="Login">
 
-					<h:outputLabel value="Senha:" />
-					<p:password value="#{loginBean.usuario.senha}" label="Senha"
-						required="true" />
+					<h:panelGrid style="margin: 0 auto" cellpadding="4">
+						<h:outputLabel value="Usuário:" />
+						<p:inputText value="#{loginBean.usuario.login}" required="true"
+							label="Login" />
 
-					<h:outputLabel value="Tipo de usuário:" />
+						<h:outputLabel value="Senha:" />
+						<p:password value="#{loginBean.usuario.senha}" label="Senha"
+							required="true" />
 
-					<p:selectOneMenu value="#{loginBean.usuario.tipo}" required="true"
-						label="Tipo de Usuário">
-						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
-						<f:selectItem itemValue="#{loginBean.tipoDeUsuario.administrador}"
-							itemLabel="Administrador" />
-						<f:selectItem itemValue="#{loginBean.tipoDeUsuario.operador}"
-							itemLabel="Operador" />
-					</p:selectOneMenu>
+						<h:outputLabel value="Tipo de usuário:" />
 
-					<p:commandButton value="Entrar" action="#{loginBean.logar}" />
-				</h:panelGrid>
-			</p:panel>
-			<h:messages />
-		</h:form>
+						<p:selectOneMenu value="#{loginBean.usuario.tipo}" required="true"
+							label="Tipo de Usuário">
+							<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+							<f:selectItem
+								itemValue="#{loginBean.tipoDeUsuario.administrador}"
+								itemLabel="Administrador" />
+							<f:selectItem itemValue="#{loginBean.tipoDeUsuario.operador}"
+								itemLabel="Operador" />
+						</p:selectOneMenu>
+
+						<p:commandButton value="Entrar" action="#{loginBean.logar}" />
+					</h:panelGrid>
+				</p:panel>
+				<h:messages />
+			</h:form>
+		</div>
 	</div>
+
 </h:body>
 </html>
