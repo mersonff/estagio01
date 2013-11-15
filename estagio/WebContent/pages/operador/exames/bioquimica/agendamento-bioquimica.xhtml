@@ -6,12 +6,14 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-		<h:form id="agendamento">
+		<br />
+		<h:form id="agendamento" styleClass="form">
 
-			<p:panel id="panel" header="Agendamento: Bioquimica"
-				style="margin-bottom:10px;">
-				<p:growl id="msgs"/>
-				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto">
+			<p:panel id="panel" header="Agendamento: Bioquímica"
+				style="margin-bottom:10px;text-align:center">
+				<p:growl id="msgs" />
+				<h:panelGrid columns="2" cellpadding="4"
+					style="margin: 0 auto;text-align:left">
 
 					<h:outputLabel for="numeroSus" value="Número do SUS: *" />
 					<p:inputText id="numeroSus"
@@ -42,5 +44,6 @@
 			</p:panel>
 
 		</h:form>
+		<br />
 	</ui:define>
 </ui:composition>

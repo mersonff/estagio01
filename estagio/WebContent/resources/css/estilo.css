@@ -16,9 +16,13 @@ a {
 #conteudo {
 	margin-top: 2px;
 	width: 800px;
-	background-color: #eaeac6;
-	-webkit-border-radius: 5px;
 	margin: 0 auto;
+}
+
+.form{
+	margin: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 #tableName {
@@ -80,6 +84,8 @@ a {
 #corpo {
 	min-height: 650px;
 	margin: 10px;
+	background-color: #fafaf4;
+	-webkit-border-radius: 5px;
 }
 
 #corpoLogin {

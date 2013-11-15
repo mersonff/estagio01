@@ -6,8 +6,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-
-		<h:form id="form">
+		<br />
+		<h:form id="form" styleClass="form">
 			<p:panel id="panel" style="margin-bottom:10px;">
 
 				<p:growl id="msgs" />
@@ -79,19 +79,20 @@
 					</p:column>
 				</p:dataTable>
 
-				<p:confirmDialog header="Excluir Exame" message="Tem certeza?"
-					widgetVar="confirmacao" id="excluir">
+				<p:confirmDialog message="Tem certeza?" widgetVar="confirmacao"
+					id="excluir">
 
 					<h:inputHidden id="idExame"
 						value="#{baciloscopiaBean.baciloscopia.idExame}" />
 					<h:inputHidden id="numeroSus"
 						value="#{baciloscopiaBean.baciloscopia.paciente.numeroSus}" />
 
-					<p:commandButton value="Sim" update="panel" id="ajax"
-						oncomplete="confirmacao.hide()"
-						actionListener="#{baciloscopiaBean.excluir()}" />
-					<p:button value="Não" onclick="confirmacao.hide();" />
-
+					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
+						<p:commandButton value="Sim" update="panel" id="ajax"
+							oncomplete="confirmacao.hide()"
+							actionListener="#{baciloscopiaBean.excluir()}" />
+						<p:button value="Não" onclick="confirmacao.hide();" />
+					</h:panelGrid>
 				</p:confirmDialog>
 
 
@@ -113,10 +114,12 @@
 							<h:form id="printArea">
 
 								<div id="cabecalho">
-									<h:panelGrid width="100%" style="text-align: center;margin-bottom: 10px;">
+									<h:panelGrid width="100%"
+										style="text-align: center;margin-bottom: 10px;">
 										<p:graphicImage value="/resources/images/logo.png"
 											width="200px" />
-											<h:outputText value="Exame de Baciloscopia" styleClass="nomeExame"/>
+										<h:outputText value="Exame de Baciloscopia"
+											styleClass="nomeExame" />
 									</h:panelGrid>
 								</div>
 
@@ -284,11 +287,23 @@
 											label="Observacoes" rows="4" cols="50" disabled="true" />
 									</h:panelGrid>
 								</p:fieldset>
+								<br />
+								<br />
+								<br />
+								<br />
+								<h:panelGrid style="margin: 0 auto;">
+									<h:outputText value="________________________________" />
+								</h:panelGrid>
+								<h:panelGrid style="margin: 0 auto;">
+									<h:outputText value="Assinatura do Responsável" />
+								</h:panelGrid>
+
 							</h:form>
 						</h:panelGrid>
 					</p:scrollPanel>
 				</p:dialog>
 			</p:panel>
 		</h:form>
+		<br />
 	</ui:define>
 </ui:composition>

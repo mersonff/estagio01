@@ -6,55 +6,51 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-		<h:form id="perfil">
+		<br />
+		<h:form id="perfil" styleClass="form">
 
-			<p:panel id="panel" header="Dados do Operador"
-				style="margin-bottom:10px;">
+			<p:panel id="panel" header="Dados Pessoais"
+				style="margin-bottom:10px;text-align:center;">
 				<p:growl id="messages" />
 
-				<h:panelGrid cellpadding="4">
+				<h:panelGrid cellpadding="4" style="text-align: left;">
 
-					<p:fieldset legend="Dados Pessoais">
+					<h:inputHidden id="senha" value="#{operadorBean.ativo.senha}" />
 
-						<h:inputHidden id="senha" value="#{operadorBean.ativo.senha}" />
+					<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto;">
+						<h:outputLabel for="login" value="Login: *" />
+						<p:inputText id="login" value="#{operadorBean.ativo.login}"
+							required="true" label="Login">
 
-						<h:panelGrid columns="2" cellpadding="4">
-							<h:outputLabel for="login" value="Login: *" />
-							<p:inputText id="login" value="#{operadorBean.ativo.login}"
-								required="true" label="Login">
+						</p:inputText>
 
-							</p:inputText>
+						<h:outputLabel for="nome" value="Nome: *" />
+						<p:inputText id="nome" value="#{operadorBean.ativo.nome}"
+							required="true" label="Nome">
+							<f:validateLength minimum="2" />
+						</p:inputText>
 
-							<h:outputLabel for="nome" value="Nome: *" />
-							<p:inputText id="nome" value="#{operadorBean.ativo.nome}"
-								required="true" label="Nome">
-								<f:validateLength minimum="2" />
-							</p:inputText>
+						<h:outputLabel for="email" value="Email:" />
+						<p:inputText id="email" value="#{operadorBean.ativo.email}"
+							label="Email">
 
-							<h:outputLabel for="email" value="Email:" />
-							<p:inputText id="email" value="#{operadorBean.ativo.email}"
-								required="true" label="Email">
+						</p:inputText>
 
-							</p:inputText>
-
-							<h:outputLabel for="telefone" value="Telefone:" />
-							<p:inputMask id="telefone" value="#{operadorBean.ativo.telefone}"
-								mask="(99)9999-9999" required="true" label="Telefone">
-							</p:inputMask>
-
-							<p:commandButton value="Atualizar" update=":perfil:panel"
-								id="ajax" actionListener="#{operadorBean.atualizar()}"
-								styleClass="ui-priority-primary" />
-
-							<p:commandButton value="Cancelar"
-								action="/pages/operador/home-operador.xhtml" />
-						</h:panelGrid>
-
-					</p:fieldset>
-
-					<p:commandButton id="selectButton" update=":dialog:password"
-						value="Alterar Senha" oncomplete="passwordDialog.show()"
-						title="Alterar Senha" />
+						<h:outputLabel for="telefone" value="Telefone:" />
+						<p:inputMask id="telefone" value="#{operadorBean.ativo.telefone}"
+							mask="(99)9999-9999" label="Telefone">
+						</p:inputMask>
+					</h:panelGrid>
+					<h:panelGrid cellpadding="4" columns="3" style="margin: 0 auto;">
+						<p:commandButton value="Atualizar" update=":perfil:panel"
+							id="ajax" actionListener="#{operadorBean.atualizar()}"
+							styleClass="ui-priority-primary" />
+						<p:commandButton value="Cancelar"
+							action="/pages/operador/home-operador.xhtml" />
+						<p:commandButton id="selectButton" update=":dialog:password"
+							value="Alterar Senha" oncomplete="passwordDialog.show()"
+							title="Alterar Senha" />
+					</h:panelGrid>
 				</h:panelGrid>
 			</p:panel>
 
@@ -98,5 +94,6 @@
 				</h:panelGrid>
 			</p:dialog>
 		</h:form>
+		<br />
 	</ui:define>
 </ui:composition>

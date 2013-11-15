@@ -6,8 +6,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-
-		<h:form id="form">
+		<br />
+		<h:form id="form" styleClass="form">
 			<p:panel id="panel" style="margin-bottom:10px;">
 
 				<p:growl id="msgs" />
@@ -98,19 +98,30 @@
 					widgetVar="exameDialog" resizable="false" id="exame"
 					showEffect="fade" hideEffect="explode" modal="true">
 
-					<h:panelGrid cellpadding="4">
+					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
 						<p:commandButton value="Imprimir" type="button"
 							icon="ui-icon-print">
 							<p:printer target="printArea" />
 						</p:commandButton>
+						<p:commandButton value="Fechar" type="reset"
+							onclick="exameDialog.hide()" />
 					</h:panelGrid>
 
-					<p:scrollPanel style="width:800px;height:500px" scrollMode="native">
+					<p:scrollPanel style="height:500px" scrollMode="native">
 						<h:panelGrid id="display" cellpadding="4">
 
-
 							<h:form id="printArea">
-								<p:fieldset legend="Dados do Pedido">
+
+								<div id="cabecalho">
+									<h:panelGrid width="100%"
+										style="text-align: center;margin-bottom: 10px;">
+										<p:graphicImage value="/resources/images/logo.png"
+											width="200px" />
+										<h:outputText value="Exame de Bioquímica"
+											styleClass="nomeExame" />
+									</h:panelGrid>
+								</div>
+								<p:fieldset legend="Dados do Pedido" style="text-align: center;">
 
 									<h:panelGrid cellpadding="4" columns="6">
 										<h:outputText value="Nome: " />
@@ -129,14 +140,11 @@
 											disabled="true" size="1" />
 									</h:panelGrid>
 
-									<h:panelGrid cellpadding="4" columns="2">
+									<h:panelGrid cellpadding="4" columns="4">
 
 										<h:outputText value="Leito: " />
 										<p:inputText value="#{bioquimicaBean.bioquimica.leito}"
 											disabled="true" />
-									</h:panelGrid>
-
-									<h:panelGrid cellpadding="4" columns="2">
 
 										<h:outputText value="Solicitado em:" />
 										<p:inputText value="#{bioquimicaBean.bioquimica.dataPedido}"
@@ -149,9 +157,11 @@
 
 								<br />
 
-								<p:fieldset legend="Dados do Resultado">
+								<p:fieldset legend="Dados do Resultado"
+									style="text-align: center;">
 
-									<h:panelGrid cellpadding="4" columns="2">
+									<h:panelGrid cellpadding="4" columns="2"
+										style="margin: 0 auto;">
 
 										<h:outputLabel for="dataEntrega" value="Data de Entrega: " />
 										<p:inputMask id="dataEntrega"
@@ -165,7 +175,9 @@
 
 									<h:panelGrid cellpadding="4" columns="2">
 
-										<p:fieldset legend="Resultados">
+										<p:fieldset>
+											<h:outputText value="Resultados"
+												style="font-weight: bold;font-size: 18px;" />
 											<h:panelGrid columns="4">
 												<h:outputLabel for="glicose" value="Glicose: " />
 												<p:inputText id="glicose"
@@ -328,9 +340,10 @@
 											</h:panelGrid>
 										</p:fieldset>
 
-										<p:fieldset legend="Valores de Referência">
-
-											<h:panelGrid columns="2" cellpadding="2" border="1"
+										<p:fieldset>
+											<h:outputText value="Referências"
+												style="font-weight: bold;font-size: 18px;" />
+											<h:panelGrid columns="4" cellpadding="2" border="1"
 												style="font-size: 10px">
 												<h:outputText value="Glicose: " />
 												<h:outputText value="70 - 110 mg/dl" />
@@ -398,11 +411,20 @@
 										</p:fieldset>
 									</h:panelGrid>
 								</p:fieldset>
+								<br />
+								<br />
+								<h:panelGrid style="margin: 0 auto;">
+									<h:outputText value="________________________________" />
+								</h:panelGrid>
+								<h:panelGrid style="margin: 0 auto;">
+									<h:outputText value="Assinatura do Responsável" />
+								</h:panelGrid>
 							</h:form>
 						</h:panelGrid>
 					</p:scrollPanel>
 				</p:dialog>
 			</p:panel>
 		</h:form>
+		<br />
 	</ui:define>
 </ui:composition>
