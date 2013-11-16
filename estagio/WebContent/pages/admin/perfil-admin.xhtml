@@ -1,0 +1,89 @@
+<ui:composition template="/WEB-INF/templates/template-admin.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<h:form id="perfil">
+
+			<p:panel id="panel" header="Dados do Administrador"
+				style="margin-bottom:10px;">
+				<p:growl id="messages" />
+
+				<h:panelGrid cellpadding="4">
+
+					<p:fieldset legend="Dados Pessoais">
+
+						<h:inputHidden id="senha" value="#{adminBean.ativo.senha}" />
+						<h:inputHidden id="log" value="#{adminBean.ativo.login}" />
+
+						<h:panelGrid columns="2" cellpadding="4">
+							<h:outputLabel for="login" value="Login: *" />
+							<p:inputText id="login" value="#{adminBean.ativo.login}"
+								required="true" label="Login" disabled="true">
+
+							</p:inputText>
+
+							<h:outputLabel for="nome" value="Nome: *" />
+							<p:inputText id="nome" value="#{adminBean.ativo.nome}"
+								required="true" label="Nome">
+								<f:validateLength minimum="2" />
+							</p:inputText>
+
+
+							<p:commandButton value="Atualizar" update=":perfil:panel"
+								id="ajax" actionListener="#{adminBean.atualizar()}"
+								styleClass="ui-priority-primary" />
+
+							<p:commandButton value="Cancelar"
+								action="/pages/admin/home-admin.xhtml" />
+						</h:panelGrid>
+
+					</p:fieldset>
+
+					<p:commandButton id="selectButton" update=":dialog:password"
+						value="Alterar Senha" oncomplete="passwordDialog.show()"
+						title="Alterar Senha" />
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+		<h:form id="dialog">
+			<p:dialog header="Alterar Senha" widgetVar="passwordDialog"
+				resizable="false" id="password" showEffect="fade"
+				hideEffect="explode" modal="true">
+
+				<h:inputHidden id="login" value="#{adminBean.ativo.login}"
+					required="true" label="Login" />
+				<h:inputHidden id="nome" value="#{adminBean.ativo.nome}"
+					required="true" label="Nome" />
+				<h:inputHidden id="senha" value="#{adminBean.ativo.senha}"
+					required="true" label="Senha" />
+
+				<h:panelGrid columns="2" cellpadding="4">
+					<h:outputLabel value="Senha Atual: " />
+					<p:password value="#{adminBean.ativo.senha}" redisplay="true"
+						label="Senha" disabled="true" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="4">
+					<h:outputLabel value="Nova Senha: *" />
+					<p:password id="novaSenha" value="#{adminBean.novaSenha}"
+						redisplay="true" label="Senha" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="4">
+					<p:commandButton value="Salvar" update=":perfil:panel" id="ajax"
+						actionListener="#{adminBean.alterarSenha()}"
+						styleClass="
+						ui-priority-primary"
+						oncomplete="passwordDialog.hide()" />
+					<p:commandButton value="Cancelar"
+						action="/pages/admin/home-admin.xhtml" />
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>
