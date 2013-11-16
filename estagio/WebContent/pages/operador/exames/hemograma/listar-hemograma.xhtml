@@ -6,14 +6,14 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-
-		<h:form id="form">
+		<br />
+		<h:form id="form" styleClass="form">
 			<p:panel id="panel" style="margin-bottom:10px;">
 
 				<p:growl id="msgs" />
 
 				<div id="tableName">
-					<h:outputText value="Todos os Exames" />
+					<h:outputText value="Todos os Exames: Hemograma" />
 				</div>
 
 				<p:dataTable id="dataTable" var="hemograma"
@@ -78,8 +78,8 @@
 					</p:column>
 				</p:dataTable>
 
-				<p:confirmDialog header="Excluir Exame" message="Tem certeza?"
-					widgetVar="confirmacao" id="excluir">
+				<p:confirmDialog message="Tem certeza?" widgetVar="confirmacao"
+					id="excluir">
 
 					<h:inputHidden id="idExame"
 						value="#{hemogramaBean.hemograma.idExame}" />
@@ -93,24 +93,32 @@
 
 				</p:confirmDialog>
 
-				<p:dialog
-					header="Pedido / Resultado de #{hemogramaBean.hemograma.nomeTipo}"
-					widgetVar="exameDialog" resizable="false" id="exame"
+				<p:dialog widgetVar="exameDialog" resizable="false" id="exame"
 					showEffect="fade" hideEffect="explode" modal="true">
 
-					<h:panelGrid cellpadding="4">
+					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
 						<p:commandButton value="Imprimir" type="button"
 							icon="ui-icon-print">
 							<p:printer target="printArea" />
 						</p:commandButton>
+						<p:commandButton value="Fechar" type="reset"
+							onclick="exameDialog.hide()" />
 					</h:panelGrid>
 
-					<p:scrollPanel style="width:800px;height:500px" scrollMode="native">
+					<p:scrollPanel style="height:500px" scrollMode="native">
 						<h:panelGrid id="display" cellpadding="4">
 
 
 							<h:form id="printArea">
-								<p:fieldset legend="Dados do Pedido">
+								<div id="cabecalho">
+									<h:panelGrid width="100%" style="text-align: center">
+										<p:graphicImage value="/resources/images/lab.png"
+											width="300px" />
+										<h:outputText value="Exame de Hemograma"
+											styleClass="nomeExame" />
+									</h:panelGrid>
+								</div>
+								<p:fieldset legend="Dados do Pedido" style="text-align: center;">
 
 									<h:panelGrid cellpadding="4" columns="6">
 										<h:outputText value="Nome: " />
@@ -128,14 +136,15 @@
 											disabled="true" size="1" />
 									</h:panelGrid>
 
-									<h:panelGrid cellpadding="4" columns="2">
+									<h:panelGrid cellpadding="4" columns="6">
 
 										<h:outputText value="Leito: " />
 										<p:inputText value="#{hemogramaBean.hemograma.leito}"
 											disabled="true" />
-									</h:panelGrid>
 
-									<h:panelGrid cellpadding="4" columns="2">
+										<h:outputText value="Solicitante: " />
+										<p:inputText disabled="true"
+											value="#{hemogramaBean.hemograma.solicitante}" />
 
 										<h:outputText value="Solicitado em:" />
 										<p:inputText value="#{hemogramaBean.hemograma.dataPedido}"
@@ -148,9 +157,11 @@
 
 								<br />
 
-								<p:fieldset legend="Dados do Resultado">
+								<p:fieldset legend="Dados do Resultado"
+									style="text-align: center;">
 
-									<h:panelGrid cellpadding="4" columns="2">
+									<h:panelGrid cellpadding="4" columns="2"
+										style="text-align: left;">
 										<h:outputLabel for="dataEntrega" value="Data de Entrega: " />
 										<p:inputMask id="dataEntrega"
 											value="#{hemogramaBean.hemograma.dataEntrega}"
@@ -161,7 +172,7 @@
 										</p:inputMask>
 									</h:panelGrid>
 
-									<h:panelGrid cellpadding="4">
+									<h:panelGrid cellpadding="4" style="text-align: left;">
 
 										<h:panelGrid columns="6" cellpadding="4">
 											<h:outputLabel for="hemacias" value="Hemácias: " />
@@ -205,7 +216,8 @@
 											</p:inputText>g/dl
 									</h:panelGrid>
 
-										<h:panelGrid columns="9" cellpadding="4">
+										<h:panelGrid columns="9" cellpadding="4"
+											style="text-align: left;">
 
 											<h:outputLabel for="leucocitos" value="Leucócitos: " />
 											<p:inputText id="leucocitos"
@@ -269,58 +281,35 @@
 												label="monocitos" size="3" disabled="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>2 - 10
+									
 									</h:panelGrid>
-									</h:panelGrid>
 
 
-									<h:panelGrid>
+										<h:panelGrid columns="4" cellpadding="4"
+											style="text-align: left;">
+											<p:outputLabel value="Hemácias: " />
+											<p:inputText id="tipoHemacias" disabled="true"
+												value="#{hemogramaBean.hemograma.tipoHemacias}" />
 
-										<p:fieldset legend="Hemácias">
-											<p:selectOneRadio id="tipoHemacias" disabled="true"
-												value="#{hemogramaBean.hemograma.tipoHemacias}"
-												layout="grid" columns="3">
-												<f:selectItems value="#{hemogramaBean.tipoHemacias}" />
-											</p:selectOneRadio>
-										</p:fieldset>
 
-										<h:panelGrid columns="2">
-											<p:fieldset legend="Plaquetas">
-												<p:selectOneRadio id="tipoPlaquetas" layout="grid"
-													columns="3" disabled="true"
-													value="#{hemogramaBean.hemograma.tipoPlaquetas}">
-													<f:selectItems value="#{hemogramaBean.tipoPlaquetas}" />
-												</p:selectOneRadio>
-											</p:fieldset>
+											<p:outputLabel value="Plaquetas: " />
+											<p:inputText id="tipoPlaquetas" disabled="true"
+												value="#{hemogramaBean.hemograma.tipoPlaquetas}" />
 
-											<p:fieldset legend="Linfócitos">
-												<p:selectOneRadio id="tipoLinfocitos" layout="grid"
-													columns="3" disabled="true"
-													value="#{hemogramaBean.hemograma.tipoLinfocitos}">
-													<f:selectItems value="#{hemogramaBean.tipoLinfocitos}" />
-												</p:selectOneRadio>
-											</p:fieldset>
+											<p:outputLabel value="Linfócitos: " />
+											<p:inputText id="tipoLinfocitos" disabled="true"
+												value="#{hemogramaBean.hemograma.tipoLinfocitos}" />
+
+											<p:outputLabel value="Granulações: " />
+											<p:inputText id="tipoGranulacoes" disabled="true"
+												value="#{hemogramaBean.hemograma.tipoGranulacoes}" />
+
+											<p:outputLabel value="Eritroblastos" />
+											<p:inputText id="tipoEritroblastos" disabled="true"
+												value="#{hemogramaBean.hemograma.tipoEritroblastos}" />
 										</h:panelGrid>
 
 										<h:panelGrid columns="2">
-											<p:fieldset legend="Granulações">
-												<p:selectOneRadio id="tipoGranulacoes" layout="grid"
-													columns="3" disabled="true"
-													value="#{hemogramaBean.hemograma.tipoGranulacoes}">
-													<f:selectItems value="#{hemogramaBean.tipoGranulacoes}" />
-												</p:selectOneRadio>
-											</p:fieldset>
-
-											<p:fieldset legend="Eritroblastos">
-												<p:selectOneRadio id="tipoEritroblastos" layout="grid"
-													columns="3" disabled="true"
-													value="#{hemogramaBean.hemograma.tipoEritroblastos}">
-													<f:selectItems value="#{hemogramaBean.tipoEritroblastos}" />
-												</p:selectOneRadio>
-											</p:fieldset>
-										</h:panelGrid>
-
-										<h:panelGrid columns="2">
-
 											<h:panelGrid columns="3">
 												<h:outputLabel for="vhs" value="VHS - 1ª hora: " />
 												<p:inputText id="vhs" value="#{hemogramaBean.hemograma.vhs}"
@@ -336,8 +325,10 @@
 												</p:inputText>mm³
 									</h:panelGrid>
 
-											<p:panel>
-												<h:panelGrid cellpadding="7" columns="2">
+											<p:panel style="text-align:center;">
+												<p:outputLabel value="Referências" style="font-weight:bold;" />
+												<h:panelGrid cellpadding="4" columns="2"
+													style="text-align:left;">
 													<h:outputText value="VHS: " />
 													<h:panelGrid>
 														<h:outputText value="H: 3 - 10 mm" />
@@ -349,14 +340,24 @@
 												</h:panelGrid>
 											</p:panel>
 										</h:panelGrid>
-
 									</h:panelGrid>
 								</p:fieldset>
+								<br />
+								<br />
+								<br />
+								<br />
+								<h:panelGrid style="margin: 0 auto;">
+									<h:outputText value="________________________________" />
+								</h:panelGrid>
+								<h:panelGrid style="margin: 0 auto;">
+									<h:outputText value="Assinatura do Responsável" />
+								</h:panelGrid>
 							</h:form>
 						</h:panelGrid>
 					</p:scrollPanel>
 				</p:dialog>
 			</p:panel>
 		</h:form>
+		<br />
 	</ui:define>
 </ui:composition>

@@ -6,13 +6,13 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-
-		<h:form id="form">
+		<br />
+		<h:form id="form" styleClass="form">
 			<p:panel id="panel" style="margin-bottom:10px;">
 				<p:growl id="msgs" />
 
 				<div id="tableName">
-					<h:outputText value="Exames Aguardando Resultado" />
+					<h:outputText value="Hb / Ht com Plaquetas Aguardando Resultado" />
 				</div>
 
 				<p:dataTable id="dataTable" var="plaqueta"
@@ -77,12 +77,11 @@
 					</p:column>
 				</p:dataTable>
 
-				<p:dialog header="Pedido de #{plaquetaBean.plaqueta.nomeTipo}"
-					widgetVar="pedidoDialog" resizable="false" id="pedido"
+				<p:dialog widgetVar="pedidoDialog" resizable="false" id="pedido"
 					showEffect="fade" hideEffect="explode" modal="true">
 
 					<h:panelGrid cellpadding="4">
-						<p:fieldset legend="Dados do Paciente">
+						<p:fieldset legend="Dados do Paciente" style="text-align:center;">
 
 							<h:panelGrid cellpadding="4" columns="6">
 								<h:outputText value="Número do SUS: " />
@@ -129,10 +128,11 @@
 						</p:fieldset>
 					</h:panelGrid>
 
-					<h:panelGrid cellpadding="4">
-						<p:fieldset legend="Dados de Pedido">
 
-							<h:panelGrid columns="2" cellpadding="4">
+					<h:panelGrid cellpadding="4" style="margin: 0 auto;">
+						<p:fieldset legend="Dados de Pedido" style="text-align:center;">
+
+							<h:panelGrid columns="6" cellpadding="4">
 								<h:outputText value="Data de Pedido: " />
 								<p:inputText value="#{plaquetaBean.plaqueta.dataPedido}"
 									disabled="true" size="7">
@@ -145,13 +145,18 @@
 									disabled="true" />
 							</h:panelGrid>
 
+							<h:panelGrid columns="2" cellpadding="4">
+								<h:outputText value="Solicitante: " />
+								<p:inputText disabled="true"
+									value="#{plaquetaBean.plaqueta.solicitante}" />
+							</h:panelGrid>
+
 						</p:fieldset>
 					</h:panelGrid>
 				</p:dialog>
 
-				<p:dialog header="Resultado de #{plaquetaBean.plaqueta.nomeTipo}"
-					widgetVar="resultadoDialog" resizable="false" id="resultado"
-					showEffect="fade" hideEffect="explode" modal="true">
+				<p:dialog widgetVar="resultadoDialog" resizable="false"
+					id="resultado" showEffect="fade" hideEffect="explode" modal="true">
 
 					<h:inputHidden id="idExame"
 						value="#{plaquetaBean.plaqueta.idExame}" />
@@ -162,7 +167,14 @@
 						<f:convertDateTime type="date" locale="pt_BR"
 							timeZone="America/Fortaleza" />
 					</h:inputHidden>
+					<h:inputHidden id="dataAgendamento"
+						value="#{plaquetaBean.plaqueta.dataAgendamento}">
+						<f:convertDateTime type="date" locale="pt_BR"
+							timeZone="America/Fortaleza" />
+					</h:inputHidden>
 					<h:inputHidden id="leito" value="#{plaquetaBean.plaqueta.leito}" />
+					<h:inputHidden id="solicitante"
+						value="#{plaquetaBean.plaqueta.solicitante}" />
 
 					<h:panelGrid id="display" cellpadding="4">
 
@@ -170,51 +182,27 @@
 
 							<h:panelGrid cellpadding="4" columns="2">
 
-								<p:fieldset legend="Resultados">
-									<h:panelGrid columns="2">
-										<h:outputLabel for="hemoglobina" value="Hemoglobina: " />
-										<p:inputText id="hemoglobina"
-											value="#{plaquetaBean.plaqueta.hemoglobina}"
-											label="hemoglobina" size="3">
-											<f:convertNumber locale="pt_BR" minFractionDigits="1" />
-										</p:inputText>
+								<h:outputLabel for="hemoglobina" value="Hemoglobina: " />
+								<p:inputText id="hemoglobina"
+									value="#{plaquetaBean.plaqueta.hemoglobina}"
+									label="hemoglobina" size="3">
+									<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+								</p:inputText>
 
-										<h:outputLabel for="hematocrito" value="Hematócito: " />
-										<p:inputText id="hematocrito"
-											value="#{plaquetaBean.plaqueta.hematocrito}"
-											label="colesterol" size="3">
-											<f:convertNumber locale="pt_BR" minFractionDigits="1" />
-										</p:inputText>
+								<h:outputLabel for="hematocrito" value="Hematócito: " />
+								<p:inputText id="hematocrito"
+									value="#{plaquetaBean.plaqueta.hematocrito}" label="colesterol"
+									size="3">
+									<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+								</p:inputText>
 
-										<h:outputLabel for="plaquetas" value="Plaquetas: " />
-										<p:inputText id="plaquetas"
-											value="#{plaquetaBean.plaqueta.plaquetas}"
-											label="triglicerides" size="3">
-											<f:convertNumber locale="pt_BR" minFractionDigits="1" />
-										</p:inputText>
+								<h:outputLabel for="plaquetas" value="Plaquetas: " />
+								<p:inputText id="plaquetas"
+									value="#{plaquetaBean.plaqueta.plaquetas}"
+									label="triglicerides" size="3">
+									<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+								</p:inputText>
 
-									</h:panelGrid>
-								</p:fieldset>
-
-								<p:fieldset legend="Valores de Referência">
-
-									<h:panelGrid cellpadding="7" columns="2" border="1">
-										<h:outputText value="Hemoglobina: " />
-										<h:panelGrid>
-											<h:outputText value="H - 13,0 - 16,0" />
-											<h:outputText value="M - 11,5 - 15,0" />
-										</h:panelGrid>
-
-										<h:outputText value="Hematócrito " />
-										<h:panelGrid>
-											<h:outputText value="H - 40 - 50" />
-											<h:outputText value="M - 39 - 45" />
-										</h:panelGrid>
-
-										<h:outputText value="Plaquetas: " />
-										<h:outputText value="130.000 - 400.000 mm³" />
-									</h:panelGrid>
-								</p:fieldset>
 							</h:panelGrid>
 						</p:fieldset>
 						<h:panelGrid cellpading="4" columns="2">
@@ -223,11 +211,12 @@
 								styleClass="ui-priority-primary"
 								oncomplete="resultadoDialog.hide();" />
 							<p:commandButton value="Cancelar" type="reset"
-								onclick="remarcarDialog.hide()" />
+								onclick="resultadoDialog.hide()" />
 						</h:panelGrid>
 					</h:panelGrid>
 				</p:dialog>
 			</p:panel>
 		</h:form>
+		<br />
 	</ui:define>
 </ui:composition>

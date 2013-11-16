@@ -6,14 +6,14 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-
-		<h:form id="form">
+		<br />
+		<h:form id="form" styleClass="form">
 			<p:panel id="panel" style="margin-bottom:10px;">
 
 				<p:growl id="msgs" />
 
 				<div id="tableName">
-					<h:outputText value="Todos os Exames" />
+					<h:outputText value="Todos os Exames: Classif. Sanguínea" />
 				</div>
 
 				<p:dataTable id="dataTable" var="sanguineo"
@@ -78,7 +78,7 @@
 					</p:column>
 				</p:dataTable>
 
-				<p:confirmDialog header="Excluir Exame" message="Tem certeza?"
+				<p:confirmDialog message="Tem certeza?"
 					widgetVar="confirmacao" id="excluir">
 
 					<h:inputHidden id="idExame"
@@ -93,23 +93,32 @@
 
 				</p:confirmDialog>
 
-				<p:dialog
-					header="Pedido / Resultado de #{sanguineoBean.sanguineo.nomeTipo}"
-					widgetVar="exameDialog" resizable="false" id="exame"
+				<p:dialog widgetVar="exameDialog" resizable="false" id="exame"
 					showEffect="fade" hideEffect="explode" modal="true">
 
-					<h:panelGrid cellpadding="4">
+					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
 						<p:commandButton value="Imprimir" type="button"
 							icon="ui-icon-print">
 							<p:printer target="printArea" />
 						</p:commandButton>
+						<p:commandButton value="Fechar" type="reset"
+							onclick="exameDialog.hide()" />
 					</h:panelGrid>
 
 					<p:scrollPanel scrollMode="native">
 						<h:panelGrid id="display" cellpadding="4">
 
 							<h:form id="printArea">
-								<p:fieldset legend="Dados do Pedido">
+								<div id="cabecalho">
+									<h:panelGrid width="100%" style="text-align: center">
+										<p:graphicImage value="/resources/images/lab.png"
+											width="300px" />
+										<h:outputText value="Exame de Classificação Sanguínea"
+											styleClass="nomeExame" />
+									</h:panelGrid>
+									<br />
+								</div>
+								<p:fieldset legend="Dados do Pedido" style="text-align: center;">
 
 									<h:panelGrid cellpadding="4" columns="6">
 										<h:outputText value="Nome: " />
@@ -127,11 +136,15 @@
 											disabled="true" size="1" />
 									</h:panelGrid>
 
-									<h:panelGrid cellpadding="4" columns="2">
+									<h:panelGrid cellpadding="4" columns="4">
 
 										<h:outputText value="Leito: " />
 										<p:inputText value="#{sanguineoBean.sanguineo.leito}"
 											disabled="true" />
+											
+										<h:outputText value="Solicitante: " />
+										<p:inputText disabled="true"
+											value="#{sanguineoBean.sanguineo.solicitante}" />
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4" columns="2">
@@ -147,7 +160,8 @@
 
 								<br />
 
-								<p:fieldset legend="Dados do Resultado">
+								<p:fieldset legend="Dados do Resultado"
+									style="text-align: center;">
 
 									<h:panelGrid cellpadding="4" columns="2">
 
@@ -161,7 +175,7 @@
 										</p:inputMask>
 									</h:panelGrid>
 
-									<h:panelGrid cellpadding="4" columns="2">
+									<h:panelGrid cellpadding="4" columns="4">
 										<h:outputLabel for="abo" value="ABO: " />
 										<p:inputText id="abo" value="#{sanguineoBean.sanguineo.abo}"
 											label="glicose" size="3" disabled="true" />
@@ -172,11 +186,22 @@
 											disabled="true" />
 									</h:panelGrid>
 								</p:fieldset>
+								<br />
+								<br />
+								<br />
+								<br />
+								<h:panelGrid style="margin: 0 auto;">
+									<h:outputText value="________________________________" />
+								</h:panelGrid>
+								<h:panelGrid style="margin: 0 auto;">
+									<h:outputText value="Assinatura do Responsável" />
+								</h:panelGrid>
 							</h:form>
 						</h:panelGrid>
 					</p:scrollPanel>
 				</p:dialog>
 			</p:panel>
 		</h:form>
+		<br />
 	</ui:define>
 </ui:composition>

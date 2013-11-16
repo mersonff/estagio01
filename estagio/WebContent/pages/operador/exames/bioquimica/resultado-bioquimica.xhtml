@@ -135,7 +135,7 @@
 					<h:panelGrid cellpadding="4" style="margin: 0 auto;">
 						<p:fieldset legend="Dados de Pedido" style="text-align:center;">
 
-							<h:panelGrid columns="4" cellpadding="4">
+							<h:panelGrid columns="6" cellpadding="4">
 								<h:outputText value="Data de Pedido: " />
 								<p:inputText value="#{bioquimicaBean.bioquimica.dataPedido}"
 									disabled="true" size="7">
@@ -146,7 +146,12 @@
 								<h:outputText value="Leito: " />
 								<p:inputText value="#{bioquimicaBean.bioquimica.leito}"
 									disabled="true" />
+							</h:panelGrid>
 
+							<h:panelGrid columns="2" cellpadding="4">
+								<h:outputText value="Solicitante: " />
+								<p:inputText disabled="true"
+									value="#{bioquimicaBean.bioquimica.solicitante}" />
 							</h:panelGrid>
 
 						</p:fieldset>
@@ -165,15 +170,23 @@
 						<f:convertDateTime type="date" locale="pt_BR"
 							timeZone="America/Fortaleza" />
 					</h:inputHidden>
+					<h:inputHidden id="dataAgendamento"
+						value="#{bioquimicaBean.bioquimica.dataAgendamento}">
+						<f:convertDateTime type="date" locale="pt_BR"
+							timeZone="America/Fortaleza" />
+					</h:inputHidden>
 					<h:inputHidden id="leito"
 						value="#{bioquimicaBean.bioquimica.leito}" />
+					<h:inputHidden id="solicitante"
+						value="#{bioquimicaBean.bioquimica.solicitante}" />
 
 					<h:panelGrid id="display" cellpadding="4">
 
 						<h:panelGrid cellpadding="4">
 
 							<p:fieldset legend="Resultados" style="text-align:center;">
-								<h:panelGrid columns="4" cellpadding="4" style="text-align:left;">
+								<h:panelGrid columns="4" cellpadding="4"
+									style="text-align:left;">
 									<h:outputLabel for="glicose" value="Glicose: " />
 									<p:inputText id="glicose"
 										value="#{bioquimicaBean.bioquimica.glicose}" label="glicose"
@@ -336,7 +349,7 @@
 									oncomplete="resultadoDialog.hide();" />
 
 								<p:commandButton value="Cancelar" type="reset"
-									onclick="remarcarDialog.hide()" />
+									onclick="resultadoDialog.hide()" />
 							</h:panelGrid>
 						</h:panelGrid>
 					</h:panelGrid>

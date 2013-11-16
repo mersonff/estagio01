@@ -14,16 +14,16 @@ public class Baciloscopia extends Exame {
 	private String prontuario;
 	private String materialClinico;
 	private String outros;
-	private boolean diagnostico;
-	private boolean controleDeTratamento;
+	private String diagnostico;
+	private String controleDeTratamento;
 	private int numeroDaAmostra;
 	private int mesDaAmostra;
 
 	// Dados do Resultado
 	@ElementCollection
 	private List<String> aspectoDoEscarro;
-	private boolean negativo;
-	private boolean baar;
+	private String negativo;
+	private String baar;
 	private String positividade;
 	private String observacoes;
 
@@ -63,22 +63,6 @@ public class Baciloscopia extends Exame {
 		this.outros = outros;
 	}
 
-	public boolean isDiagnostico() {
-		return diagnostico;
-	}
-
-	public void setDiagnostico(boolean diagnostico) {
-		this.diagnostico = diagnostico;
-	}
-
-	public boolean isControleDeTratamento() {
-		return controleDeTratamento;
-	}
-
-	public void setControleDeTratamento(boolean controleDeTratamento) {
-		this.controleDeTratamento = controleDeTratamento;
-	}
-
 	public int getNumeroDaAmostra() {
 		return numeroDaAmostra;
 	}
@@ -93,22 +77,6 @@ public class Baciloscopia extends Exame {
 
 	public void setMesDaAmostra(int mesDaAmostra) {
 		this.mesDaAmostra = mesDaAmostra;
-	}
-
-	public boolean isNegativo() {
-		return negativo;
-	}
-
-	public void setNegativo(boolean negativo) {
-		this.negativo = negativo;
-	}
-
-	public boolean isBaar() {
-		return baar;
-	}
-
-	public void setBaar(boolean baar) {
-		this.baar = baar;
 	}
 
 	public String getPositividade() {
@@ -133,6 +101,38 @@ public class Baciloscopia extends Exame {
 
 	public void setAspectoDoEscarro(List<String> aspectoDoEscarro) {
 		this.aspectoDoEscarro = aspectoDoEscarro;
+	}
+
+	public String getDiagnostico() {
+		return diagnostico;
+	}
+
+	public void setDiagnostico(String diagnostico) {
+		this.diagnostico = diagnostico;
+	}
+
+	public String getControleDeTratamento() {
+		return controleDeTratamento;
+	}
+
+	public void setControleDeTratamento(String controleDeTratamento) {
+		this.controleDeTratamento = controleDeTratamento;
+	}
+
+	public String getNegativo() {
+		return negativo;
+	}
+
+	public void setNegativo(String negativo) {
+		this.negativo = negativo;
+	}
+
+	public String getBaar() {
+		return baar;
+	}
+
+	public void setBaar(String baar) {
+		this.baar = baar;
 	}
 
 }

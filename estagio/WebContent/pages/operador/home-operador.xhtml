@@ -7,6 +7,62 @@
 
 
 	<ui:define name="corpo">
-		
+		<br />
+		<h:form id="form" styleClass="form">
+			<p:panel id="panel" style="margin-bottom:10px;">
+
+				<div id="tableName">
+					<h:outputText value="Exames Agendados para Hoje" />
+				</div>
+
+				<p:dataTable id="dataTable" var="exame" value="#{exameBean.deHoje}"
+					widgetVar="examesTable" paginator="true" rows="9"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					emptyMessage="Nenhum exame encontrado com esses critérios."
+					filteredValue="#{exameBean.examesFiltrados}"
+					paginatorAlwaysVisible="false">
+
+					<f:facet name="header">
+						<p:outputPanel>
+							<div id="filtro">
+								<h:outputText value="Procurar em todos os campos " />
+								<p:inputText id="globalFilter" onkeyup="examesTable.filter()"
+									style="width:150px" />
+							</div>
+						</p:outputPanel>
+					</f:facet>
+
+					<p:column id="numeroSusColumn" sortBy="#{exame.paciente.numeroSus}"
+						filterBy="#{exame.paciente.numeroSus}" headerText="SUS"
+						filterMatchMode="startsWith" style="text-align: center">
+						<h:outputText value="#{exame.paciente.numeroSus}" />
+					</p:column>
+
+					<p:column id="nomeColumn" filterBy="#{exame.paciente.nome}"
+						headerText="Nome" sortBy="#{exame.paciente.nome}"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{exame.paciente.nome}" />
+					</p:column>
+					
+					<p:column id="dataAgendamentoColumn"
+						sortBy="#{exame.dataAgendamento}"
+						filterBy="#{exame.dataAgendamento}" headerText="Agendado em"
+						style="text-align: center" filterMatchMode="contains">
+						<h:outputText value="#{exame.dataAgendamento}">
+							<f:convertDateTime type="date" locale="pt_BR"
+								timeZone="America/Fortaleza" />
+						</h:outputText>
+					</p:column>
+
+					<p:column id="tipoColumn" style="text-align: center"
+						headerText="Tipo" sortBy="#{exame.nomeTipo}"
+						filterBy="#{exame.nomeTipo}" filterMatchMode="startsWith">
+						<h:outputText value="#{exame.nomeTipo}" />
+					</p:column>
+
+				</p:dataTable>
+			</p:panel>
+		</h:form>
 	</ui:define>
 </ui:composition>

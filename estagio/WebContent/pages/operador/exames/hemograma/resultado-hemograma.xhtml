@@ -6,13 +6,13 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-
-		<h:form id="form">
+		<br />
+		<h:form id="form" styleClass="form">
 			<p:panel id="panel" style="margin-bottom:10px;">
 				<p:growl id="msgs" />
 
 				<div id="tableName">
-					<h:outputText value="Exames Aguardando Resultado" />
+					<h:outputText value="Hemogramas Aguardando Resultado" />
 				</div>
 
 				<p:dataTable id="dataTable" var="hemograma"
@@ -78,12 +78,11 @@
 					</p:column>
 				</p:dataTable>
 
-				<p:dialog header="Pedido de #{hemogramaBean.hemograma.nomeTipo}"
-					widgetVar="pedidoDialog" resizable="false" id="pedido"
+				<p:dialog widgetVar="pedidoDialog" resizable="false" id="pedido"
 					showEffect="fade" hideEffect="explode" modal="true">
 
 					<h:panelGrid cellpadding="4">
-						<p:fieldset legend="Dados do Paciente">
+						<p:fieldset legend="Dados do Paciente" style="text-align: center;">
 
 							<h:panelGrid cellpadding="4" columns="6">
 								<h:outputText value="Número do SUS: " />
@@ -134,9 +133,9 @@
 					</h:panelGrid>
 
 					<h:panelGrid cellpadding="4">
-						<p:fieldset legend="Dados de Pedido">
+						<p:fieldset legend="Dados de Pedido" style="text-align: center;">
 
-							<h:panelGrid columns="2" cellpadding="4">
+							<h:panelGrid columns="4" cellpadding="4">
 								<h:outputText value="Data de Pedido: " />
 								<p:inputText value="#{hemogramaBean.hemograma.dataPedido}"
 									disabled="true" size="7">
@@ -148,45 +147,58 @@
 								<p:inputText value="#{hemogramaBean.hemograma.leito}"
 									disabled="true" />
 
+								<h:outputLabel for="solicitante" value="Solicitante: " />
+								<p:inputText value="#{hemogramaBean.hemograma.solicitante}"
+									label="solicitante" disabled="true" />
+
 							</h:panelGrid>
 
 						</p:fieldset>
 					</h:panelGrid>
 				</p:dialog>
 
-				<p:dialog header="Resultado de #{hemogramaBean.hemograma.nomeTipo}"
-					widgetVar="resultadoDialog" resizable="false" id="resultado"
-					showEffect="fade" hideEffect="explode" modal="true">
+				<p:dialog widgetVar="resultadoDialog" resizable="false"
+					id="resultado" showEffect="fade" hideEffect="explode" modal="true">
 
-					<h:panelGrid cellpading="4">
+					<h:panelGrid cellpading="4" columns="2" style="margin: 0 auto;">
 						<p:commandButton value="Cadastrar" update="panel" id="ajax"
 							actionListener="#{hemogramaBean.atualizar()}"
 							styleClass="ui-priority-primary"
 							oncomplete="resultadoDialog.hide();" />
 
 						<p:commandButton value="Cancelar" type="reset"
-							onclick="remarcarDialog.hide()" />
+							onclick="resultadoDialog.hide()" />
 					</h:panelGrid>
 
-					<h:inputHidden id="idExame"
-						value="#{hemogramaBean.hemograma.idExame}" />
-					<h:inputHidden id="numeroSus"
-						value="#{hemogramaBean.hemograma.paciente.numeroSus}" />
-					<h:inputHidden id="dataPedido"
-						value="#{hemogramaBean.hemograma.dataPedido}">
-						<f:convertDateTime type="date" locale="pt_BR"
-							timeZone="America/Fortaleza" />
-					</h:inputHidden>
-					<h:inputHidden id="leito" value="#{hemogramaBean.hemograma.leito}" />
+					<p:scrollPanel style="height:500px" scrollMode="native">
+						<h:panelGrid id="display">
 
-					<p:scrollPanel style="width:850px;height:500px" scrollMode="native">
-						<h:panelGrid id="display" cellpadding="4">
+							<h:inputHidden id="idExame"
+								value="#{hemogramaBean.hemograma.idExame}" />
+							<h:inputHidden id="numeroSus"
+								value="#{hemogramaBean.hemograma.paciente.numeroSus}" />
+							<h:inputHidden id="dataPedido"
+								value="#{hemogramaBean.hemograma.dataPedido}">
+								<f:convertDateTime type="date" locale="pt_BR"
+									timeZone="America/Fortaleza" />
+							</h:inputHidden>
+							<h:inputHidden id="leito"
+								value="#{hemogramaBean.hemograma.leito}" />
+							<h:inputHidden id="solicitante"
+								value="#{hemogramaBean.hemograma.solicitante}" />
+							<h:inputHidden id="dataAgendamento"
+								value="#{hemogramaBean.hemograma.dataAgendamento}">
+								<f:convertDateTime type="date" locale="pt_BR"
+									timeZone="America/Fortaleza" />
+							</h:inputHidden>
 
-							<p:fieldset legend="Dados do Resultado">
+							<p:fieldset legend="Dados do Resultado"
+								style="text-align:center;">
 
-								<h:panelGrid cellpadding="4">
+								<h:panelGrid cellpadding="4" style="text-align:left;">
 
-									<h:panelGrid columns="6" cellpadding="4">
+									<h:panelGrid columns="6" cellpadding="4"
+										style="text-align:left;">
 										<h:outputLabel for="hemacias" value="Hemácias: " />
 										<p:inputText id="hemacias"
 											value="#{hemogramaBean.hemograma.hemacias}" label="hemacias"
@@ -227,7 +239,8 @@
 										</p:inputText>g/dl
 									</h:panelGrid>
 
-									<h:panelGrid columns="9" cellpadding="4">
+									<h:panelGrid columns="9" cellpadding="4"
+										style="text-align:left;">
 
 										<h:outputLabel for="leucocitos" value="Leucócitos: " />
 										<p:inputText id="leucocitos"
@@ -297,7 +310,9 @@
 
 								<h:panelGrid>
 
-									<p:fieldset legend="Hemácias">
+									<p:fieldset>
+										<p:outputLabel value="Hemácicas"
+											style="font-weight:bold;font-size:18px;" />
 										<p:selectOneRadio id="tipoHemacias"
 											value="#{hemogramaBean.hemograma.tipoHemacias}" layout="grid"
 											columns="3">
@@ -306,14 +321,18 @@
 									</p:fieldset>
 
 									<h:panelGrid columns="2">
-										<p:fieldset legend="Plaquetas">
+										<p:fieldset>
+											<p:outputLabel value="Plaquetas"
+												style="font-weight:bold;font-size:18px;" />
 											<p:selectOneRadio id="tipoPlaquetas" layout="grid"
 												columns="3" value="#{hemogramaBean.hemograma.tipoPlaquetas}">
 												<f:selectItems value="#{hemogramaBean.tipoPlaquetas}" />
 											</p:selectOneRadio>
 										</p:fieldset>
 
-										<p:fieldset legend="Linfócitos">
+										<p:fieldset>
+											<p:outputLabel value="Linfócitos"
+												style="font-weight:bold;font-size:18px;" />
 											<p:selectOneRadio id="tipoLinfocitos" layout="grid"
 												columns="3"
 												value="#{hemogramaBean.hemograma.tipoLinfocitos}">
@@ -323,7 +342,9 @@
 									</h:panelGrid>
 
 									<h:panelGrid columns="2">
-										<p:fieldset legend="Granulações">
+										<p:fieldset>
+											<p:outputLabel value="Granulações"
+												style="font-weight:bold;font-size:18px;" />
 											<p:selectOneRadio id="tipoGranulacoes" layout="grid"
 												columns="3"
 												value="#{hemogramaBean.hemograma.tipoGranulacoes}">
@@ -331,7 +352,9 @@
 											</p:selectOneRadio>
 										</p:fieldset>
 
-										<p:fieldset legend="Eritroblastos">
+										<p:fieldset>
+											<p:outputLabel value="Eritroblastos"
+												style="font-weight:bold;font-size:18px;" />
 											<p:selectOneRadio id="tipoEritroblastos" layout="grid"
 												columns="3"
 												value="#{hemogramaBean.hemograma.tipoEritroblastos}">
@@ -340,35 +363,19 @@
 										</p:fieldset>
 									</h:panelGrid>
 
-									<h:panelGrid columns="2">
-
-										<h:panelGrid columns="3">
-											<h:outputLabel for="vhs" value="VHS - 1ª hora: " />
-											<p:inputText id="vhs" value="#{hemogramaBean.hemograma.vhs}"
-												label="hemacias" size="3">
-												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
-											</p:inputText>mm
+									<h:panelGrid columns="3" style="text-align:left;">
+										<h:outputLabel for="vhs" value="VHS - 1ª hora: " />
+										<p:inputText id="vhs" value="#{hemogramaBean.hemograma.vhs}"
+											label="hemacias" size="3">
+											<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+										</p:inputText>mm
 									
 									<h:outputLabel for="plaquetas" value="Plaquetas: " />
-											<p:inputText id="plaquetas"
-												value="#{hemogramaBean.hemograma.plaquetas}"
-												label="plaquetas" size="3">
-												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
-											</p:inputText>mm³
-									</h:panelGrid>
-
-										<p:panel>
-											<h:panelGrid cellpadding="7" columns="2">
-												<h:outputText value="VHS: " />
-												<h:panelGrid>
-													<h:outputText value="H: 3 - 10 mm" />
-													<h:outputText value="M: 4 - 12 mm" />
-												</h:panelGrid>
-
-												<h:outputText value="Plaquetas: " />
-												<h:outputText value="130.000 - 400.000 mm³" />
-											</h:panelGrid>
-										</p:panel>
+										<p:inputText id="plaquetas"
+											value="#{hemogramaBean.hemograma.plaquetas}"
+											label="plaquetas" size="3">
+											<f:convertNumber locale="pt_BR" minFractionDigits="1" />
+										</p:inputText>mm³
 									</h:panelGrid>
 
 								</h:panelGrid>
@@ -378,5 +385,6 @@
 				</p:dialog>
 			</p:panel>
 		</h:form>
+		<br />
 	</ui:define>
 </ui:composition>

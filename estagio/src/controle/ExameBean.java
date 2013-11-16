@@ -1,5 +1,6 @@
 package controle;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import dao.PacienteJPADAO;
 public class ExameBean extends AbstractBean {
 	private Exame exame;
 	private List<Exame> exames;
+	private List<Exame> deHoje;
 	private List<Exame> examesFiltrados;
 
 	private final static String[] status;
@@ -34,7 +36,7 @@ public class ExameBean extends AbstractBean {
 		this.setExames(new ArrayList<Exame>());
 		pesquisarTodos();
 		statusOptions = createFilterOptions(status);
-		
+
 	}
 
 	public void cadastrar() {
@@ -97,6 +99,21 @@ public class ExameBean extends AbstractBean {
 
 	public SelectItem[] getStatusOptions() {
 		return statusOptions;
+	}
+
+	public List<Exame> getDeHoje() throws ParseException {
+		List<Exame> temp = new ArrayList<Exame>();
+		for (Exame e : exames) {
+			if (e.isHoje() == true && e.getStatus().equals("Em espera")) {
+				temp.add(e);
+			}
+		}
+		deHoje = temp;
+		return deHoje;
+	}
+
+	public void setDeHoje(List<Exame> deHoje) {
+		this.deHoje = deHoje;
 	}
 
 }

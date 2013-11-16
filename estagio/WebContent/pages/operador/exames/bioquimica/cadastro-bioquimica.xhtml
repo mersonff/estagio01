@@ -148,18 +148,29 @@
 							value="#{bioquimicaBean.bioquimica.paciente.numeroSus}" />
 						<h:inputHidden id="idExame"
 							value="#{bioquimicaBean.bioquimica.idExame}" />
+						<h:inputHidden id="dataAgendamento"
+							value="#{bioquimicaBean.bioquimica.dataAgendamento}">
+							<f:convertDateTime type="date" locale="pt_BR"
+								timeZone="America/Fortaleza" />
+						</h:inputHidden>
 
 						<p:fieldset legend="Dados de Pedido: Bioquímica">
-							<h:outputLabel for="leito" value="Leito: " />
-							<p:inputText id="leito"
-								value="#{bioquimicaBean.bioquimica.leito}" label="leito" />
+							<h:panelGrid columns="2" cellpadding="4">
+								<h:outputLabel for="leito" value="Leito: " />
+								<p:inputText id="leito"
+									value="#{bioquimicaBean.bioquimica.leito}" label="leito" />
+								<h:outputText value="Solicitante: " />
+								<p:inputText id="solicitante"
+									value="#{bioquimicaBean.bioquimica.solicitante}" />
+							</h:panelGrid>
 						</p:fieldset>
 
 						<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
 							<p:commandButton value="Cadastrar" update="panel" id="ajax"
 								actionListener="#{bioquimicaBean.cadastrar()}"
 								styleClass="ui-priority-primary" />
-							<p:commandButton value="Limpar" type="reset" />
+							<p:commandButton value="Cancelar" type="reset"
+								onclick="pedidoDialog.hide()" />
 						</h:panelGrid>
 					</h:panelGrid>
 				</p:dialog>
@@ -176,6 +187,7 @@
 						value="#{bioquimicaBean.bioquimica.paciente.numeroSus}" />
 					<h:inputHidden id="idExame"
 						value="#{bioquimicaBean.bioquimica.idExame}" />
+
 
 					<p:fieldset legend="Remarcar Bioquímica">
 						<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto">

@@ -51,8 +51,7 @@ a {
 
 #menu {
 	margin-top: 10px;
-	margin: 10px;
-}
+	}
 
 #login {
 	width: 400px;
@@ -82,7 +81,7 @@ a {
 }
 
 #corpo {
-	min-height: 650px;
+	min-height: 700px;
 	margin: 10px;
 	background-color: #fafaf4;
 	-webkit-border-radius: 5px;

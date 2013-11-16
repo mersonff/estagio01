@@ -1,10 +1,20 @@
 package controle;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
 
 import modelo.Baciloscopia;
 import modelo.Paciente;
@@ -139,6 +149,20 @@ public class BaciloscopiaBean extends AbstractBean {
 
 	public void setBaciloscopiaEmAberto(List<Baciloscopia> baciloscopiaEmAberto) {
 		this.baciloscopiaEmAberto = baciloscopiaEmAberto;
+	}
+
+	public void preProcessPDF(Object document) throws IOException,
+			BadElementException, DocumentException {
+		Document pdf = (Document) document;
+		pdf.open();
+		pdf.setPageSize(PageSize.A4);
+
+		ServletContext servletContext = (ServletContext) FacesContext
+				.getCurrentInstance().getExternalContext().getContext();
+		String logo = servletContext.getRealPath("") + File.separator
+				+ "images" + File.separator + "prime_logo.png";
+
+		pdf.add(Image.getInstance(logo));
 	}
 
 }

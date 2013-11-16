@@ -51,7 +51,7 @@
 
 					<p:column id="dataPedidoColumn" sortBy="#{baciloscopia.dataPedido}"
 						style="text-align: center" filterBy="#{baciloscopia.dataPedido}"
-						headerText="Pedido em" filterMatchMode="startsWith">
+						headerText="Pedido em" filterMatchMode="contains">
 						<h:outputText value="#{baciloscopia.dataPedido}">
 							<f:convertDateTime type="date" locale="pt_BR"
 								timeZone="America/Fortaleza" />
@@ -152,12 +152,16 @@
 								value="#{baciloscopiaBean.baciloscopia.unidadeDeSaude}" />
 						</h:panelGrid>
 
-						<h:panelGrid columns="2" cellpadding="4">
+						<h:panelGrid columns="4" cellpadding="4">
 
 							<h:outputLabel for="prontuario" value="Prontuário:" />
 							<p:inputText disabled="true"
 								value="#{baciloscopiaBean.baciloscopia.prontuario}"
 								label="Prontuário" />
+
+							<h:outputText value="Solicitante: " />
+							<p:inputText value="#{baciloscopiaBean.baciloscopia.solicitante}"
+								disabled="true" />
 						</h:panelGrid>
 
 						<h:panelGrid columns="4" cellpadding="4">
@@ -172,26 +176,21 @@
 								value="#{baciloscopiaBean.baciloscopia.outros}" label="Outros" />
 						</h:panelGrid>
 
-						<h:panelGrid columns="4" cellpadding="4">
+						<h:panelGrid columns="8" cellpadding="4">
 
 							<h:outputLabel for="diagnostico" value="Diagnóstico: " />
-							<p:selectBooleanCheckbox disabled="true"
+							<p:inputText disabled="true" size="1"
 								value="#{baciloscopiaBean.baciloscopia.diagnostico}" />
 
 							<h:outputLabel for="controleDeTratamento"
 								value="Controle de Tratamento: " />
-							<p:selectBooleanCheckbox disabled="true"
+							<p:inputText disabled="true" size="1"
 								value="#{baciloscopiaBean.baciloscopia.controleDeTratamento}" />
-						</h:panelGrid>
 
-						<h:panelGrid columns="4" cellpadding="4">
-
-							<h:outputLabel for="numeroDaAmostra" value="Número da Amostra: " />
-							<p:selectOneRadio disabled="true"
-								value="#{baciloscopiaBean.baciloscopia.numeroDaAmostra}">
-								<f:selectItem itemLabel="1ª Amostra" itemValue="1" />
-								<f:selectItem itemLabel="2ª Amostra" itemValue="2" />
-							</p:selectOneRadio>
+							<h:outputText value="Amostra:" />
+							<p:inputText
+								value="#{baciloscopiaBean.baciloscopia.numeroDaAmostra}"
+								disabled="true" size="1" />
 
 							<h:outputText value="Mês da Amostra:" />
 							<p:inputText disabled="true"
@@ -216,6 +215,11 @@
 						<f:convertDateTime type="date" locale="pt_BR"
 							timeZone="America/Fortaleza" />
 					</h:inputHidden>
+					<h:inputHidden id="dataAgendamento"
+						value="#{baciloscopiaBean.baciloscopia.dataAgendamento}">
+						<f:convertDateTime type="date" locale="pt_BR"
+							timeZone="America/Fortaleza" />
+					</h:inputHidden>
 					<h:inputHidden id="prontuario"
 						value="#{baciloscopiaBean.baciloscopia.prontuario}" />
 					<h:inputHidden id="materialClinico"
@@ -230,6 +234,8 @@
 						value="#{baciloscopiaBean.baciloscopia.controleDeTratamento}" />
 					<h:inputHidden id="mesDaAmostra"
 						value="#{baciloscopiaBean.baciloscopia.mesDaAmostra}" />
+					<h:inputHidden id="solicitante"
+						value="#{baciloscopiaBean.baciloscopia.solicitante}" />
 
 					<p:fieldset legend="Dados do Resultado" style="text-align: center;">
 
@@ -247,23 +253,29 @@
 							</p:selectManyCheckbox>
 						</h:panelGrid>
 
-						<h:panelGrid cellpadding="4" columns="6">
+						<h:panelGrid cellpadding="4" columns="6" style="text-align: left;">
 
 							<h:outputLabel for="negativo" value="Negativo: " />
-							<p:selectBooleanCheckbox id="negativo"
+							<p:selectOneMenu id="negativo"
 								value="#{baciloscopiaBean.baciloscopia.negativo}"
-								label="Negativo" />
+								label="Negativo">
+								<f:selectItem itemLabel="Sim" itemValue="Sim" />
+								<f:selectItem itemLabel="Não" itemValue="Não" />
+							</p:selectOneMenu>
 
 							<h:outputLabel for="baar" value="1 a 9 BAAR: " />
-							<p:selectBooleanCheckbox id="baar"
-								value="#{baciloscopiaBean.baciloscopia.baar}" label="Baar" />
+							<p:selectOneMenu id="baar"
+								value="#{baciloscopiaBean.baciloscopia.baar}" label="Baar">
+								<f:selectItem itemLabel="Sim" itemValue="Sim" />
+								<f:selectItem itemLabel="Não" itemValue="Não" />
+							</p:selectOneMenu>
 
 							<h:outputLabel for="positividade" value="" />
 							<p:selectOneRadio id="positividade"
 								value="#{baciloscopiaBean.baciloscopia.positividade}">
-								<f:selectItem itemLabel=" Positivo+ " itemValue="Positivo+" />
-								<f:selectItem itemLabel=" Positivo++ " itemValue="Positivo++" />
-								<f:selectItem itemLabel=" Positivo+++ " itemValue="Positivo+++" />
+								<f:selectItem itemLabel="Positivo+" itemValue="Positivo+" />
+								<f:selectItem itemLabel="Positivo++" itemValue="Positivo++" />
+								<f:selectItem itemLabel="Positivo+++" itemValue="Positivo+++" />
 							</p:selectOneRadio>
 						</h:panelGrid>
 
@@ -281,7 +293,7 @@
 							styleClass="ui-priority-primary"
 							oncomplete="resultadoDialog.hide();" />
 						<p:commandButton value="Cancelar" type="reset"
-							onclick="remarcarDialog.hide()" />
+							onclick="resultadoDialog.hide()" />
 					</h:panelGrid>
 				</p:dialog>
 			</p:panel>

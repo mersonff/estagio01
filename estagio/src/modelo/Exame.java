@@ -1,6 +1,8 @@
 package modelo;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +32,9 @@ public class Exame {
 	@ManyToOne
 	@JoinColumn(name = "numeroSus")
 	private Paciente paciente;
+	private String solicitante;
 	private String nomeTipo;
+	private boolean hoje;
 
 	public Exame() {
 		this.paciente = new Paciente();
@@ -91,7 +95,33 @@ public class Exame {
 	public void setDataAgendamento(Date dataAgendamento) {
 		this.dataAgendamento = dataAgendamento;
 	}
-	
-	
+
+	public String getSolicitante() {
+		return solicitante;
+	}
+
+	public void setSolicitante(String solicitante) {
+		this.solicitante = solicitante;
+	}
+
+	public boolean isHoje() {
+		Calendar dataAgend = new GregorianCalendar();
+		dataAgend.setTime(dataAgendamento);
+		Calendar datahoje = Calendar.getInstance();
+		if (dataAgend.get(Calendar.DATE) == datahoje.get(Calendar.DATE)
+				&& dataAgend.get(Calendar.MONTH) == datahoje
+						.get(Calendar.MONTH)
+				&& dataAgend.get(Calendar.YEAR) == datahoje.get(Calendar.YEAR)) {
+			hoje = true;
+		} else {
+			hoje = false;
+		}
+		return hoje;
+
+	}
+
+	public void setHoje(boolean hoje) {
+		this.hoje = hoje;
+	}
 
 }

@@ -151,7 +151,8 @@
 						<p:commandButton value="Cadastrar" update="panel" id="ajax"
 							actionListener="#{urinaBean.cadastrar()}"
 							styleClass="ui-priority-primary" />
-						<p:commandButton value="Limpar" type="reset" />
+						<p:commandButton value="Cancelar" type="reset"
+							onclick="pedidoDialog.hide()" />
 					</h:panelGrid>
 				</p:dialog>
 			</p:panel>

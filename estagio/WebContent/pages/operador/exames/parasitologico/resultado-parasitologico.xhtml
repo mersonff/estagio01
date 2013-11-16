@@ -6,13 +6,13 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-
-		<h:form id="form">
+		<br />
+		<h:form id="form" styleClass="form">
 			<p:panel id="panel" style="margin-bottom:10px;">
 				<p:growl id="msgs" />
 
 				<div id="tableName">
-					<h:outputText value="Exames Aguardando Resultado" />
+					<h:outputText value="Parasitológico de Fezes Aguardando Resultado" />
 				</div>
 
 				<p:dataTable id="dataTable" var="parasitologico"
@@ -81,13 +81,11 @@
 					</p:column>
 				</p:dataTable>
 
-				<p:dialog
-					header="Pedido de #{parasitologicoBean.parasitologico.nomeTipo}"
-					widgetVar="pedidoDialog" resizable="false" id="pedido"
+				<p:dialog widgetVar="pedidoDialog" resizable="false" id="pedido"
 					showEffect="fade" hideEffect="explode" modal="true">
 
 					<h:panelGrid cellpadding="4">
-						<p:fieldset legend="Dados do Paciente">
+						<p:fieldset legend="Dados do Paciente" style="text-align:center;">
 
 							<h:panelGrid cellpadding="4" columns="6">
 								<h:outputText value="Número do SUS: " />
@@ -141,9 +139,9 @@
 					</h:panelGrid>
 
 					<h:panelGrid cellpadding="4">
-						<p:fieldset legend="Dados de Pedido">
+						<p:fieldset legend="Dados de Pedido" style="text-align:center;">
 
-							<h:panelGrid columns="2" cellpadding="4">
+							<h:panelGrid columns="2" cellpadding="4" style="text-align:left;">
 								<h:outputText value="Data de Pedido: " />
 								<p:inputText
 									value="#{parasitologicoBean.parasitologico.dataPedido}"
@@ -151,16 +149,18 @@
 									<f:convertDateTime type="date" locale="pt_BR"
 										timeZone="America/Fortaleza" />
 								</p:inputText>
+							</h:panelGrid>
 
+							<h:panelGrid columns="4" cellpadding="4" style="text-align:left;">
 								<h:outputLabel for="unidade" value="Unidade: " />
 								<p:inputText
 									value="#{parasitologicoBean.parasitologico.unidade}"
 									label="Unidade" disabled="true" />
 
-								<h:outputLabel for="medicoSolicitante"
-									value="Médico Solicitante: " />
+								<h:outputLabel for="solicitante"
+									value="Solicitante: " />
 								<p:inputText
-									value="#{parasitologicoBean.parasitologico.medicoSolicitante}"
+									value="#{parasitologicoBean.parasitologico.solicitante}"
 									label="Médico Solicitante" disabled="true" />
 
 								<h:outputLabel for="prontuario" value="Prontuário: " />
@@ -183,10 +183,8 @@
 					</h:panelGrid>
 				</p:dialog>
 
-				<p:dialog
-					header="Resultado de #{parasitologicoBean.parasitologico.nomeTipo}"
-					widgetVar="resultadoDialog" resizable="false" id="resultado"
-					showEffect="fade" hideEffect="explode" modal="true">
+				<p:dialog widgetVar="resultadoDialog" resizable="false"
+					id="resultado" showEffect="fade" hideEffect="explode" modal="true">
 
 					<h:inputHidden id="idExame"
 						value="#{parasitologicoBean.parasitologico.idExame}" />
@@ -197,12 +195,17 @@
 						<f:convertDateTime type="date" locale="pt_BR"
 							timeZone="America/Fortaleza" />
 					</h:inputHidden>
+					<h:inputHidden id="dataAgendamento"
+						value="#{parasitologicoBean.parasitologico.dataAgendamento}">
+						<f:convertDateTime type="date" locale="pt_BR"
+							timeZone="America/Fortaleza" />
+					</h:inputHidden>
 					<h:inputHidden id="leito"
 						value="#{parasitologicoBean.parasitologico.leito}" />
+					<h:inputHidden id="solicitante"
+						value="#{parasitologicoBean.parasitologico.solicitante}" />
 					<h:inputHidden id="unidade"
 						value="#{parasitologicoBean.parasitologico.unidade}" />
-					<h:inputHidden id="medicoSolicitante"
-						value="#{parasitologicoBean.parasitologico.medicoSolicitante}" />
 					<h:inputHidden id="prontuario"
 						value="#{parasitologicoBean.parasitologico.prontuario}" />
 					<h:inputHidden id="enfermaria"
@@ -210,11 +213,13 @@
 
 					<h:panelGrid id="display" cellpadding="4">
 
-						<p:fieldset legend="Dados do Resultado">
+						<p:fieldset legend="Dados do Resultado" style="margin: 0 auto;text-align:center;">
 
-							<h:panelGrid cellpadding="4">
-								<p:fieldset
-									legend="MÉTODO DIRETO E COLS E DE HOFFMAN PONS E JANER">
+							<h:panelGrid cellpadding="4" style="text-align:center;">
+								<p:fieldset>
+									<p:outputLabel
+										value="MÉTODO DIRETO E COLS E DE HOFFMAN PONS E JANER"
+										style="font-weight:bold;font-size:18px;" />
 									<p:selectOneRadio id="metodo"
 										value="#{parasitologicoBean.parasitologico.metodo}"
 										layout="grid" columns="3">
@@ -223,9 +228,11 @@
 								</p:fieldset>
 							</h:panelGrid>
 
-							<h:panelGrid cellpadding="4" columns="2">
+							<h:panelGrid cellpadding="4" columns="2" style="text-align:center;">
 								<h:panelGrid>
-									<p:fieldset legend="Ovos de Helmintos">
+									<p:fieldset>
+										<p:outputLabel value="Ovos de Helmintos"
+											style="font-weight:bold;font-size:18px;" />
 										<p:selectManyCheckbox id="ovosDeHelmintos"
 											value="#{parasitologicoBean.parasitologico.ovosDeHelmintos}"
 											layout="pageDirection">
@@ -234,8 +241,10 @@
 									</p:fieldset>
 								</h:panelGrid>
 
-								<h:panelGrid>
-									<p:fieldset legend="Protozoários">
+								<h:panelGrid cellpadding="4" style="text-align:center;">
+									<p:fieldset>
+										<p:outputLabel value="Protozoários"
+											style="font-weight:bold;font-size:18px;" />
 										<p:selectManyCheckbox id="protozoarios"
 											value="#{parasitologicoBean.parasitologico.protozoarios}"
 											layout="pageDirection">
@@ -248,17 +257,18 @@
 						</p:fieldset>
 					</h:panelGrid>
 
-					<h:panelGrid cellpading="4">
+					<h:panelGrid cellpading="4" columns="2" style="margin: 0 auto;">
 						<p:commandButton value="Cadastrar" update="panel" id="ajax"
 							actionListener="#{parasitologicoBean.atualizar()}"
 							styleClass="ui-priority-primary"
 							oncomplete="resultadoDialog.hide();" />
 
 						<p:commandButton value="Cancelar" type="reset"
-							onclick="remarcarDialog.hide()" />
+							onclick="resultadoDialog.hide()" />
 					</h:panelGrid>
 				</p:dialog>
 			</p:panel>
 		</h:form>
+		<br />
 	</ui:define>
 </ui:composition>

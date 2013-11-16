@@ -6,14 +6,14 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-		<h:form id="form">
+		<br />
+		<h:form id="form" styleClass="form">
 
-			<p:panel id="panel" header="Pedido de Exame: Parasitológico de Fezes"
-				style="margin-bottom:10px;">
+			<p:panel id="panel" style="margin-bottom:10px;">
 				<p:growl id="msgs" />
 
 				<div id="tableName">
-					<h:outputText value="Exames Agendados" />
+					<h:outputText value="Parasitológico de Fezes Agendados" />
 				</div>
 
 				<p:dataTable id="dataTable" var="parasitologico"
@@ -88,11 +88,10 @@
 					</p:column>
 				</p:dataTable>
 
-				<p:dialog header="Dados do Paciente" widgetVar="pacienteDialog"
-					resizable="false" id="paciente" showEffect="fade"
-					hideEffect="explode" modal="true">
+				<p:dialog widgetVar="pacienteDialog" resizable="false" id="paciente"
+					showEffect="fade" hideEffect="explode" modal="true">
 
-					<p:fieldset legend="Dados do Paciente">
+					<p:fieldset legend="Dados do Paciente" style="text-align: center;">
 
 						<h:panelGrid cellpadding="4" columns="6">
 							<h:outputText value="Número do SUS: " />
@@ -145,56 +144,69 @@
 					</p:fieldset>
 				</p:dialog>
 
-				<p:dialog
-					header="Pedido de #{parasitologicoBean.parasitologico.nomeTipo}"
-					widgetVar="pedidoDialog" resizable="false" id="pedido"
+				<p:dialog widgetVar="pedidoDialog" resizable="false" id="pedido"
 					showEffect="fade" hideEffect="explode" modal="true">
 
-					<h:panelGrid id="display" columns="2" cellpadding="4">
+
+					<p:fieldset legend="Dados do Pedido" style="text-align:center;">
+
 
 						<h:inputHidden id="numeroSus"
 							value="#{parasitologicoBean.parasitologico.paciente.numeroSus}" />
 						<h:inputHidden id="idExame"
 							value="#{parasitologicoBean.parasitologico.idExame}" />
+						<h:inputHidden id="dataAgendamento"
+							value="#{parasitologicoBean.parasitologico.dataAgendamento}">
+							<f:convertDateTime type="date" locale="pt_BR"
+								timeZone="America/Fortaleza" />
+						</h:inputHidden>
 
-						<h:outputLabel for="unidade" value="Unidade: " />
-						<p:inputText id="unidade"
-							value="#{parasitologicoBean.parasitologico.unidade}"
-							label="Unidade" />
+						<h:panelGrid id="display" columns="2" cellpadding="4"
+							style="text-align:left;">
+							<h:outputLabel for="unidade" value="Unidade: " />
+							<p:inputText id="unidade"
+								value="#{parasitologicoBean.parasitologico.unidade}"
+								label="Unidade" />
 
-						<h:outputLabel for="medicoSolicitante"
-							value="Médico Solicitante: " />
-						<p:inputText id="medicoSolicitante"
-							value="#{parasitologicoBean.parasitologico.medicoSolicitante}"
-							label="Médico Solicitante" />
+							<h:outputLabel for="medicoSolicitante"
+								value="Médico Solicitante: " />
+							<p:inputText id="medicoSolicitante"
+								value="#{parasitologicoBean.parasitologico.medicoSolicitante}"
+								label="Médico Solicitante" />
 
-						<h:outputLabel for="prontuario" value="Prontuário: " />
-						<p:inputText id="prontuario"
-							value="#{parasitologicoBean.parasitologico.prontuario}"
-							label="Prontuário" />
+							<h:outputLabel for="prontuario" value="Prontuário: " />
+							<p:inputText id="prontuario"
+								value="#{parasitologicoBean.parasitologico.prontuario}"
+								label="Prontuário" />
 
-						<h:outputLabel for="enfermaria" value="Enfermaria: " />
-						<p:inputText id="enfermaria"
-							value="#{parasitologicoBean.parasitologico.enfermaria}"
-							label="Enfermaria" />
+							<h:outputLabel for="enfermaria" value="Enfermaria: " />
+							<p:inputText id="enfermaria"
+								value="#{parasitologicoBean.parasitologico.enfermaria}"
+								label="Enfermaria" />
 
-						<h:outputLabel for="leito" value="Leito: " />
-						<p:inputText id="leito"
-							value="#{parasitologicoBean.parasitologico.leito}" label="leito" />
+							<h:outputLabel for="leito" value="Leito: " />
+							<p:inputText id="leito"
+								value="#{parasitologicoBean.parasitologico.leito}" label="leito" />
 
+							<h:outputText value="Solicitante: " />
+							<p:inputText id="solicitante"
+								value="#{parasitologicoBean.parasitologico.solicitante}" />
+						</h:panelGrid>
+
+					</p:fieldset>
+					<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto;">
 						<p:commandButton value="Cadastrar" update="panel" id="ajax"
 							actionListener="#{parasitologicoBean.cadastrar()}"
 							styleClass="ui-priority-primary" />
-						<p:commandButton value="Limpar" type="reset" />
+						<p:commandButton value="Cancelar" type="reset"
+							onclick="pedidoDialog.hide()" />
 					</h:panelGrid>
 				</p:dialog>
 			</p:panel>
 		</h:form>
 
 		<h:form id="remarcarForm">
-			<p:dialog
-				header="Remarcar #{parasitologicoBean.parasitologico.nomeTipo}"
-				widgetVar="remarcarDialog" resizable="false" id="remarcar"
+			<p:dialog widgetVar="remarcarDialog" resizable="false" id="remarcar"
 				showEffect="fade" hideEffect="explode" modal="true">
 
 				<h:panelGrid id="display" style="margin: 0 auto">
@@ -204,8 +216,9 @@
 					<h:inputHidden id="idExame"
 						value="#{parasitologicoBean.parasitologico.idExame}" />
 
-					<p:fieldset legend="Nova Data">
-						<h:panelGrid cellpadding="4" style="margin: 0 auto">
+					<p:fieldset legend="Remarcar Parasitológico de Fezes">
+						<h:panelGrid cellpadding="4" style="margin: 0 auto" columns="2">
+							<p:outputLabel value="Nova Data: " />
 							<p:inputMask id="dataAgendamento" size="7" required="true"
 								mask="99/99/9999"
 								requiredMessage="Agendar para: Campo obrigatório."
@@ -227,5 +240,6 @@
 				</h:panelGrid>
 			</p:dialog>
 		</h:form>
+		<br />
 	</ui:define>
 </ui:composition>

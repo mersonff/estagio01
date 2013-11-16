@@ -52,7 +52,7 @@
 						sortBy="#{baciloscopia.dataAgendamento}"
 						filterBy="#{baciloscopia.dataAgendamento}"
 						headerText="Agendado em" style="text-align: center"
-						filterMatchMode="startsWith">
+						filterMatchMode="contains">
 						<h:outputText value="#{baciloscopia.dataAgendamento}">
 							<f:convertDateTime type="date" locale="pt_BR"
 								timeZone="America/Fortaleza" />
@@ -152,6 +152,11 @@
 							value="#{baciloscopiaBean.baciloscopia.paciente.numeroSus}" />
 						<h:inputHidden id="idExame"
 							value="#{baciloscopiaBean.baciloscopia.idExame}" />
+						<h:inputHidden id="dataAgendamento"
+							value="#{baciloscopiaBean.baciloscopia.dataAgendamento}">
+							<f:convertDateTime type="date" locale="pt_BR"
+								timeZone="America/Fortaleza" />
+						</h:inputHidden>
 
 						<p:fieldset legend="Dados de Pedido: Baciloscopia">
 							<h:panelGrid columns="4" cellpadding="4">
@@ -159,6 +164,10 @@
 								<h:outputText value="Unidade de Saúde: " />
 								<p:inputText id="unidadeDeSaude"
 									value="#{baciloscopiaBean.baciloscopia.unidadeDeSaude}" />
+
+								<h:outputText value="Solicitante: " />
+								<p:inputText id="solicitante"
+									value="#{baciloscopiaBean.baciloscopia.solicitante}" />
 
 								<h:outputLabel for="prontuario" value="Prontuário:" />
 								<p:inputText id="prontuario"
@@ -179,29 +188,36 @@
 									rows="4" cols="25" />
 							</h:panelGrid>
 
-							<h:panelGrid columns="2" cellpadding="4">
+							<h:panelGrid columns="6" cellpadding="4">
 
 								<h:outputLabel for="diagnostico" value="Diagnóstico: " />
-								<p:selectBooleanCheckbox id="diagnostico"
-									value="#{baciloscopiaBean.baciloscopia.diagnostico}" />
+								<p:selectOneMenu id="diagnostico"
+									value="#{baciloscopiaBean.baciloscopia.diagnostico}">
+									<f:selectItem itemLabel="Sim" itemValue="Sim" />
+									<f:selectItem itemLabel="Não" itemValue="Não" />
+								</p:selectOneMenu>
 
 								<h:outputLabel for="controleDeTratamento"
 									value="Controle de Tratamento: " />
-								<p:selectBooleanCheckbox id="controleDeTratamento"
-									value="#{baciloscopiaBean.baciloscopia.controleDeTratamento}" />
+								<p:selectOneMenu id="controleDeTratamento"
+									value="#{baciloscopiaBean.baciloscopia.controleDeTratamento}">
+									<f:selectItem itemLabel="Sim" itemValue="Sim" />
+									<f:selectItem itemLabel="Não" itemValue="Não" />
+								</p:selectOneMenu>
 
+								<h:outputText value="Mês da Amostra:" />
+								<p:inputText id="mesDaAmostra"
+									value="#{baciloscopiaBean.baciloscopia.mesDaAmostra}"
+									style="font-weight:bold" size="1" />
+							</h:panelGrid>
+
+							<h:panelGrid columns="4" cellpadding="4">
 								<h:outputLabel for="numeroDaAmostra" value="Número da Amostra: " />
 								<p:selectOneRadio id="numeroDaAmostra"
 									value="#{baciloscopiaBean.baciloscopia.numeroDaAmostra}">
 									<f:selectItem itemLabel="1ª Amostra" itemValue="1" />
 									<f:selectItem itemLabel="2ª Amostra" itemValue="2" />
 								</p:selectOneRadio>
-
-								<h:outputText value="Mês da Amostra:" />
-								<p:inputText id="mesDaAmostra"
-									value="#{baciloscopiaBean.baciloscopia.mesDaAmostra}"
-									style="font-weight:bold" size="1" />
-
 							</h:panelGrid>
 						</p:fieldset>
 					</h:panelGrid>
