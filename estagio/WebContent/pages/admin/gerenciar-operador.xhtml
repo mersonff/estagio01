@@ -66,6 +66,11 @@
 							<f:setPropertyActionListener value="#{operador}"
 								target="#{operadorBean.operador}" />
 						</p:commandButton>
+						<p:commandButton icon="ui-icon-pencil" update=":editarForm:editar"
+							oncomplete="editarDialog.show()" title="Editar Operador">
+							<f:setPropertyActionListener target="#{operadorBean.operador}"
+								value="#{operador}" />
+						</p:commandButton>
 						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
 							oncomplete="confirmacao.show()" title="Excluir Operador">
 							<f:setPropertyActionListener target="#{operadorBean.operador}"
@@ -118,8 +123,48 @@
 				</p:dialog>
 			</p:panel>
 		</h:form>
+		<h:form id="editarForm">
+			<p:dialog widgetVar="editarDialog" resizable="false" id="editar"
+				showEffect="fade" hideEffect="explode" modal="true">
 
+				<h:panelGrid id="display" cellpadding="4">
 
+					<p:fieldset legend="Editar Operador">
+						<h:panelGrid columns="2" cellpadding="4">
+
+							<h:outputLabel for="Login" value="Login: *" />
+							<p:inputText id="login" value="#{operadorBean.operador.login}"
+								label="Login" required="true" />
+
+							<h:outputLabel for="Senha" value="Senha: *" />
+							<p:inputText id="senha" value="#{operadorBean.operador.senha}"
+								label="Senha" required="true" />
+
+							<h:outputLabel for="Nome" value="Nome: *" />
+							<p:inputText id="nome" value="#{operadorBean.operador.nome}"
+								label="Nome" required="true" />
+
+							<h:outputLabel for="email" value="E-mail: " />
+							<p:inputText id="email" value="#{operadorBean.operador.email}"
+								label="E-mail" />
+
+							<h:outputLabel for="telefone" value="Telefone: " />
+							<p:inputMask id="telefone"
+								value="#{operadorBean.operador.telefone}" label="Telefone"
+								mask="(99)9999-9999" />
+						</h:panelGrid>
+					</p:fieldset>
+
+					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
+						<p:commandButton value="Cadastrar" update=":form:panel"
+							actionListener="#{operadorBean.editar()}"
+							styleClass="ui-priority-primary" />
+						<p:commandButton value="Cancelar" type="reset"
+							onclick="editarDialog.hide()" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
 
 	</ui:define>
 </ui:composition>

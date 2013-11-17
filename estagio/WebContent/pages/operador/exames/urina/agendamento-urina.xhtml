@@ -6,17 +6,18 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-		<h:form id="agendamento">
+		<br />
+		<h:form id="agendamento" styleClass="form">
 
 			<p:panel id="panel" header="Agendamento: Urina"
-				style="margin-bottom:10px;">
-				<p:growl id="msgs"/>
-				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto">
+				style="margin-bottom:10px;text-align:center;">
+				<p:growl id="msgs" />
+				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto;text-align:left;">
 
 					<h:outputLabel for="numeroSus" value="Número do SUS: *" />
 					<p:inputText id="numeroSus"
-						value="#{urinaBean.urina.paciente.numeroSus}"
-						required="true" label="numeroSus" size="14"
+						value="#{urinaBean.urina.paciente.numeroSus}" required="true"
+						label="numeroSus" size="14"
 						requiredMessage="Número do SUS: Campo obrigatório."
 						converterMessage="Número do SUS: Deve ser um número." />
 
@@ -42,5 +43,6 @@
 			</p:panel>
 
 		</h:form>
+		<br />
 	</ui:define>
 </ui:composition>

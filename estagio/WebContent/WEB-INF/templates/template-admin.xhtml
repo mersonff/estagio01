@@ -6,7 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>bitLAB</title>
+	<title>Lab. Aracoiaba</title>
 	<h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
 </h:head>
 <h:body>
@@ -14,7 +14,7 @@
 		<div id="conteudo">
 			<div id="cabecalho">
 				<h:panelGrid width="100%" style="text-align: center">
-					<p:graphicImage value="/resources/images/logo.png" width="300px" />
+					<p:graphicImage value="/resources/images/lab.png" width="700px" />
 				</h:panelGrid>
 			</div>
 
@@ -35,14 +35,10 @@
 								url="/pages/admin/cadastro-operador.xhtml" />
 						</p:submenu>
 
-						<p:submenu label="Pesquisar" icon="ui-icon-search">
-							<p:menuitem value="Operador"
-								url="/pages/admin/exibe-operador.xhtml" />
-						</p:submenu>
-
 						<p:submenu label="Editar">
 							<p:menuitem value="Perfil" url="/pages/admin/perfil-admin.xhtml" />
-							<p:menuitem value="Operador" url="#" />
+							<p:menuitem value="Operadores"
+								url="/pages/admin/gerenciar-operador.xhtml" />
 						</p:submenu>
 
 						<p:menuitem value="Sair" icon="ui-icon-extlink"
@@ -56,9 +52,10 @@
 			<div id="corpo">
 				<ui:insert name="corpo">Corpo da página</ui:insert>
 			</div>
+		</div>
 
-			<div id="rodape">
-				<p:menubar styleClass="footer">
+		<div id="rodape">
+			<p:menubar styleClass="footer">
 				<f:facet name="options">
 					<h:panelGrid width="100%"
 						style="text-align: center;font-size: 12px;" columns="6">
@@ -76,7 +73,6 @@
 					</h:panelGrid>
 				</f:facet>
 			</p:menubar>
-			</div>
 		</div>
 	</f:view>
 </h:body>

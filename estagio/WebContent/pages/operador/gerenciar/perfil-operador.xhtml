@@ -56,9 +56,8 @@
 
 		</h:form>
 		<h:form id="dialog">
-			<p:dialog header="Alterar Senha" widgetVar="passwordDialog"
-				resizable="false" id="password" showEffect="fade"
-				hideEffect="explode" modal="true">
+			<p:dialog widgetVar="passwordDialog" resizable="false" id="password"
+				showEffect="fade" hideEffect="explode" modal="true">
 
 				<h:inputHidden id="login" value="#{operadorBean.ativo.login}"
 					required="true" label="Login" />
@@ -71,19 +70,19 @@
 				<h:inputHidden id="senha" value="#{operadorBean.ativo.senha}"
 					required="true" label="Senha" />
 
-				<h:panelGrid columns="2" cellpadding="4">
-					<h:outputLabel value="Senha Atual: " />
-					<p:password value="#{operadorBean.ativo.senha}" redisplay="true"
-						label="Senha" disabled="true" />
-				</h:panelGrid>
 
-				<h:panelGrid columns="2" cellpadding="4">
-					<h:outputLabel value="Nova Senha: *" />
-					<p:password id="novaSenha" value="#{operadorBean.novaSenha}"
-						redisplay="true" label="Senha" />
-				</h:panelGrid>
+				<p:fieldset legend="Alterar Senha" style="text-align:center;">
+					<h:panelGrid columns="2" cellpadding="4">
+						<h:outputLabel value="Senha Atual: " />
+						<p:password value="#{operadorBean.ativo.senha}" redisplay="true"
+							label="Senha" disabled="true" />
+						<h:outputLabel value="Nova Senha: *" />
+						<p:password id="novaSenha" value="#{operadorBean.novaSenha}"
+							redisplay="true" label="Senha" />
+					</h:panelGrid>
+				</p:fieldset>
 
-				<h:panelGrid columns="2" cellpadding="4">
+				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto;">
 					<p:commandButton value="Salvar" update=":perfil:panel" id="ajax"
 						actionListener="#{operadorBean.alterarSenha()}"
 						styleClass="

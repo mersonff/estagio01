@@ -6,14 +6,14 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-
-		<h:form id="form">
+		<br />
+		<h:form id="form" styleClass="form">
 			<p:panel id="panel" style="margin-bottom:10px;">
 
 				<p:growl id="msgs" />
 
 				<div id="tableName">
-					<h:outputText value="Todos os Exames" />
+					<h:outputText value="Todos os Exames: Parasitológico de Fezes" />
 				</div>
 
 				<p:dataTable id="dataTable" var="parasitologico"
@@ -96,16 +96,16 @@
 
 				</p:confirmDialog>
 
-				<p:dialog
-					header="Pedido / Resultado de #{parasitologicoBean.parasitologico.nomeTipo}"
-					widgetVar="exameDialog" resizable="false" id="exame"
+				<p:dialog widgetVar="exameDialog" resizable="false" id="exame"
 					showEffect="fade" hideEffect="explode" modal="true">
 
-					<h:panelGrid cellpadding="4">
+					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
 						<p:commandButton value="Imprimir" type="button"
 							icon="ui-icon-print">
 							<p:printer target="printArea" />
 						</p:commandButton>
+						<p:commandButton value="Fechar" type="reset"
+							onclick="exameDialog.hide()" />
 					</h:panelGrid>
 
 					<p:scrollPanel style="width:600px;height:500px" scrollMode="native">
@@ -113,9 +113,19 @@
 
 
 							<h:form id="printArea">
-								<p:fieldset legend="Dados de Pedido">
+								<div id="cabecalho">
+									<h:panelGrid width="100%" style="text-align: center">
+										<p:graphicImage value="/resources/images/lab.png"
+											width="300px" />
+										<h:outputText value="Exame Parasitológico de Fezes"
+											styleClass="nomeExame" />
+									</h:panelGrid>
+								</div>
+								<br />
+								<p:fieldset legend="Dados de Pedido" style="text-align:center;">
 
-									<h:panelGrid columns="4" cellpadding="4">
+									<h:panelGrid columns="6" cellpadding="4"
+										style="text-align:left;">
 										<h:outputText value="Data de Pedido: " />
 										<p:inputText
 											value="#{parasitologicoBean.parasitologico.dataPedido}"
@@ -129,6 +139,15 @@
 											value="#{parasitologicoBean.parasitologico.unidade}"
 											label="Unidade" disabled="true" />
 
+										<h:outputText value="Idade: " />
+										<p:inputText
+											value="#{parasitologicoBean.parasitologico.paciente.idade}"
+											disabled="true" size="1" />
+									</h:panelGrid>
+
+									<h:panelGrid columns="4" cellpadding="4"
+										style="text-align:left;">
+
 										<h:outputLabel for="nome" value="Nome: " />
 										<p:inputText
 											value="#{parasitologicoBean.parasitologico.paciente.nome}"
@@ -138,17 +157,15 @@
 										<p:inputText
 											value="#{parasitologicoBean.parasitologico.paciente.sobrenome}"
 											label="Sobrenome" disabled="true" />
+									</h:panelGrid>
 
-										<h:outputText value="Idade: " />
-										<p:inputText
-											value="#{parasitologicoBean.parasitologico.paciente.idade}"
-											disabled="true" size="1" />
+									<h:panelGrid columns="4" cellpadding="4"
+										style="text-align:left;">
 
-										<h:outputLabel for="medicoSolicitante"
-											value="Médico Solicitante: " />
+										<h:outputLabel for="solicitante" value="Solicitante: " />
 										<p:inputText
-											value="#{parasitologicoBean.parasitologico.medicoSolicitante}"
-											label="Médico Solicitante" disabled="true" />
+											value="#{parasitologicoBean.parasitologico.solicitante}"
+											label="solicitante" disabled="true" />
 
 										<h:outputLabel for="prontuario" value="Prontuário: " />
 										<p:inputText
@@ -166,14 +183,15 @@
 											label="leito" disabled="true" />
 
 									</h:panelGrid>
-
 								</p:fieldset>
 
 								<br />
 
-								<p:fieldset legend="Dados do Resultado">
+								<p:fieldset legend="Dados do Resultado"
+									style="text-align:center;">
 
-									<h:panelGrid cellpadding="4" columns="4">
+									<h:panelGrid cellpadding="4" columns="4"
+										style="text-align:left;">
 										<h:outputLabel for="dataEntrega" value="Data de Entrega: " />
 										<p:inputMask id="dataEntrega"
 											value="#{parasitologicoBean.parasitologico.dataEntrega}"
@@ -189,25 +207,46 @@
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4">
-										<p:fieldset legend="Ovos de Helmintos">
-											<p:inputTextarea disabled="true"
-												value="#{parasitologicoBean.parasitologico.ovosDeHelmintos}"
-												cols="70" />
+
+										<p:fieldset>
+											<h:panelGrid cellpadding="4">
+												<p:outputLabel value="Ovos de Helmintos"
+													style="font-weight:bold;font-size:18px;" />
+												<p:inputTextarea disabled="true"
+													value="#{parasitologicoBean.parasitologico.ovosDeHelmintos}"
+													cols="50" />
+											</h:panelGrid>
 										</p:fieldset>
 
-										<p:fieldset legend="Protozoários">
-											<p:inputTextarea disabled="true"
-												value="#{parasitologicoBean.parasitologico.protozoarios}"
-												cols="70" />
+
+										<p:fieldset>
+											<h:panelGrid cellpadding="4">
+												<p:outputLabel value="Protozoários"
+													style="font-weight:bold;font-size:18px;" />
+												<p:inputTextarea disabled="true"
+													value="#{parasitologicoBean.parasitologico.protozoarios}"
+													cols="50" />
+											</h:panelGrid>
 										</p:fieldset>
 									</h:panelGrid>
 
 								</p:fieldset>
+								<br />
+								<br />
+								<br />
+								<br />
+								<h:panelGrid style="margin: 0 auto;">
+									<h:outputText value="________________________________" />
+								</h:panelGrid>
+								<h:panelGrid style="margin: 0 auto;">
+									<h:outputText value="Assinatura do Responsável" />
+								</h:panelGrid>
 							</h:form>
 						</h:panelGrid>
 					</p:scrollPanel>
 				</p:dialog>
 			</p:panel>
 		</h:form>
+		<br />
 	</ui:define>
 </ui:composition>

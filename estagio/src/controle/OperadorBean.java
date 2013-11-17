@@ -38,6 +38,13 @@ public class OperadorBean extends AbstractBean {
 		displayInfoMessageToUser("Atualizado com Sucesso!");
 	}
 	
+	public void editar() {
+		OperadorDAO operDAO = new OperadorJPADAO();
+		operDAO.save(this.operador);
+		displayInfoMessageToUser("Atualizado com Sucesso!");
+		this.operadores = operDAO.find();
+	}
+	
 	public void alterarSenha() {
 		OperadorDAO operDAO = new OperadorJPADAO();
 		this.ativo.setSenha(novaSenha);
