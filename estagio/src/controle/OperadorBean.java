@@ -27,29 +27,36 @@ public class OperadorBean extends AbstractBean {
 	}
 
 	public void cadastrar() {
-		OperadorDAO operDAO = new OperadorJPADAO();
-		operDAO.save(this.operador);
-		displayInfoMessageToUser("Cadastrado com sucesso!");
+		OperadorDAO operadorDAO = new OperadorJPADAO();
+		Operador p = operadorDAO.find(this.operador.getLogin());
+		if (p == null) {
+			operadorDAO.save(this.operador);
+			displayInfoMessageToUser("Cadastrado com sucesso!");
+			this.operador = new Operador();
+		} else {
+			displayErrorMessageToUser("Login indisponível: Esse Login já está sendo usado.");
+		}
 	}
-	
+
 	public void atualizar() {
 		OperadorDAO operDAO = new OperadorJPADAO();
 		operDAO.save(this.ativo);
 		displayInfoMessageToUser("Atualizado com Sucesso!");
 	}
-	
+
 	public void editar() {
 		OperadorDAO operDAO = new OperadorJPADAO();
 		operDAO.save(this.operador);
 		displayInfoMessageToUser("Atualizado com Sucesso!");
 		this.operadores = operDAO.find();
 	}
-	
+
 	public void alterarSenha() {
 		OperadorDAO operDAO = new OperadorJPADAO();
 		this.ativo.setSenha(novaSenha);
 		operDAO.save(this.ativo);
 		displayInfoMessageToUser("Atualizado com Sucesso!");
+
 	}
 
 	public void pesquisarTodos() {
@@ -89,7 +96,8 @@ public class OperadorBean extends AbstractBean {
 	}
 
 	public Operador getAtivo() {
-		HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance()
+				.getExternalContext().getSession(true);
 		Operador temp = new Operador();
 		OperadorDAO pDAO = new OperadorJPADAO();
 		temp = pDAO.find(sessao.getAttribute("login"));

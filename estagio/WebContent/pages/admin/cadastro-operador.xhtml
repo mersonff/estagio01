@@ -26,16 +26,17 @@
 					<p:password id="senha" value="#{operadorBean.operador.senha}"
 						feedback="true" required="true" label="Senha" />
 
-					<h:outputLabel for="Nome" value="Nome: *" />
+					<h:outputLabel for="nome" value="Nome: *" />
 					<p:inputText id="nome" value="#{operadorBean.operador.nome}"
 						required="true" label="Nome">
 						<f:validateLength minimum="2" />
 					</p:inputText>
 
-					<h:outputLabel for="email" value="E-mail:" />
+					<h:outputLabel for="email" value="E-mail: *" />
 					<p:inputText id="email" value="#{operadorBean.operador.email}"
-						label="E-mail">
-
+						label="E-mail" required="true" validatorMessage="E-mail: Formato inválido.">
+						<f:validateRegex
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 					</p:inputText>
 
 					<h:outputLabel for="telefone" value="Telefone:" />

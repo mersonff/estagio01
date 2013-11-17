@@ -1,7 +1,7 @@
 @CHARSET "ISO-8859-1";
 
 body {
-	background-color: #69b549;
+	background: url("../resources/images/background.png");
 }
 
 a {
@@ -13,13 +13,24 @@ a {
 	font-family: Calibri;
 }
 
+.welcome {
+	position: absolute;
+	top: 50%;
+	left: 38%;
+	margin-top: -50px;
+	font-family: Verdana;
+	font-weight: bold;
+	font-size: 50px;
+	color: #69b549
+}
+
 #conteudo {
 	margin-top: 2px;
 	width: 800px;
 	margin: 0 auto;
 }
 
-.form{
+.form {
 	margin: 10px;
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -51,7 +62,7 @@ a {
 
 #menu {
 	margin-top: 10px;
-	}
+}
 
 #login {
 	width: 400px;

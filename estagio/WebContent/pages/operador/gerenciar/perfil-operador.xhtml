@@ -32,8 +32,10 @@
 
 						<h:outputLabel for="email" value="Email:" />
 						<p:inputText id="email" value="#{operadorBean.ativo.email}"
-							label="Email">
-
+							label="Email" required="true"
+							validatorMessage="E-mail: Formato inválido.">
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 						</p:inputText>
 
 						<h:outputLabel for="telefone" value="Telefone:" />
@@ -59,28 +61,31 @@
 			<p:dialog widgetVar="passwordDialog" resizable="false" id="password"
 				showEffect="fade" hideEffect="explode" modal="true">
 
-				<h:inputHidden id="login" value="#{operadorBean.ativo.login}"
-					required="true" label="Login" />
-				<h:inputHidden id="nome" value="#{operadorBean.ativo.nome}"
-					required="true" label="Nome" />
-				<h:inputHidden id="email" value="#{operadorBean.ativo.email}"
-					required="true" label="Email" />
-				<h:inputHidden id="telefone" value="#{operadorBean.ativo.telefone}"
-					required="true" label="Telefone" />
-				<h:inputHidden id="senha" value="#{operadorBean.ativo.senha}"
-					required="true" label="Senha" />
+				<h:panelGrid id="display" style="margin: 0 auto">
+
+					<h:inputHidden id="login" value="#{operadorBean.ativo.login}"
+						label="Login" />
+					<h:inputHidden id="nome" value="#{operadorBean.ativo.nome}"
+						label="Nome" />
+					<h:inputHidden id="email" value="#{operadorBean.ativo.email}"
+						label="Email" />
+					<h:inputHidden id="telefone" value="#{operadorBean.ativo.telefone}"
+						label="Telefone" />
+					<h:inputHidden id="senha" value="#{operadorBean.ativo.senha}"
+						label="Senha" />
 
 
-				<p:fieldset legend="Alterar Senha" style="text-align:center;">
-					<h:panelGrid columns="2" cellpadding="4">
-						<h:outputLabel value="Senha Atual: " />
-						<p:password value="#{operadorBean.ativo.senha}" redisplay="true"
-							label="Senha" disabled="true" />
-						<h:outputLabel value="Nova Senha: *" />
-						<p:password id="novaSenha" value="#{operadorBean.novaSenha}"
-							redisplay="true" label="Senha" />
-					</h:panelGrid>
-				</p:fieldset>
+					<p:fieldset legend="Alterar Senha" style="text-align:center;">
+						<h:panelGrid columns="2" cellpadding="4">
+							<h:outputLabel value="Senha Atual: " />
+							<p:password value="#{operadorBean.ativo.senha}" redisplay="true"
+								label="Senha" disabled="true" />
+							<h:outputLabel value="Nova Senha: *" />
+							<p:password id="novaSenha" value="#{operadorBean.novaSenha}"
+								redisplay="true" required="true" label="Nova Senha" />
+						</h:panelGrid>
+					</p:fieldset>
+				</h:panelGrid>
 
 				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto;">
 					<p:commandButton value="Salvar" update=":perfil:panel" id="ajax"

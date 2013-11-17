@@ -6,8 +6,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="corpo">
-
-		<h:form id="form">
+		<br />
+		<h:form id="form" styleClass="form">
 			<p:panel id="panel" style="margin-bottom:10px;">
 
 				<p:growl id="msgs" />
@@ -79,26 +79,27 @@
 					</p:column>
 				</p:dataTable>
 
-				<p:confirmDialog header="Excluir Operador" message="Tem certeza?"
-					widgetVar="confirmacao" id="excluir">
+				<p:confirmDialog message="Tem certeza?" widgetVar="confirmacao"
+					id="excluir">
 
 					<h:inputHidden id="login" value="#{operadorBean.operador.login}" />
 
-					<p:commandButton value="Sim" update="panel" id="ajax"
-						oncomplete="confirmacao.hide()"
-						actionListener="#{operadorBean.excluir()}" />
-					<p:button value="Não" onclick="confirmacao.hide();" />
+					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
+						<p:commandButton value="Sim" update="panel" id="ajax"
+							oncomplete="confirmacao.hide()"
+							actionListener="#{operadorBean.excluir()}" />
+						<p:button value="Não" onclick="confirmacao.hide();" />
+					</h:panelGrid>
 
 				</p:confirmDialog>
 
 
-				<p:dialog header="Dados do Operador" widgetVar="exameDialog"
-					resizable="false" id="operador" showEffect="fade"
-					hideEffect="explode" modal="true">
+				<p:dialog widgetVar="exameDialog" resizable="false" id="operador"
+					showEffect="fade" hideEffect="explode" modal="true">
 
 					<h:panelGrid id="display" cellpadding="4">
 
-						<p:fieldset legend="Operador">
+						<p:fieldset legend="Operador" style="text-align:center;">
 
 							<h:panelGrid cellpadding="4" columns="4">
 								<h:outputText value="Login:" />
@@ -129,24 +130,28 @@
 
 				<h:panelGrid id="display" cellpadding="4">
 
-					<p:fieldset legend="Editar Operador">
-						<h:panelGrid columns="2" cellpadding="4">
+					<p:fieldset legend="Editar Operador" style="text-align: center;">
+						<h:panelGrid columns="2" cellpadding="4" style="text-align: left;">
 
-							<h:outputLabel for="Login" value="Login: *" />
+							<h:outputLabel for="login" value="Login: *" />
 							<p:inputText id="login" value="#{operadorBean.operador.login}"
 								label="Login" required="true" />
 
-							<h:outputLabel for="Senha" value="Senha: *" />
+							<h:outputLabel for="senha" value="Senha: *" />
 							<p:inputText id="senha" value="#{operadorBean.operador.senha}"
 								label="Senha" required="true" />
 
-							<h:outputLabel for="Nome" value="Nome: *" />
+							<h:outputLabel for="nome" value="Nome: *" />
 							<p:inputText id="nome" value="#{operadorBean.operador.nome}"
 								label="Nome" required="true" />
 
 							<h:outputLabel for="email" value="E-mail: " />
 							<p:inputText id="email" value="#{operadorBean.operador.email}"
-								label="E-mail" />
+								label="E-mail" required="true"
+								validatorMessage="E-mail: Formato inválido.">
+								<f:validateRegex
+									pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+							</p:inputText>
 
 							<h:outputLabel for="telefone" value="Telefone: " />
 							<p:inputMask id="telefone"
@@ -158,13 +163,13 @@
 					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
 						<p:commandButton value="Cadastrar" update=":form:panel"
 							actionListener="#{operadorBean.editar()}"
-							styleClass="ui-priority-primary" />
+							styleClass="ui-priority-primary" onsuccess="editarDialog.hide()" />
 						<p:commandButton value="Cancelar" type="reset"
 							onclick="editarDialog.hide()" />
 					</h:panelGrid>
 				</h:panelGrid>
 			</p:dialog>
 		</h:form>
-
+		<br />
 	</ui:define>
 </ui:composition>
