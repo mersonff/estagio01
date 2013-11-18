@@ -1,0 +1,73 @@
+<ui:composition template="/WEB-INF/templates/template-operador.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<br />
+		<h:form id="cad_paciente" styleClass="form">
+
+			<p:messages autoUpdate="true" closable="true" id="msg" />
+
+			<p:panel id="panel" header="Quantidade de Exames"
+				style="margin-bottom:10px;text-align:center;">
+
+				<h:panelGrid columns="2" cellpadding="4"
+					style="margin: 0 auto;text-align:left;">
+
+					
+
+
+					<h:outputLabel for="dataInicio" value="De: " />
+					<p:inputMask id="dataInicio"
+						value="#{exameBean.inicio}"
+						label="dataInicio" mask="99/99/9999" size="7"
+						requiredMessage="Data de inicio: Campo obrigatório."
+						converterMessage="Data de inicio: A data inserida não é uma data válida" required="true">
+						<f:convertDateTime type="date" locale="pt_BR"
+							timeZone="America/Fortaleza" />
+					</p:inputMask>
+					
+					<h:outputLabel for="dataFim" value="Ate: " />
+					<p:inputMask id="dataFim"
+						value="#{exameBean.fim}"
+						label="dataFim" mask="99/99/9999" size="7"
+						requiredMessage="Data de fim: Campo obrigatório."
+						converterMessage="Data de fim: A data inserida não é uma data válida" required="true">
+						<f:convertDateTime type="date" locale="pt_BR"
+							timeZone="America/Fortaleza" />
+					</p:inputMask>
+					
+					<h:outputLabel value="Tipo de exame:" />
+					<p:selectOneMenu value="#{exameBean.tipo}" required="true"
+							label="Tipo de exame">
+							<f:selectItem itemValue="Todos" itemLabel="Todos" />
+							<f:selectItem itemValue="Baciloscopia" itemLabel="Baciloscopia" />
+							<f:selectItem itemValue="Bioquimica" itemLabel="Bioquimica" />
+							<f:selectItem itemValue="Parasitologico de Fezes" itemLabel="Parasitologico de Fezes" />
+							<f:selectItem itemValue="Hemograma" itemLabel="Hemograma" />
+							<f:selectItem itemValue="Hb / Ht com Plaquetas" itemLabel="Hb / Ht com Plaquetas" />
+							<f:selectItem itemValue="Classificacao Sanguinea" itemLabel="Classificacao Sanguinea" />
+						    <f:selectItem itemValue="Urina" itemLabel="Urina" />
+						</p:selectOneMenu>
+					
+					<h:outputText value="Quantidade:" />
+					<h:outputText value="#{exameBean.quantidade}" />
+					
+
+
+				</h:panelGrid>
+
+
+				<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
+					<p:commandButton value="Verificar" update=":cad_paciente" id="ajax"
+						actionListener="#{exameBean.quantExame()}"
+						styleClass="ui-priority-primary" />
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+		<br />
+	</ui:define>
+</ui:composition>
