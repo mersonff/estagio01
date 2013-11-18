@@ -2,6 +2,7 @@ package controle;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -20,6 +21,10 @@ public class ExameBean extends AbstractBean {
 	private List<Exame> exames;
 	private List<Exame> deHoje;
 	private List<Exame> examesFiltrados;
+	private Date inicio;
+	private Date fim;
+	private int quantidade;
+	private String tipo;
 
 	private final static String[] status;
 	static {
@@ -60,6 +65,23 @@ public class ExameBean extends AbstractBean {
 		ExameDAO operDAO = new ExameJPADAO();
 		operDAO.delete(exame);
 		displayInfoMessageToUser("Excluido com sucesso!");
+	}
+	
+	public void quantPacientesAtendidos(){
+		ExameDAO exameDAO = new ExameJPADAO();
+		List<Exame> exames = exameDAO.quantPacientesAtendidos(this.inicio, this.fim);
+		this.quantidade = exames.size();
+	}
+	
+	public void quantExame(){
+		ExameDAO exameDAO = new ExameJPADAO();
+		if(this.tipo.equals("Todos")){
+			List<Exame> exames = exameDAO.quantGeralExame(this.inicio, this.fim);
+			this.quantidade = exames.size();
+		}else{
+			List<Exame> exames = exameDAO.quantTipoExame(this.inicio, this.fim, this.tipo);
+			this.quantidade = exames.size();
+		}
 	}
 
 	public Exame getExame() {
@@ -115,5 +137,39 @@ public class ExameBean extends AbstractBean {
 	public void setDeHoje(List<Exame> deHoje) {
 		this.deHoje = deHoje;
 	}
+
+	public Date getInicio() {
+		return inicio;
+	}
+
+	public void setInicio(Date inicio) {
+		this.inicio = inicio;
+	}
+
+	public Date getFim() {
+		return fim;
+	}
+
+	public void setFim(Date fim) {
+		this.fim = fim;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
+	
 
 }

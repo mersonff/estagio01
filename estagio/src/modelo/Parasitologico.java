@@ -25,7 +25,7 @@ public class Parasitologico extends Exame {
 	private List<String> protozoarios;
 
 	public Parasitologico() {
-		setNomeTipo("Parasitológico de Fezes");
+		setNomeTipo("Parasitologico de Fezes");
 	}
 
 	public String getLeito() {

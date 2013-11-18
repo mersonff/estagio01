@@ -12,10 +12,20 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Exame.QuantPacientesAtendidos", 
+			    query="select e from Exame e where e.dataEntrega >= :dataInicio and e.dataEntrega <= :dataFim"),
+	@NamedQuery(name="Exame.quantGeralExame", 
+			    query="select e from Exame e where e.dataEntrega >= :dataInicio and e.dataEntrega <= :dataFim"),
+	@NamedQuery(name="Exame.quantTipoExame", 
+			    query="select e from Exame e where e.dataEntrega >= :dataInicio and e.dataEntrega <= :dataFim and e.nomeTipo = :nomeTipo")			    
+})
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Exame {
 

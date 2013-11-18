@@ -1,6 +1,7 @@
 package controle;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -18,6 +19,7 @@ public class PacienteBean extends AbstractBean {
 	private Paciente paciente;
 	private List<Paciente> pacientes;
 	private List<Paciente> filteredPacientes;
+
 
 	public PacienteBean() {
 		this.setPaciente(new Paciente());
@@ -84,5 +86,4 @@ public class PacienteBean extends AbstractBean {
 	public void setFilteredPacientes(List<Paciente> filteredPacientes) {
 		this.filteredPacientes = filteredPacientes;
 	}
-
 }
