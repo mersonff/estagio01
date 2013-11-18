@@ -54,7 +54,7 @@ public class AdminBean  extends AbstractBean{
 		Administrador temp = new Administrador();
 		AdministradorDAO adminDAO = new AdministradorJPADAO();
 		temp =adminDAO.find(sessao.getAttribute("login"));
-		ativo = temp;
+		this.ativo = temp;
 		return ativo;
 	}
 
