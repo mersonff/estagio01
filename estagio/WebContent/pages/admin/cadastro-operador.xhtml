@@ -17,7 +17,7 @@
 					style="margin: 0 auto;text-align:left;">
 
 					<h:outputLabel for="login" value="Login: *" />
-					<p:inputText id="login" value="#{operadorBean.operador.login}"
+					<p:inputText id="login" value="#{operadorBean.operador.login}" 
 						required="true" label="Login">
 
 					</p:inputText>
@@ -35,8 +35,7 @@
 					<h:outputLabel for="email" value="E-mail: *" />
 					<p:inputText id="email" value="#{operadorBean.operador.email}"
 						label="E-mail" required="true" validatorMessage="E-mail: Formato inválido.">
-						<f:validateRegex
-							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						<f:validator validatorId="validadorEmail" />
 					</p:inputText>
 
 					<h:outputLabel for="telefone" value="Telefone:" />

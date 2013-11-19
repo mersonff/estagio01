@@ -16,34 +16,19 @@
 
 				<h:panelGrid id="printArea" columns="2" cellpadding="4"
 					style="margin: 0 auto;text-align:left;">
-
 					
-
-
 					<h:outputLabel for="dataInicio" value="De: " />
-					<p:inputMask id="dataInicio"
-						value="#{exameBean.inicio}"
-						label="dataInicio" mask="99/99/9999" size="8"
-						requiredMessage="Data de inicio: Campo obrigatório."
-						converterMessage="Data de inicio: A data inserida não é uma data válida" required="true">
-						<f:convertDateTime type="date" locale="pt_BR"
-							timeZone="America/Fortaleza" />
-					</p:inputMask>
-					
+					<p:calendar value="#{exameBean.inicio}" id="dataInicio" required="true" showOn="button" size="15" 
+					timeZone="America/Fortaleza" locale="pt_BR" pattern="dd/MM/yyyy" title="inicio da pesquisa"  />
+		
 					<h:outputLabel for="dataFim" value="Ate: " />
-					<p:inputMask id="dataFim"
-						value="#{exameBean.fim}"
-						label="dataFim" mask="99/99/9999" size="8"
-						requiredMessage="Data de fim: Campo obrigatório."
-						converterMessage="Data de fim: A data inserida não é uma data válida" required="true">
-						<f:convertDateTime type="date" locale="pt_BR"
-							timeZone="America/Fortaleza" />
-					</p:inputMask>
+					<p:calendar value="#{exameBean.fim}" id="dataFim" required="true" showOn="button" size="15"
+					timeZone="America/Fortaleza" locale="pt_BR" pattern="dd/MM/yyyy" title="fim da pesquisa" />
 					
-					<h:outputText value="Pacientes atendidos:" />
+					<h:outputLabel value="Pacientes atendidos:" />
 					<h:outputText value="#{exameBean.quantidade}" />
-					
-
+		
+	
 
 				</h:panelGrid>
 

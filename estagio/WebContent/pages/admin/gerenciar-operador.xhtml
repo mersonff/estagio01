@@ -132,10 +132,13 @@
 
 					<p:fieldset legend="Editar Operador" style="text-align: center;">
 						<h:panelGrid columns="2" cellpadding="4" style="text-align: left;">
-
+                            
 							<h:outputLabel for="login" value="Login: *" />
-							<p:inputText id="login" value="#{operadorBean.operador.login}"
-								label="Login" required="true" />
+							<h:panelGroup>
+								<h:inputHidden value="#{operadorBean.operador.login}" />
+								<p:inputText id="login" value="#{operadorBean.operador.login}"
+									label="Login" required="true" disabled="true"/>	
+							</h:panelGroup>	
 
 							<h:outputLabel for="senha" value="Senha: *" />
 							<p:inputText id="senha" value="#{operadorBean.operador.senha}"
@@ -149,8 +152,7 @@
 							<p:inputText id="email" value="#{operadorBean.operador.email}"
 								label="E-mail" required="true"
 								validatorMessage="E-mail: Formato inválido.">
-								<f:validateRegex
-									pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+								<f:validator validatorId="validadorEmail" />
 							</p:inputText>
 
 							<h:outputLabel for="telefone" value="Telefone: " />
@@ -161,7 +163,7 @@
 					</p:fieldset>
 
 					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
-						<p:commandButton value="Cadastrar" update=":form:panel"
+						<p:commandButton value="Atualizar" update=":form:panel"
 							actionListener="#{operadorBean.editar()}"
 							styleClass="ui-priority-primary" onsuccess="editarDialog.hide()" />
 						<p:commandButton value="Cancelar" type="reset"

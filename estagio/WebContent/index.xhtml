@@ -37,17 +37,14 @@
 						<p:selectOneMenu value="#{loginBean.usuario.tipo}" required="true"
 							label="Tipo de Usuário">
 							<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
-							<f:selectItem
-								itemValue="#{loginBean.tipoDeUsuario.administrador}"
-								itemLabel="Administrador" />
-							<f:selectItem itemValue="#{loginBean.tipoDeUsuario.operador}"
-								itemLabel="Operador" />
+							<f:selectItem itemValue="#{loginBean.tipoDeUsuario.operador}" itemLabel="Operador" />
+							<f:selectItem itemValue="#{loginBean.tipoDeUsuario.administrador}" itemLabel="Administrador" />
 						</p:selectOneMenu>
 
 						<p:commandButton value="Entrar" action="#{loginBean.logar}" />
+						
 					</h:panelGrid>
 				</p:panel>
-				<h:messages />
 			</h:form>
 		</div>
 	</div>
