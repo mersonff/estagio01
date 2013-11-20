@@ -13,7 +13,7 @@
 				<p:growl id="msgs" />
 
 				<div id="tableName">
-					<h:outputText value="Todos os Exames" />
+					<h:outputText value="Todos os Exames: Hb / Ht com Plaquetas" />
 				</div>
 
 				<p:dataTable id="dataTable" var="plaqueta"
@@ -119,7 +119,7 @@
 									</h:panelGrid>
 								</div>
 								<br />
-								<p:fieldset legend="Dados do Pedido" style="text-align:center;">
+								<p:fieldset legend="Dados do Pedido" style="text-align:center;" toggleable="true">
 
 									<h:panelGrid cellpadding="4" columns="6">
 										<h:outputText value="Nome: " />
@@ -161,7 +161,7 @@
 								<br />
 
 								<p:fieldset legend="Dados do Resultado"
-									style="text-align:center;">
+									style="text-align:center;" toggleable="true">
 
 									<h:panelGrid cellpadding="4" columns="2">
 

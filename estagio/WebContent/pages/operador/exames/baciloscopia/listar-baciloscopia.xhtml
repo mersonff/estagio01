@@ -13,7 +13,7 @@
 				<p:growl id="msgs" />
 
 				<div id="tableName">
-					<h:outputText value="Todas os Exames: Baciloscopia" />
+					<h:outputText value="Todos os Exames: Baciloscopia" />
 				</div>
 
 				<p:dataTable id="dataTable" var="baciloscopia"
@@ -122,7 +122,7 @@
 									</h:panelGrid>
 								</div>
 								<br />
-								<p:fieldset legend="Dados do Pedido" style="text-align: center;">
+								<p:fieldset legend="Dados do Pedido" style="text-align: center;" toggleable="true">
 
 									<h:panelGrid cellpadding="4" columns="6">
 										<h:outputText value="SUS:" />
@@ -240,7 +240,7 @@
 								<br />
 
 								<p:fieldset legend="Dados do Resultado"
-									style="text-align: center;">
+									style="text-align: center;" toggleable="true">
 
 									<h:panelGrid cellpadding="4" columns="4">
 										<h:outputLabel for="dataEntrega" value="Data de Entrega: " />

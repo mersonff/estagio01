@@ -21,7 +21,7 @@
 					paginator="true" rows="10"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15"
-					emptyMessage="Nenhum exame encontrado com esses critérios."
+					emptyMessage="Nenhum exame encontrado com esses critÃ©rios."
 					filteredValue="#{bioquimicaBean.filteredBioquimicas}"
 					paginatorAlwaysVisible="false">
 
@@ -89,7 +89,7 @@
 					<p:commandButton value="Sim" update="panel" id="ajax"
 						oncomplete="confirmacao.hide()"
 						actionListener="#{bioquimicaBean.excluir()}" />
-					<p:button value="Não" onclick="confirmacao.hide();" />
+					<p:button value="NÃ£o" onclick="confirmacao.hide();" />
 
 				</p:confirmDialog>
 
@@ -119,7 +119,7 @@
 									</h:panelGrid>
 								</div>
 								<br />
-								<p:fieldset legend="Dados do Pedido" style="text-align: center;">
+								<p:fieldset legend="Dados do Pedido" style="text-align: center;" toggleable="true">
 
 									<h:panelGrid cellpadding="4" columns="6">
 										<h:outputText value="Nome: " />
@@ -159,7 +159,7 @@
 
 								<br />
 
-								<p:fieldset legend="Dados do Resultado"
+								<p:fieldset legend="Dados do Resultado" toggleable="true"
 									style="text-align: center;">
 
 									<h:panelGrid cellpadding="4" columns="2"
@@ -269,7 +269,7 @@
 												</p:inputText>
 
 												<h:outputLabel for="proteinasTotais"
-													value="Proteínas Totais: " />
+													value="ProteÃ­nas Totais: " />
 												<p:inputText id="proteinasTotais"
 													value="#{bioquimicaBean.bioquimica.proteinasTotais}"
 													label="proteinasTotais" size="3" disabled="true">
