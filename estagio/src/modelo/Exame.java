@@ -19,8 +19,8 @@ import javax.persistence.TemporalType;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Exame.QuantPacientesAtendidos", 
-			    query="select e from Exame e where e.dataEntrega >= :dataInicio and e.dataEntrega <= :dataFim"),
+	@NamedQuery(name="Exame.autoComplete", 
+			    query="select e.solicitante from Exame e where e.solicitante LIKE :solicitante"),
 	@NamedQuery(name="Exame.quantGeralExame", 
 			    query="select e from Exame e where e.dataEntrega >= :dataInicio and e.dataEntrega <= :dataFim"),
 	@NamedQuery(name="Exame.quantTipoExame", 

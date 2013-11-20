@@ -189,8 +189,8 @@
 								value="#{parasitologicoBean.parasitologico.leito}" label="leito" />
 
 							<h:outputText value="Solicitante: " />
-							<p:inputText id="solicitante"
-								value="#{parasitologicoBean.parasitologico.solicitante}" />
+							<p:autoComplete id="solicitante"
+								value="#{parasitologicoBean.parasitologico.solicitante}" completeMethod="#{parasitologicoBean.complete}" minQueryLength="3"/>
 						</h:panelGrid>
 
 					</p:fieldset>

@@ -166,8 +166,8 @@
 									value="#{baciloscopiaBean.baciloscopia.unidadeDeSaude}" />
 
 								<h:outputText value="Solicitante: " />
-								<p:inputText id="solicitante"
-									value="#{baciloscopiaBean.baciloscopia.solicitante}" />
+								<p:autoComplete id="solicitante"
+									value="#{baciloscopiaBean.baciloscopia.solicitante}" completeMethod="#{baciloscopiaBean.complete}" minQueryLength="3" />
 
 								<h:outputLabel for="prontuario" value="Prontuário:" />
 								<p:inputText id="prontuario"

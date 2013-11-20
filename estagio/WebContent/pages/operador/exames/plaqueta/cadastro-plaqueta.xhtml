@@ -156,8 +156,8 @@
 								<p:inputText id="leito" value="#{plaquetaBean.plaqueta.leito}"
 									label="leito" />
 								<h:outputText value="Solicitante: " />
-								<p:inputText id="solicitante"
-									value="#{plaquetaBean.plaqueta.solicitante}" />
+								<p:autoComplete id="solicitante"
+									value="#{plaquetaBean.plaqueta.solicitante}" completeMethod="#{plaquetaBean.complete}" minQueryLength="3" />
 							</h:panelGrid>
 						</p:fieldset>
 

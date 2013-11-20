@@ -11,16 +11,17 @@ public class ExameJPADAO extends GenericJPADAO<Exame> implements ExameDAO {
 		this.persistentClass = Exame.class;
 	}
 
-	public List<Exame> quantPacientesAtendidos(Date inicio, Date fim) {
-		return this.getEm().createNamedQuery("Exame.QuantPacientesAtendidos").setParameter("dataInicio", inicio).setParameter("dataFim", fim).getResultList();
-	}
-
 	public List<Exame> quantGeralExame(Date inicio, Date fim) {
 		return this.getEm().createNamedQuery("Exame.quantGeralExame").setParameter("dataInicio", inicio).setParameter("dataFim", fim).getResultList();
 	}
 
 	public List<Exame> quantTipoExame(Date inicio, Date fim, String nome) {
 		return this.getEm().createNamedQuery("Exame.quantTipoExame").setParameter("dataInicio", inicio).setParameter("dataFim", fim).setParameter("nomeTipo", nome).getResultList();
+	}
+
+
+	public List<String> autoComplete(String solicitante) {
+		return this.getEm().createNamedQuery("Exame.autoComplete").setParameter("solicitante", "%"+solicitante+"%").getResultList();
 	}
 
 }

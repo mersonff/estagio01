@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -20,6 +22,8 @@ import modelo.Baciloscopia;
 import modelo.Paciente;
 import dao.BaciloscopiaDAO;
 import dao.BaciloscopiaJPADAO;
+import dao.ExameDAO;
+import dao.ExameJPADAO;
 import dao.PacienteDAO;
 import dao.PacienteJPADAO;
 
@@ -96,6 +100,21 @@ public class BaciloscopiaBean extends AbstractBean {
 		} else {
 			displayErrorMessageToUser("Paciente não encontrado. Por favor, realize o cadastro do paciente.");
 		}
+	}
+	
+	public List<String> complete(String query){
+		 List<String> results = new ArrayList<String>();  
+		 ExameDAO exameDAO = new ExameJPADAO();
+		 results = exameDAO.autoComplete(query);
+		 Set<String> resultadoSemRepeticao = new HashSet<String>();
+		 for(String nome: results){
+			 resultadoSemRepeticao.add(nome);
+		 }
+		 results.clear();
+		 for(String nome: resultadoSemRepeticao){
+			 results.add(nome);
+		 }
+	     return results; 
 	}
 
 	public Baciloscopia getBaciloscopia() {

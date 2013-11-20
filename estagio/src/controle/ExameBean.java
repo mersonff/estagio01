@@ -3,10 +3,8 @@ package controle;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
@@ -82,11 +80,6 @@ public class ExameBean extends AbstractBean {
 		displayInfoMessageToUser("Excluido com sucesso!");
 	}
 	
-	public void quantPacientesAtendidos(){
-		ExameDAO exameDAO = new ExameJPADAO();
-		List<Exame> exames = exameDAO.quantPacientesAtendidos(this.inicio, this.fim);
-		this.quantTodos = exames.size();
-	}
 	
 	public void quantPacientesAtendidosPorSolicitante(){
 		ExameDAO exameDAO = new ExameJPADAO();
@@ -105,6 +98,21 @@ public class ExameBean extends AbstractBean {
 			}
 			this.solicitantesExames.add(se);
 		}
+	}
+	
+	public List<String> complete(String query){
+		 List<String> results = new ArrayList<String>();  
+		 ExameDAO exameDAO = new ExameJPADAO();
+		 results = exameDAO.autoComplete(query);
+		 Set<String> resultadoSemRepeticao = new HashSet<String>();
+		 for(String nome: results){
+			 resultadoSemRepeticao.add(nome);
+		 }
+		 results.clear();
+		 for(String nome: resultadoSemRepeticao){
+			 results.add(nome);
+		 }
+	     return results; 
 	}
 	
 	public void quantExame(){

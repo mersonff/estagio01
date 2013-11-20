@@ -7,7 +7,7 @@ import modelo.Exame;
 
 public interface ExameDAO extends GenericDAO<Exame>{
 	
-	public List<Exame> quantPacientesAtendidos(Date inicio, Date fim);
+	public List<String> autoComplete(String solicitante);
 	
 	public List<Exame> quantGeralExame(Date inicio, Date fim);
 	

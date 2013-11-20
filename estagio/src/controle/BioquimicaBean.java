@@ -2,7 +2,9 @@ package controle;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 
@@ -10,6 +12,8 @@ import modelo.Bioquimica;
 import modelo.Paciente;
 import dao.BioquimicaDAO;
 import dao.BioquimicaJPADAO;
+import dao.ExameDAO;
+import dao.ExameJPADAO;
 import dao.PacienteDAO;
 import dao.PacienteJPADAO;
 
@@ -40,6 +44,21 @@ public class BioquimicaBean extends AbstractBean {
 			displayErrorMessageToUser("Paciente não cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
 
+	}
+	
+	public List<String> complete(String query){
+		 List<String> results = new ArrayList<String>();  
+		 ExameDAO exameDAO = new ExameJPADAO();
+		 results = exameDAO.autoComplete(query);
+		 Set<String> resultadoSemRepeticao = new HashSet<String>();
+		 for(String nome: results){
+			 resultadoSemRepeticao.add(nome);
+		 }
+		 results.clear();
+		 for(String nome: resultadoSemRepeticao){
+			 results.add(nome);
+		 }
+	     return results; 
 	}
 
 	public void remarcar() {

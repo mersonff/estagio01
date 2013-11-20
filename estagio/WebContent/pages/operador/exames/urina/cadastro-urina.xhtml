@@ -154,8 +154,8 @@
 								label="leito" />
 
 							<h:outputText value="Solicitante: " />
-							<p:inputText id="solicitante"
-								value="#{urinaBean.urina.solicitante}" />
+							<p:autoComplete id="solicitante"
+								value="#{urinaBean.urina.solicitante}" completeMethod="#{urinaBean.complete}" minQueryLength="3" />
 
 						</h:panelGrid>
 					</p:fieldset>

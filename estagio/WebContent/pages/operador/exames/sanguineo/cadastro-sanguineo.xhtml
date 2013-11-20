@@ -161,8 +161,8 @@
 								label="leito" />
 
 							<h:outputText value="Solicitante: " />
-							<p:inputText id="solicitante"
-								value="#{sanguineoBean.sanguineo.solicitante}" />
+							<p:autoComplete id="solicitante"
+								value="#{sanguineoBean.sanguineo.solicitante}" completeMethod="#{sanguineoBean.complete}" minQueryLength="3" />
 						</h:panelGrid>
 					</p:fieldset>
 

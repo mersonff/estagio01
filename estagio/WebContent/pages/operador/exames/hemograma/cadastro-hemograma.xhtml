@@ -162,9 +162,9 @@
 									label="leito" />
 
 								<h:outputLabel for="solicitante" value="Solicitante: " />
-								<p:inputText id="solicitante"
+								<p:autoComplete id="solicitante"
 									value="#{hemogramaBean.hemograma.solicitante}"
-									label="solicitante" />
+									label="solicitante" completeMethod="#{hemogramaBean.complete}" minQueryLength="3" />
 							</h:panelGrid>
 
 						</p:fieldset>

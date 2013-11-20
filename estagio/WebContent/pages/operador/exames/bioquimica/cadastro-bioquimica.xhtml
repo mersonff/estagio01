@@ -160,8 +160,8 @@
 								<p:inputText id="leito"
 									value="#{bioquimicaBean.bioquimica.leito}" label="leito" />
 								<h:outputText value="Solicitante: " />
-								<p:inputText id="solicitante"
-									value="#{bioquimicaBean.bioquimica.solicitante}" />
+								<p:autoComplete id="solicitante"
+									value="#{bioquimicaBean.bioquimica.solicitante}" completeMethod="#{bioquimicaBean.complete}" minQueryLength="3" />
 							</h:panelGrid>
 						</p:fieldset>
 
