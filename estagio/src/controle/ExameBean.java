@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,7 +38,7 @@ public class ExameBean extends AbstractBean {
 	private int quantSanguineo;
 	private int quantUrina;
 	private String tipo;
-	private Map<String, Integer> solicitantes = new HashMap<String, Integer>();
+	private List<SolicitanteExame> solicitantesExames;
 
 	private final static String[] status;
 	static {
@@ -52,6 +51,7 @@ public class ExameBean extends AbstractBean {
 	private SelectItem[] statusOptions;
 
 	public ExameBean() {
+		this.setSolicitantesExames(new ArrayList<SolicitanteExame>());
 		this.setExame(new Exame());
 		this.setExames(new ArrayList<Exame>());
 		pesquisarTodos();
@@ -91,11 +91,19 @@ public class ExameBean extends AbstractBean {
 	public void quantPacientesAtendidosPorSolicitante(){
 		ExameDAO exameDAO = new ExameJPADAO();
 		List<Exame> exames = exameDAO.quantGeralExame(this.inicio, this.fim);
-		Set<SolicitanteExame> quantExameSolicitante = new HashSet<SolicitanteExame>();
+		Set<String> nomesSolicitantes = new HashSet<String>();
 		for(Exame exame : exames){
+			nomesSolicitantes.add(exame.getSolicitante());
+		}
+		for(String nome: nomesSolicitantes){
 			SolicitanteExame se = new SolicitanteExame();
-			se.setNome(exame.getSolicitante());
-			quantExameSolicitante.add(se);
+			se.setNome(nome);
+			for(Exame exame: exames){
+				if(nome.equals(exame.getSolicitante())){
+					se.setQuantidade(se.getQuantidade()+1);
+				}
+			}
+			this.solicitantesExames.add(se);
 		}
 	}
 	
@@ -264,14 +272,12 @@ public class ExameBean extends AbstractBean {
 		this.tipo = tipo;
 	}
 
-	public Map<String, Integer> getSolicitantes() {
-		return solicitantes;
+	public List<SolicitanteExame> getSolicitantesExames() {
+		return solicitantesExames;
 	}
 
-	public void setSolicitantes(Map<String, Integer> solicitantes) {
-		this.solicitantes = solicitantes;
+	public void setSolicitantesExames(List<SolicitanteExame> solicitantesExames) {
+		this.solicitantesExames = solicitantesExames;
 	}
-	
-	
 
 }

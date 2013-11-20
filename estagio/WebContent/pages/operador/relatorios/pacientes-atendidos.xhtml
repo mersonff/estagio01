@@ -32,7 +32,7 @@
 
 				<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
 					<p:commandButton value="Verificar" update=":cad_paciente" id="ajax"
-						actionListener="#{exameBean.quantExame()}"
+						actionListener="#{exameBean.quantPacientesAtendidosPorSolicitante()}"
 						styleClass="ui-priority-primary" oncomplete="resultadoDialog.show()" />
 				</h:panelGrid>
 				
@@ -42,7 +42,7 @@
 				<p:dialog widgetVar="resultadoDialog" resizable="false"
 					id="resultado" showEffect="fade" hideEffect="explode" modal="true">
 
-					<p:fieldset id="printArea" legend="Quantidade de Exames Realizados" style="text-align: center;">
+					<p:fieldset id="printArea" legend="Quantidade de Exames Realizados por Solicitante" style="text-align: center;">
 
 						<h:panelGrid cellpadding="4" columns="4" style="margin: 0 auto">
 
@@ -59,32 +59,17 @@
 							</h:outputText>
 						</h:panelGrid>
 						
-						<h:panelGrid cellpadding="4" columns="2">
-							
-							<h:outputText value="Baciloscopia: " />
-							<h:outputText value="#{exameBean.quantBaciloscopia}" />
-							
-							<h:outputText value="Bioquimica: " />
-							<h:outputText value="#{exameBean.quantBioquimica}" />
-						
-							<h:outputText value="Hemograma: " />
-							<h:outputText value="#{exameBean.quantHemograma}" />
-							
-							<h:outputText value="Hb / Ht com Plaquetas: " />
-							<h:outputText value="#{exameBean.quantPlaqueta}" />
-							
-							<h:outputText value="Parasitologico de fezes: " />
-							<h:outputText value="#{exameBean.quantParasitologicoFezes}" />
-							
-							<h:outputText value="Classificacao sanguinea: " />
-							<h:outputText value="#{exameBean.quantSanguineo}" />
-							
-							<h:outputText value="Urina: " />
-							<h:outputText value="#{exameBean.quantUrina}" />
-							
-							<h:outputText value="Todos: " />
-							<h:outputText value="#{exameBean.quanTodos}" />
-						</h:panelGrid>
+					<p:dataTable id="dataTable" var="se" value="#{exameBean.solicitantesExames}">
+
+						<p:column headerText="Nome">
+							<h:outputText value="#{se.nome}" />
+						</p:column>
+	
+						<p:column headerText="Quantidade">
+							<h:outputText value="#{se.quantidade}" />
+						</p:column>
+					
+				    </p:dataTable>
 
 					</p:fieldset>
 
