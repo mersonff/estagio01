@@ -23,7 +23,14 @@ public class ExameBean extends AbstractBean {
 	private List<Exame> examesFiltrados;
 	private Date inicio;
 	private Date fim;
-	private int quantidade;
+	private int quantTodos;
+	private int quantBaciloscopia;
+	private int quantHemograma;
+	private int quantBioquimica;
+	private int quantParasitologicoFezes;
+	private int quantPlaqueta;
+	private int quantSanguineo;
+	private int quantUrina;
 	private String tipo;
 
 	private final static String[] status;
@@ -70,17 +77,29 @@ public class ExameBean extends AbstractBean {
 	public void quantPacientesAtendidos(){
 		ExameDAO exameDAO = new ExameJPADAO();
 		List<Exame> exames = exameDAO.quantPacientesAtendidos(this.inicio, this.fim);
-		this.quantidade = exames.size();
+		this.quantTodos = exames.size();
 	}
 	
 	public void quantExame(){
 		ExameDAO exameDAO = new ExameJPADAO();
-		if(this.tipo.equals("Todos")){
-			List<Exame> exames = exameDAO.quantGeralExame(this.inicio, this.fim);
-			this.quantidade = exames.size();
-		}else{
-			List<Exame> exames = exameDAO.quantTipoExame(this.inicio, this.fim, this.tipo);
-			this.quantidade = exames.size();
+		List<Exame> exames = exameDAO.quantGeralExame(this.inicio, this.fim);
+		this.quantTodos = exames.size();
+		for(Exame ex: exames){
+			if(ex.getNomeTipo().equals("Baciloscopia")){
+				this.quantBaciloscopia++;
+			}else if(ex.getNomeTipo().equals("Hemograma")){
+				this.quantHemograma++;
+			}else if(ex.getNomeTipo().equals("Bioquimica")){
+				this.quantBioquimica++;
+			}else if(ex.getNomeTipo().equals("Parasitologico de Fezes")){
+				this.quantParasitologicoFezes++;
+			}else if(ex.getNomeTipo().equals("Hb / Ht com Plaquetas")){
+				this.quantPlaqueta++;
+			}else if(ex.getNomeTipo().equals("Classificacao Sanguinea")){
+				this.quantSanguineo++;
+			}else if(ex.getNomeTipo().equals("Urina")){
+				this.quantUrina++;
+			}
 		}
 	}
 
@@ -154,12 +173,68 @@ public class ExameBean extends AbstractBean {
 		this.fim = fim;
 	}
 
-	public int getQuantidade() {
-		return quantidade;
+	public int getQuanTodos() {
+		return quantTodos;
 	}
 
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
+	public void setQuanTodos(int quantTodos) {
+		this.quantTodos = quantTodos;
+	}
+
+	public int getQuantBaciloscopia() {
+		return quantBaciloscopia;
+	}
+
+	public void setQuantBaciloscopia(int quantBaciloscopia) {
+		this.quantBaciloscopia = quantBaciloscopia;
+	}
+
+	public int getQuantHemograma() {
+		return quantHemograma;
+	}
+
+	public void setQuantHemograma(int quantHemograma) {
+		this.quantHemograma = quantHemograma;
+	}
+
+	public int getQuantBioquimica() {
+		return quantBioquimica;
+	}
+
+	public void setQuantBioquimica(int quantBioquimica) {
+		this.quantBioquimica = quantBioquimica;
+	}
+
+	public int getQuantParasitologicoFezes() {
+		return quantParasitologicoFezes;
+	}
+
+	public void setQuantParasitologicoFezes(int quantParasitologicoFezes) {
+		this.quantParasitologicoFezes = quantParasitologicoFezes;
+	}
+
+	public int getQuantPlaqueta() {
+		return quantPlaqueta;
+	}
+
+	public void setQuantPlaqueta(int quantPlaqueta) {
+		this.quantPlaqueta = quantPlaqueta;
+	}
+
+	public int getQuantSanguineo() {
+		return quantSanguineo;
+	}
+
+	public void setQuantSanguineo(int quantSanguineo) {
+		this.quantSanguineo = quantSanguineo;
+	}
+
+	public int getQuantUrina() {
+		return quantUrina;
+	}
+
+	public void setQuantUrina(int quantUrina) {
+		this.quantUrina = quantUrina;
 	}
 
 	public String getTipo() {
