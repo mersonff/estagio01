@@ -3,10 +3,17 @@ package controle;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
+
+import util.SolicitanteExame;
 
 import modelo.Exame;
 import modelo.Paciente;
@@ -32,6 +39,7 @@ public class ExameBean extends AbstractBean {
 	private int quantSanguineo;
 	private int quantUrina;
 	private String tipo;
+	private Map<String, Integer> solicitantes = new HashMap<String, Integer>();
 
 	private final static String[] status;
 	static {
@@ -78,6 +86,17 @@ public class ExameBean extends AbstractBean {
 		ExameDAO exameDAO = new ExameJPADAO();
 		List<Exame> exames = exameDAO.quantPacientesAtendidos(this.inicio, this.fim);
 		this.quantTodos = exames.size();
+	}
+	
+	public void quantPacientesAtendidosPorSolicitante(){
+		ExameDAO exameDAO = new ExameJPADAO();
+		List<Exame> exames = exameDAO.quantGeralExame(this.inicio, this.fim);
+		Set<SolicitanteExame> quantExameSolicitante = new HashSet<SolicitanteExame>();
+		for(Exame exame : exames){
+			SolicitanteExame se = new SolicitanteExame();
+			se.setNome(exame.getSolicitante());
+			quantExameSolicitante.add(se);
+		}
 	}
 	
 	public void quantExame(){
@@ -243,6 +262,14 @@ public class ExameBean extends AbstractBean {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public Map<String, Integer> getSolicitantes() {
+		return solicitantes;
+	}
+
+	public void setSolicitantes(Map<String, Integer> solicitantes) {
+		this.solicitantes = solicitantes;
 	}
 	
 	
