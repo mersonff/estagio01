@@ -23,7 +23,7 @@
 		<div id="corpoLogin">
 
 			<h:form id="login">
-				<p:panel>
+				<p:panel header="Autenticação de Usuário" style="text-align:center;">
 
 					<h:panelGrid style="margin: 0 auto" cellpadding="4">
 						<h:outputLabel value="Usuário:" />
@@ -37,7 +37,7 @@
 						<h:outputLabel value="Tipo de usuário:" />
 
 						<p:selectOneMenu value="#{loginBean.usuario.tipo}" required="true"
-							label="Tipo de Usuário">
+							label="Tipo de Usuário" style="text-align: left;">
 							<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 							<f:selectItem itemValue="#{loginBean.tipoDeUsuario.operador}"
 								itemLabel="Operador" />

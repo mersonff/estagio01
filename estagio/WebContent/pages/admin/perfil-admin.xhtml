@@ -18,12 +18,12 @@
 				<h:panelGrid cellpadding="4">
 
 					<h:inputHidden id="senha" value="#{adminBean.ativo.senha}" />
-					<h:inputHidden value="#{adminBean.ativo.login}" />
+					<h:inputHidden id="login" value="#{adminBean.ativo.login}" />
 
 					<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto;">
 						<h:outputLabel for="login" value="Login: *" />
-						<p:inputText id="login" value="#{adminBean.ativo.login}"
-							required="true" label="Login" disabled="true">
+						<p:inputText value="#{adminBean.ativo.login}" required="true"
+							label="Login" disabled="true">
 						</p:inputText>
 
 						<h:outputLabel for="nome" value="Nome: *" />
@@ -82,8 +82,7 @@
 						styleClass="
 						ui-priority-primary"
 						oncomplete="passwordDialog.hide()" />
-					<p:commandButton value="Cancelar"
-						onclick="passwordDialog.hide()"/>
+					<p:commandButton value="Cancelar" onclick="passwordDialog.hide()" />
 				</h:panelGrid>
 			</p:dialog>
 		</h:form>
