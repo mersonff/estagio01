@@ -26,7 +26,7 @@ public class ParasitologicoBean extends AbstractBean {
 	private List<Parasitologico> filteredParasitologicos;
 	private String[] metodos = { "Baerman", "Simples", "Hamatoxilina",
 			"Seriado" };
-	private String[] ovos = { "Ascaris Lumbricóides", "Ancilostomideo",
+	private String[] ovos = { "Ascaris Lumbricï¿½ides", "Ancilostomideo",
 			"Trichuris Trichiura", "Enterobius Vermiculares",
 			"Strongiloides Larvas", "Taenia SP", "Schistosoma Mansonu",
 			"Hymenolepis Nana", "Hymenolepis Diminuta" };
@@ -38,7 +38,7 @@ public class ParasitologicoBean extends AbstractBean {
 	public ParasitologicoBean() {
 		this.setParasitologico(new Parasitologico());
 		this.setParasitologicos(new ArrayList<Parasitologico>());
-		pesquisarTodos();
+		findAll();
 	}
 
 	public void agendar() {
@@ -52,24 +52,24 @@ public class ParasitologicoBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.parasitologico = new Parasitologico();
 		} else {
-			displayErrorMessageToUser("Paciente não cadastrado: Por favor, cadastre o paciente e tente novamente.");
+			displayErrorMessageToUser("Paciente nÃ£o cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
 
 	}
-	
-	public List<String> complete(String query){
-		 List<String> results = new ArrayList<String>();  
-		 ExameDAO exameDAO = new ExameJPADAO();
-		 results = exameDAO.autoComplete(query);
-		 Set<String> resultadoSemRepeticao = new HashSet<String>();
-		 for(String nome: results){
-			 resultadoSemRepeticao.add(nome);
-		 }
-		 results.clear();
-		 for(String nome: resultadoSemRepeticao){
-			 results.add(nome);
-		 }
-	     return results; 
+
+	public List<String> complete(String query) {
+		List<String> results = new ArrayList<String>();
+		ExameDAO exameDAO = new ExameJPADAO();
+		results = exameDAO.autoComplete(query);
+		Set<String> resultadoSemRepeticao = new HashSet<String>();
+		for (String nome : results) {
+			resultadoSemRepeticao.add(nome);
+		}
+		results.clear();
+		for (String nome : resultadoSemRepeticao) {
+			results.add(nome);
+		}
+		return results;
 	}
 
 	public void remarcar() {
@@ -89,16 +89,11 @@ public class ParasitologicoBean extends AbstractBean {
 
 	public void atualizar() {
 		ParasitologicoDAO operDAO = new ParasitologicoJPADAO();
-		this.parasitologico.setStatus("Concluído");
+		this.parasitologico.setStatus("ConcluÃ­do");
 		this.parasitologico.setDataEntrega(new Date());
 		operDAO.save(this.parasitologico);
 		displayInfoMessageToUser("Cadastrado com sucesso!");
 
-	}
-
-	public void pesquisarTodos() {
-		ParasitologicoDAO operDAO = new ParasitologicoJPADAO();
-		this.parasitologicos = operDAO.find();
 	}
 
 	public void excluir() {
@@ -109,15 +104,9 @@ public class ParasitologicoBean extends AbstractBean {
 
 	}
 
-	public void find() {
-		PacienteDAO pDAO = new PacienteJPADAO();
-		Paciente p = pDAO
-				.find(this.parasitologico.getPaciente().getNumeroSus());
-		if (p != null) {
-			displayInfoMessageToUser("Paciente encontrado.");
-		} else {
-			displayErrorMessageToUser("Paciente não encontrado. Por favor, realize o cadastro do paciente.");
-		}
+	public void findAll() {
+		ParasitologicoDAO operDAO = new ParasitologicoJPADAO();
+		this.parasitologicos = operDAO.find();
 	}
 
 	public Parasitologico getParasitologico() {

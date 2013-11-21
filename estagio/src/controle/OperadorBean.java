@@ -23,7 +23,7 @@ public class OperadorBean extends AbstractBean {
 	public OperadorBean() {
 		this.setOperadores(new ArrayList<Operador>());
 		this.setOperador(new Operador());
-		pesquisarTodos();
+		findAll();
 	}
 
 	public void cadastrar() {
@@ -34,7 +34,7 @@ public class OperadorBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.operador = new Operador();
 		} else {
-			displayErrorMessageToUser("Login indisponível: Esse Login já está sendo usado.");
+			displayErrorMessageToUser("Login indisponÃ­vel: Esse Login jï¿½ estï¿½ sendo usado.");
 		}
 	}
 
@@ -59,15 +59,15 @@ public class OperadorBean extends AbstractBean {
 
 	}
 
-	public void pesquisarTodos() {
-		OperadorDAO operDAO = new OperadorJPADAO();
-		this.operadores = operDAO.find();
-	}
-
 	public void excluir() {
 		OperadorDAO operDAO = new OperadorJPADAO();
 		operDAO.delete(this.operador);
 		displayInfoMessageToUser("Excluido com sucesso!");
+		this.operadores = operDAO.find();
+	}
+
+	public void findAll() {
+		OperadorDAO operDAO = new OperadorJPADAO();
 		this.operadores = operDAO.find();
 	}
 

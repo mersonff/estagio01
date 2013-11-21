@@ -1,7 +1,6 @@
 package controle;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -20,11 +19,10 @@ public class PacienteBean extends AbstractBean {
 	private List<Paciente> pacientes;
 	private List<Paciente> filteredPacientes;
 
-
 	public PacienteBean() {
 		this.setPaciente(new Paciente());
 		this.setPacientes(new ArrayList<Paciente>());
-		pesquisarTodos();
+		findAll();
 	}
 
 	public void cadastrar() {
@@ -35,7 +33,7 @@ public class PacienteBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.paciente = new Paciente();
 		} else {
-			displayErrorMessageToUser("Número do SUS já cadastrado: Já existe um paciente com esse número de SUS cadastrado!");
+			displayErrorMessageToUser("NÃºmero do SUS jÃ¡ cadastrado.");
 		}
 	}
 
@@ -58,7 +56,7 @@ public class PacienteBean extends AbstractBean {
 		this.pacientes = operDAO.find();
 	}
 
-	public void pesquisarTodos() {
+	public void findAll() {
 		PacienteDAO operDAO = new PacienteJPADAO();
 		this.pacientes = operDAO.find();
 	}

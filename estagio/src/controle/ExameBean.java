@@ -10,10 +10,9 @@ import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
 
-import util.SolicitanteExame;
-
 import modelo.Exame;
 import modelo.Paciente;
+import util.SolicitanteExame;
 import dao.ExameDAO;
 import dao.ExameJPADAO;
 import dao.PacienteDAO;
@@ -43,7 +42,7 @@ public class ExameBean extends AbstractBean {
 		status = new String[3];
 		status[0] = "Em espera";
 		status[1] = "Em aberto";
-		status[2] = "Conclu�do";
+		status[2] = "Concluído";
 	}
 
 	private SelectItem[] statusOptions;
@@ -52,8 +51,8 @@ public class ExameBean extends AbstractBean {
 		this.setSolicitantesExames(new ArrayList<SolicitanteExame>());
 		this.setExame(new Exame());
 		this.setExames(new ArrayList<Exame>());
-		pesquisarTodos();
 		statusOptions = createFilterOptions(status);
+		findAll();
 
 	}
 
@@ -65,13 +64,8 @@ public class ExameBean extends AbstractBean {
 			operDAO.save(this.exame);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 		} else {
-			displayInfoMessageToUser("Paciente n�o cadastrado." + "");
+			displayInfoMessageToUser("Paciente não cadastrado." + "");
 		}
-	}
-
-	public void pesquisarTodos() {
-		ExameDAO operDAO = new ExameJPADAO();
-		this.exames = operDAO.find();
 	}
 
 	public void excluir(Exame exame) {
@@ -79,60 +73,64 @@ public class ExameBean extends AbstractBean {
 		operDAO.delete(exame);
 		displayInfoMessageToUser("Excluido com sucesso!");
 	}
-	
-	
-	public void quantPacientesAtendidosPorSolicitante(){
+
+	public void findAll() {
+		ExameDAO operDAO = new ExameJPADAO();
+		this.exames = operDAO.find();
+	}
+
+	public void quantPacientesAtendidosPorSolicitante() {
 		ExameDAO exameDAO = new ExameJPADAO();
 		List<Exame> exames = exameDAO.quantGeralExame(this.inicio, this.fim);
 		Set<String> nomesSolicitantes = new HashSet<String>();
-		for(Exame exame : exames){
+		for (Exame exame : exames) {
 			nomesSolicitantes.add(exame.getSolicitante());
 		}
-		for(String nome: nomesSolicitantes){
+		for (String nome : nomesSolicitantes) {
 			SolicitanteExame se = new SolicitanteExame();
 			se.setNome(nome);
-			for(Exame exame: exames){
-				if(nome.equals(exame.getSolicitante())){
-					se.setQuantidade(se.getQuantidade()+1);
+			for (Exame exame : exames) {
+				if (nome.equals(exame.getSolicitante())) {
+					se.setQuantidade(se.getQuantidade() + 1);
 				}
 			}
 			this.solicitantesExames.add(se);
 		}
 	}
-	
-	public List<String> complete(String query){
-		 List<String> results = new ArrayList<String>();  
-		 ExameDAO exameDAO = new ExameJPADAO();
-		 results = exameDAO.autoComplete(query);
-		 Set<String> resultadoSemRepeticao = new HashSet<String>();
-		 for(String nome: results){
-			 resultadoSemRepeticao.add(nome);
-		 }
-		 results.clear();
-		 for(String nome: resultadoSemRepeticao){
-			 results.add(nome);
-		 }
-	     return results; 
+
+	public List<String> complete(String query) {
+		List<String> results = new ArrayList<String>();
+		ExameDAO exameDAO = new ExameJPADAO();
+		results = exameDAO.autoComplete(query);
+		Set<String> resultadoSemRepeticao = new HashSet<String>();
+		for (String nome : results) {
+			resultadoSemRepeticao.add(nome);
+		}
+		results.clear();
+		for (String nome : resultadoSemRepeticao) {
+			results.add(nome);
+		}
+		return results;
 	}
-	
-	public void quantExame(){
+
+	public void quantExame() {
 		ExameDAO exameDAO = new ExameJPADAO();
 		List<Exame> exames = exameDAO.quantGeralExame(this.inicio, this.fim);
 		this.quantTodos = exames.size();
-		for(Exame ex: exames){
-			if(ex.getNomeTipo().equals("Baciloscopia")){
+		for (Exame ex : exames) {
+			if (ex.getNomeTipo().equals("Baciloscopia")) {
 				this.quantBaciloscopia++;
-			}else if(ex.getNomeTipo().equals("Hemograma")){
+			} else if (ex.getNomeTipo().equals("Hemograma")) {
 				this.quantHemograma++;
-			}else if(ex.getNomeTipo().equals("Bioquimica")){
+			} else if (ex.getNomeTipo().equals("Bioquímica")) {
 				this.quantBioquimica++;
-			}else if(ex.getNomeTipo().equals("Parasitologico de Fezes")){
+			} else if (ex.getNomeTipo().equals("Parasitológico de Fezes")) {
 				this.quantParasitologicoFezes++;
-			}else if(ex.getNomeTipo().equals("Hb / Ht com Plaquetas")){
+			} else if (ex.getNomeTipo().equals("Hb / Ht com Plaquetas")) {
 				this.quantPlaqueta++;
-			}else if(ex.getNomeTipo().equals("Classificacao Sanguinea")){
+			} else if (ex.getNomeTipo().equals("Classifição Sanguínea")) {
 				this.quantSanguineo++;
-			}else if(ex.getNomeTipo().equals("Urina")){
+			} else if (ex.getNomeTipo().equals("Urina")) {
 				this.quantUrina++;
 			}
 		}

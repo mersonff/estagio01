@@ -1,7 +1,5 @@
 package controle;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -9,14 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
-
-import com.itextpdf.text.BadElementException;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.PageSize;
 
 import modelo.Baciloscopia;
 import modelo.Paciente;
@@ -38,7 +28,7 @@ public class BaciloscopiaBean extends AbstractBean {
 	public BaciloscopiaBean() {
 		this.setBaciloscopia(new Baciloscopia());
 		this.setBaciloscopias(new ArrayList<Baciloscopia>());
-		pesquisarTodos();
+		findAll();
 	}
 
 	public void agendar() {
@@ -51,7 +41,7 @@ public class BaciloscopiaBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.baciloscopia = new Baciloscopia();
 		} else {
-			displayErrorMessageToUser("Paciente n„o cadastrado: Por favor, cadastre o paciente e tente novamente.");
+			displayErrorMessageToUser("Paciente n√£o cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
 
 	}
@@ -73,16 +63,11 @@ public class BaciloscopiaBean extends AbstractBean {
 
 	public void atualizar() {
 		BaciloscopiaDAO operDAO = new BaciloscopiaJPADAO();
-		this.baciloscopia.setStatus("ConcluÌdo");
+		this.baciloscopia.setStatus("Conclu√≠do");
 		this.baciloscopia.setDataEntrega(new Date());
 		operDAO.save(this.baciloscopia);
 		displayInfoMessageToUser("Cadastrado com sucesso!");
 
-	}
-
-	public void pesquisarTodos() {
-		BaciloscopiaDAO operDAO = new BaciloscopiaJPADAO();
-		this.baciloscopias = operDAO.find();
 	}
 
 	public void excluir() {
@@ -92,29 +77,24 @@ public class BaciloscopiaBean extends AbstractBean {
 		this.baciloscopias = operDAO.find();
 	}
 
-	public void find() {
-		PacienteDAO pDAO = new PacienteJPADAO();
-		Paciente p = pDAO.find(this.baciloscopia.getPaciente().getNumeroSus());
-		if (p != null) {
-			displayInfoMessageToUser("Paciente encontrado.");
-		} else {
-			displayErrorMessageToUser("Paciente n„o encontrado. Por favor, realize o cadastro do paciente.");
-		}
+	public void findAll() {
+		BaciloscopiaDAO operDAO = new BaciloscopiaJPADAO();
+		this.baciloscopias = operDAO.find();
 	}
-	
-	public List<String> complete(String query){
-		 List<String> results = new ArrayList<String>();  
-		 ExameDAO exameDAO = new ExameJPADAO();
-		 results = exameDAO.autoComplete(query);
-		 Set<String> resultadoSemRepeticao = new HashSet<String>();
-		 for(String nome: results){
-			 resultadoSemRepeticao.add(nome);
-		 }
-		 results.clear();
-		 for(String nome: resultadoSemRepeticao){
-			 results.add(nome);
-		 }
-	     return results; 
+
+	public List<String> complete(String query) {
+		List<String> results = new ArrayList<String>();
+		ExameDAO exameDAO = new ExameJPADAO();
+		results = exameDAO.autoComplete(query);
+		Set<String> resultadoSemRepeticao = new HashSet<String>();
+		for (String nome : results) {
+			resultadoSemRepeticao.add(nome);
+		}
+		results.clear();
+		for (String nome : resultadoSemRepeticao) {
+			results.add(nome);
+		}
+		return results;
 	}
 
 	public Baciloscopia getBaciloscopia() {
@@ -168,20 +148,6 @@ public class BaciloscopiaBean extends AbstractBean {
 
 	public void setBaciloscopiaEmAberto(List<Baciloscopia> baciloscopiaEmAberto) {
 		this.baciloscopiaEmAberto = baciloscopiaEmAberto;
-	}
-
-	public void preProcessPDF(Object document) throws IOException,
-			BadElementException, DocumentException {
-		Document pdf = (Document) document;
-		pdf.open();
-		pdf.setPageSize(PageSize.A4);
-
-		ServletContext servletContext = (ServletContext) FacesContext
-				.getCurrentInstance().getExternalContext().getContext();
-		String logo = servletContext.getRealPath("") + File.separator
-				+ "images" + File.separator + "prime_logo.png";
-
-		pdf.add(Image.getInstance(logo));
 	}
 
 }

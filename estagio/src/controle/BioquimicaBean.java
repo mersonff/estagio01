@@ -28,7 +28,7 @@ public class BioquimicaBean extends AbstractBean {
 	public BioquimicaBean() {
 		this.setBioquimica(new Bioquimica());
 		this.setBioquimicas(new ArrayList<Bioquimica>());
-		pesquisarTodos();
+		findAll();
 	}
 
 	public void agendar() {
@@ -41,24 +41,24 @@ public class BioquimicaBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.bioquimica = new Bioquimica();
 		} else {
-			displayErrorMessageToUser("Paciente n„o cadastrado: Por favor, cadastre o paciente e tente novamente.");
+			displayErrorMessageToUser("Paciente n√£o cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
 
 	}
-	
-	public List<String> complete(String query){
-		 List<String> results = new ArrayList<String>();  
-		 ExameDAO exameDAO = new ExameJPADAO();
-		 results = exameDAO.autoComplete(query);
-		 Set<String> resultadoSemRepeticao = new HashSet<String>();
-		 for(String nome: results){
-			 resultadoSemRepeticao.add(nome);
-		 }
-		 results.clear();
-		 for(String nome: resultadoSemRepeticao){
-			 results.add(nome);
-		 }
-	     return results; 
+
+	public List<String> complete(String query) {
+		List<String> results = new ArrayList<String>();
+		ExameDAO exameDAO = new ExameJPADAO();
+		results = exameDAO.autoComplete(query);
+		Set<String> resultadoSemRepeticao = new HashSet<String>();
+		for (String nome : results) {
+			resultadoSemRepeticao.add(nome);
+		}
+		results.clear();
+		for (String nome : resultadoSemRepeticao) {
+			results.add(nome);
+		}
+		return results;
 	}
 
 	public void remarcar() {
@@ -78,16 +78,11 @@ public class BioquimicaBean extends AbstractBean {
 
 	public void atualizar() {
 		BioquimicaDAO operDAO = new BioquimicaJPADAO();
-		this.bioquimica.setStatus("ConcluÌdo");
+		this.bioquimica.setStatus("Conclu√∫do");
 		this.bioquimica.setDataEntrega(new Date());
 		operDAO.save(this.bioquimica);
 		displayInfoMessageToUser("Cadastrado com sucesso!");
 
-	}
-
-	public void pesquisarTodos() {
-		BioquimicaDAO operDAO = new BioquimicaJPADAO();
-		this.bioquimicas = operDAO.find();
 	}
 
 	public void excluir() {
@@ -98,14 +93,9 @@ public class BioquimicaBean extends AbstractBean {
 
 	}
 
-	public void find() {
-		PacienteDAO pDAO = new PacienteJPADAO();
-		Paciente p = pDAO.find(this.bioquimica.getPaciente().getNumeroSus());
-		if (p != null) {
-			displayInfoMessageToUser("Paciente encontrado.");
-		} else {
-			displayErrorMessageToUser("Paciente n„o encontrado. Por favor, realize o cadastro do paciente.");
-		}
+	public void findAll() {
+		BioquimicaDAO operDAO = new BioquimicaJPADAO();
+		this.bioquimicas = operDAO.find();
 	}
 
 	public Bioquimica getBioquimica() {
@@ -128,8 +118,7 @@ public class BioquimicaBean extends AbstractBean {
 		return filteredBioquimicas;
 	}
 
-	public void setFilteredBioquimicas(
-			List<Bioquimica> filteredBioquimicas) {
+	public void setFilteredBioquimicas(List<Bioquimica> filteredBioquimicas) {
 		this.filteredBioquimicas = filteredBioquimicas;
 	}
 

@@ -24,19 +24,19 @@ public class HemogramaBean extends AbstractBean {
 	private List<Hemograma> hemogramaEmEspera;
 	private List<Hemograma> hemogramaEmAberto;
 	private List<Hemograma> filteredHemogramas;
-	private String[] tipoHemacias = { "Normais", "Hipocrômicas",
-			"Anisocrômicas", "Microcíticas", "Anisocíticas", "Macrocíticas",
-			"Poiquilocíticas" };
+	private String[] tipoHemacias = { "Normais", "HipocrÃ´micas",
+			"AnisocrÃ´micas", "MicrocÃ­ticas", "AnisocÃ­ticas", "MacrocÃ­ticas",
+			"PoiquilocÃ­ticas" };
 	private String[] tipoPlaquetas = { "Normais", "Aumentadas", "Diminuidas" };
 	private String[] tipoLinfocitos = { "Com atipias", "Sem atipias" };
-	private String[] tipoGranulacoes = { "Ausência", "Presença" };
-	private String[] tipoEritroblastos = { "Basófilos", "Policromatófilos",
-			"Ortocromáticos" };
+	private String[] tipoGranulacoes = { "Ausï¿½ncia", "PresenÃ§a" };
+	private String[] tipoEritroblastos = { "BasÃ³filos", "PolicromatÃ³filos",
+			"OrtocromÃ¡ticos" };
 
 	public HemogramaBean() {
 		this.setHemograma(new Hemograma());
 		this.setHemogramas(new ArrayList<Hemograma>());
-		pesquisarTodos();
+		findAll();
 	}
 
 	public void agendar() {
@@ -49,7 +49,7 @@ public class HemogramaBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.hemograma = new Hemograma();
 		} else {
-			displayErrorMessageToUser("Paciente não cadastrado: Por favor, cadastre o paciente e tente novamente.");
+			displayErrorMessageToUser("Paciente nÃ£o cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
 
 	}
@@ -86,14 +86,14 @@ public class HemogramaBean extends AbstractBean {
 
 	public void atualizar() {
 		HemogramaDAO operDAO = new HemogramaJPADAO();
-		this.hemograma.setStatus("Concluído");
+		this.hemograma.setStatus("ConcluÃ­do");
 		this.hemograma.setDataEntrega(new Date());
 		operDAO.save(this.hemograma);
 		displayInfoMessageToUser("Cadastrado com sucesso!");
 
 	}
 
-	public void pesquisarTodos() {
+	public void findAll() {
 		HemogramaDAO operDAO = new HemogramaJPADAO();
 		this.hemogramas = operDAO.find();
 	}
@@ -104,16 +104,6 @@ public class HemogramaBean extends AbstractBean {
 		displayInfoMessageToUser("Excluido com sucesso!");
 		this.hemogramas = operDAO.find();
 
-	}
-
-	public void find() {
-		PacienteDAO pDAO = new PacienteJPADAO();
-		Paciente p = pDAO.find(this.hemograma.getPaciente().getNumeroSus());
-		if (p != null) {
-			displayInfoMessageToUser("Paciente encontrado.");
-		} else {
-			displayErrorMessageToUser("Paciente não encontrado. Por favor, realize o cadastro do paciente.");
-		}
 	}
 
 	public Hemograma getHemograma() {

@@ -1,13 +1,11 @@
 package dao;
 
-import javax.persistence.EntityManager;
-
 import modelo.Baciloscopia;
 
 public class BaciloscopiaJPADAO extends GenericJPADAO<Baciloscopia> implements
 		BaciloscopiaDAO {
 
-	EntityManager em;
+	private static final long serialVersionUID = 1L;
 
 	public BaciloscopiaJPADAO() {
 		this.persistentClass = Baciloscopia.class;

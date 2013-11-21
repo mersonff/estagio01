@@ -8,6 +8,8 @@
 <h:head>
 	<title>Lab. Aracoiaba</title>
 	<h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
+	<link rel="shortcut icon"
+		href="http://www.iconj.com/ico/m/r/mrpihmc6so.ico" type="image/x-icon" />
 </h:head>
 <h:body>
 	<div id="conteudo">
@@ -37,12 +39,15 @@
 						<p:selectOneMenu value="#{loginBean.usuario.tipo}" required="true"
 							label="Tipo de Usuário">
 							<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
-							<f:selectItem itemValue="#{loginBean.tipoDeUsuario.operador}" itemLabel="Operador" />
-							<f:selectItem itemValue="#{loginBean.tipoDeUsuario.administrador}" itemLabel="Administrador" />
+							<f:selectItem itemValue="#{loginBean.tipoDeUsuario.operador}"
+								itemLabel="Operador" />
+							<f:selectItem
+								itemValue="#{loginBean.tipoDeUsuario.administrador}"
+								itemLabel="Administrador" />
 						</p:selectOneMenu>
 
 						<p:commandButton value="Entrar" action="#{loginBean.logar}" />
-						
+
 					</h:panelGrid>
 				</p:panel>
 			</h:form>

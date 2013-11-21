@@ -28,7 +28,7 @@ public class PlaquetaBean extends AbstractBean {
 	public PlaquetaBean() {
 		this.setPlaqueta(new Plaqueta());
 		this.setPlaquetas(new ArrayList<Plaqueta>());
-		pesquisarTodos();
+		findAll();
 	}
 
 	public void agendar() {
@@ -41,24 +41,24 @@ public class PlaquetaBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.plaqueta = new Plaqueta();
 		} else {
-			displayErrorMessageToUser("Paciente n„o cadastrado: Por favor, cadastre o paciente e tente novamente.");
+			displayErrorMessageToUser("Paciente n√£o cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
 
 	}
-	
-	public List<String> complete(String query){
-		 List<String> results = new ArrayList<String>();  
-		 ExameDAO exameDAO = new ExameJPADAO();
-		 results = exameDAO.autoComplete(query);
-		 Set<String> resultadoSemRepeticao = new HashSet<String>();
-		 for(String nome: results){
-			 resultadoSemRepeticao.add(nome);
-		 }
-		 results.clear();
-		 for(String nome: resultadoSemRepeticao){
-			 results.add(nome);
-		 }
-	     return results; 
+
+	public List<String> complete(String query) {
+		List<String> results = new ArrayList<String>();
+		ExameDAO exameDAO = new ExameJPADAO();
+		results = exameDAO.autoComplete(query);
+		Set<String> resultadoSemRepeticao = new HashSet<String>();
+		for (String nome : results) {
+			resultadoSemRepeticao.add(nome);
+		}
+		results.clear();
+		for (String nome : resultadoSemRepeticao) {
+			results.add(nome);
+		}
+		return results;
 	}
 
 	public void remarcar() {
@@ -78,16 +78,11 @@ public class PlaquetaBean extends AbstractBean {
 
 	public void atualizar() {
 		PlaquetaDAO operDAO = new PlaquetaJPADAO();
-		this.plaqueta.setStatus("ConcluÌdo");
+		this.plaqueta.setStatus("Conclu√≠do");
 		this.plaqueta.setDataEntrega(new Date());
 		operDAO.save(this.plaqueta);
 		displayInfoMessageToUser("Cadastrado com sucesso!");
 
-	}
-
-	public void pesquisarTodos() {
-		PlaquetaDAO operDAO = new PlaquetaJPADAO();
-		this.plaquetas = operDAO.find();
 	}
 
 	public void excluir() {
@@ -98,14 +93,9 @@ public class PlaquetaBean extends AbstractBean {
 
 	}
 
-	public void find() {
-		PacienteDAO pDAO = new PacienteJPADAO();
-		Paciente p = pDAO.find(this.plaqueta.getPaciente().getNumeroSus());
-		if (p != null) {
-			displayInfoMessageToUser("Paciente encontrado.");
-		} else {
-			displayErrorMessageToUser("Paciente n„o encontrado. Por favor, realize o cadastro do paciente.");
-		}
+	public void findAll() {
+		PlaquetaDAO operDAO = new PlaquetaJPADAO();
+		this.plaquetas = operDAO.find();
 	}
 
 	public Plaqueta getPlaqueta() {
@@ -128,8 +118,7 @@ public class PlaquetaBean extends AbstractBean {
 		return filteredPlaquetas;
 	}
 
-	public void setFilteredPlaquetas(
-			List<Plaqueta> filteredPlaquetas) {
+	public void setFilteredPlaquetas(List<Plaqueta> filteredPlaquetas) {
 		this.filteredPlaquetas = filteredPlaquetas;
 	}
 

@@ -9,6 +9,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import util.JPAUtil;
 
 public abstract class GenericJPADAO<T> implements GenericDAO<T>, Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	protected Class<T> persistentClass;
 	 

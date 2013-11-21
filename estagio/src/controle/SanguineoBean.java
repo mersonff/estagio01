@@ -28,7 +28,7 @@ public class SanguineoBean extends AbstractBean {
 	public SanguineoBean() {
 		this.setSanguineo(new Sanguineo());
 		this.setSanguineos(new ArrayList<Sanguineo>());
-		pesquisarTodos();
+		findAll();
 	}
 
 	public void agendar() {
@@ -41,24 +41,24 @@ public class SanguineoBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.sanguineo = new Sanguineo();
 		} else {
-			displayErrorMessageToUser("Paciente n„o cadastrado: Por favor, cadastre o paciente e tente novamente.");
+			displayErrorMessageToUser("Paciente n√£o cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
 
 	}
-	
-	public List<String> complete(String query){
-		 List<String> results = new ArrayList<String>();  
-		 ExameDAO exameDAO = new ExameJPADAO();
-		 results = exameDAO.autoComplete(query);
-		 Set<String> resultadoSemRepeticao = new HashSet<String>();
-		 for(String nome: results){
-			 resultadoSemRepeticao.add(nome);
-		 }
-		 results.clear();
-		 for(String nome: resultadoSemRepeticao){
-			 results.add(nome);
-		 }
-	     return results; 
+
+	public List<String> complete(String query) {
+		List<String> results = new ArrayList<String>();
+		ExameDAO exameDAO = new ExameJPADAO();
+		results = exameDAO.autoComplete(query);
+		Set<String> resultadoSemRepeticao = new HashSet<String>();
+		for (String nome : results) {
+			resultadoSemRepeticao.add(nome);
+		}
+		results.clear();
+		for (String nome : resultadoSemRepeticao) {
+			results.add(nome);
+		}
+		return results;
 	}
 
 	public void remarcar() {
@@ -78,16 +78,11 @@ public class SanguineoBean extends AbstractBean {
 
 	public void atualizar() {
 		SanguineoDAO operDAO = new SanguineoJPADAO();
-		this.sanguineo.setStatus("ConcluÌdo");
+		this.sanguineo.setStatus("Conclu√≠do");
 		this.sanguineo.setDataEntrega(new Date());
 		operDAO.save(this.sanguineo);
 		displayInfoMessageToUser("Cadastrado com sucesso!");
 
-	}
-
-	public void pesquisarTodos() {
-		SanguineoDAO operDAO = new SanguineoJPADAO();
-		this.sanguineos = operDAO.find();
 	}
 
 	public void excluir() {
@@ -98,14 +93,9 @@ public class SanguineoBean extends AbstractBean {
 
 	}
 
-	public void find() {
-		PacienteDAO pDAO = new PacienteJPADAO();
-		Paciente p = pDAO.find(this.sanguineo.getPaciente().getNumeroSus());
-		if (p != null) {
-			displayInfoMessageToUser("Paciente encontrado.");
-		} else {
-			displayErrorMessageToUser("Paciente n„o encontrado. Por favor, realize o cadastro do paciente.");
-		}
+	public void findAll() {
+		SanguineoDAO operDAO = new SanguineoJPADAO();
+		this.sanguineos = operDAO.find();
 	}
 
 	public Sanguineo getSanguineo() {
@@ -128,8 +118,7 @@ public class SanguineoBean extends AbstractBean {
 		return filteredSanguineos;
 	}
 
-	public void setFilteredSanguineos(
-			List<Sanguineo> filteredSanguineos) {
+	public void setFilteredSanguineos(List<Sanguineo> filteredSanguineos) {
 		this.filteredSanguineos = filteredSanguineos;
 	}
 

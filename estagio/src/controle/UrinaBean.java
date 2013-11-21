@@ -24,14 +24,14 @@ public class UrinaBean extends AbstractBean {
 	private List<Urina> urinaEmEspera;
 	private List<Urina> urinaEmAberto;
 	private List<Urina> filteredUrinas;
-	private String[] elementosAnormais = { "Proteína", "Glicose", "Acetona",
-			"Acetoacético", "Sais Biliares", "Pig Biliares", "Urobilinogênio",
+	private String[] elementosAnormais = { "ProteÃ­na", "Glicose", "Acetona",
+			"AcetoacÃ©tico", "Sais Biliares", "Pig Biliares", "UrobilinogÃªnio",
 			"Hemoglobina" };
 
 	public UrinaBean() {
 		this.setUrina(new Urina());
 		this.setUrinas(new ArrayList<Urina>());
-		pesquisarTodos();
+		findAll();
 	}
 
 	public void agendar() {
@@ -44,24 +44,24 @@ public class UrinaBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.urina = new Urina();
 		} else {
-			displayErrorMessageToUser("Paciente não cadastrado: Por favor, cadastre o paciente e tente novamente.");
+			displayErrorMessageToUser("Paciente nÃ£o cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
 
 	}
-	
-	public List<String> complete(String query){
-		 List<String> results = new ArrayList<String>();  
-		 ExameDAO exameDAO = new ExameJPADAO();
-		 results = exameDAO.autoComplete(query);
-		 Set<String> resultadoSemRepeticao = new HashSet<String>();
-		 for(String nome: results){
-			 resultadoSemRepeticao.add(nome);
-		 }
-		 results.clear();
-		 for(String nome: resultadoSemRepeticao){
-			 results.add(nome);
-		 }
-	     return results; 
+
+	public List<String> complete(String query) {
+		List<String> results = new ArrayList<String>();
+		ExameDAO exameDAO = new ExameJPADAO();
+		results = exameDAO.autoComplete(query);
+		Set<String> resultadoSemRepeticao = new HashSet<String>();
+		for (String nome : results) {
+			resultadoSemRepeticao.add(nome);
+		}
+		results.clear();
+		for (String nome : resultadoSemRepeticao) {
+			results.add(nome);
+		}
+		return results;
 	}
 
 	public void remarcar() {
@@ -81,16 +81,11 @@ public class UrinaBean extends AbstractBean {
 
 	public void atualizar() {
 		UrinaDAO operDAO = new UrinaJPADAO();
-		this.urina.setStatus("Concluído");
+		this.urina.setStatus("ConcluÃ­do");
 		this.urina.setDataEntrega(new Date());
 		operDAO.save(this.urina);
 		displayInfoMessageToUser("Cadastrado com sucesso!");
 
-	}
-
-	public void pesquisarTodos() {
-		UrinaDAO operDAO = new UrinaJPADAO();
-		this.urinas = operDAO.find();
 	}
 
 	public void excluir() {
@@ -100,15 +95,10 @@ public class UrinaBean extends AbstractBean {
 		this.urinas = operDAO.find();
 
 	}
-
-	public void find() {
-		PacienteDAO pDAO = new PacienteJPADAO();
-		Paciente p = pDAO.find(this.urina.getPaciente().getNumeroSus());
-		if (p != null) {
-			displayInfoMessageToUser("Paciente encontrado.");
-		} else {
-			displayErrorMessageToUser("Paciente não encontrado. Por favor, realize o cadastro do paciente.");
-		}
+	
+	public void findAll() {
+		UrinaDAO operDAO = new UrinaJPADAO();
+		this.urinas = operDAO.find();
 	}
 
 	public Urina getUrina() {
