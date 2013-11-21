@@ -122,13 +122,13 @@ public class ExameBean extends AbstractBean {
 				this.quantBaciloscopia++;
 			} else if (ex.getNomeTipo().equals("Hemograma")) {
 				this.quantHemograma++;
-			} else if (ex.getNomeTipo().equals("BioquÃ­mica")) {
+			} else if (ex.getNomeTipo().equals("Bioquímica")) {
 				this.quantBioquimica++;
-			} else if (ex.getNomeTipo().equals("ParasitolÃ³gico de Fezes")) {
+			} else if (ex.getNomeTipo().equals("Parasitológico de Fezes")) {
 				this.quantParasitologicoFezes++;
 			} else if (ex.getNomeTipo().equals("Hb / Ht com Plaquetas")) {
 				this.quantPlaqueta++;
-			} else if (ex.getNomeTipo().equals("ClassifiÃ§Ã£o SanguÃ­nea")) {
+			} else if (ex.getNomeTipo().equals("Classificação Sanguínea")) {
 				this.quantSanguineo++;
 			} else if (ex.getNomeTipo().equals("Urina")) {
 				this.quantUrina++;

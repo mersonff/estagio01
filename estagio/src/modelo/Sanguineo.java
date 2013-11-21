@@ -14,7 +14,7 @@ public class Sanguineo extends Exame {
 	private String fatorRH;
 
 	public Sanguineo() {
-		setNomeTipo("ClassificaÃ§Ã£o SanguÃ­nea");
+		setNomeTipo("Classificação Sanguínea");
 	}
 
 	public String getLeito() {

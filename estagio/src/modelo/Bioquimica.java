@@ -35,7 +35,7 @@ public class Bioquimica extends Exame {
 	private double ttgo;
 
 	public Bioquimica() {
-		setNomeTipo("BioquimÃ­ca");
+		setNomeTipo("Bioquímica");
 	}
 
 	public String getLeito() {
