@@ -1,0 +1,129 @@
+<ui:composition template="/WEB-INF/templates/template-operador.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<br />
+		<h:form id="cad_paciente" styleClass="form" prependId="true">
+
+			<p:messages autoUpdate="true" closable="true" id="msg" />
+
+			<p:panel id="panel" header="Relatório Geral de Exames por Quantidade"
+				style="margin-bottom:10px;text-align:center;">
+
+				<h:panelGrid columns="2" cellpadding="4"
+					style="margin: 0 auto;text-align:left;">
+
+					<f:facet name="header">
+						<h:outputText value="Período: " />
+					</f:facet>
+
+					<h:outputLabel for="dataInicio" value="De: *" />
+					<p:calendar value="#{exameBean.inicio}" id="dataInicio"
+						showOn="button" size="8" required="true"
+						timeZone="America/Fortaleza" locale="pt_BR" pattern="dd/MM/yyyy"
+						title="inicio da pesquisa" label="Data de Início" />
+
+					<h:outputLabel for="dataFim" value="Até: *" />
+					<p:calendar value="#{exameBean.fim}" id="dataFim" showOn="button"
+						size="8" required="true" timeZone="America/Fortaleza"
+						locale="pt_BR" pattern="dd/MM/yyyy" title="fim da pesquisa"
+						label="Data Final" />
+
+				</h:panelGrid>
+
+
+				<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
+					<p:commandButton value="Verificar" update=":cad_paciente:display"
+						id="ajax" actionListener="#{exameBean.quantExame()}"
+						styleClass="ui-priority-primary"
+						oncomplete="resultadoDialog.show()" />
+				</h:panelGrid>
+
+				<p:dialog widgetVar="resultadoDialog" resizable="false"
+					id="resultado" showEffect="fade" hideEffect="explode" modal="true">
+					<h:panelGrid id="display">
+
+						<h:form id="printArea"  style="text-align: center;">
+
+							<div id="cabecalho">
+								<h:panelGrid width="100%" style="text-align: center">
+									<p:graphicImage value="/resources/images/lab.png" width="300px" />
+									<h:outputText value="Relatório Geral de Exames por Quantidade"
+										styleClass="nomeExame" />
+								</h:panelGrid>
+							</div>
+							<br />
+
+							<h:panelGrid style="margin: 0 auto;">
+								<h:panelGrid cellpadding="4" columns="4">
+
+									<f:facet name="header">
+										<h:outputText value="Período" />
+									</f:facet>
+
+									<h:outputText value="De: " />
+									<h:outputText value="#{exameBean.inicio}">
+										<f:convertDateTime type="date" locale="pt_BR"
+											timeZone="America/Fortaleza" />
+									</h:outputText>
+
+									<h:outputText value="Até: " />
+									<h:outputText value="#{exameBean.fim}">
+										<f:convertDateTime type="date" locale="pt_BR"
+											timeZone="America/Fortaleza" />
+									</h:outputText>
+								</h:panelGrid>
+
+								<h:panelGrid cellpadding="4" columns="2">
+
+									<f:facet name="header">
+										<h:outputText value="Tipo de Exame / Quantidade" />
+									</f:facet>
+
+									<h:outputText value="Baciloscopia: " />
+									<h:outputText value="#{exameBean.quantBaciloscopia}" />
+
+									<h:outputText value="Bioquímica: " />
+									<h:outputText value="#{exameBean.quantBioquimica}" />
+
+									<h:outputText value="Hemograma: " />
+									<h:outputText value="#{exameBean.quantHemograma}" />
+
+									<h:outputText value="Hb / Ht com Plaquetas: " />
+									<h:outputText value="#{exameBean.quantPlaqueta}" />
+
+									<h:outputText value="Parasitológico de Fezes: " />
+									<h:outputText value="#{exameBean.quantParasitologicoFezes}" />
+
+									<h:outputText value="Classificacao Sanguínea: " />
+									<h:outputText value="#{exameBean.quantSanguineo}" />
+
+									<h:outputText value="Urina: " />
+									<h:outputText value="#{exameBean.quantUrina}" />
+
+									<h:outputText value="Total: " />
+									<h:outputText value="#{exameBean.quanTodos}" />
+								</h:panelGrid>
+							</h:panelGrid>
+						</h:form>
+					</h:panelGrid>
+
+					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto">
+						<p:commandButton value="Imprimir" type="button">
+							<p:printer target=":cad_paciente:printArea"
+								oncomplete="resultadoDialog.hide();" />
+						</p:commandButton>
+						<p:commandButton value="Fechar" type="reset"
+							onclick="resultadoDialog.hide()" />
+					</h:panelGrid>
+				</p:dialog>
+
+			</p:panel>
+		</h:form>
+		<br />
+	</ui:define>
+</ui:composition>

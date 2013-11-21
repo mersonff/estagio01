@@ -11,7 +11,6 @@ import javax.persistence.PrimaryKeyJoinColumn;
 public class Parasitologico extends Exame {
 	// Dados do Pedido
 	private String leito;
-	private String medicoSolicitante;
 	private String prontuario;
 	private String enfermaria;
 	private String unidade;
@@ -34,14 +33,6 @@ public class Parasitologico extends Exame {
 
 	public void setLeito(String leito) {
 		this.leito = leito;
-	}
-
-	public String getMedicoSolicitante() {
-		return medicoSolicitante;
-	}
-
-	public void setMedicoSolicitante(String medicoSolicitante) {
-		this.medicoSolicitante = medicoSolicitante;
 	}
 
 	public String getProntuario() {

@@ -14,7 +14,8 @@
 		<div id="conteudo">
 			<div id="cabecalho">
 				<h:panelGrid width="100%" style="text-align: center">
-					<p:graphicImage value="/resources/images/lab.png" width="700px" />
+					<p:graphicImage value="/resources/images/lab.png" width="750px"
+						height="100px" />
 				</h:panelGrid>
 			</div>
 			<h:form>
@@ -31,16 +32,22 @@
 							<p:submenu label="Agendamento">
 								<p:menuitem value="Baciloscopia"
 									url="/pages/operador/exames/baciloscopia/agendamento-baciloscopia.xhtml" />
+								<p:separator />
 								<p:menuitem value="Bioquímica"
 									url="/pages/operador/exames/bioquimica/agendamento-bioquimica.xhtml" />
+								<p:separator />
 								<p:menuitem value="Classificação Sanguínea"
 									url="/pages/operador/exames/sanguineo/agendamento-sanguineo.xhtml" />
+								<p:separator />
 								<p:menuitem value="Hemograma"
 									url="/pages/operador/exames/hemograma/agendamento-hemograma.xhtml" />
+								<p:separator />
 								<p:menuitem value="Hb / Ht com Plaquetas"
 									url="/pages/operador/exames/plaqueta/agendamento-plaqueta.xhtml" />
+								<p:separator />
 								<p:menuitem value="Parasitológico de Fezes"
 									url="/pages/operador/exames/parasitologico/agendamento-parasitologico.xhtml" />
+								<p:separator />
 								<p:menuitem value="Urina"
 									url="/pages/operador/exames/urina/agendamento-urina.xhtml" />
 							</p:submenu>
@@ -55,16 +62,22 @@
 							<p:submenu label="Pedido">
 								<p:menuitem value="Baciloscopia"
 									url="/pages/operador/exames/baciloscopia/cadastro-baciloscopia.xhtml" />
+								<p:separator />
 								<p:menuitem value="Bioquímica"
 									url="/pages/operador/exames/bioquimica/cadastro-bioquimica.xhtml" />
+								<p:separator />
 								<p:menuitem value="Classificação Sanguínea"
 									url="/pages/operador/exames/sanguineo/cadastro-sanguineo.xhtml" />
+								<p:separator />
 								<p:menuitem value="Hemograma"
 									url="/pages/operador/exames/hemograma/cadastro-hemograma.xhtml" />
+								<p:separator />
 								<p:menuitem value="Hb / Ht com Plaquetas"
 									url="/pages/operador/exames/plaqueta/cadastro-plaqueta.xhtml" />
+								<p:separator />
 								<p:menuitem value="Parasitológico de Fezes"
 									url="/pages/operador/exames/parasitologico/cadastro-parasitologico.xhtml" />
+								<p:separator />
 								<p:menuitem value="Urina"
 									url="/pages/operador/exames/urina/cadastro-urina.xhtml" />
 							</p:submenu>
@@ -74,16 +87,22 @@
 							<p:submenu label="Resultado">
 								<p:menuitem value="Baciloscopia"
 									url="/pages/operador/exames/baciloscopia/resultado-baciloscopia.xhtml" />
+								<p:separator />
 								<p:menuitem value="Bioquímica"
 									url="/pages/operador/exames/bioquimica/resultado-bioquimica.xhtml" />
+								<p:separator />
 								<p:menuitem value="Classificação Sanguínea"
 									url="/pages/operador/exames/sanguineo/resultado-sanguineo.xhtml" />
+								<p:separator />
 								<p:menuitem value="Hemograma"
 									url="/pages/operador/exames/hemograma/resultado-hemograma.xhtml" />
+								<p:separator />
 								<p:menuitem value="Hb / Ht com Plaquetas"
 									url="/pages/operador/exames/plaqueta/resultado-plaqueta.xhtml" />
+								<p:separator />
 								<p:menuitem value="Parasitológico de Fezes"
 									url="/pages/operador/exames/parasitologico/resultado-parasitologico.xhtml" />
+								<p:separator />
 								<p:menuitem value="Urina"
 									url="/pages/operador/exames/urina/resultado-urina.xhtml" />
 							</p:submenu>
@@ -93,16 +112,22 @@
 							<p:submenu label="Exame">
 								<p:menuitem value="Baciloscopia"
 									url="/pages/operador/exames/baciloscopia/listar-baciloscopia.xhtml" />
+								<p:separator />
 								<p:menuitem value="Bioquímica"
 									url="/pages/operador/exames/bioquimica/listar-bioquimica.xhtml" />
+								<p:separator />
 								<p:menuitem value="Classificação Sanguínea"
 									url="/pages/operador/exames/sanguineo/listar-sanguineo.xhtml" />
+								<p:separator />
 								<p:menuitem value="Hemograma"
 									url="/pages/operador/exames/hemograma/listar-hemograma.xhtml" />
+								<p:separator />
 								<p:menuitem value="Hb / Ht com Plaquetas"
 									url="/pages/operador/exames/plaqueta/listar-plaqueta.xhtml" />
+								<p:separator />
 								<p:menuitem value="Parasitológico de Fezes"
 									url="/pages/operador/exames/parasitologico/listar-parasitologico.xhtml" />
+								<p:separator />
 								<p:menuitem value="Urina"
 									url="/pages/operador/exames/urina/listar-urina.xhtml" />
 							</p:submenu>
@@ -111,16 +136,17 @@
 								url="/pages/operador/paciente/listar-paciente.xhtml" />
 						</p:submenu>
 
+						<p:submenu label="Relatórios" icon="ui-icon-clipboard">
+							<p:menuitem value="Exames por Quantidade"
+								url="/pages/operador/relatorios/relatorio-geral.xhtml" />
+							<p:separator />
+							<p:menuitem value="Quantidade por Solicitante"
+								url="/pages/operador/relatorios/relatorio-solicitante.xhtml" />
+						</p:submenu>
+
 						<p:submenu label="Gerenciar" icon="ui-icon-gear">
 							<p:menuitem value="Perfil"
 								url="/pages/operador/gerenciar/perfil-operador.xhtml" />
-						</p:submenu>
-						
-						<p:submenu label="Relatórios" icon="ui-icon-clipboard">
-							<p:menuitem value="Quantidade de Pacientes Atendidos por Solicitante"
-								url="/pages/operador/relatorios/pacientes-atendidos.xhtml" />
-							<p:menuitem value="Quantidade de Exames Realizados"
-								url="/pages/operador/relatorios/exame-geral.xhtml" />	
 						</p:submenu>
 
 						<p:menuitem value="Sair" icon="ui-icon-extlink"

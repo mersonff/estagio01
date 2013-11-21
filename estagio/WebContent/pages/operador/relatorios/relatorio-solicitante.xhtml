@@ -1,0 +1,105 @@
+<ui:composition template="/WEB-INF/templates/template-operador.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<br />
+		<h:form id="cad_paciente" styleClass="form">
+
+			<p:messages autoUpdate="true" closable="true" id="msg" />
+
+			<p:panel id="panel" header="Relatório de Exames por Solicitante"
+				style="margin-bottom:10px;text-align:center;">
+
+				<h:panelGrid columns="2" cellpadding="4"
+					style="margin: 0 auto;text-align:left;">
+
+					<f:facet name="header">
+						<h:outputText value="Período: " />
+					</f:facet>
+
+					<h:outputLabel for="dataInicio" value="De: " />
+					<p:calendar value="#{exameBean.inicio}" id="dataInicio"
+						showOn="button" size="8" required="true"
+						timeZone="America/Fortaleza" locale="pt_BR" pattern="dd/MM/yyyy"
+						title="inicio da pesquisa" />
+
+					<h:outputLabel for="dataFim" value="Até: " />
+					<p:calendar value="#{exameBean.fim}" id="dataFim" showOn="button"
+						size="8" required="true" timeZone="America/Fortaleza"
+						locale="pt_BR" pattern="dd/MM/yyyy" title="fim da pesquisa" />
+
+				</h:panelGrid>
+
+
+				<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
+					<p:commandButton value="Verificar" update=":cad_paciente:display"
+						id="ajax"
+						actionListener="#{exameBean.quantPacientesAtendidosPorSolicitante()}"
+						styleClass="ui-priority-primary"
+						oncomplete="resultadoDialog.show()" />
+				</h:panelGrid>
+
+
+
+
+				<p:dialog widgetVar="resultadoDialog" resizable="false"
+					id="resultado" showEffect="fade" hideEffect="explode" modal="true">
+					<h:panelGrid id="display">
+
+						<h:form id="printArea" style="text-align: center;">
+
+							<div id="cabecalho">
+								<h:panelGrid width="100%" style="text-align: center">
+									<p:graphicImage value="/resources/images/lab.png" width="300px" />
+									<h:outputText value="Relatório de Exames por Solicitante"
+										styleClass="nomeExame" />
+								</h:panelGrid>
+							</div>
+							<br />
+							<h:panelGrid cellpadding="4" columns="4" style="margin: 0 auto">
+
+								<h:outputText value="De: " />
+								<h:outputText value="#{exameBean.inicio}">
+									<f:convertDateTime type="date" locale="pt_BR"
+										timeZone="America/Fortaleza" />
+								</h:outputText>
+
+								<h:outputText value="Ate: " />
+								<h:outputText value="#{exameBean.fim}">
+									<f:convertDateTime type="date" locale="pt_BR"
+										timeZone="America/Fortaleza" />
+								</h:outputText>
+							</h:panelGrid>
+							<p:dataTable id="dataTable" var="se"
+								value="#{exameBean.solicitantesExames}">
+
+								<p:column headerText="Solicitante">
+									<h:outputText value="#{se.nome}" />
+								</p:column>
+
+								<p:column headerText="Quantidade">
+									<h:outputText value="#{se.quantidade}" />
+								</p:column>
+
+							</p:dataTable>
+						</h:form>
+					</h:panelGrid>
+					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto">
+						<p:commandButton value="Imprimir" type="button">
+							<p:printer target="printArea"
+								oncomplete="resultadoDialog.hide();" />
+						</p:commandButton>
+						<p:commandButton value="Fechar" type="reset"
+							onclick="resultadoDialog.hide()" />
+					</h:panelGrid>
+				</p:dialog>
+
+			</p:panel>
+		</h:form>
+		<br />
+	</ui:define>
+</ui:composition>
