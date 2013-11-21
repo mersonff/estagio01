@@ -129,7 +129,7 @@
 										<h:outputText value="Data de Pedido: " />
 										<p:inputText
 											value="#{parasitologicoBean.parasitologico.dataPedido}"
-											disabled="true" size="7">
+											readonly="true" size="7">
 											<f:convertDateTime type="date" locale="pt_BR"
 												timeZone="America/Fortaleza" />
 										</p:inputText>
@@ -137,12 +137,12 @@
 										<h:outputLabel for="unidade" value="Unidade: " />
 										<p:inputText
 											value="#{parasitologicoBean.parasitologico.unidade}"
-											label="Unidade" disabled="true" />
+											label="Unidade" readonly="true" />
 
 										<h:outputText value="Idade: " />
 										<p:inputText
 											value="#{parasitologicoBean.parasitologico.paciente.idade}"
-											disabled="true" size="1" />
+											readonly="true" size="1" />
 									</h:panelGrid>
 
 									<h:panelGrid columns="4" cellpadding="4"
@@ -151,12 +151,12 @@
 										<h:outputLabel for="nome" value="Nome: " />
 										<p:inputText
 											value="#{parasitologicoBean.parasitologico.paciente.nome}"
-											label="Nome" disabled="true" />
+											label="Nome" readonly="true" />
 
 										<h:outputLabel for="sobrenome" value="Sobrenome: " />
 										<p:inputText
 											value="#{parasitologicoBean.parasitologico.paciente.sobrenome}"
-											label="Sobrenome" disabled="true" />
+											label="Sobrenome" readonly="true" />
 									</h:panelGrid>
 
 									<h:panelGrid columns="4" cellpadding="4"
@@ -165,22 +165,22 @@
 										<h:outputLabel for="solicitante" value="Solicitante: " />
 										<p:inputText
 											value="#{parasitologicoBean.parasitologico.solicitante}"
-											label="solicitante" disabled="true" />
+											label="solicitante" readonly="true" />
 
 										<h:outputLabel for="prontuario" value="Prontuário: " />
 										<p:inputText
 											value="#{parasitologicoBean.parasitologico.prontuario}"
-											label="Prontuário" disabled="true" />
+											label="Prontuário" readonly="true" />
 
 										<h:outputLabel for="enfermaria" value="Enfermaria: " />
 										<p:inputText
 											value="#{parasitologicoBean.parasitologico.enfermaria}"
-											label="Enfermaria" disabled="true" />
+											label="Enfermaria" readonly="true" />
 
 										<h:outputLabel for="leito" value="Leito: " />
 										<p:inputText
 											value="#{parasitologicoBean.parasitologico.leito}"
-											label="leito" disabled="true" />
+											label="leito" readonly="true" />
 
 									</h:panelGrid>
 								</p:fieldset>
@@ -196,13 +196,13 @@
 										<p:inputMask id="dataEntrega"
 											value="#{parasitologicoBean.parasitologico.dataEntrega}"
 											label="dataEntrega" mask="99/99/9999" size="7"
-											disabled="true">
+											readonly="true">
 											<f:convertDateTime type="date" locale="pt_BR"
 												timeZone="America/Fortaleza" />
 										</p:inputMask>
 
 										<h:outputLabel for="metodo" value="Método: " />
-										<p:inputText disabled="true"
+										<p:inputText readonly="true"
 											value="#{parasitologicoBean.parasitologico.metodo}" />
 									</h:panelGrid>
 
@@ -212,7 +212,7 @@
 											<h:panelGrid cellpadding="4">
 												<p:outputLabel value="Ovos de Helmintos"
 													style="font-weight:bold;font-size:18px;" />
-												<p:inputTextarea disabled="true"
+												<p:inputTextarea readonly="true"
 													value="#{parasitologicoBean.parasitologico.ovosDeHelmintos}"
 													cols="50" />
 											</h:panelGrid>
@@ -223,7 +223,7 @@
 											<h:panelGrid cellpadding="4">
 												<p:outputLabel value="Protozoários"
 													style="font-weight:bold;font-size:18px;" />
-												<p:inputTextarea disabled="true"
+												<p:inputTextarea readonly="true"
 													value="#{parasitologicoBean.parasitologico.protozoarios}"
 													cols="50" />
 											</h:panelGrid>

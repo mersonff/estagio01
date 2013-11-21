@@ -88,46 +88,46 @@
 								<h:outputText value="Número do SUS: " />
 								<p:inputText
 									value="#{sanguineoBean.sanguineo.paciente.numeroSus}" size="14"
-									disabled="true" />
+									readonly="true" />
 
 								<h:outputText value="Nascido em: " />
 								<p:inputMask
 									value="#{sanguineoBean.sanguineo.paciente.dataNascimento}"
-									disabled="true" mask="99/99/9999" size="7">
+									readonly="true" mask="99/99/9999" size="7">
 									<f:convertDateTime type="date" locale="pt_BR"
 										timeZone="America/Fortaleza" />
 								</p:inputMask>
 
 								<h:outputText value="Idade: " />
 								<p:inputText value="#{sanguineoBean.sanguineo.paciente.idade}"
-									disabled="true" size="1" />
+									readonly="true" size="1" />
 							</h:panelGrid>
 
 							<h:panelGrid cellpadding="4" columns="6">
 								<h:outputText value="Nome: " />
 								<p:inputText value="#{sanguineoBean.sanguineo.paciente.nome}"
-									disabled="true" size="10" />
+									readonly="true" size="10" />
 
 								<h:outputText value="Sobrenome: " />
 								<p:inputText
 									value="#{sanguineoBean.sanguineo.paciente.sobrenome}"
-									disabled="true" />
+									readonly="true" />
 
 								<h:outputText value="Sexo: " />
 								<p:inputText value="#{sanguineoBean.sanguineo.paciente.sexo}"
-									disabled="true" size="1" />
+									readonly="true" size="1" />
 							</h:panelGrid>
 
 							<h:panelGrid cellpadding="4" columns="4">
 								<h:outputText value="Endereço: " />
 								<p:inputText
 									value="#{sanguineoBean.sanguineo.paciente.endereco}"
-									disabled="true" />
+									readonly="true" />
 
 								<h:outputText value="Localidade: " />
 								<p:inputText
 									value="#{sanguineoBean.sanguineo.paciente.localidade}"
-									disabled="true" size="10" />
+									readonly="true" size="10" />
 							</h:panelGrid>
 						</p:fieldset>
 					</h:panelGrid>
@@ -138,17 +138,17 @@
 							<h:panelGrid columns="4" cellpadding="4" style="text-align:left;">
 								<h:outputText value="Data de Pedido: " />
 								<p:inputText value="#{sanguineoBean.sanguineo.dataPedido}"
-									disabled="true" size="7">
+									readonly="true" size="7">
 									<f:convertDateTime type="date" locale="pt_BR"
 										timeZone="America/Fortaleza" />
 								</p:inputText>
 
 								<h:outputText value="Leito: " />
 								<p:inputText value="#{sanguineoBean.sanguineo.leito}"
-									disabled="true" />
+									readonly="true" />
 
 								<h:outputText value="Solicitante: " />
-								<p:inputText disabled="true"
+								<p:inputText readonly="true"
 									value="#{sanguineoBean.sanguineo.solicitante}" />
 							</h:panelGrid>
 

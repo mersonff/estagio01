@@ -88,46 +88,46 @@
 								<h:outputText value="Número do SUS: " />
 								<p:inputText
 									value="#{hemogramaBean.hemograma.paciente.numeroSus}" size="14"
-									disabled="true" />
+									readonly="true" />
 
 								<h:outputText value="Nascido em: " />
 								<p:inputMask
 									value="#{hemogramaBean.hemograma.paciente.dataNascimento}"
-									disabled="true" mask="99/99/9999" size="7">
+									readonly="true" mask="99/99/9999" size="7">
 									<f:convertDateTime type="date" locale="pt_BR"
 										timeZone="America/Fortaleza" />
 								</p:inputMask>
 
 								<h:outputText value="Idade: " />
 								<p:inputText value="#{hemogramaBean.hemograma.paciente.idade}"
-									disabled="true" size="1" />
+									readonly="true" size="1" />
 							</h:panelGrid>
 
 							<h:panelGrid cellpadding="4" columns="6">
 								<h:outputText value="Nome: " />
 								<p:inputText value="#{hemogramaBean.hemograma.paciente.nome}"
-									disabled="true" size="10" />
+									readonly="true" size="10" />
 
 								<h:outputText value="Sobrenome: " />
 								<p:inputText
 									value="#{hemogramaBean.hemograma.paciente.sobrenome}"
-									disabled="true" />
+									readonly="true" />
 
 								<h:outputText value="Sexo: " />
 								<p:inputText value="#{hemogramaBean.hemograma.paciente.sexo}"
-									disabled="true" size="1" />
+									readonly="true" size="1" />
 							</h:panelGrid>
 
 							<h:panelGrid cellpadding="4" columns="4">
 								<h:outputText value="Endereço: " />
 								<p:inputText
 									value="#{hemogramaBean.hemograma.paciente.endereco}"
-									disabled="true" />
+									readonly="true" />
 
 								<h:outputText value="Localidade: " />
 								<p:inputText
 									value="#{hemogramaBean.hemograma.paciente.localidade}"
-									disabled="true" size="10" />
+									readonly="true" size="10" />
 							</h:panelGrid>
 						</p:fieldset>
 					</h:panelGrid>
@@ -138,18 +138,18 @@
 							<h:panelGrid columns="4" cellpadding="4">
 								<h:outputText value="Data de Pedido: " />
 								<p:inputText value="#{hemogramaBean.hemograma.dataPedido}"
-									disabled="true" size="7">
+									readonly="true" size="7">
 									<f:convertDateTime type="date" locale="pt_BR"
 										timeZone="America/Fortaleza" />
 								</p:inputText>
 
 								<h:outputText value="Leito: " />
 								<p:inputText value="#{hemogramaBean.hemograma.leito}"
-									disabled="true" />
+									readonly="true" />
 
 								<h:outputLabel for="solicitante" value="Solicitante: " />
 								<p:inputText value="#{hemogramaBean.hemograma.solicitante}"
-									label="solicitante" disabled="true" />
+									label="solicitante" readonly="true" />
 
 							</h:panelGrid>
 

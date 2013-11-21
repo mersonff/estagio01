@@ -125,33 +125,33 @@
 										<h:outputText value="Nome: " />
 										<p:inputText id="nome"
 											value="#{plaquetaBean.plaqueta.paciente.nome}"
-											disabled="true" size="10" />
+											readonly="true" size="10" />
 
 										<h:outputText value="Sobrenome: " />
 										<p:inputText id="sobrenome"
 											value="#{plaquetaBean.plaqueta.paciente.sobrenome}"
-											disabled="true" />
+											readonly="true" />
 
 										<h:outputText value="Idade: " />
 										<p:inputText value="#{plaquetaBean.plaqueta.paciente.idade}"
-											disabled="true" size="1" />
+											readonly="true" size="1" />
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4" columns="6">
 
 										<h:outputText value="Leito: " />
 										<p:inputText value="#{plaquetaBean.plaqueta.leito}"
-											disabled="true" />
+											readonly="true" />
 
 										<h:panelGrid columns="2" cellpadding="4">
 											<h:outputText value="Solicitante: " />
-											<p:inputText disabled="true"
+											<p:inputText readonly="true"
 												value="#{plaquetaBean.plaqueta.solicitante}" />
 										</h:panelGrid>
 
 										<h:outputText value="Solicitado em:" />
 										<p:inputText value="#{plaquetaBean.plaqueta.dataPedido}"
-											disabled="true" size="7">
+											readonly="true" size="7">
 											<f:convertDateTime type="date" locale="pt_BR"
 												timeZone="America/Fortaleza" />
 										</p:inputText>
@@ -169,7 +169,7 @@
 										<p:inputMask id="dataEntrega"
 											value="#{plaquetaBean.plaqueta.dataEntrega}"
 											label="dataEntrega" mask="99/99/9999" size="7"
-											disabled="true">
+											readonly="true">
 											<f:convertDateTime type="date" locale="pt_BR"
 												timeZone="America/Fortaleza" />
 										</p:inputMask>
@@ -181,21 +181,21 @@
 											<h:outputLabel for="hemoglobina" value="Hemoglobina: " />
 											<p:inputText id="hemoglobina"
 												value="#{plaquetaBean.plaqueta.hemoglobina}" label="glicose"
-												size="3" disabled="true">
+												size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="hematocrito" value="Hematócrito: " />
 											<p:inputText id="hematocrito"
 												value="#{plaquetaBean.plaqueta.hematocrito}"
-												label="colesterol" size="3" disabled="true">
+												label="colesterol" size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 
 											<h:outputLabel for="plaquetas" value="Plaquetas: " />
 											<p:inputText id="plaquetas"
 												value="#{plaquetaBean.plaqueta.plaquetas}"
-												label="triglicerides" size="3" disabled="true">
+												label="triglicerides" size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>
 										</h:panelGrid>

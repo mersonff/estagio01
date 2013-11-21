@@ -97,12 +97,12 @@
 							<h:outputText value="Número do SUS: " />
 							<p:inputText
 								value="#{parasitologicoBean.parasitologico.paciente.numeroSus}"
-								size="14" disabled="true" />
+								size="14" readonly="true" />
 
 							<h:outputText value="Nascido em: " />
 							<p:inputMask
 								value="#{parasitologicoBean.parasitologico.paciente.dataNascimento}"
-								disabled="true" mask="99/99/9999" size="7">
+								readonly="true" mask="99/99/9999" size="7">
 								<f:convertDateTime type="date" locale="pt_BR"
 									timeZone="America/Fortaleza" />
 							</p:inputMask>
@@ -110,36 +110,36 @@
 							<h:outputText value="Idade: " />
 							<p:inputText
 								value="#{parasitologicoBean.parasitologico.paciente.idade}"
-								disabled="true" size="1" />
+								readonly="true" size="1" />
 						</h:panelGrid>
 
 						<h:panelGrid cellpadding="4" columns="6">
 							<h:outputText value="Nome: " />
 							<p:inputText
 								value="#{parasitologicoBean.parasitologico.paciente.nome}"
-								disabled="true" size="10" />
+								readonly="true" size="10" />
 
 							<h:outputText value="Sobrenome: " />
 							<p:inputText
 								value="#{parasitologicoBean.parasitologico.paciente.sobrenome}"
-								disabled="true" />
+								readonly="true" />
 
 							<h:outputText value="Sexo: " />
 							<p:inputText
 								value="#{parasitologicoBean.parasitologico.paciente.sexo}"
-								disabled="true" size="1" />
+								readonly="true" size="1" />
 						</h:panelGrid>
 
 						<h:panelGrid cellpadding="4" columns="4">
 							<h:outputText value="Endereço: " />
 							<p:inputText
 								value="#{parasitologicoBean.parasitologico.paciente.endereco}"
-								disabled="true" />
+								readonly="true" />
 
 							<h:outputText value="Localidade: " />
 							<p:inputText
 								value="#{parasitologicoBean.parasitologico.paciente.localidade}"
-								disabled="true" size="10" />
+								readonly="true" size="10" />
 						</h:panelGrid>
 					</p:fieldset>
 				</p:dialog>
@@ -168,12 +168,6 @@
 								value="#{parasitologicoBean.parasitologico.unidade}"
 								label="Unidade" />
 
-							<h:outputLabel for="medicoSolicitante"
-								value="Médico Solicitante: " />
-							<p:inputText id="medicoSolicitante"
-								value="#{parasitologicoBean.parasitologico.medicoSolicitante}"
-								label="Médico Solicitante" />
-
 							<h:outputLabel for="prontuario" value="Prontuário: " />
 							<p:inputText id="prontuario"
 								value="#{parasitologicoBean.parasitologico.prontuario}"
@@ -190,7 +184,9 @@
 
 							<h:outputText value="Solicitante: " />
 							<p:autoComplete id="solicitante"
-								value="#{parasitologicoBean.parasitologico.solicitante}" completeMethod="#{parasitologicoBean.complete}" minQueryLength="3"/>
+								value="#{parasitologicoBean.parasitologico.solicitante}"
+								completeMethod="#{parasitologicoBean.complete}"
+								minQueryLength="3" />
 						</h:panelGrid>
 
 					</p:fieldset>

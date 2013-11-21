@@ -120,30 +120,30 @@
 									<h:panelGrid cellpadding="4" columns="6">
 										<h:outputText value="Nome: " />
 										<p:inputText id="nome"
-											value="#{urinaBean.urina.paciente.nome}" disabled="true"
+											value="#{urinaBean.urina.paciente.nome}" readonly="true"
 											size="10" />
 
 										<h:outputText value="Sobrenome: " />
 										<p:inputText id="sobrenome"
-											value="#{urinaBean.urina.paciente.sobrenome}" disabled="true" />
+											value="#{urinaBean.urina.paciente.sobrenome}" readonly="true" />
 
 										<h:outputText value="Idade: " />
 										<p:inputText value="#{urinaBean.urina.paciente.idade}"
-											disabled="true" size="1" />
+											readonly="true" size="1" />
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4" columns="6">
 
 										<h:outputText value="Leito: " />
-										<p:inputText value="#{urinaBean.urina.leito}" disabled="true" />
+										<p:inputText value="#{urinaBean.urina.leito}" readonly="true" />
 
 										<h:outputText value="Solicitante: " />
 										<p:inputText value="#{urinaBean.urina.solicitante}"
-											disabled="true" />
+											readonly="true" />
 
 										<h:outputText value="Solicitado em:" />
 										<p:inputText value="#{urinaBean.urina.dataPedido}"
-											disabled="true" size="7">
+											readonly="true" size="7">
 											<f:convertDateTime type="date" locale="pt_BR"
 												timeZone="America/Fortaleza" />
 										</p:inputText>
@@ -171,27 +171,27 @@
 													<h:panelGrid columns="2" style="text-align:left;">
 														<h:outputLabel for="volume" value="Volume: " />
 														<p:inputText id="volume" value="#{urinaBean.urina.volume}"
-															label="Volume" disabled="true" />
+															label="Volume" readonly="true" />
 
 														<h:outputLabel for="cor" value="Cor: " />
 														<p:inputText id="cor" value="#{urinaBean.urina.cor}"
-															label="Cor" disabled="true" />
+															label="Cor" readonly="true" />
 
 														<h:outputLabel for="aspecto" value="Aspecto: " />
 														<p:inputText id="aspecto"
 															value="#{urinaBean.urina.aspecto}" label="Aspecto"
-															disabled="true" />
+															readonly="true" />
 
 														<h:outputLabel for="densidade" value="Densidade: " />
 														<p:inputText id="densidade"
 															value="#{urinaBean.urina.densidade}" label="Densidade"
-															size="4" disabled="true">
+															size="4" readonly="true">
 															<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 														</p:inputText>
 
 														<h:outputLabel for="ph" value="PH: " />
 														<p:inputText id="ph" value="#{urinaBean.urina.ph}"
-															label="PH" size="3" disabled="true">
+															label="PH" size="3" readonly="true">
 															<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 														</p:inputText>
 
@@ -218,7 +218,7 @@
 											<h:panelGrid style="margin: 0 auto;text-align:left;">
 												<p:inputTextarea id="elementosAnormais"
 													value="#{urinaBean.urina.elementosAnormais}" rows="6"
-													disabled="true" />
+													readonly="true" />
 											</h:panelGrid>
 										</p:fieldset>
 									</h:panelGrid>
@@ -239,28 +239,28 @@
 														<h:outputLabel for="cilindros" value="Cilindros: " />
 														<p:inputText id="cilindros"
 															value="#{urinaBean.urina.cilindros}" label="Cilindros"
-															size="3" disabled="true">
+															size="3" readonly="true">
 															<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 														</p:inputText>
 
 														<h:outputLabel for="hemacias" value="Hemácias: " />
 														<p:inputText id="hemacias"
 															value="#{urinaBean.urina.hemacias}" label="Hemácias"
-															size="3" disabled="true">
+															size="3" readonly="true">
 															<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 														</p:inputText>
 
 														<h:outputLabel for="leucocitos" value="Leucócitos: " />
 														<p:inputText id="leucocitos"
 															value="#{urinaBean.urina.leucocitos}" label="Leucócitos"
-															size="3" disabled="true">
+															size="3" readonly="true">
 															<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 														</p:inputText>
 
 														<h:outputLabel for="celulas" value="Cél. Epiteliais: " />
 														<p:inputText id="celulas"
 															value="#{urinaBean.urina.celulas}"
-															label="Cél. Epiteliais" size="3" disabled="true">
+															label="Cél. Epiteliais" size="3" readonly="true">
 															<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 														</p:inputText>
 
@@ -286,7 +286,7 @@
 													<p:outputLabel value="Estudo Detalhado por Segmento"
 														style="font-weight:bold;font-size:18px;" />
 													<p:inputTextarea value="#{urinaBean.urina.estudoDetalhado}"
-														cols="30" rows="6" disabled="true" />
+														cols="30" rows="6" readonly="true" />
 												</h:panelGrid>
 											</p:fieldset>
 										</h:panelGrid>

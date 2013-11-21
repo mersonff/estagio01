@@ -122,23 +122,24 @@
 									</h:panelGrid>
 								</div>
 								<br />
-								<p:fieldset legend="Dados do Pedido" style="text-align: center;" toggleable="true">
+								<p:fieldset legend="Dados do Pedido" style="text-align: center;"
+									toggleable="true">
 
 									<h:panelGrid cellpadding="4" columns="6">
 										<h:outputText value="SUS:" />
 										<p:inputText
 											value="#{baciloscopiaBean.baciloscopia.paciente.numeroSus}"
-											disabled="true" size="14" />
+											readonly="true" size="14" />
 
 										<h:outputText value="Unidade de Saúde: " />
 										<p:inputText
 											value="#{baciloscopiaBean.baciloscopia.unidadeDeSaude}"
-											disabled="true" size="15" />
+											readonly="true" size="15" />
 
 										<h:outputText value="Solicitado em:" />
 										<p:inputText
 											value="#{baciloscopiaBean.baciloscopia.dataPedido}"
-											disabled="true" size="7">
+											readonly="true" size="7">
 											<f:convertDateTime type="date" locale="pt_BR"
 												timeZone="America/Fortaleza" />
 										</p:inputText>
@@ -148,22 +149,22 @@
 										<h:outputText value="Nome: " />
 										<p:inputText
 											value="#{baciloscopiaBean.baciloscopia.paciente.nome}"
-											disabled="true" size="10" />
+											readonly="true" size="10" />
 
 										<h:outputText value="Sobrenome: " />
 										<p:inputText
 											value="#{baciloscopiaBean.baciloscopia.paciente.sobrenome}"
-											disabled="true" />
+											readonly="true" />
 
 										<h:outputText value="Sexo:" />
 										<p:inputText id="sexo"
 											value="#{baciloscopiaBean.baciloscopia.paciente.sexo}"
-											disabled="true" size="1" />
+											readonly="true" size="1" />
 
 										<h:outputText value="Idade: " />
 										<p:inputText
 											value="#{baciloscopiaBean.baciloscopia.paciente.idade}"
-											disabled="true" size="1" />
+											readonly="true" size="1" />
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4" columns="6">
@@ -171,7 +172,7 @@
 										<h:outputText value="Nascido em:" />
 										<p:inputText id="dataNascimento"
 											value="#{baciloscopiaBean.baciloscopia.paciente.dataNascimento}"
-											disabled="true" size="7">
+											readonly="true" size="7">
 											<f:convertDateTime type="date" locale="pt_BR"
 												timeZone="America/Fortaleza" />
 										</p:inputText>
@@ -179,24 +180,24 @@
 										<h:outputText value="Endereço:" />
 										<p:inputText id="endereco"
 											value="#{baciloscopiaBean.baciloscopia.paciente.endereco}"
-											disabled="true" />
+											readonly="true" />
 
 										<h:outputText value="Localidade:" />
 										<p:inputText id="localidade"
 											value="#{baciloscopiaBean.baciloscopia.paciente.localidade}"
-											disabled="true" size="10" />
+											readonly="true" size="10" />
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4" columns="4">
 										<h:outputText value="Prontuário:" />
 										<p:inputText id="prontuario"
 											value="#{baciloscopiaBean.baciloscopia.prontuario}"
-											disabled="true" />
+											readonly="true" />
 
 										<h:outputText value="Solicitante: " />
 										<p:inputText id="solicitante"
 											value="#{baciloscopiaBean.baciloscopia.solicitante}"
-											disabled="true" />
+											readonly="true" />
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4" columns="4">
@@ -204,12 +205,12 @@
 										<h:outputText value="Material Clínico:" />
 										<p:inputTextarea id="materialClinico"
 											value="#{baciloscopiaBean.baciloscopia.materialClinico}"
-											disabled="true" />
+											readonly="true" />
 
 										<h:outputText value="Outros:" />
 										<p:inputTextarea id="outros"
 											value="#{baciloscopiaBean.baciloscopia.outros}"
-											disabled="true" />
+											readonly="true" />
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4" columns="8">
@@ -217,23 +218,23 @@
 										<h:outputLabel for="diagnostico" value="Diagnóstico: " />
 										<p:inputText id="diagnostico" size="1"
 											value="#{baciloscopiaBean.baciloscopia.diagnostico}"
-											disabled="true" />
+											readonly="true" />
 
 										<h:outputText value="Amostra:" />
 										<p:inputText id="numeroDaAmostra"
 											value="#{baciloscopiaBean.baciloscopia.numeroDaAmostra}"
-											disabled="true" size="1" />
+											readonly="true" size="1" />
 
 										<h:outputLabel for="controleDeTratamento"
 											value="Controle de Tratamento: " />
 										<p:inputText id="controleDeTratamento" size="1"
 											value="#{baciloscopiaBean.baciloscopia.controleDeTratamento}"
-											disabled="true" />
+											readonly="true" />
 
 										<h:outputText value="Mês da Amostra:" />
 										<p:inputText id="mesDaAmostra"
 											value="#{baciloscopiaBean.baciloscopia.mesDaAmostra}"
-											disabled="true" size="1" />
+											readonly="true" size="1" />
 									</h:panelGrid>
 								</p:fieldset>
 
@@ -247,7 +248,7 @@
 										<p:inputMask id="dataEntrega"
 											value="#{baciloscopiaBean.baciloscopia.dataEntrega}"
 											label="dataEntrega" mask="99/99/9999" size="7"
-											disabled="true">
+											readonly="true">
 											<f:convertDateTime type="date" locale="pt_BR"
 												timeZone="America/Fortaleza" />
 										</p:inputMask>
@@ -256,7 +257,7 @@
 											value="Aspecto do Escarro: " />
 										<p:inputTextarea id="aspectoDoEscarro"
 											value="#{baciloscopiaBean.baciloscopia.aspectoDoEscarro}"
-											disabled="true" />
+											readonly="true" />
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4" columns="6">
@@ -264,16 +265,16 @@
 										<h:outputLabel for="negativo" value="Negativo: " />
 										<p:inputText id="negativo" size="1"
 											value="#{baciloscopiaBean.baciloscopia.negativo}"
-											label="Negativo" disabled="true" />
+											label="Negativo" readonly="true" />
 
 										<h:outputLabel for="baar" value="1 a 9 BAAR: " />
 										<p:inputText id="baar" size="1"
 											value="#{baciloscopiaBean.baciloscopia.baar}" label="Baar"
-											disabled="true" />
+											readonly="true" />
 
 										<h:outputLabel for="positividade" value="" />
 										<p:inputText id="positividade" size="7"
-											style="text-align: center;" disabled="true"
+											style="text-align: center;" readonly="true"
 											value="#{baciloscopiaBean.baciloscopia.positividade}" />
 
 									</h:panelGrid>
@@ -283,7 +284,7 @@
 										<h:outputLabel for="observacoes" value="Observações: " />
 										<p:inputTextarea id="observacoes"
 											value="#{baciloscopiaBean.baciloscopia.observacoes}"
-											label="Observacoes" rows="4" cols="50" disabled="true" />
+											label="Observacoes" rows="4" cols="50" readonly="true" />
 									</h:panelGrid>
 								</p:fieldset>
 								<br />

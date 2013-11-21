@@ -104,19 +104,19 @@
 							<h:panelGrid cellpadding="4" columns="4">
 								<h:outputText value="Login:" />
 								<p:inputText value="#{operadorBean.operador.login}"
-									disabled="true" size="15" />
+									readonly="true" size="15" />
 
 								<h:outputText value="Nome: " />
 								<p:inputText value="#{operadorBean.operador.nome}"
-									disabled="true" size="25" />
+									readonly="true" size="25" />
 
 								<h:outputText value="Telefone: " />
 								<p:inputText value="#{operadorBean.operador.telefone}"
-									disabled="true" size="15" />
+									readonly="true" size="15" />
 
 								<h:outputText value="Email: " />
 								<p:inputText value="#{operadorBean.operador.email}"
-									disabled="true" size="25" />
+									readonly="true" size="25" />
 							</h:panelGrid>
 
 						</p:fieldset>
@@ -137,7 +137,7 @@
 							<h:panelGroup>
 								<h:inputHidden value="#{operadorBean.operador.login}" />
 								<p:inputText id="login" value="#{operadorBean.operador.login}"
-									label="Login" required="true" disabled="true"/>	
+									label="Login" required="true" readonly="true"/>	
 							</h:panelGroup>	
 
 							<h:outputLabel for="senha" value="Senha: *" />

@@ -125,31 +125,31 @@
 										<h:outputText value="Nome: " />
 										<p:inputText id="nome"
 											value="#{hemogramaBean.hemograma.paciente.nome}"
-											disabled="true" size="10" />
+											readonly="true" size="10" />
 
 										<h:outputText value="Sobrenome: " />
 										<p:inputText id="sobrenome"
 											value="#{hemogramaBean.hemograma.paciente.sobrenome}"
-											disabled="true" />
+											readonly="true" />
 
 										<h:outputText value="Idade: " />
 										<p:inputText value="#{hemogramaBean.hemograma.paciente.idade}"
-											disabled="true" size="1" />
+											readonly="true" size="1" />
 									</h:panelGrid>
 
 									<h:panelGrid cellpadding="4" columns="6">
 
 										<h:outputText value="Leito: " />
 										<p:inputText value="#{hemogramaBean.hemograma.leito}"
-											disabled="true" />
+											readonly="true" />
 
 										<h:outputText value="Solicitante: " />
-										<p:inputText disabled="true"
+										<p:inputText readonly="true"
 											value="#{hemogramaBean.hemograma.solicitante}" />
 
 										<h:outputText value="Solicitado em:" />
 										<p:inputText value="#{hemogramaBean.hemograma.dataPedido}"
-											disabled="true" size="7">
+											readonly="true" size="7">
 											<f:convertDateTime type="date" locale="pt_BR"
 												timeZone="America/Fortaleza" />
 										</p:inputText>
@@ -167,7 +167,7 @@
 										<p:inputMask id="dataEntrega"
 											value="#{hemogramaBean.hemograma.dataEntrega}"
 											label="dataEntrega" mask="99/99/9999" size="7"
-											disabled="true">
+											readonly="true">
 											<f:convertDateTime type="date" locale="pt_BR"
 												timeZone="America/Fortaleza" />
 										</p:inputMask>
@@ -179,40 +179,40 @@
 											<h:outputLabel for="hemacias" value="Hemácias: " />
 											<p:inputText id="hemacias"
 												value="#{hemogramaBean.hemograma.hemacias}" label="hemacias"
-												size="3" disabled="true">
+												size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>x10/ul
 
 										<h:outputLabel for="vcm" value="*V.C.M: " />
 											<p:inputText id="vcm" value="#{hemogramaBean.hemograma.vcm}"
-												label="vcm" size="3" disabled="true">
+												label="vcm" size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>fl
 
 										<h:outputLabel for="hemoglobina" value="Hemoglobina: " />
 											<p:inputText id="hemoglobina"
 												value="#{hemogramaBean.hemograma.hemoglobina}"
-												label="hemoglobina" size="3" disabled="true">
+												label="hemoglobina" size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>g/dl
 
 										<h:outputLabel for="hcm" value="*H.C.M: " />
 											<p:inputText id="hcm" value="#{hemogramaBean.hemograma.hcm}"
-												label="hcm" size="3" disabled="true">
+												label="hcm" size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>pg
 
 										<h:outputLabel for="hematocrito" value="Hematócrito: " />
 											<p:inputText id="hematocrito"
 												value="#{hemogramaBean.hemograma.hematocrito}"
-												label="hematocrito" size="3" disabled="true">
+												label="hematocrito" size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>%
 
 										<h:outputLabel for="chcm" value="*C.H.C.M: " />
 											<p:inputText id="chcm"
 												value="#{hemogramaBean.hemograma.chcm}" label="chcm"
-												size="3" disabled="true">
+												size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>g/dl
 									</h:panelGrid>
@@ -223,63 +223,63 @@
 											<h:outputLabel for="leucocitos" value="Leucócitos: " />
 											<p:inputText id="leucocitos"
 												value="#{hemogramaBean.hemograma.leucocitos}"
-												label="leucocitos" size="3" disabled="true">
+												label="leucocitos" size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>4 - 10.000
 
 										<h:outputLabel for="mieiocitos" value="Mielócitos: " />
 											<p:inputText id="mieiocitos"
 												value="#{hemogramaBean.hemograma.mieiocitos}"
-												label="mieiocitos" size="3" disabled="true">
+												label="mieiocitos" size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>0
 
 										<h:outputLabel for="metamiei" value="Metamiei.: " />
 											<p:inputText id="metamiei"
 												value="#{hemogramaBean.hemograma.metamiei}" label="metamiei"
-												size="3" disabled="true">
+												size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>0 - 1
 
 										<h:outputLabel for="bastoes" value="Bastões: " />
 											<p:inputText id="bastoes"
 												value="#{hemogramaBean.hemograma.bastoes}" label="bastoes"
-												size="3" disabled="true">
+												size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>1 - 5
 
 										<h:outputLabel for="segmentacao" value="Segmentação: " />
 											<p:inputText id="segmentacao"
 												value="#{hemogramaBean.hemograma.segmentacao}"
-												label="segmentacao" size="3" disabled="true">
+												label="segmentacao" size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>40 - 75
 
-										<h:outputLabel for="eosinof" value="EosinÃ³f.: " />
+										<h:outputLabel for="eosinof" value="Eosinóf.: " />
 											<p:inputText id="eosinof"
 												value="#{hemogramaBean.hemograma.eosinof}" label="eosinof"
-												size="3" disabled="true">
+												size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>1 - 7
 
 										<h:outputLabel for="basofilos" value="Basófilos: " />
 											<p:inputText id="basofilos"
 												value="#{hemogramaBean.hemograma.basofilos}"
-												label="basofilos" size="3" disabled="true">
+												label="basofilos" size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>0 - 1
 
 										<h:outputLabel for="linfocitos" value="Linfócitos: " />
 											<p:inputText id="linfocitos"
 												value="#{hemogramaBean.hemograma.linfocitos}"
-												label="linfoticos" size="3" disabled="true">
+												label="linfoticos" size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>20 - 40
 
 										<h:outputLabel for="monocitos" value="Monócitos: " />
 											<p:inputText id="monocitos"
 												value="#{hemogramaBean.hemograma.monocitos}"
-												label="monocitos" size="3" disabled="true">
+												label="monocitos" size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 											</p:inputText>2 - 10
 									
@@ -288,25 +288,25 @@
 
 										<h:panelGrid columns="4" cellpadding="4"
 											style="text-align: left;">
-											<p:outputLabel value="HemÃ¡cias: " />
-											<p:inputText id="tipoHemacias" disabled="true"
+											<p:outputLabel value="Hemácias " />
+											<p:inputText id="tipoHemacias" readonly="true"
 												value="#{hemogramaBean.hemograma.tipoHemacias}" />
 
 
 											<p:outputLabel value="Plaquetas: " />
-											<p:inputText id="tipoPlaquetas" disabled="true"
+											<p:inputText id="tipoPlaquetas" readonly="true"
 												value="#{hemogramaBean.hemograma.tipoPlaquetas}" />
 
 											<p:outputLabel value="Linfócitos: " />
-											<p:inputText id="tipoLinfocitos" disabled="true"
+											<p:inputText id="tipoLinfocitos" readonly="true"
 												value="#{hemogramaBean.hemograma.tipoLinfocitos}" />
 
 											<p:outputLabel value="Granulações: " />
-											<p:inputText id="tipoGranulacoes" disabled="true"
+											<p:inputText id="tipoGranulacoes" readonly="true"
 												value="#{hemogramaBean.hemograma.tipoGranulacoes}" />
 
 											<p:outputLabel value="Eritroblastos" />
-											<p:inputText id="tipoEritroblastos" disabled="true"
+											<p:inputText id="tipoEritroblastos" readonly="true"
 												value="#{hemogramaBean.hemograma.tipoEritroblastos}" />
 										</h:panelGrid>
 
@@ -314,20 +314,20 @@
 											<h:panelGrid columns="3">
 												<h:outputLabel for="vhs" value="VHS - 1ª hora: " />
 												<p:inputText id="vhs" value="#{hemogramaBean.hemograma.vhs}"
-													label="hemacias" size="3" disabled="true">
+													label="hemacias" size="3" readonly="true">
 													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 												</p:inputText>mm
 									
 									<h:outputLabel for="plaquetas" value="Plaquetas: " />
 												<p:inputText id="plaquetas"
 													value="#{hemogramaBean.hemograma.plaquetas}"
-													label="plaquetas" size="3" disabled="true">
+													label="plaquetas" size="3" readonly="true">
 													<f:convertNumber locale="pt_BR" minFractionDigits="1" />
 												</p:inputText>mmÂ³
 									</h:panelGrid>
 
 											<p:panel style="text-align:center;">
-												<p:outputLabel value="ReferÃªncias" style="font-weight:bold;" />
+												<p:outputLabel value="Referências" style="font-weight:bold;" />
 												<h:panelGrid cellpadding="4" columns="2"
 													style="text-align:left;">
 													<h:outputText value="VHS: " />
