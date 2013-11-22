@@ -33,7 +33,7 @@ public class PacienteBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.paciente = new Paciente();
 		} else {
-			displayErrorMessageToUser("NÃºmero do SUS jÃ¡ cadastrado.");
+			displayErrorMessageToUser("Número do SUS já cadastrado.");
 		}
 	}
 

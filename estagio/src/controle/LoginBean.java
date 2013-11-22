@@ -71,7 +71,7 @@ public class LoginBean extends AbstractBean {
 			}
 
 		} catch (Exception e) {
-			displayErrorMessageToUser("Usu√°rio ou senha inv√°lidos!");
+			displayErrorMessageToUser("Usu·rio ou senha inv·lido!");
 			return "/index.xhtml";
 		}
 

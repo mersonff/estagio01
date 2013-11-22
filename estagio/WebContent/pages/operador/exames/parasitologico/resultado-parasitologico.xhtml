@@ -98,7 +98,7 @@
 								<h:outputText value="Nascido em: " />
 								<p:inputMask
 									value="#{parasitologicoBean.parasitologico.paciente.dataNascimento}"
-									readonly="true" mask="99/99/9999" size="7">
+									readonly="true" mask="99/99/9999" size="8">
 									<f:convertDateTime type="date" locale="pt_BR"
 										timeZone="America/Fortaleza" />
 								</p:inputMask>
@@ -135,7 +135,7 @@
 								<h:outputText value="Localidade: " />
 								<p:inputText
 									value="#{parasitologicoBean.parasitologico.paciente.localidade}"
-									readonly="true" size="10" />
+									readonly="true" />
 							</h:panelGrid>
 						</p:fieldset>
 					</h:panelGrid>
@@ -143,17 +143,19 @@
 					<h:panelGrid cellpadding="4">
 						<p:fieldset legend="Dados de Pedido" style="text-align:center;">
 
-							<h:panelGrid columns="2" cellpadding="4" style="text-align:left;">
+							<h:panelGrid columns="4" cellpadding="4" style="text-align:left;">
 								<h:outputText value="Data de Pedido: " />
 								<p:inputText
 									value="#{parasitologicoBean.parasitologico.dataPedido}"
-									readonly="true" size="7">
+									readonly="true" size="8">
 									<f:convertDateTime type="date" locale="pt_BR"
 										timeZone="America/Fortaleza" />
 								</p:inputText>
-							</h:panelGrid>
-
-							<h:panelGrid columns="4" cellpadding="4" style="text-align:left;">
+								
+								<h:outputLabel for="leito" value="Leito: " />
+								<p:inputText value="#{parasitologicoBean.parasitologico.leito}"
+									label="leito" readonly="true" />
+								
 								<h:outputLabel for="unidade" value="Unidade: " />
 								<p:inputText
 									value="#{parasitologicoBean.parasitologico.unidade}"
@@ -175,10 +177,7 @@
 									value="#{parasitologicoBean.parasitologico.enfermaria}"
 									label="Enfermaria" readonly="true" />
 
-								<h:outputLabel for="leito" value="Leito: " />
-								<p:inputText value="#{parasitologicoBean.parasitologico.leito}"
-									label="leito" readonly="true" />
-
+								
 							</h:panelGrid>
 
 						</p:fieldset>

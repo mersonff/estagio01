@@ -95,52 +95,44 @@
 					<p:fieldset legend="Dados do Paciente" style="text-align: center;">
 
 						<h:panelGrid cellpadding="4" columns="6">
-							<h:outputText value="Número do SUS: " />
+							<h:outputLabel value="Número do SUS: " />
 							<p:inputText
-								value="#{baciloscopiaBean.baciloscopia.paciente.numeroSus}"
-								size="14" readonly="true" />
+								value="#{baciloscopiaBean.baciloscopia.paciente.numeroSus}" size="14" readonly="true" />
 
-							<h:outputText value="Nascido em: " />
-							<p:inputMask
-								value="#{baciloscopiaBean.baciloscopia.paciente.dataNascimento}"
-								readonly="true" mask="99/99/9999" size="7">
+							<h:outputLabel value="Nascido em: " />
+							<p:inputText
+								value="#{baciloscopiaBean.baciloscopia.paciente.dataNascimento}" size="8" readonly="true">
 								<f:convertDateTime type="date" locale="pt_BR"
 									timeZone="America/Fortaleza" />
-							</p:inputMask>
+							</p:inputText>
 
-							<h:outputText value="Idade: " />
+							<h:outputLabel value="Idade: " />
 							<p:inputText
-								value="#{baciloscopiaBean.baciloscopia.paciente.idade}"
-								readonly="true" size="1" />
+								value="#{baciloscopiaBean.baciloscopia.paciente.idade}" size="1" readonly="true" />
 						</h:panelGrid>
 
 						<h:panelGrid cellpadding="4" columns="6">
-							<h:outputText value="Nome: " />
+							<h:outputLabel value="Nome: " />
 							<p:inputText
-								value="#{baciloscopiaBean.baciloscopia.paciente.nome}"
-								readonly="true" size="10" />
+								value="#{baciloscopiaBean.baciloscopia.paciente.nome}" size="11" readonly="true" />
 
-							<h:outputText value="Sobrenome: " />
+							<h:outputLabel value="Sobrenome: " />
 							<p:inputText
-								value="#{baciloscopiaBean.baciloscopia.paciente.sobrenome}"
-								readonly="true" />
+								value="#{baciloscopiaBean.baciloscopia.paciente.sobrenome}" readonly="true" />
 
-							<h:outputText value="Sexo: " />
+							<h:outputLabel value="Sexo: " />
 							<p:inputText
-								value="#{baciloscopiaBean.baciloscopia.paciente.sexo}"
-								readonly="true" size="1" />
+								value="#{baciloscopiaBean.baciloscopia.paciente.sexo}" size="1" readonly="true" />
 						</h:panelGrid>
-
-						<h:panelGrid cellpadding="4" columns="4">
-							<h:outputText value="Endereço: " />
+						
+						<h:panelGrid cellpadding="4" columns="6">
+							<h:outputLabel value="Endereço: " />
 							<p:inputText
-								value="#{baciloscopiaBean.baciloscopia.paciente.endereco}"
-								readonly="true" />
+								value="#{baciloscopiaBean.baciloscopia.paciente.endereco}" readonly="true" />
 
-							<h:outputText value="Localidade: " />
+							<h:outputLabel value="Localidade: " />
 							<p:inputText
-								value="#{baciloscopiaBean.baciloscopia.paciente.localidade}"
-								readonly="true" size="10" />
+								value="#{baciloscopiaBean.baciloscopia.paciente.localidade}" readonly="true" />
 						</h:panelGrid>
 					</p:fieldset>
 				</p:dialog>

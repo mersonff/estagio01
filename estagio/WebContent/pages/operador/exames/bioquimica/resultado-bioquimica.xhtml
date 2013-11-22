@@ -95,7 +95,7 @@
 								<h:outputText value="Nascido em: " />
 								<p:inputMask
 									value="#{bioquimicaBean.bioquimica.paciente.dataNascimento}"
-									readonly="true" mask="99/99/9999" size="7">
+									readonly="true" mask="99/99/9999" size="8">
 									<f:convertDateTime type="date" locale="pt_BR"
 										timeZone="America/Fortaleza" />
 								</p:inputMask>
@@ -129,7 +129,7 @@
 								<h:outputText value="Localidade: " />
 								<p:inputText
 									value="#{bioquimicaBean.bioquimica.paciente.localidade}"
-									readonly="true" size="10" />
+									readonly="true" />
 							</h:panelGrid>
 						</p:fieldset>
 					</h:panelGrid>
@@ -140,7 +140,7 @@
 							<h:panelGrid columns="6" cellpadding="4">
 								<h:outputText value="Data de Pedido: " />
 								<p:inputText value="#{bioquimicaBean.bioquimica.dataPedido}"
-									readonly="true" size="7">
+									readonly="true" size="8">
 									<f:convertDateTime type="date" locale="pt_BR"
 										timeZone="America/Fortaleza" />
 								</p:inputText>

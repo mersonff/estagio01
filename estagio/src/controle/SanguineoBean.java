@@ -41,7 +41,7 @@ public class SanguineoBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.sanguineo = new Sanguineo();
 		} else {
-			displayErrorMessageToUser("Paciente n√£o cadastrado: Por favor, cadastre o paciente e tente novamente.");
+			displayErrorMessageToUser("Paciente n„o cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
 
 	}
@@ -78,7 +78,7 @@ public class SanguineoBean extends AbstractBean {
 
 	public void atualizar() {
 		SanguineoDAO operDAO = new SanguineoJPADAO();
-		this.sanguineo.setStatus("Conclu√≠do");
+		this.sanguineo.setStatus("ConcluÌdo");
 		this.sanguineo.setDataEntrega(new Date());
 		operDAO.save(this.sanguineo);
 		displayInfoMessageToUser("Cadastrado com sucesso!");

@@ -42,7 +42,7 @@ public class ExameBean extends AbstractBean {
 		status = new String[3];
 		status[0] = "Em espera";
 		status[1] = "Em aberto";
-		status[2] = "Conclu√≠do";
+		status[2] = "ConcluÌdo";
 	}
 
 	private SelectItem[] statusOptions;
@@ -64,7 +64,7 @@ public class ExameBean extends AbstractBean {
 			operDAO.save(this.exame);
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 		} else {
-			displayInfoMessageToUser("Paciente n√£o cadastrado." + "");
+			displayInfoMessageToUser("Paciente n„o cadastrado." + "");
 		}
 	}
 

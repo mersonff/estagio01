@@ -24,8 +24,8 @@ public class UrinaBean extends AbstractBean {
 	private List<Urina> urinaEmEspera;
 	private List<Urina> urinaEmAberto;
 	private List<Urina> filteredUrinas;
-	private String[] elementosAnormais = { "ProteÃ­na", "Glicose", "Acetona",
-			"AcetoacÃ©tico", "Sais Biliares", "Pig Biliares", "UrobilinogÃªnio",
+	private String[] elementosAnormais = { "Proteína", "Glicose", "Acetona",
+			"Acetoacético", "Sais Biliares", "Pig Biliares", "Urobilinogênio",
 			"Hemoglobina" };
 
 	public UrinaBean() {
@@ -44,7 +44,7 @@ public class UrinaBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.urina = new Urina();
 		} else {
-			displayErrorMessageToUser("Paciente nÃ£o cadastrado: Por favor, cadastre o paciente e tente novamente.");
+			displayErrorMessageToUser("Paciente não cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
 
 	}
@@ -81,7 +81,7 @@ public class UrinaBean extends AbstractBean {
 
 	public void atualizar() {
 		UrinaDAO operDAO = new UrinaJPADAO();
-		this.urina.setStatus("ConcluÃ­do");
+		this.urina.setStatus("Concluído");
 		this.urina.setDataEntrega(new Date());
 		operDAO.save(this.urina);
 		displayInfoMessageToUser("Cadastrado com sucesso!");

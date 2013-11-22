@@ -41,7 +41,7 @@ public class BioquimicaBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.bioquimica = new Bioquimica();
 		} else {
-			displayErrorMessageToUser("Paciente n√£o cadastrado: Por favor, cadastre o paciente e tente novamente.");
+			displayErrorMessageToUser("Paciente n„o cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
 
 	}
@@ -78,7 +78,7 @@ public class BioquimicaBean extends AbstractBean {
 
 	public void atualizar() {
 		BioquimicaDAO operDAO = new BioquimicaJPADAO();
-		this.bioquimica.setStatus("Conclu√∫do");
+		this.bioquimica.setStatus("ConcluÌdo");
 		this.bioquimica.setDataEntrega(new Date());
 		operDAO.save(this.bioquimica);
 		displayInfoMessageToUser("Cadastrado com sucesso!");

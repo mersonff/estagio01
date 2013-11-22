@@ -34,7 +34,7 @@ public class OperadorBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.operador = new Operador();
 		} else {
-			displayErrorMessageToUser("Login indisponÃ­vel: Esse Login jï¿½ estï¿½ sendo usado.");
+			displayErrorMessageToUser("Login indisponível: Esse Login já está sendo usado.");
 		}
 	}
 

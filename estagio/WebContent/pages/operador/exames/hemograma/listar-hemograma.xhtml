@@ -151,7 +151,7 @@
 
 										<h:outputText value="Solicitado em:" />
 										<p:inputText value="#{hemogramaBean.hemograma.dataPedido}"
-											readonly="true" size="7">
+											readonly="true" size="8">
 											<f:convertDateTime type="date" locale="pt_BR"
 												timeZone="America/Fortaleza" />
 										</p:inputText>
@@ -168,7 +168,7 @@
 										<h:outputLabel for="dataEntrega" value="Data de Entrega: " />
 										<p:inputMask id="dataEntrega"
 											value="#{hemogramaBean.hemograma.dataEntrega}"
-											label="dataEntrega" mask="99/99/9999" size="7"
+											label="dataEntrega" mask="99/99/9999" size="8"
 											readonly="true">
 											<f:convertDateTime type="date" locale="pt_BR"
 												timeZone="America/Fortaleza" />
@@ -183,7 +183,7 @@
 												value="#{hemogramaBean.hemograma.hemacias}" label="hemacias"
 												size="3" readonly="true">
 												<f:convertNumber locale="pt_BR" minFractionDigits="1" />
-											</p:inputText>x10/ul
+											</p:inputText>x10⁶/ul
 
 										<h:outputLabel for="vcm" value="*V.C.M: " />
 											<p:inputText id="vcm" value="#{hemogramaBean.hemograma.vcm}"

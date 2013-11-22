@@ -24,14 +24,14 @@ public class HemogramaBean extends AbstractBean {
 	private List<Hemograma> hemogramaEmEspera;
 	private List<Hemograma> hemogramaEmAberto;
 	private List<Hemograma> filteredHemogramas;
-	private String[] tipoHemacias = { "Normais", "HipocrÃ´micas",
-			"AnisocrÃ´micas", "MicrocÃ­ticas", "AnisocÃ­ticas", "MacrocÃ­ticas",
-			"PoiquilocÃ­ticas" };
+	private String[] tipoHemacias = { "Normais", "Hipocrômicas",
+			"Anisocrômicas", "Microcíticas", "Anisocíticas", "Macrocíticas",
+			"Poiquilocíticas" };
 	private String[] tipoPlaquetas = { "Normais", "Aumentadas", "Diminuidas" };
 	private String[] tipoLinfocitos = { "Com atipias", "Sem atipias" };
-	private String[] tipoGranulacoes = { "Ausï¿½ncia", "PresenÃ§a" };
-	private String[] tipoEritroblastos = { "BasÃ³filos", "PolicromatÃ³filos",
-			"OrtocromÃ¡ticos" };
+	private String[] tipoGranulacoes = { "Ausência", "Presença" };
+	private String[] tipoEritroblastos = { "Basófilos", "Policromatófilos",
+			"Ortocromáticos" };
 
 	public HemogramaBean() {
 		this.setHemograma(new Hemograma());
@@ -49,7 +49,7 @@ public class HemogramaBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.hemograma = new Hemograma();
 		} else {
-			displayErrorMessageToUser("Paciente nÃ£o cadastrado: Por favor, cadastre o paciente e tente novamente.");
+			displayErrorMessageToUser("Paciente não cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
 
 	}
@@ -86,7 +86,7 @@ public class HemogramaBean extends AbstractBean {
 
 	public void atualizar() {
 		HemogramaDAO operDAO = new HemogramaJPADAO();
-		this.hemograma.setStatus("ConcluÃ­do");
+		this.hemograma.setStatus("Concluído");
 		this.hemograma.setDataEntrega(new Date());
 		operDAO.save(this.hemograma);
 		displayInfoMessageToUser("Cadastrado com sucesso!");

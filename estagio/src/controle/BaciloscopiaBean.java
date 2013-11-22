@@ -41,7 +41,7 @@ public class BaciloscopiaBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.baciloscopia = new Baciloscopia();
 		} else {
-			displayErrorMessageToUser("Paciente n√£o cadastrado: Por favor, cadastre o paciente e tente novamente.");
+			displayErrorMessageToUser("Paciente n„o cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
 
 	}
@@ -63,7 +63,7 @@ public class BaciloscopiaBean extends AbstractBean {
 
 	public void atualizar() {
 		BaciloscopiaDAO operDAO = new BaciloscopiaJPADAO();
-		this.baciloscopia.setStatus("Conclu√≠do");
+		this.baciloscopia.setStatus("ConcluÌdo");
 		this.baciloscopia.setDataEntrega(new Date());
 		operDAO.save(this.baciloscopia);
 		displayInfoMessageToUser("Cadastrado com sucesso!");

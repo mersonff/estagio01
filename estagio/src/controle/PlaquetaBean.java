@@ -41,7 +41,7 @@ public class PlaquetaBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.plaqueta = new Plaqueta();
 		} else {
-			displayErrorMessageToUser("Paciente n√£o cadastrado: Por favor, cadastre o paciente e tente novamente.");
+			displayErrorMessageToUser("Paciente n„o cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
 
 	}
@@ -78,7 +78,7 @@ public class PlaquetaBean extends AbstractBean {
 
 	public void atualizar() {
 		PlaquetaDAO operDAO = new PlaquetaJPADAO();
-		this.plaqueta.setStatus("Conclu√≠do");
+		this.plaqueta.setStatus("ConcluÌdo");
 		this.plaqueta.setDataEntrega(new Date());
 		operDAO.save(this.plaqueta);
 		displayInfoMessageToUser("Cadastrado com sucesso!");

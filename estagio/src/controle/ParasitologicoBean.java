@@ -26,7 +26,7 @@ public class ParasitologicoBean extends AbstractBean {
 	private List<Parasitologico> filteredParasitologicos;
 	private String[] metodos = { "Baerman", "Simples", "Hamatoxilina",
 			"Seriado" };
-	private String[] ovos = { "Ascaris Lumbricï¿½ides", "Ancilostomideo",
+	private String[] ovos = { "Ascaris Lumbricóides", "Ancilostomideo",
 			"Trichuris Trichiura", "Enterobius Vermiculares",
 			"Strongiloides Larvas", "Taenia SP", "Schistosoma Mansonu",
 			"Hymenolepis Nana", "Hymenolepis Diminuta" };
@@ -52,7 +52,7 @@ public class ParasitologicoBean extends AbstractBean {
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.parasitologico = new Parasitologico();
 		} else {
-			displayErrorMessageToUser("Paciente nÃ£o cadastrado: Por favor, cadastre o paciente e tente novamente.");
+			displayErrorMessageToUser("Paciente não cadastrado: Por favor, cadastre o paciente e tente novamente.");
 		}
 
 	}
@@ -89,7 +89,7 @@ public class ParasitologicoBean extends AbstractBean {
 
 	public void atualizar() {
 		ParasitologicoDAO operDAO = new ParasitologicoJPADAO();
-		this.parasitologico.setStatus("ConcluÃ­do");
+		this.parasitologico.setStatus("Concluído");
 		this.parasitologico.setDataEntrega(new Date());
 		operDAO.save(this.parasitologico);
 		displayInfoMessageToUser("Cadastrado com sucesso!");

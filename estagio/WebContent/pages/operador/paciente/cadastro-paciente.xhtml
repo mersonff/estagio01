@@ -37,7 +37,7 @@
 					<h:outputLabel for="dataNascimento" value="Data de Nascimento: " />
 					<p:inputMask id="dataNascimento"
 						value="#{pacienteBean.paciente.dataNascimento}"
-						label="dataNascimento" mask="99/99/9999" size="7"
+						label="dataNascimento" mask="99/99/9999" size="8"
 						requiredMessage="Data de Pedido: Campo obrigatório."
 						converterMessage="Data Pedido: A data inserida não é uma data válida">
 						<f:convertDateTime type="date" locale="pt_BR"
@@ -50,8 +50,7 @@
 
 					<h:outputLabel for="localidade" value="Localidade: " />
 					<p:inputText id="localidade"
-						value="#{pacienteBean.paciente.localidade}" label="localidade"
-						size="10" />
+						value="#{pacienteBean.paciente.localidade}" label="localidade" />
 
 					<h:outputLabel for="sexo" value="Sexo: " />
 					<p:selectOneMenu id="sexo" value="#{pacienteBean.paciente.sexo}">

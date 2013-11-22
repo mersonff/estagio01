@@ -101,7 +101,7 @@
 							<h:outputText value="Nascido em: " />
 							<p:inputMask
 								value="#{plaquetaBean.plaqueta.paciente.dataNascimento}"
-								readonly="true" mask="99/99/9999" size="7">
+								readonly="true" mask="99/99/9999" size="8">
 								<f:convertDateTime type="date" locale="pt_BR"
 									timeZone="America/Fortaleza" />
 							</p:inputMask>
@@ -132,7 +132,7 @@
 
 							<h:outputText value="Localidade: " />
 							<p:inputText value="#{plaquetaBean.plaqueta.paciente.localidade}"
-								readonly="true" size="10" />
+								readonly="true" />
 						</h:panelGrid>
 					</p:fieldset>
 				</p:dialog>

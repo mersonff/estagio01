@@ -96,7 +96,7 @@
 								<h:outputText value="Nascido em: " />
 								<p:inputMask
 									value="#{baciloscopiaBean.baciloscopia.paciente.dataNascimento}"
-									readonly="true" mask="99/99/9999" size="7">
+									readonly="true" mask="99/99/9999" size="8">
 									<f:convertDateTime type="date" locale="pt_BR"
 										timeZone="America/Fortaleza" />
 								</p:inputMask>
@@ -133,7 +133,7 @@
 								<h:outputText value="Localidade: " />
 								<p:inputText
 									value="#{baciloscopiaBean.baciloscopia.paciente.localidade}"
-									readonly="true" size="10" />
+									readonly="true" />
 							</h:panelGrid>
 						</p:fieldset>
 					</h:panelGrid>
@@ -144,7 +144,7 @@
 
 							<h:outputText value="Data de Pedido: " />
 							<p:inputText value="#{baciloscopiaBean.baciloscopia.dataPedido}"
-								readonly="true" size="7">
+								readonly="true" size="8">
 								<f:convertDateTime type="date" locale="pt_BR"
 									timeZone="America/Fortaleza" />
 							</p:inputText>
@@ -181,12 +181,12 @@
 						<h:panelGrid columns="8" cellpadding="4">
 
 							<h:outputLabel for="diagnostico" value="Diagnóstico: " />
-							<p:inputText readonly="true" size="1"
+							<p:inputText readonly="true" size="2"
 								value="#{baciloscopiaBean.baciloscopia.diagnostico}" />
 
 							<h:outputLabel for="controleDeTratamento"
 								value="Controle de Tratamento: " />
-							<p:inputText readonly="true" size="1"
+							<p:inputText readonly="true" size="2"
 								value="#{baciloscopiaBean.baciloscopia.controleDeTratamento}" />
 
 							<h:outputText value="Amostra:" />
