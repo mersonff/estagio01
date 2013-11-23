@@ -80,8 +80,8 @@
 					</p:column>
 				</p:dataTable>
 
-				<p:confirmDialog header="Excluir Paciente" message="Tem certeza?"
-					widgetVar="confirmacao" id="excluir">
+				<p:confirmDialog message="Tem certeza?" widgetVar="confirmacao"
+					id="excluir">
 
 					<h:inputHidden id="numeroSus"
 						value="#{pacienteBean.paciente.numeroSus}" />
@@ -93,9 +93,8 @@
 
 				</p:confirmDialog>
 
-				<p:dialog widgetVar="pacienteDialog"
-					resizable="false" id="paciente" showEffect="fade"
-					hideEffect="explode" modal="true">
+				<p:dialog widgetVar="pacienteDialog" resizable="false" id="paciente"
+					showEffect="fade" hideEffect="explode" modal="true">
 
 					<p:fieldset legend="Dados do Paciente" style="text-align:center;">
 
@@ -110,7 +109,7 @@
 								<f:convertDateTime type="date" locale="pt_BR"
 									timeZone="America/Fortaleza" />
 							</p:inputMask>
-							
+
 							<h:outputText value="Idade: " />
 							<p:inputText value="#{pacienteBean.paciente.idade}"
 								readonly="true" size="1" />

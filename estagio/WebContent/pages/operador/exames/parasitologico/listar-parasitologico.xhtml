@@ -124,7 +124,8 @@
 									</h:panelGrid>
 								</div>
 								<br />
-								<p:fieldset legend="Dados de Pedido" style="text-align:center;" toggleable="true">
+								<p:fieldset legend="Dados de Pedido" style="text-align:center;"
+									toggleable="true">
 
 									<h:panelGrid columns="6" cellpadding="4"
 										style="text-align:left;">
@@ -137,12 +138,12 @@
 										</p:inputText>
 
 										<h:outputLabel for="unidade" value="Unidade: " />
-										<p:inputText
+										<p:inputText id="unidade"
 											value="#{parasitologicoBean.parasitologico.unidade}"
 											label="Unidade" readonly="true" />
 
 										<h:outputText value="Idade: " />
-										<p:inputText
+										<p:inputText id="idade"
 											value="#{parasitologicoBean.parasitologico.paciente.idade}"
 											readonly="true" size="1" />
 									</h:panelGrid>
@@ -151,12 +152,12 @@
 										style="text-align:left;">
 
 										<h:outputLabel for="nome" value="Nome: " />
-										<p:inputText
+										<p:inputText id="nome"
 											value="#{parasitologicoBean.parasitologico.paciente.nome}"
 											label="Nome" readonly="true" />
 
 										<h:outputLabel for="sobrenome" value="Sobrenome: " />
-										<p:inputText
+										<p:inputText id="sobrenome"
 											value="#{parasitologicoBean.parasitologico.paciente.sobrenome}"
 											label="Sobrenome" readonly="true" />
 									</h:panelGrid>
@@ -165,22 +166,22 @@
 										style="text-align:left;">
 
 										<h:outputLabel for="solicitante" value="Solicitante: " />
-										<p:inputText
+										<p:inputText id="solicitante"
 											value="#{parasitologicoBean.parasitologico.solicitante}"
 											label="solicitante" readonly="true" />
 
 										<h:outputLabel for="prontuario" value="Prontuário: " />
-										<p:inputText
+										<p:inputText id="prontuario"
 											value="#{parasitologicoBean.parasitologico.prontuario}"
 											label="Prontuário" readonly="true" />
 
 										<h:outputLabel for="enfermaria" value="Enfermaria: " />
-										<p:inputText
+										<p:inputText id="enfermaria"
 											value="#{parasitologicoBean.parasitologico.enfermaria}"
 											label="Enfermaria" readonly="true" />
 
 										<h:outputLabel for="leito" value="Leito: " />
-										<p:inputText
+										<p:inputText id="leito"
 											value="#{parasitologicoBean.parasitologico.leito}"
 											label="leito" readonly="true" />
 
@@ -204,7 +205,7 @@
 										</p:inputMask>
 
 										<h:outputLabel for="metodo" value="Método: " />
-										<p:inputText readonly="true"
+										<p:inputText id="metodo" readonly="true"
 											value="#{parasitologicoBean.parasitologico.metodo}" />
 									</h:panelGrid>
 

@@ -92,47 +92,55 @@
 				<p:dialog widgetVar="pacienteDialog" resizable="false" id="paciente"
 					showEffect="fade" hideEffect="explode" modal="true">
 
-					<p:fieldset legend="Dados do Paciente" style="text-align: center;">
+					<p:fieldset legend="Dados do Paciente" style="text-align:center;">
 
 						<h:panelGrid cellpadding="4" columns="6">
-							<h:outputLabel value="Número do SUS: " />
+							<h:outputText value="Número do SUS: " />
 							<p:inputText
-								value="#{baciloscopiaBean.baciloscopia.paciente.numeroSus}" size="14" readonly="true" />
+								value="#{baciloscopiaBean.baciloscopia.paciente.numeroSus}"
+								size="14" readonly="true" />
 
-							<h:outputLabel value="Nascido em: " />
-							<p:inputText
-								value="#{baciloscopiaBean.baciloscopia.paciente.dataNascimento}" size="8" readonly="true">
+							<h:outputText value="Nascido em: " />
+							<p:inputMask
+								value="#{baciloscopiaBean.baciloscopia.paciente.dataNascimento}"
+								readonly="true" mask="99/99/9999" size="8">
 								<f:convertDateTime type="date" locale="pt_BR"
 									timeZone="America/Fortaleza" />
-							</p:inputText>
+							</p:inputMask>
 
-							<h:outputLabel value="Idade: " />
+							<h:outputText value="Idade: " />
 							<p:inputText
-								value="#{baciloscopiaBean.baciloscopia.paciente.idade}" size="1" readonly="true" />
+								value="#{baciloscopiaBean.baciloscopia.paciente.idade}"
+								readonly="true" size="1" />
 						</h:panelGrid>
 
 						<h:panelGrid cellpadding="4" columns="6">
-							<h:outputLabel value="Nome: " />
+							<h:outputText value="Nome: " />
 							<p:inputText
-								value="#{baciloscopiaBean.baciloscopia.paciente.nome}" size="11" readonly="true" />
+								value="#{baciloscopiaBean.baciloscopia.paciente.nome}"
+								readonly="true" size="10" />
 
-							<h:outputLabel value="Sobrenome: " />
+							<h:outputText value="Sobrenome: " />
 							<p:inputText
-								value="#{baciloscopiaBean.baciloscopia.paciente.sobrenome}" readonly="true" />
+								value="#{baciloscopiaBean.baciloscopia.paciente.sobrenome}"
+								readonly="true" />
 
-							<h:outputLabel value="Sexo: " />
+							<h:outputText value="Sexo: " />
 							<p:inputText
-								value="#{baciloscopiaBean.baciloscopia.paciente.sexo}" size="1" readonly="true" />
+								value="#{baciloscopiaBean.baciloscopia.paciente.sexo}"
+								readonly="true" size="1" />
 						</h:panelGrid>
-						
-						<h:panelGrid cellpadding="4" columns="6">
-							<h:outputLabel value="Endereço: " />
-							<p:inputText
-								value="#{baciloscopiaBean.baciloscopia.paciente.endereco}" readonly="true" />
 
-							<h:outputLabel value="Localidade: " />
+						<h:panelGrid cellpadding="4" columns="4">
+							<h:outputText value="Endereço: " />
 							<p:inputText
-								value="#{baciloscopiaBean.baciloscopia.paciente.localidade}" readonly="true" />
+								value="#{baciloscopiaBean.baciloscopia.paciente.endereco}"
+								readonly="true" />
+
+							<h:outputText value="Localidade: " />
+							<p:inputText
+								value="#{baciloscopiaBean.baciloscopia.paciente.localidade}"
+								readonly="true" />
 						</h:panelGrid>
 					</p:fieldset>
 				</p:dialog>
@@ -160,7 +168,7 @@
 									value="#{baciloscopiaBean.baciloscopia.unidadeDeSaude}" />
 
 								<h:outputText value="Solicitante: " />
-								<p:autoComplete id="solicitante" required="true"
+								<p:autoComplete id="solicitante"
 									value="#{baciloscopiaBean.baciloscopia.solicitante}"
 									completeMethod="#{baciloscopiaBean.complete}"
 									minQueryLength="3" />
