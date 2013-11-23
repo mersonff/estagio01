@@ -80,12 +80,15 @@
 
 					<p:fieldset legend="Alterar Senha" style="text-align:center;">
 						<h:panelGrid columns="2" cellpadding="4">
-							<h:outputLabel value="Senha Atual: " />
-							<p:password value="#{operadorBean.ativo.senha}" redisplay="true"
-								label="Senha" disabled="true" />
+							<h:outputLabel value="Senha Atual: *" />
+							<p:password value="#{operadorBean.senhaAtual}" redisplay="true"
+								label="Senha" required="true" />
 							<h:outputLabel value="Nova Senha: *" />
 							<p:password id="novaSenha" value="#{operadorBean.novaSenha}"
 								redisplay="true" required="true" label="Nova Senha" />
+							<h:outputLabel value="Confirmar nova senha: *" />
+							<p:password id="confirmaNovaSenha" value="#{operadorBean.confirmaNovaSenha}"
+								redisplay="true" required="true" label="Confirmar nova senha" />	
 						</h:panelGrid>
 					</p:fieldset>
 				</h:panelGrid>
@@ -96,8 +99,8 @@
 						styleClass="
 						ui-priority-primary"
 						oncomplete="passwordDialog.hide()" />
-					<p:commandButton value="Cancelar"
-						action="/pages/operador/home-operador.xhtml" />
+					<p:commandButton value="Cancelar" type="reset"
+							onclick="passwordDialog.hide()" />	
 				</h:panelGrid>
 			</p:dialog>
 		</h:form>

@@ -17,7 +17,9 @@ public class AdminBean extends AbstractBean {
 	private Administrador administrador;
 	private List<Administrador> admins;
 	private Administrador ativo;
+	private String senhaAtual;
 	private String novaSenha;
+	private String confirmaNovaSenha;
 
 	public AdminBean() {
 		this.administrador = new Administrador();
@@ -33,9 +35,17 @@ public class AdminBean extends AbstractBean {
 
 	public void alterarSenha() {
 		AdministradorDAO adminDAO = new AdministradorJPADAO();
-		this.ativo.setSenha(this.novaSenha);
-		adminDAO.save(this.ativo);
-		displayInfoMessageToUser("Atualizada com sucesso!");
+		if(this.ativo.getSenha().equals(this.senhaAtual)){
+			if(this.novaSenha.equals(this.confirmaNovaSenha)){
+				this.ativo.setSenha(this.novaSenha);
+				adminDAO.save(this.ativo);
+				displayInfoMessageToUser("Atualizado com Sucesso!");
+			}else{
+				displayErrorMessageToUser("Erro na confirmação da senha!");
+			}
+		}else{
+			displayErrorMessageToUser("Senha atual inválida!");
+		}
 	}
 
 	public void findAll() {
@@ -80,5 +90,23 @@ public class AdminBean extends AbstractBean {
 	public void setAdmins(List<Administrador> admins) {
 		this.admins = admins;
 	}
+
+	public String getSenhaAtual() {
+		return senhaAtual;
+	}
+
+	public void setSenhaAtual(String senhaAtual) {
+		this.senhaAtual = senhaAtual;
+	}
+
+	public String getConfirmaNovaSenha() {
+		return confirmaNovaSenha;
+	}
+
+	public void setConfirmaNovaSenha(String confirmaNovaSenha) {
+		this.confirmaNovaSenha = confirmaNovaSenha;
+	}
+	
+	
 
 }

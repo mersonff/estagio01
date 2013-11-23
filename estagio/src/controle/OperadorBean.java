@@ -18,7 +18,9 @@ public class OperadorBean extends AbstractBean {
 	private Operador ativo;
 	private List<Operador> operadores;
 	private List<Operador> filteredOperadores;
+	private String senhaAtual;
 	private String novaSenha;
+	private String confirmaNovaSenha;
 
 	public OperadorBean() {
 		this.setOperadores(new ArrayList<Operador>());
@@ -53,9 +55,18 @@ public class OperadorBean extends AbstractBean {
 
 	public void alterarSenha() {
 		OperadorDAO operDAO = new OperadorJPADAO();
-		this.ativo.setSenha(novaSenha);
-		operDAO.save(this.ativo);
-		displayInfoMessageToUser("Atualizado com Sucesso!");
+		if(this.ativo.getSenha().equals(this.senhaAtual)){
+			if(this.novaSenha.equals(this.confirmaNovaSenha)){
+				this.ativo.setSenha(this.novaSenha);
+				operDAO.save(this.ativo);
+				displayInfoMessageToUser("Atualizado com Sucesso!");
+			}else{
+				displayErrorMessageToUser("Erro na confirmação da senha!");
+			}
+		}else{
+			displayErrorMessageToUser("Senha atual inválida!");
+		}
+		
 
 	}
 
@@ -115,6 +126,22 @@ public class OperadorBean extends AbstractBean {
 
 	public void setNovaSenha(String novaSenha) {
 		this.novaSenha = novaSenha;
+	}
+
+	public String getConfirmaNovaSenha() {
+		return confirmaNovaSenha;
+	}
+
+	public void setConfirmaNovaSenha(String confirmaNovaSenha) {
+		this.confirmaNovaSenha = confirmaNovaSenha;
+	}
+
+	public String getSenhaAtual() {
+		return senhaAtual;
+	}
+
+	public void setSenhaAtual(String senhaAtual) {
+		this.senhaAtual = senhaAtual;
 	}
 
 }

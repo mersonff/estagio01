@@ -63,15 +63,15 @@
 
 					<p:fieldset legend="Alterar Senha" style="text-align: center;">
 						<h:panelGrid columns="2" cellpadding="4">
-							<h:outputLabel value="Senha Atual: " />
-							<p:password value="#{adminBean.ativo.senha}" redisplay="true"
-								label="Senha" disabled="true" />
-						</h:panelGrid>
-
-						<h:panelGrid columns="2" cellpadding="4">
+							<h:outputLabel value="Senha Atual: *" />
+							<p:password value="#{adminBean.senhaAtual}" redisplay="true"
+								label="Senha" required="true" />
 							<h:outputLabel value="Nova Senha: *" />
 							<p:password id="novaSenha" value="#{adminBean.novaSenha}"
 								redisplay="true" required="true" label="Nova Senha" />
+							<h:outputLabel value="Confirmar Nova Senha: *" />
+							<p:password id="confirmaNovaSenha" value="#{adminBean.confirmaNovaSenha}"
+								redisplay="true" required="true" label="Confirmar Nova Senha" />	
 						</h:panelGrid>
 					</p:fieldset>
 				</h:panelGrid>
