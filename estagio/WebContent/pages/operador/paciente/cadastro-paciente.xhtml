@@ -22,38 +22,38 @@
 					<h:outputLabel for="numeroSus" value="Número do SUS: *" />
 					<p:inputText id="numeroSus"
 						value="#{pacienteBean.paciente.numeroSus}" required="true"
-						label="numeroSus" size="14"
+						label="Número do SUS" size="14"
 						requiredMessage="Número do SUS: Campo obrigatório."
 						converterMessage="Número do SUS: Deve ser um número." />
 
-					<h:outputLabel for="nome" value="Nome: " />
+					<h:outputLabel for="nome" value="Nome: *" />
 					<p:inputText id="nome" value="#{pacienteBean.paciente.nome}"
-						label="nome" size="10" />
+						label="Nome" size="10" required="true" />
 
-					<h:outputLabel for="sobrenome" value="Sobrenome: " />
+					<h:outputLabel for="sobrenome" value="Sobrenome: *" />
 					<p:inputText id="sobrenome"
-						value="#{pacienteBean.paciente.sobrenome}" label="sobrenome" />
+						value="#{pacienteBean.paciente.sobrenome}" label="Sobrenome" required="true" />
 
 					<h:outputLabel for="dataNascimento" value="Data de Nascimento: " />
 					<p:inputMask id="dataNascimento"
 						value="#{pacienteBean.paciente.dataNascimento}"
-						label="dataNascimento" mask="99/99/9999" size="8"
-						requiredMessage="Data de Pedido: Campo obrigatório."
-						converterMessage="Data Pedido: A data inserida não é uma data válida">
+						label="Data de Nascimento" mask="99/99/9999" size="8"
+						requiredMessage="Data de Nascimento: Campo obrigatório."
+						converterMessage="Data de Nascimento: Data inválida">
 						<f:convertDateTime type="date" locale="pt_BR"
 							timeZone="America/Fortaleza" />
 					</p:inputMask>
 
 					<h:outputLabel for="endereco" value="Endereço: " />
 					<p:inputText id="endereco"
-						value="#{pacienteBean.paciente.endereco}" label="endereco" />
+						value="#{pacienteBean.paciente.endereco}" label="Endereco" />
 
 					<h:outputLabel for="localidade" value="Localidade: " />
 					<p:inputText id="localidade"
-						value="#{pacienteBean.paciente.localidade}" label="localidade" />
+						value="#{pacienteBean.paciente.localidade}" label="Localidade" />
 
 					<h:outputLabel for="sexo" value="Sexo: " />
-					<p:selectOneMenu id="sexo" value="#{pacienteBean.paciente.sexo}">
+					<p:selectOneMenu id="sexo" value="#{pacienteBean.paciente.sexo}" label="Sexo">
 						<f:selectItem itemLabel="Masculino" itemValue="M" />
 						<f:selectItem itemLabel="Feminino" itemValue="F" />
 					</p:selectOneMenu>

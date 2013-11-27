@@ -68,12 +68,12 @@
 					<p:column style="width:4%">
 						<p:commandButton id="selectButton" update=":form:paciente"
 							oncomplete="pacienteDialog.show()" icon="ui-icon-search"
-							title="Vizualizar Exame">
+							title="Vizualizar Paciente">
 							<f:setPropertyActionListener value="#{paciente}"
 								target="#{pacienteBean.paciente}" />
 						</p:commandButton>
 						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
-							oncomplete="confirmacao.show()" title="Excluir Exame">
+							oncomplete="confirmacao.show()" title="Excluir Paciente">
 							<f:setPropertyActionListener target="#{pacienteBean.paciente}"
 								value="#{paciente}" />
 						</p:commandButton>
