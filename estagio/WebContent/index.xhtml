@@ -26,24 +26,24 @@
 				<p:panel header="Autenticação de Usuário" style="text-align:center;">
 
 					<h:panelGrid style="margin: 0 auto" cellpadding="4">
-						<h:outputLabel value="Usuário:" />
+						<h:outputLabel value="Login: " />
 						<p:inputText value="#{loginBean.usuario.login}" required="true"
 							label="Login" />
 
-						<h:outputLabel value="Senha:" />
+						<h:outputLabel value="Senha: " />
 						<p:password value="#{loginBean.usuario.senha}" label="Senha"
 							required="true" />
 
-						<h:outputLabel value="Tipo de usuário:" />
+						<h:outputLabel value="Tipo: " />
 
 						<p:selectOneMenu value="#{loginBean.usuario.tipo}" required="true"
-							label="Tipo de Usuário" style="text-align: left;">
+							label="Tipo de Usuário">
 							<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
-							<f:selectItem itemValue="#{loginBean.tipoDeUsuario.operador}"
-								itemLabel="Operador" />
 							<f:selectItem
 								itemValue="#{loginBean.tipoDeUsuario.administrador}"
 								itemLabel="Administrador" />
+							<f:selectItem itemValue="#{loginBean.tipoDeUsuario.operador}"
+								itemLabel="Operador" />
 						</p:selectOneMenu>
 
 						<p:commandButton value="Entrar" action="#{loginBean.logar}" />
