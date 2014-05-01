@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/templates/template-atendente.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<br />
+		<h:form id="perfil" styleClass="form">
+
+			<p:panel id="panel" header="Dados Pessoais"
+				style="margin-bottom:10px;text-align:center;">
+				<p:growl id="messages" />
+
+				<h:panelGrid cellpadding="4" style="text-align: left;">
+
+					<h:inputHidden id="senha" value="#{atendenteBean.ativo.senha}" />
+					<h:inputHidden value="#{atendenteBean.ativo.login}" />
+
+					<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto;">
+						<h:outputLabel for="login" value="Login: *" />
+						<p:inputText id="login" value="#{atendenteBean.ativo.login}"
+							required="true" label="Login" disabled="true">
+
+						</p:inputText>
+
+						<h:outputLabel for="nome" value="Nome: *" />
+						<p:inputText id="nome" value="#{atendenteBean.ativo.nome}"
+							required="true" label="Nome">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+
+						<h:outputLabel for="email" value="Email:" />
+						<p:inputText id="email" value="#{atendenteBean.ativo.email}"
+							label="Email" required="true"
+							validatorMessage="E-mail: Formato inválido.">
+							<f:validateRegex
+								pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+						</p:inputText>
+
+						<h:outputLabel for="telefone" value="Telefone:" />
+						<p:inputMask id="telefone" value="#{atendenteBean.ativo.telefone}"
+							mask="(99)9999-9999" label="Telefone">
+						</p:inputMask>
+					</h:panelGrid>
+					<h:panelGrid cellpadding="4" columns="3" style="margin: 0 auto;">
+						<p:commandButton value="Atualizar" update=":perfil:panel"
+							id="ajax" actionListener="#{atendenteBean.atualizar()}"
+							styleClass="ui-priority-primary" />
+						<p:commandButton value="Cancelar"
+							action="/pages/atendente/home-atendente.xhtml" />
+						<p:commandButton id="selectButton" update=":dialog:password"
+							value="Alterar Senha" oncomplete="passwordDialog.show()"
+							title="Alterar Senha" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+		<h:form id="dialog">
+			<p:dialog widgetVar="passwordDialog" resizable="false" id="password"
+				showEffect="fade" hideEffect="explode" modal="true">
+
+				<h:panelGrid id="display" style="margin: 0 auto">
+
+					<h:inputHidden id="login" value="#{atendenteBean.ativo.login}"
+						label="Login" />
+					<h:inputHidden id="nome" value="#{atendenteBean.ativo.nome}"
+						label="Nome" />
+					<h:inputHidden id="email" value="#{atendenteBean.ativo.email}"
+						label="Email" />
+					<h:inputHidden id="telefone" value="#{atendenteBean.ativo.telefone}"
+						label="Telefone" />
+					<h:inputHidden id="senha" value="#{atendenteBean.ativo.senha}"
+						label="Senha" />
+
+
+					<p:fieldset legend="Alterar Senha" style="text-align:center;">
+						<h:panelGrid columns="2" cellpadding="4">
+							<h:outputLabel value="Senha Atual: *" />
+							<p:password value="#{atendenteBean.senhaAtual}" redisplay="true"
+								label="Senha" required="true" />
+							<h:outputLabel value="Nova Senha: *" />
+							<p:password id="novaSenha" value="#{atendenteBean.novaSenha}"
+								redisplay="true" required="true" label="Nova Senha" />
+							<h:outputLabel value="Confirmar nova senha: *" />
+							<p:password id="confirmaNovaSenha" value="#{atendenteBean.confirmaNovaSenha}"
+								redisplay="true" required="true" label="Confirmar nova senha" />	
+						</h:panelGrid>
+					</p:fieldset>
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto;">
+					<p:commandButton value="Salvar" update=":perfil:panel" id="ajax"
+						actionListener="#{atendenteBean.alterarSenha()}"
+						styleClass="
+						ui-priority-primary"
+						oncomplete="passwordDialog.hide()" />
+					<p:commandButton value="Cancelar" type="reset"
+							onclick="passwordDialog.hide()" />	
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+		<br />
+	</ui:define>
+</ui:composition>

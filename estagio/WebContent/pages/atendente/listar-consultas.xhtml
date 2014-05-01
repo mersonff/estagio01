@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/templates/template-atendente.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+
+		<h:form id="form">
+			<p:panel id="panel" style="margin-bottom:10px;">
+
+				<p:growl id="msgs" />
+
+				<div id="tableName">
+					<h:outputText value="Consultas Cadastradas" />
+				</div>
+
+				<p:dataTable id="dataTable" var="consulta"
+					value="#{consultaBean.consultas}" widgetVar="consultasTable"
+					paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					emptyMessage="Nenhuma consulta encontrada com esses critérios."
+					filteredValue="#{consultaBean.filteredConsultas}"
+					paginatorAlwaysVisible="false">
+
+					<f:facet name="header">
+						<div id="filtro">
+							<p:outputPanel>
+								<h:outputText value="Procurar em todos os campos:" />
+								<p:inputText id="globalFilter" onkeyup="consultasTable.filter()"
+									style="width:150px" />
+							</p:outputPanel>
+						</div>
+					</f:facet>
+
+					<p:column id="numeroSusColumn"
+						sortBy="#{consulta.paciente.numeroSus}"
+						filterBy="#{consulta.paciente.numeroSus}" headerText="SUS"
+						filterMatchMode="startsWith" style="text-align: center">
+						<h:outputText value="#{consulta.paciente.numeroSus}" />
+					</p:column>
+
+					<p:column id="nomeColumn" filterBy="#{consulta.paciente.nome}"
+						headerText="Nome" sortBy="#{consulta.paciente.nome}"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{consulta.paciente.nome}" />
+					</p:column>
+
+					<p:column id="data" sortBy="#{consulta.data}"
+						filterBy="#{consulta.data}" headerText="Data"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{consulta.data}">
+							<f:convertDateTime type="date" locale="pt_BR"
+								timeZone="America/Fortaleza" />
+						</h:outputText>
+					</p:column>
+
+					<p:column id="tipoConsultaColumn"
+						filterBy="#{consulta.tipoConsulta}" headerText="Tipo Consulta"
+						sortBy="#{consulta.tipoConsulta}" style="text-align: center"
+						filterMatchMode="startsWith">
+						<h:outputText value="#{consulta.tipoConsulta}" />
+					</p:column>
+
+					<p:column id="tipoAtendimentoColumn"
+						filterBy="#{consulta.tipoAtendimento}"
+						headerText="Tipo Atendimento" sortBy="#{consulta.tipoAtendimento}"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{consulta.tipoAtendimento}" />
+					</p:column>
+
+					<p:column style="width:4%">
+						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
+							oncomplete="confirmacao.show()" title="Excluir Consulta">
+							<f:setPropertyActionListener target="#{consultaBean.consulta}"
+								value="#{consulta}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog message="Tem certeza?" widgetVar="confirmacao"
+					id="excluir">
+
+					<h:inputHidden id="idConsulta"
+						value="#{consultaBean.consulta.idConsulta}" />
+					<h:inputHidden id="numeroSus"
+						value="#{consultaBean.consulta.paciente.numeroSus}" />
+
+					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
+						<p:commandButton value="Sim" update="panel" id="ajax"
+							oncomplete="confirmacao.hide()"
+							actionListener="#{consultaBean.excluir()}" />
+						<p:button value="Não" onclick="confirmacao.hide();" />
+					</h:panelGrid>
+				</p:confirmDialog>
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

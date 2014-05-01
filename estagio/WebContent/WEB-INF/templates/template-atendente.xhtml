@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Lab. Aracoiaba</title>
+	<h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon"
+		href="http://www.iconj.com/ico/m/r/mrpihmc6so.ico" type="image/x-icon" />
+</h:head>
+<h:body>
+	<f:view locale="pt_BR">
+		<div id="conteudo">
+			<div id="cabecalho">
+				<h:panelGrid width="100%" style="text-align: center">
+					<p:graphicImage value="/resources/images/lab.png" width="750px"
+						height="100px" />
+				</h:panelGrid>
+			</div>
+			<h:form>
+
+				<p:growl id="messages" />
+
+				<div id="menu">
+					<p:menubar>
+						<p:menuitem value="Início" icon="ui-icon-home"
+							url="/pages/atendente/home-atendente.xhtml"
+							action="/pages/atentende/home-atendente.xhtml" />
+
+						<p:submenu label="Novo" icon="ui-icon-contact">
+							<p:menuitem value="Consulta"
+								url="/pages/atendente/cadastro-consulta.xhtml" />
+							<p:separator />
+							<p:menuitem value="Internamento"
+								url="/pages/atendente/cadastro-internamento.xhtml" />
+							<p:separator />
+
+							<p:menuitem value="Paciente"
+								url="/pages/atendente/cadastro-paciente.xhtml" />
+						</p:submenu>
+
+						<p:submenu label="Pesquisar" icon="ui-icon-search">
+							<p:menuitem value="Consultas"
+								url="/pages/atendente/listar-consultas.xhtml" />
+							<p:separator />
+							<p:menuitem value="Internamentos"
+								url="/pages/atendente/listar-internamentos.xhtml" />
+							<p:separator />
+							<p:menuitem value="Paciente"
+								url="/pages/atendente/listar-paciente.xhtml" />
+						</p:submenu>
+
+						<p:submenu label="Gerenciar" icon="ui-icon-gear">
+							<p:menuitem value="Perfil"
+								url="/pages/atendente/perfil-atendente.xhtml" />
+						</p:submenu>
+
+						<p:menuitem value="Sair" icon="ui-icon-extlink"
+							action="#{logoutBean.sair()}" style="margin-left: 400px;" />
+					</p:menubar>
+				</div>
+			</h:form>
+
+			<div id="corpo">
+				<ui:insert name="corpo">Corpo da página</ui:insert>
+			</div>
+
+		</div>
+
+		<div id="rodape"></div>
+	</f:view>
+</h:body>
+</html>

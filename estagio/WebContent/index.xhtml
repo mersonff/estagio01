@@ -44,6 +44,8 @@
 								itemLabel="Administrador" />
 							<f:selectItem itemValue="#{loginBean.tipoDeUsuario.operador}"
 								itemLabel="Operador" />
+							<f:selectItem itemValue="#{loginBean.tipoDeUsuario.atendente}"
+								itemLabel="Atendente" />
 						</p:selectOneMenu>
 
 						<p:commandButton value="Entrar" action="#{loginBean.logar}" />

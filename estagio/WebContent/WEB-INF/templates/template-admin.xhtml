@@ -36,6 +36,8 @@
 						<p:submenu label="Cadastrar" icon="ui-icon-document">
 							<p:menuitem value="Operador"
 								url="/pages/admin/cadastro-operador.xhtml" />
+							<p:menuitem value="Atendente"
+								url="/pages/admin/cadastro-atendente.xhtml" />
 						</p:submenu>
 
 						<p:submenu label="Gerenciar" icon="ui-icon-gear">
@@ -43,6 +45,9 @@
 							<p:separator />
 							<p:menuitem value="Operadores"
 								url="/pages/admin/gerenciar-operador.xhtml" />
+							<p:separator />
+							<p:menuitem value="Atendentes"
+								url="/pages/admin/gerenciar-atendente.xhtml" />
 						</p:submenu>
 
 						<p:menuitem value="Sair" icon="ui-icon-extlink"
@@ -58,26 +63,7 @@
 			</div>
 		</div>
 
-		<div id="rodape">
-			<p:menubar styleClass="footer">
-				<f:facet name="options">
-					<h:panelGrid width="100%"
-						style="text-align: center;font-size: 12px;" columns="6">
-						<p:graphicImage value="/resources/images/pf.png" width="30px" />
-						<p:graphicImage value="/resources/images/jsf.png" width="60px" />
-						<p:graphicImage value="/resources/images/hn.png" width="60px"
-							style="margin-right: 300px;" />
-						<p:outputLabel value="Sistema criado por: " />
-						<a href="http://www.facebook.com.br/emersonffreitas">Emerson
-							Freitas</a>,
-							<a href="https://www.facebook.com/profile.php?id=100002465557688">Joabe
-							Cavalcante</a> e
-							<a href="https://www.facebook.com/robsonpereira1991"
-							style="clear: both;">Robson Pereira</a>
-					</h:panelGrid>
-				</f:facet>
-			</p:menubar>
-		</div>
+		<div id="rodape"></div>
 	</f:view>
 </h:body>
 </html>

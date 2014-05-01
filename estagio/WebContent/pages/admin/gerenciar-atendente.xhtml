@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/templates/template-admin.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<br />
+		<h:form id="form" styleClass="form">
+			<p:panel id="panel" style="margin-bottom:10px;">
+
+				<p:growl id="msgs" />
+
+				<div id="tableName">
+					<h:outputText value="Atendentes Cadastrados" />
+				</div>
+
+				<p:dataTable id="dataTable" var="atendente"
+					value="#{atendenteBean.atendentees}" widgetVar="atendenteesTable"
+					paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					emptyMessage="Nenhum atendente encontrado com esses critérios."
+					filteredValue="#{atendenteBean.filteredAtendentees}"
+					paginatorAlwaysVisible="false">
+
+					<f:facet name="header">
+						<div id="filtro">
+							<p:outputPanel>
+								<h:outputText value="Procurar em todos os campos:" />
+								<p:inputText id="globalFilter"
+									onkeyup="atendenteesTable.filter()" style="width:150px" />
+							</p:outputPanel>
+						</div>
+					</f:facet>
+
+					<p:column id="loginColumn" sortBy="#{atendente.login}"
+						filterBy="#{atendente.login}" headerText="Login"
+						filterMatchMode="startsWith" style="text-align: center">
+						<h:outputText value="#{atendente.login}" />
+					</p:column>
+
+					<p:column id="nomeColumn" filterBy="#{atendente.nome}"
+						headerText="Nome" sortBy="#{atendente.nome}"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{atendente.nome}" />
+					</p:column>
+
+					<p:column id="telefoneColumn" sortBy="#{atendente.telefone}"
+						filterBy="#{baciloscopia.dataPedido}" headerText="Telefone"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{atendente.telefone}" />
+					</p:column>
+
+					<p:column id="emailColumn" sortBy="#{atendente.email}"
+						filterBy="#{atendente.email}" headerText="Email"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{atendente.email}" />
+					</p:column>
+
+					<p:column style="width:4%">
+						<p:commandButton id="selectButton" update=":form:display"
+							oncomplete="exameDialog.show()" icon="ui-icon-search"
+							title="Vizualizar Atendente">
+							<f:setPropertyActionListener value="#{atendente}"
+								target="#{atendenteBean.atendente}" />
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-pencil" update=":editarForm:editar"
+							oncomplete="editarDialog.show()" title="Editar Atendente">
+							<f:setPropertyActionListener target="#{atendenteBean.atendente}"
+								value="#{atendente}" />
+						</p:commandButton>
+						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
+							oncomplete="confirmacao.show()" title="Excluir Atendente">
+							<f:setPropertyActionListener target="#{atendenteBean.atendente}"
+								value="#{atendente}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog message="Tem certeza?" widgetVar="confirmacao"
+					id="excluir">
+
+					<h:inputHidden id="login" value="#{atendenteBean.atendente.login}" />
+
+					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
+						<p:commandButton value="Sim" update="panel" id="ajax"
+							oncomplete="confirmacao.hide()"
+							actionListener="#{atendenteBean.excluir()}" />
+						<p:button value="Não" onclick="confirmacao.hide();" />
+					</h:panelGrid>
+
+				</p:confirmDialog>
+
+
+				<p:dialog widgetVar="exameDialog" resizable="false" id="atendente"
+					showEffect="fade" hideEffect="explode" modal="true">
+
+					<h:panelGrid id="display" cellpadding="4">
+
+						<p:fieldset legend="Atendente" style="text-align:center;">
+
+							<h:panelGrid cellpadding="4" columns="4">
+								<h:outputText value="Login:" />
+								<p:inputText value="#{atendenteBean.atendente.login}"
+									readonly="true" size="15" />
+
+								<h:outputText value="Nome: " />
+								<p:inputText value="#{atendenteBean.atendente.nome}"
+									readonly="true" size="25" />
+
+								<h:outputText value="Telefone: " />
+								<p:inputText value="#{atendenteBean.atendente.telefone}"
+									readonly="true" size="15" />
+
+								<h:outputText value="Email: " />
+								<p:inputText value="#{atendenteBean.atendente.email}"
+									readonly="true" size="25" />
+							</h:panelGrid>
+
+						</p:fieldset>
+					</h:panelGrid>
+				</p:dialog>
+			</p:panel>
+		</h:form>
+		<h:form id="editarForm">
+			<p:dialog widgetVar="editarDialog" resizable="false" id="editar"
+				showEffect="fade" hideEffect="explode" modal="true">
+
+				<h:panelGrid id="display" cellpadding="4">
+
+					<p:fieldset legend="Editar Atendente" style="text-align: center;">
+						<h:panelGrid columns="2" cellpadding="4" style="text-align: left;">
+
+							<h:outputLabel for="login" value="Login: *" />
+							<h:panelGroup>
+								<h:inputHidden value="#{atendenteBean.atendente.login}" />
+								<p:inputText id="login" value="#{atendenteBean.atendente.login}"
+									label="Login" required="true" disabled="true" />
+							</h:panelGroup>
+
+							<h:outputLabel for="senha" value="Senha: *" />
+							<p:inputText id="senha" value="#{atendenteBean.atendente.senha}"
+								label="Senha" required="true" />
+
+							<h:outputLabel for="nome" value="Nome: *" />
+							<p:inputText id="nome" value="#{atendenteBean.atendente.nome}"
+								label="Nome" required="true" />
+
+							<h:outputLabel for="email" value="E-mail: " />
+							<p:inputText id="email" value="#{atendenteBean.atendente.email}"
+								label="E-mail" required="true"
+								validatorMessage="E-mail: Formato inválido.">
+								<f:validator validatorId="validadorEmail" />
+							</p:inputText>
+
+							<h:outputLabel for="telefone" value="Telefone: " />
+							<p:inputMask id="telefone"
+								value="#{atendenteBean.atendente.telefone}" label="Telefone"
+								mask="(99)9999-9999" />
+						</h:panelGrid>
+					</p:fieldset>
+
+					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
+						<p:commandButton value="Atualizar" update=":form:panel"
+							actionListener="#{atendenteBean.editar()}"
+							styleClass="ui-priority-primary" onsuccess="editarDialog.hide()" />
+						<p:commandButton value="Cancelar" type="reset"
+							onclick="editarDialog.hide()" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+		<br />
+	</ui:define>
+</ui:composition>

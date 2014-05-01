@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/templates/template-atendente.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<br />
+		<h:form id="agendamento" styleClass="form">
+
+			<p:panel id="panel" header="Novo Internamento"
+				style="margin-bottom:10px;text-align: center;">
+
+				<p:growl id="msgs" />
+
+				<h:panelGrid columns="2" cellpadding="4"
+					style="margin: 0 auto;text-align: left;">
+
+					<h:outputLabel for="numeroSus" value="Número do SUS: *" />
+					<p:inputText id="numeroSus"
+						value="#{internamentoBean.internamento.paciente.numeroSus}"
+						required="true" label="numeroSus" size="14"
+						requiredMessage="Número do SUS: Campo obrigatório."
+						converterMessage="Número do SUS: Deve ser um número." />
+
+					<h:outputLabel for="leito" value="Leito: *" />
+					<p:selectOneMenu id="leito"
+						value="#{internamentoBean.internamento.leito}" required="true"
+						label="Tipo de Atendimento"
+						requiredMessage="Leito: Campo obrigatório.">
+						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+						<f:selectItems value="#{internamentoBean.leito}" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+
+				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto">
+
+					<p:commandButton value="Cadastrar" update="panel" id="ajax"
+						actionListener="#{internamentoBean.cadastrar()}"
+						styleClass="ui-priority-primary" />
+					<p:commandButton value="Limpar" type="reset" />
+
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+		<br />
+	</ui:define>
+</ui:composition>

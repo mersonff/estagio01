@@ -7,13 +7,16 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import modelo.Administrador;
+import modelo.Atendente;
 import modelo.Operador;
-import dao.AdministradorDAO;
-import dao.AdministradorJPADAO;
-import dao.OperadorDAO;
-import dao.OperadorJPADAO;
 import util.TipoDeUsuario;
 import util.Usuario;
+import dao.AdministradorDAO;
+import dao.AdministradorJPADAO;
+import dao.AtendenteDAO;
+import dao.AtendenteJPADAO;
+import dao.OperadorDAO;
+import dao.OperadorJPADAO;
 
 @ManagedBean
 public class LoginBean extends AbstractBean {
@@ -65,6 +68,21 @@ public class LoginBean extends AbstractBean {
 					sessao.setAttribute("login", this.usuario.getLogin());
 					sessao.setAttribute("tipo", this.usuario.getTipo());
 					return "/pages/operador/home-operador.xhtml?faces-redirect=true";
+				} else {
+					throw new Exception();
+				}
+			} else if (this.usuario.getTipo().equals(
+					this.tipoDeUsuario.getAtendente())) {
+				AtendenteDAO atenDAO = new AtendenteJPADAO();
+				Atendente aten = atenDAO.find(this.usuario.getLogin());
+				if (aten != null
+						&& aten.getSenha().equals(this.usuario.getSenha())) {
+					HttpSession sessao = (HttpSession) FacesContext
+							.getCurrentInstance().getExternalContext()
+							.getSession(true);
+					sessao.setAttribute("login", this.usuario.getLogin());
+					sessao.setAttribute("tipo", this.usuario.getTipo());
+					return "/pages/atendente/home-atendente.xhtml?faces-redirect=true";
 				} else {
 					throw new Exception();
 				}

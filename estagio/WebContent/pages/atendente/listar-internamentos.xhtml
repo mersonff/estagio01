@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/templates/template-atendente.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+
+		<h:form id="form">
+			<p:panel id="panel" style="margin-bottom:10px;">
+
+				<p:growl id="msgs" />
+
+				<div id="tableName">
+					<h:outputText value="Consultas Cadastradas" />
+				</div>
+
+				<p:dataTable id="dataTable" var="internamento"
+					value="#{internamentoBean.internamentos}"
+					widgetVar="internamentosTable" paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					emptyMessage="Nenhuma internamento encontrado com esses critérios."
+					filteredValue="#{internamentoBean.filteredInternamentos}"
+					paginatorAlwaysVisible="false">
+
+					<f:facet name="header">
+						<div id="filtro">
+							<p:outputPanel>
+								<h:outputText value="Procurar em todos os campos:" />
+								<p:inputText id="globalFilter"
+									onkeyup="internamentosTable.filter()" style="width:150px" />
+							</p:outputPanel>
+						</div>
+					</f:facet>
+
+					<p:column id="numeroSusColumn"
+						sortBy="#{internamento.paciente.numeroSus}"
+						filterBy="#{internamento.paciente.numeroSus}" headerText="SUS"
+						filterMatchMode="startsWith" style="text-align: center">
+						<h:outputText value="#{internamento.paciente.numeroSus}" />
+					</p:column>
+
+					<p:column id="nomeColumn" filterBy="#{internamento.paciente.nome}"
+						headerText="Nome" sortBy="#{internamento.paciente.nome}"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{internamento.paciente.nome}" />
+					</p:column>
+
+					<p:column id="data" sortBy="#{internamento.data}"
+						filterBy="#{internamento.data}" headerText="Data"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{internamento.data}">
+							<f:convertDateTime type="date" locale="pt_BR"
+								timeZone="America/Fortaleza" />
+						</h:outputText>
+					</p:column>
+
+					<p:column id="leito" filterBy="#{internamento.leito}"
+						headerText="Leito" sortBy="#{internamento.leito}"
+						style="text-align: center" filterMatchMode="startsWith">
+						<h:outputText value="#{internamento.leito}" />
+					</p:column>
+
+					<p:column style="width:4%">
+						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
+							oncomplete="confirmacao.show()" title="Excluir Consulta">
+							<f:setPropertyActionListener
+								target="#{internamentoBean.internamento}"
+								value="#{internamento}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog message="Tem certeza?" widgetVar="confirmacao"
+					id="excluir">
+
+					<h:inputHidden id="idConsulta"
+						value="#{internamentoBean.internamento.idInternamento}" />
+					<h:inputHidden id="numeroSus"
+						value="#{internamentoBean.internamento.paciente.numeroSus}" />
+
+					<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
+						<p:commandButton value="Sim" update="panel" id="ajax"
+							oncomplete="confirmacao.hide()"
+							actionListener="#{internamentoBean.excluir()}" />
+						<p:button value="Não" onclick="confirmacao.hide();" />
+					</h:panelGrid>
+				</p:confirmDialog>
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -5,8 +5,11 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
+import modelo.Baciloscopia;
 import modelo.Exame;
 import modelo.Paciente;
+import dao.BaciloscopiaDAO;
+import dao.BaciloscopiaJPADAO;
 import dao.ExameDAO;
 import dao.ExameJPADAO;
 import dao.PacienteDAO;

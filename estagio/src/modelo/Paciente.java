@@ -26,9 +26,14 @@ public class Paciente {
 	private int idade;
 	@OneToMany(mappedBy = "paciente")
 	private List<Exame> exames;
+	@OneToMany(mappedBy = "paciente")
+	private List<Consulta> consultas;
+	@OneToMany(mappedBy = "paciente")
+	private List<Internamento> internamentos;
 
 	public Paciente() {
 		this.exames = new ArrayList<Exame>();
+		this.consultas = new ArrayList<Consulta>();
 	}
 
 	public long getNumeroSus() {
@@ -85,6 +90,22 @@ public class Paciente {
 
 	public void setExames(List<Exame> exames) {
 		this.exames = exames;
+	}
+
+	public List<Consulta> getConsultas() {
+		return consultas;
+	}
+
+	public void setConsultas(List<Consulta> consultas) {
+		this.consultas = consultas;
+	}
+
+	public List<Internamento> getInternamentos() {
+		return internamentos;
+	}
+
+	public void setInternamentos(List<Internamento> internamentos) {
+		this.internamentos = internamentos;
 	}
 
 	public String getSobrenome() {

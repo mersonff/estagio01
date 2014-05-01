@@ -1,5 +1,6 @@
 /modelo
-/dao
 /controle
-/META-INF
+/dao
+/filtros
 /util
+/META-INF

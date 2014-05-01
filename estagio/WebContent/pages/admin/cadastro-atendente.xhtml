@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/templates/template-admin.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<br />
+		<h:form id="cad_atendente" styleClass="form">
+			<p:messages id="messages" autoUpdate="true" closable="true" />
+
+			<p:panel id="panel" header="Cadastro de Atendente"
+				style="margin-bottom:10px;text-align:center;">
+
+				<h:panelGrid columns="2" cellpadding="4"
+					style="margin: 0 auto;text-align:left;">
+
+					<h:outputLabel for="login" value="Login: *" />
+					<p:inputText id="login" value="#{atendenteBean.atendente.login}"
+						required="true" label="Login" />
+
+					<h:outputLabel for="senha" value="Senha: *" />
+					<p:password id="senha" value="#{atendenteBean.atendente.senha}"
+						feedback="true" required="true" label="Senha" />
+
+					<h:outputLabel for="nome" value="Nome: *" />
+					<p:inputText id="nome" value="#{atendenteBean.atendente.nome}"
+						required="true" label="Nome">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+
+					<h:outputLabel for="email" value="E-mail: *" />
+					<p:inputText id="email" value="#{atendenteBean.atendente.email}"
+						label="E-mail" required="true"
+						validatorMessage="E-mail: Formato inválido.">
+						<f:validator validatorId="validadorEmail" />
+					</p:inputText>
+
+					<h:outputLabel for="telefone" value="Telefone:" />
+					<p:inputMask id="telefone"
+						value="#{atendenteBean.atendente.telefone}" mask="(99)9999-9999"
+						label="Telefone" />
+
+				</h:panelGrid>
+
+
+				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto;">
+					<p:commandButton value="Cadastrar" update="cad_atendente" id="ajax"
+						actionListener="#{atendenteBean.cadastrar()}"
+						styleClass="ui-priority-primary" />
+					<p:commandButton value="Limpar" type="reset" />
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+		<br />
+	</ui:define>
+</ui:composition>

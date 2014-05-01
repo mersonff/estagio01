@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/templates/template-atendente.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<br />
+		<h:form id="cad_paciente" styleClass="form">
+
+			<p:messages autoUpdate="true" closable="true" id="msg" />
+
+			<p:panel id="panel" header="Cadastro de Paciente"
+				style="margin-bottom:10px;text-align:center;">
+
+				<h:panelGrid columns="2" cellpadding="4"
+					style="margin: 0 auto;text-align:left;">
+
+					<h:outputLabel for="numeroSus" value="Número do SUS: *" />
+					<p:inputText id="numeroSus"
+						value="#{pacienteBean.paciente.numeroSus}" required="true"
+						label="Número do SUS" size="14"
+						requiredMessage="Número do SUS: Campo obrigatório."
+						converterMessage="Número do SUS: Deve ser um número." />
+
+					<h:outputLabel for="nome" value="Nome: *" />
+					<p:inputText id="nome" value="#{pacienteBean.paciente.nome}"
+						label="Nome" size="10" required="true" />
+
+					<h:outputLabel for="sobrenome" value="Sobrenome: *" />
+					<p:inputText id="sobrenome"
+						value="#{pacienteBean.paciente.sobrenome}" label="Sobrenome" required="true" />
+
+					<h:outputLabel for="dataNascimento" value="Data de Nascimento: " />
+					<p:inputMask id="dataNascimento"
+						value="#{pacienteBean.paciente.dataNascimento}"
+						label="Data de Nascimento" mask="99/99/9999" size="8"
+						requiredMessage="Data de Nascimento: Campo obrigatório."
+						converterMessage="Data de Nascimento: Data inválida">
+						<f:convertDateTime type="date" locale="pt_BR"
+							timeZone="America/Fortaleza" />
+					</p:inputMask>
+
+					<h:outputLabel for="endereco" value="Endereço: " />
+					<p:inputText id="endereco"
+						value="#{pacienteBean.paciente.endereco}" label="Endereco" />
+
+					<h:outputLabel for="localidade" value="Localidade: " />
+					<p:inputText id="localidade"
+						value="#{pacienteBean.paciente.localidade}" label="Localidade" />
+
+					<h:outputLabel for="sexo" value="Sexo: " />
+					<p:selectOneMenu id="sexo" value="#{pacienteBean.paciente.sexo}" label="Sexo">
+						<f:selectItem itemLabel="Masculino" itemValue="M" />
+						<f:selectItem itemLabel="Feminino" itemValue="F" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+
+
+				<h:panelGrid cellpadding="4" columns="2" style="margin: 0 auto;">
+					<p:commandButton value="Cadastrar" update=":cad_paciente" id="ajax"
+						actionListener="#{pacienteBean.cadastrar()}"
+						styleClass="ui-priority-primary" />
+					<p:commandButton value="Limpar" type="reset" />
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+		<br />
+	</ui:define>
+</ui:composition>
