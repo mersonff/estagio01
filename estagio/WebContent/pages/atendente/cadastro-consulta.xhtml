@@ -12,7 +12,7 @@
 		<h:form id="agendamento" styleClass="form">
 
 			<p:panel id="panel" header="Nova Consulta"
-				style="margin-bottom:10px;text-align: center;">
+				style="margin-bottom:10px;text-align: center;width:450px;">
 
 				<p:growl id="msgs" />
 
@@ -22,12 +22,12 @@
 					<h:outputLabel for="numeroSus" value="Número do SUS: *" />
 					<p:inputText id="numeroSus"
 						value="#{consultaBean.consulta.paciente.numeroSus}"
-						required="true" label="numeroSus" size="14"
+						required="true" label="numeroSus" size="25"
 						requiredMessage="Número do SUS: Campo obrigatório."
 						converterMessage="Número do SUS: Deve ser um número." />
 
 					<h:outputLabel for="tipoConsulta" value="Tipo de Consulta: *" />
-					<p:selectOneMenu id="tipoConsulta"
+					<p:selectOneMenu id="tipoConsulta" style="width:215px;"
 						value="#{consultaBean.consulta.tipoConsulta}" required="true"
 						label="Tipo de Consulta"
 						requiredMessage="Tipo de Consulta: Campo obrigatório.">
@@ -36,13 +36,37 @@
 					</p:selectOneMenu>
 
 					<h:outputLabel for="tipoAtendimento" value="Tipo de Atendimento: *" />
-					<p:selectOneMenu id="tipoAtendimento"
+					<p:selectOneMenu id="tipoAtendimento" style="width:215px;"
 						value="#{consultaBean.consulta.tipoAtendimento}" required="true"
 						label="Tipo de Atendimento"
 						requiredMessage="Tipo de Atendimento: Campo obrigatório.">
 						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 						<f:selectItems value="#{consultaBean.tipoAtendimento}" />
 					</p:selectOneMenu>
+					
+					
+					
+					
+					
+					<h:outputLabel for="profAtendente" value="Profissional Atendente: " />
+					<p:inputText id="profAtendente" size="25"
+						value="#{consultaBean.profissionalAtendente}" 
+						label="Profissional Atendente" />
+					
+					<h:outputLabel for="areaAtendimento" value="Área de Atendimento: *" />
+					<p:selectOneMenu id="areaAtendimento" style="width:215px;"
+						value="#{consultaBean.consulta.areaAtendimento}" required="true"
+						label="Área de Atendimento"
+						requiredMessage="Área de Atendimento: Campo obrigatório.">
+						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+						<f:selectItems value="#{consultaBean.areaAtendimento}" />
+					</p:selectOneMenu>
+					
+					<h:outputLabel for="observacao" value="Observação: " />
+					<p:inputTextarea rows="3" cols="25"
+					value="#{consultaBean.observacao}" 
+					label="Observação"/>
+									
 				</h:panelGrid>
 
 				<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto">

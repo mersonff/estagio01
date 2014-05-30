@@ -22,10 +22,18 @@ public class ConsultaBean extends AbstractBean {
 	private Consulta consulta;
 	private List<Consulta> consultas;
 	private List<Consulta> filteredConsultas;
-	private String[] tipoAtendimento = { "XXXXXXX", "XXXXXXX", "XXXXXXX",
-			"XXXXXXX", "XXXXXXX", "XXXXXXX", "XXXXXXX" };
-	private String[] tipoConsulta = { "Primeira Consulta", "Retorno" };
-
+	
+	//Alterado por David Costa
+	private String[] tipoAtendimento;// = { "XXXXXXXXXXXXXXX", "XXXXXXXXXXXXXXX" };
+	private String[] tipoConsulta; // = { "Primeira Consulta", "Retorno" };
+	//
+		
+	//Acrescentado por David Costa
+	private String profissionalAtendente;
+	private String[] areaAtendimento;// = {"Pediatria","Traumatologia"};
+	private String observacao;
+	//
+	
 	public ConsultaBean() {
 		this.setConsulta(new Consulta());
 		this.setConsultas(new ArrayList<Consulta>());
@@ -38,7 +46,14 @@ public class ConsultaBean extends AbstractBean {
 		Paciente p = pDAO.find(this.consulta.getPaciente().getNumeroSus());
 		if (p != null) {
 			this.consulta.setData(new Date());
-			operDAO.save(this.consulta);
+			//operDAO.save(this.consulta);
+			
+			//Adicionado por David Costa
+			this.consulta.setProfissionalAtendente(this.profissionalAtendente);
+			this.consulta.setObservacao(this.observacao);
+			operDAO.put(this.consulta);
+			//
+			
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.consulta = new Consulta();
 		} else {
@@ -56,6 +71,13 @@ public class ConsultaBean extends AbstractBean {
 	public void findAll() {
 		ConsultaDAO operDAO = new ConsultaJPADAO();
 		this.consultas = operDAO.find();
+		
+		//Adicionado por David Costa
+		TiposBean tipos = new TiposBean();
+		this.tipoAtendimento = tipos.getTiposAtendimento().toArray(new String[tipos.getTiposAtendimento().size()]);
+		this.tipoConsulta = tipos.getTiposConsultas().toArray(new String[tipos.getTiposConsultas().size()]);
+		this.areaAtendimento = tipos.getTiposAreaAtendimento().toArray(new String[tipos.getTiposAreaAtendimento().size()]);
+				
 	}
 
 	public List<String> complete(String query) {
@@ -112,5 +134,32 @@ public class ConsultaBean extends AbstractBean {
 	public void setFilteredConsultas(List<Consulta> filteredConsultas) {
 		this.filteredConsultas = filteredConsultas;
 	}
+	
+	
+	//Adicionado por David Costa
+	public String getProfissionalAtendente() {
+		return profissionalAtendente;
+	}
+
+	public void setProfissionalAtendente(String profissionalAtendente) {
+		this.profissionalAtendente = profissionalAtendente;
+	}
+
+	public String[] getAreaAtendimento() {
+		return areaAtendimento;
+	}
+
+	public void setAreaAtendimento(String[] areasAtendimento) {
+		this.areaAtendimento = areasAtendimento;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+	//
 
 }

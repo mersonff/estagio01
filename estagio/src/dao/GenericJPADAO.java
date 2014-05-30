@@ -18,6 +18,12 @@ public abstract class GenericJPADAO<T> implements GenericDAO<T>, Serializable {
 		getEm().merge(entity);
 	}
  
+	//acrescentado por David Costa
+	public void put(T entity) {
+		getEm().persist(entity);
+	}
+	//
+	
 	public void delete(T entity) {
 		getEm().remove(getEm().merge(entity));
 	}

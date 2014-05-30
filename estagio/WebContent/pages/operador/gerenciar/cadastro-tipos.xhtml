@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/templates/template-operador.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+		<br />
+		<h:form id="perfil" styleClass="form">
+
+			<p:panel id="panel" header="Tipos Definidos"
+				style="margin-bottom:10px;text-align:center;">
+				<p:growl id="messages" />
+
+				<h:panelGrid cellpadding="4" style="text-align: left;">
+
+					<h:inputHidden id="senha" value="#{operadorBean.ativo.senha}" />
+					<h:inputHidden value="#{operadorBean.ativo.login}" />
+
+					<h:panelGrid columns="2" cellpadding="4" style="margin: 0 auto;">
+						<h:outputLabel for="tipoAreaAtendimento" value="Área Atendimento: " />
+						<p:inputText id="tipoAreaAtendimento" value="#{tiposBean.tipo.tipoAreaAtendimento}"
+							label="Área Atendimento" >
+						</p:inputText>
+						
+						<h:outputLabel for="tipoAtendimento" value="Tipo Atendimento: " />
+						<p:inputText id="tipoAtendimento" value="#{tiposBean.tipo.tipoAtendimento}"
+							label="Tipo Atendimento" >
+						</p:inputText>
+						
+						<h:outputLabel for="tipoLeito" value="Tipo Leito: " />
+						<p:inputText id="tipoLeito" value="#{tiposBean.tipo.tipoLeito}"
+							label="Tipo Leito" >
+						</p:inputText>
+						
+						<h:outputLabel for="tipoConsulta" value="Tipo Consulta: " />
+						<p:inputText id="tipoConsulta" value="#{tiposBean.tipo.tipoConsulta}"
+							label="Tipo Consulta" >
+						</p:inputText>
+
+
+
+					</h:panelGrid>
+					<h:panelGrid cellpadding="4" columns="3" style="margin: 0 auto;">
+						<p:commandButton value="Cadastrar" update=":perfil:panel"
+							id="ajax" actionListener="#{tiposBean.cadastrar()}"
+							styleClass="ui-priority-primary" />
+						<p:commandButton value="Cancelar"
+							action="/pages/operador/home-operador.xhtml" />
+						
+					</h:panelGrid>
+				</h:panelGrid>
+			</p:panel>
+
+		</h:form>
+		<br />
+	</ui:define>
+</ui:composition>

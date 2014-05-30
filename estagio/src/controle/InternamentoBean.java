@@ -22,7 +22,9 @@ public class InternamentoBean extends AbstractBean {
 	private Internamento internamento;
 	private List<Internamento> internamentos;
 	private List<Internamento> filteredInternamentos;
-	private String[] leito = { "1", "2", "..." };
+	//Alterado por David Costa
+	private String[] leito;// = { "1", "2", "..." };
+	//
 
 	public InternamentoBean() {
 		this.setInternamento(new Internamento());
@@ -36,7 +38,12 @@ public class InternamentoBean extends AbstractBean {
 		Paciente p = pDAO.find(this.internamento.getPaciente().getNumeroSus());
 		if (p != null) {
 			this.internamento.setData(new Date());
-			operDAO.save(this.internamento);
+			//operDAO.save(this.internamento);
+			
+			//Adicionado por David Costa
+			operDAO.put(this.internamento);
+			//
+			
 			displayInfoMessageToUser("Cadastrado com sucesso!");
 			this.internamento = new Internamento();
 		} else {
@@ -54,6 +61,10 @@ public class InternamentoBean extends AbstractBean {
 	public void findAll() {
 		InternamentoDAO operDAO = new InternamentoJPADAO();
 		this.internamentos = operDAO.find();
+		
+		//Adicionado por David Costa
+		TiposBean tipos = new TiposBean();
+		this.leito = tipos.getTiposLeitos().toArray(new String[tipos.getTiposLeitos().size()]);
 	}
 
 	public List<String> complete(String query) {

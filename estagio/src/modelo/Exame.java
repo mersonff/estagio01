@@ -14,10 +14,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+//Adicionado por David Costa
+@SequenceGenerator(name = "sequencia_exames", sequenceName = "sequencia_exames") 
+//
 @NamedQueries({
 	@NamedQuery(name="Exame.autoComplete", 
 			    query="select e.solicitante from Exame e where e.solicitante LIKE :solicitante"),
@@ -30,7 +34,9 @@ import javax.persistence.TemporalType;
 public class Exame {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//Atualizado por David Costa
+	@GeneratedValue(strategy = GenerationType.AUTO, generator="sequencia_exames")
+	//
 	private long idExame;
 	@Temporal(TemporalType.DATE)
 	private Date dataPedido;

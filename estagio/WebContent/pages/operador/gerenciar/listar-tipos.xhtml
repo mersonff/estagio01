@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/templates/template-operador.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="corpo">
+
+		<h:form id="form">
+			<p:panel id="panel" style="margin-bottom:10px;">
+
+				<p:growl id="msgs" />
+
+				<div id="tableName">
+					<h:outputText value="Tipos Cadastrados" />
+				</div>
+
+				<p:dataTable id="dataTable" var="tipo"
+					value="#{tiposBean.tipos}" widgetVar="tiposTable"
+					paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					emptyMessage="Nenhum tipo encontrado com esses critérios."
+					filteredValue="#{tiposBean.filteredTipos}"
+					paginatorAlwaysVisible="false">
+
+					<f:facet name="header">
+						<div id="filtro">
+							<p:outputPanel>
+								<h:outputText value="Procurar em todos os campos:" />
+								<p:inputText id="globalFilter" onkeyup="tiposTable.filter()"
+									style="width:150px" />
+							</p:outputPanel>
+						</div>
+					</f:facet>
+
+					<p:column id="tipoAtendimentoColumn" sortBy="#{tipo.tipoAtendimento}"
+						filterBy="#{tipo.tipoAtendimento}" headerText="Tipo Atendimento"
+						filterMatchMode="startsWith" style="text-align: center">
+						<h:outputText value="#{tipo.tipoAtendimento}" />
+					</p:column>
+
+					<p:column id="tipoConsultaColumn" sortBy="#{tipo.tipoConsulta}"
+						filterBy="#{tipo.tipoConsulta}" headerText="Tipo Consulta"
+						filterMatchMode="startsWith" style="text-align: center">
+						<h:outputText value="#{tipo.tipoConsulta}" />
+					</p:column>
+					
+					<p:column id="areaAtendimentoColumn" sortBy="#{tipo.tipoAreaAtendimento}"
+						filterBy="#{tipo.tipoAreaAtendimento}" headerText="Área Atendimento"
+						filterMatchMode="startsWith" style="text-align: center">
+						<h:outputText value="#{tipo.tipoAreaAtendimento}" />
+					</p:column>
+					
+					<p:column id="tipoLeitoColumn" sortBy="#{tipo.tipoLeito}"
+						filterBy="#{tipo.tipoLeito}" headerText="Tipo Leito"
+						filterMatchMode="startsWith" style="text-align: center">
+						<h:outputText value="#{tipo.tipoLeito}" />
+					</p:column>
+					
+					<p:column style="width:4%">
+						<p:commandButton icon="ui-icon-trash" update=":form:excluir"
+							oncomplete="confirmacao.show()" title="Excluir Tipo">
+							<f:setPropertyActionListener target="#{tiposBean.tipo}"
+								value="#{tipo}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:confirmDialog message="Tem certeza?" widgetVar="confirmacao"
+					id="excluir">
+
+					<h:inputHidden id="IdTipo"
+						value="#{tiposBean.tipo.idTipo}" />
+
+					<p:commandButton value="Sim" update="panel" id="ajax"
+						oncomplete="confirmacao.hide()"
+						actionListener="#{tiposBean.excluir()}" />
+					<p:button value="Não" onclick="confirmacao.hide();" />
+
+				</p:confirmDialog>
+				
+
+				
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
